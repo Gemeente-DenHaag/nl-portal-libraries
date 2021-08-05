@@ -1,6 +1,11 @@
 {
   "name": "nl-portal-libraries",
   "private": true,
+  "scripts": {
+    "bootstrap": "lerna bootstrap",
+    "build": "lerna run build",
+    "start": "lerna run start --stream"
+  },
   "workspaces": [
     "packages/*"
   ],
