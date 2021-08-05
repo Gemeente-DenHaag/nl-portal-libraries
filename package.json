@@ -1,0 +1,10 @@
+{
+  "name": "nl-portal-libraries",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "devDependencies": {
+    "lerna": "^4.0.0"
+  }
+}
