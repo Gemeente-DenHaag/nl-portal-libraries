@@ -5,7 +5,7 @@ import {ExampleComponent} from "@nl-portal/user-interface"
 function App() {
   return (
     <div className="App">
-      <ExampleComponent text={"test"}/>
+      <ExampleComponent/>
     </div>
   );
 }
