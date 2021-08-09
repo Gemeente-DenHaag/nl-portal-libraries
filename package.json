@@ -7,7 +7,7 @@
     "start": "lerna run start --stream",
     "lint": "eslint ./packages --ext .ts,.tsx",
     "lint:fix": "eslint ./packages --fix --ext .ts,.tsx",
-    "format": "prettier --write \"./packages/**/*.+(js|jsx|ts|tsx|json|css|md)\""
+    "prettier": "prettier --write \"./packages/**/*.+(js|jsx|ts|tsx|json|css|md)\""
   },
   "workspaces": [
     "packages/*"
