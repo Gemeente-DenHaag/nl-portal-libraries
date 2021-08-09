@@ -8,7 +8,7 @@
     "test": "yarn jest",
     "lint": "eslint ./packages --ext .ts,.tsx",
     "lint:fix": "eslint ./packages --fix --ext .ts,.tsx",
-    "prettier": "prettier --write \"./packages/**/*.+(js|jsx|ts|tsx|json|css|md)\""
+    "prettier": "prettier --write \"./**/*.+(js|jsx|ts|tsx|json|css|md)\""
   },
   "workspaces": [
     "packages/*"
