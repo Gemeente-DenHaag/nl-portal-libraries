@@ -6,3 +6,6 @@
 
 # Git
 /.git
+
+# Lerna
+/lerna-debug.log
