@@ -16,6 +16,7 @@
   "devDependencies": {
     "@babel/plugin-transform-runtime": "^7.15.0",
     "@babel/preset-env": "^7.15.0",
+    "@testing-library/jest-dom": "^5.14.1",
     "@typescript-eslint/eslint-plugin": "^4.29.0",
     "@typescript-eslint/parser": "^4.29.0",
     "babel-core": "^6.26.3",
@@ -28,8 +29,10 @@
     "eslint-plugin-prettier": "^3.4.0",
     "eslint-plugin-react": "^7.24.0",
     "eslint-plugin-react-hooks": "^4.2.0",
+    "global-jsdom": "^8.1.0",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^27.0.6",
+    "jsdom": "^16.7.0",
     "lerna": "^4.0.0",
     "prettier": "^2.3.2",
     "prettier-airbnb-config": "^1.0.0",

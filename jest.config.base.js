@@ -1,8 +1,6 @@
 module.exports = {
-    "preset": "ts-jest",
-    roots: [
-        "<rootDir>/src",
-    ],
+    preset: "ts-jest",
+    testEnvironment: "jsdom",
     transform: {
         "^.+\\.ts$": "ts-jest",
         "^.+\\.(js|jsx)$": "babel-jest",
@@ -24,5 +22,5 @@ module.exports = {
     coveragePathIgnorePatterns: [
         "(tests/.*.mock).(jsx?|tsx?)$"
     ],
-    verbose: true
+    verbose: true,
 };

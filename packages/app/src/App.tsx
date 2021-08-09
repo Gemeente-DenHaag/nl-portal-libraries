@@ -8,6 +8,7 @@ import {ExampleComponent} from '@nl-portal/user-interface';
 function App() {
   return (
     <div className="App">
+      learn react
       <ExampleComponent />
     </div>
   );
