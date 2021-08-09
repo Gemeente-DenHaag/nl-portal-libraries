@@ -5,6 +5,7 @@
     "bootstrap": "lerna bootstrap",
     "build": "lerna run build",
     "start": "lerna run start --stream",
+    "test": "yarn jest",
     "lint": "eslint ./packages --ext .ts,.tsx",
     "lint:fix": "eslint ./packages --fix --ext .ts,.tsx",
     "prettier": "prettier --write \"./packages/**/*.+(js|jsx|ts|tsx|json|css|md)\""
@@ -13,8 +14,12 @@
     "packages/*"
   ],
   "devDependencies": {
+    "@babel/plugin-transform-runtime": "^7.15.0",
+    "@babel/preset-env": "^7.15.0",
     "@typescript-eslint/eslint-plugin": "^4.29.0",
     "@typescript-eslint/parser": "^4.29.0",
+    "babel-core": "^6.26.3",
+    "babel-jest": "^27.0.6",
     "eslint": "^7.32.0",
     "eslint-config-airbnb": "^18.2.1",
     "eslint-config-prettier": "^8.3.0",
@@ -23,8 +28,11 @@
     "eslint-plugin-prettier": "^3.4.0",
     "eslint-plugin-react": "^7.24.0",
     "eslint-plugin-react-hooks": "^4.2.0",
+    "identity-obj-proxy": "^3.0.0",
+    "jest": "^27.0.6",
     "lerna": "^4.0.0",
     "prettier": "^2.3.2",
-    "prettier-airbnb-config": "^1.0.0"
+    "prettier-airbnb-config": "^1.0.0",
+    "ts-jest": "^27.0.4"
   }
 }
