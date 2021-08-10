@@ -4,7 +4,7 @@
   "scripts": {
     "bootstrap": "lerna bootstrap",
     "build": "lerna run build",
-    "start": "lerna run start --stream",
+    "start": "lerna run start --parallel",
     "test": "yarn jest",
     "test:watch": "yarn jest --watchAll",
     "lint": "eslint \"packages/**/*.{js,jsx,ts,tsx}\"",
