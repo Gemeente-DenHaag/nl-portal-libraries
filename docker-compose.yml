@@ -1,0 +1,16 @@
+version: '3.5'
+
+services:
+  nlportal:
+    build:
+      context: ./
+      target: nl_portal
+    #user: "node" change for production
+    environment:
+      - NODE_ENV=dev #change to production for production
+    volumes:
+      - ./:/home/node/app
+    expose:
+      - "8081"
+
+
