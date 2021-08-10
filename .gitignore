@@ -6,3 +6,9 @@
 
 # Git
 /.git
+
+# Lerna
+/lerna-debug.log
+
+# Testing
+/coverage
