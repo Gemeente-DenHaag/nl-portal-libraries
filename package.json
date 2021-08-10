@@ -9,7 +9,8 @@
     "test:watch": "yarn jest --watchAll",
     "lint": "eslint ./packages --ext .ts,.tsx",
     "lint:fix": "eslint ./packages --fix --ext .ts,.tsx",
-    "prettier": "prettier --write \"./**/*.+(js|jsx|ts|tsx|json|css|md)\""
+    "prettier": "prettier --check .",
+    "prettier:fix": "prettier --write ."
   },
   "workspaces": [
     "packages/*"
