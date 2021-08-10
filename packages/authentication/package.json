@@ -45,5 +45,9 @@
   },
   "files": [
     "dist"
-  ]
+  ],
+  "dependencies": {
+    "@react-keycloak/web": "^3.4.0",
+    "keycloak-js": "^15.0.1"
+  }
 }
