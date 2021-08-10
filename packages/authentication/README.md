@@ -1,4 +1,4 @@
-# @nl-portal/user-interface
+# @nl-portal/authentication
 
 > Made with create-react-library
 
@@ -8,5 +8,5 @@
 ## Install
 
 ```bash
-npm install --save @nl-portal/user-interface
+npm install --save @nl-portal/authentication
 ```
