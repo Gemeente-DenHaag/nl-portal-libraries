@@ -6,6 +6,7 @@
     "build": "lerna run build",
     "start": "lerna run start --stream",
     "test": "yarn jest",
+    "test:watch": "yarn jest --watchAll",
     "lint": "eslint ./packages --ext .ts,.tsx",
     "lint:fix": "eslint ./packages --fix --ext .ts,.tsx",
     "prettier": "prettier --write \"./**/*.+(js|jsx|ts|tsx|json|css|md)\""
