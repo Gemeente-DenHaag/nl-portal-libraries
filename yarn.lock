@@ -13242,13 +13242,6 @@ react-dom@^17.0.2:
     object-assign "^4.1.1"
     scheduler "^0.20.2"
 
-react-environments@^1.2.1:
-  version "1.2.1"
-  resolved "https://registry.yarnpkg.com/react-environments/-/react-environments-1.2.1.tgz#b20061afa5ec05c8ea16b6b37a61e4e818c9c34b"
-  integrity sha512-3UYWtoA5pcTgEn5AbTnpswwThQiKkhba1QuH45L8GnX4cbaZGhxbOHg7YaPdXZ8bqLlbdllta6aRSCAzd/Mnuw==
-  dependencies:
-    minimist "^1.2.0"
-
 react-error-overlay@^6.0.9:
   version "6.0.9"
   resolved "https://registry.yarnpkg.com/react-error-overlay/-/react-error-overlay-6.0.9.tgz#3c743010c9359608c375ecd6bc76f35d93995b0a"
