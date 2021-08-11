@@ -8,9 +8,10 @@ FROM node AS nl_portal
 
 WORKDIR /home/node/app
 
-COPY package.json ./
-COPY lerna.json ./
-COPY packages packages/
+COPY . ./
+#COPY package.json ./
+#COPY lerna.json ./
+#COPY packages packages/
 
 # install and build
 RUN npm install --global lerna; \
