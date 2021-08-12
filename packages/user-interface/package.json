@@ -47,6 +47,7 @@
     "dist"
   ],
   "dependencies": {
-    "@gemeente-denhaag/denhaag-component-library": "^0.2.3-alpha.7"
+    "@gemeente-denhaag/denhaag-component-library": "^0.2.3-alpha.7",
+    "prop-types": "^15.7.2"
   }
 }

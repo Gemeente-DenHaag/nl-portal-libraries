@@ -6,7 +6,7 @@
   "license": "EUPL-1.2",
   "main": "dist/index.js",
   "module": "dist/index.modern.js",
-  "source": "src/index.tsx",
+  "source": "src/index.ts",
   "engines": {
     "node": ">=10"
   },
@@ -48,6 +48,7 @@
   ],
   "dependencies": {
     "@react-keycloak/web": "^3.4.0",
-    "keycloak-js": "^15.0.1"
+    "keycloak-js": "^15.0.1",
+    "prop-types": "^15.7.2"
   }
 }

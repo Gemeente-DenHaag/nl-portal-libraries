@@ -4,9 +4,8 @@
   "author": "Municipality of The Hague",
   "license": "EUPL-1.2",
   "dependencies": {
-    "@gemeente-denhaag/design-tokens-common": "^0.2.3-alpha.7",
     "@gemeente-denhaag/design-tokens-components": "^0.2.3-alpha.7",
-    "@gemeente-denhaag/design-tokens-proprietary": "^0.2.3-alpha.7",
+    "@nl-portal/authentication": "1.0.0",
     "@nl-portal/user-interface": "1.0.0",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
@@ -16,6 +15,7 @@
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.0",
     "env-cmd": "^10.1.0",
+    "prop-types": "^15.7.2",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-scripts": "4.0.3",
