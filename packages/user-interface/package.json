@@ -48,6 +48,7 @@
   ],
   "dependencies": {
     "@gemeente-denhaag/denhaag-component-library": "^0.2.3-alpha.7",
+    "@react-keycloak/web": "^3.4.0",
     "prop-types": "^15.7.2"
   }
 }

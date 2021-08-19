@@ -19,7 +19,11 @@ const KeycloakComponent: FC<KeycloakProps> = ({children, url, clientId, realm, r
   };
 
   return (
-    <ReactKeycloakProvider authClient={keycloakClient} initOptions={initOptions}>
+    <ReactKeycloakProvider
+      authClient={keycloakClient}
+      initOptions={initOptions}
+      LoadingComponent={<div>Loading</div>}
+    >
       {children}
     </ReactKeycloakProvider>
   );
