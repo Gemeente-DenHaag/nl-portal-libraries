@@ -4,7 +4,8 @@
   "scripts": {
     "bootstrap": "lerna bootstrap",
     "build": "lerna run build",
-    "start": "lerna run start --parallel",
+    "kill-ports": "kill-port --port 3000",
+    "start": "npm run kill-ports && lerna run start --parallel",
     "test": "yarn jest",
     "test:watch": "yarn jest --watchAll",
     "lint": "eslint \"packages/**/*.{js,jsx,ts,tsx}\"",
@@ -35,6 +36,7 @@
     "identity-obj-proxy": "^3.0.0",
     "jest": "^27.0.6",
     "jsdom": "^16.7.0",
+    "kill-port": "^1.6.1",
     "lerna": "^4.0.0",
     "prettier": "^2.3.2",
     "prettier-airbnb-config": "^1.0.0",
