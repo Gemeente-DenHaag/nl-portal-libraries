@@ -5,7 +5,7 @@ import Keycloak, {KeycloakConfig, KeycloakInitOptions} from 'keycloak-js';
 import {FC, useState} from 'react';
 
 interface KeycloakProps extends KeycloakConfig {
-  children?: React.ReactNode;
+  children: React.ReactNode;
   redirectUri: string;
 }
 
