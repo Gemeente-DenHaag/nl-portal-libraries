@@ -9,7 +9,7 @@ interface KeycloakProps extends KeycloakConfig {
   redirectUri: string;
 }
 
-const KeycloakComponent: FC<KeycloakProps> = ({children, url, clientId, realm, redirectUri}) => {
+const KeycloakWrapper: FC<KeycloakProps> = ({children, url, clientId, realm, redirectUri}) => {
   const [keycloakClient] = useState(() => new (Keycloak as any)({url, clientId, realm}));
   const initOptions: KeycloakInitOptions = {
     checkLoginIframe: false,
@@ -29,7 +29,7 @@ const KeycloakComponent: FC<KeycloakProps> = ({children, url, clientId, realm, r
   );
 };
 
-KeycloakComponent.propTypes = {
+KeycloakWrapper.propTypes = {
   children: PropTypes.node.isRequired,
   clientId: PropTypes.string.isRequired,
   url: PropTypes.string.isRequired,
@@ -37,4 +37,4 @@ KeycloakComponent.propTypes = {
   redirectUri: PropTypes.string.isRequired,
 };
 
-export {KeycloakComponent};
+export {KeycloakWrapper};

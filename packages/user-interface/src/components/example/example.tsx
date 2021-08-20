@@ -2,7 +2,7 @@ import * as React from 'react';
 import {Button, StylesProvider, Card} from '@gemeente-denhaag/denhaag-component-library';
 import {useKeycloak} from '@react-keycloak/web';
 
-export const ExampleComponent = () => {
+const Example = () => {
   const {keycloak} = useKeycloak();
 
   return (
@@ -12,3 +12,5 @@ export const ExampleComponent = () => {
     </StylesProvider>
   );
 };
+
+export {Example};

@@ -1,20 +1,20 @@
 import React from 'react';
-import './App.css';
+import './app.css';
 import '@gemeente-denhaag/design-tokens-components';
-import {ExampleComponent} from '@nl-portal/user-interface';
-import {KeycloakComponent} from '@nl-portal/authentication';
+import {Example} from '@nl-portal/user-interface';
+import {KeycloakWrapper} from '@nl-portal/authentication';
 
 function App() {
   return (
-    <KeycloakComponent
+    <KeycloakWrapper
       clientId={`${process.env.REACT_APP_KEYCLOAK_CLIENT_ID}`}
       realm={`${process.env.REACT_APP_KEYCLOAK_REALM}`}
       url={`${process.env.REACT_APP_KEYCLOAK_URL}`}
       redirectUri={`${process.env.REACT_APP_KEYCLOAK_REDIRECT_URI}`}
     >
-      <ExampleComponent />
-    </KeycloakComponent>
+      <Example />
+    </KeycloakWrapper>
   );
 }
 
-export default App;
+export {App};
