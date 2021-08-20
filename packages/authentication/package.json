@@ -1,5 +1,5 @@
 {
-  "name": "@nl-portal/user-interface",
+  "name": "@nl-portal/authentication",
   "version": "0.1.0",
   "description": "Made with create-react-library",
   "author": "Municipality of The Hague",
@@ -47,8 +47,8 @@
     "dist"
   ],
   "dependencies": {
-    "@gemeente-denhaag/denhaag-component-library": "0.2.3-alpha.7",
     "@react-keycloak/web": "^3.4.0",
+    "keycloak-js": "^15.0.1",
     "prop-types": "^15.7.2"
   }
 }

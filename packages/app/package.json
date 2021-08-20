@@ -1,13 +1,12 @@
 {
   "name": "@nl-portal/app",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "author": "Municipality of The Hague",
   "license": "EUPL-1.2",
   "dependencies": {
-    "@gemeente-denhaag/design-tokens-common": "^0.2.3-alpha.7",
-    "@gemeente-denhaag/design-tokens-components": "^0.2.3-alpha.7",
-    "@gemeente-denhaag/design-tokens-proprietary": "^0.2.3-alpha.7",
-    "@nl-portal/user-interface": "1.0.0",
+    "@gemeente-denhaag/design-tokens-components": "0.2.3-alpha.7",
+    "@nl-portal/authentication": "0.1.0",
+    "@nl-portal/user-interface": "0.1.0",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
@@ -15,6 +14,8 @@
     "@types/node": "^12.0.0",
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.0",
+    "env-cmd": "^10.1.0",
+    "prop-types": "^15.7.2",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-scripts": "4.0.3",
@@ -24,6 +25,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "build:staging": "env-cmd -f .env.staging react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
