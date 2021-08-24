@@ -1,5 +1,4 @@
 import * as React from 'react';
-import PropTypes from 'prop-types';
 import {FC, useState} from 'react';
 import {IntlProvider} from 'react-intl';
 import {DEFAULT_LOCALES, DEFAULT_MESSAGES} from '../../i18n';
@@ -23,10 +22,6 @@ const LocalizationProvider: FC<LocalizationProviderProps> = ({children}) => {
       </IntlProvider>
     </LocaleContext.Provider>
   );
-};
-
-LocalizationProvider.propTypes = {
-  children: PropTypes.node.isRequired,
 };
 
 export {LocalizationProvider};

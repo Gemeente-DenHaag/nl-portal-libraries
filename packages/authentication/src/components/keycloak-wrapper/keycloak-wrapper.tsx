@@ -1,6 +1,5 @@
 import * as React from 'react';
 import {ReactKeycloakProvider} from '@react-keycloak/web';
-import PropTypes from 'prop-types';
 import Keycloak, {KeycloakConfig, KeycloakInitOptions} from 'keycloak-js';
 import {FC, useState} from 'react';
 
@@ -27,14 +26,6 @@ const KeycloakWrapper: FC<KeycloakProps> = ({children, url, clientId, realm, red
       {children}
     </ReactKeycloakProvider>
   );
-};
-
-KeycloakWrapper.propTypes = {
-  children: PropTypes.node.isRequired,
-  clientId: PropTypes.string.isRequired,
-  url: PropTypes.string.isRequired,
-  realm: PropTypes.string.isRequired,
-  redirectUri: PropTypes.string.isRequired,
 };
 
 export {KeycloakWrapper};

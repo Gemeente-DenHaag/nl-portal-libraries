@@ -47,7 +47,6 @@
     "dist"
   ],
   "dependencies": {
-    "prop-types": "^15.7.2",
     "react-intl": "^5.20.10"
   }
 }
