@@ -7,7 +7,6 @@ import {LocaleContext} from '../../contexts';
 import {Locales, Messages} from '../../interfaces';
 
 interface LocalizationProviderProps {
-  children: React.ReactNode;
   customMessages?: Messages;
   customLocales?: Locales;
 }
