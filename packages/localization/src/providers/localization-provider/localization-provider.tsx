@@ -10,12 +10,15 @@ interface LocalizationProviderProps {
 }
 
 const LocalizationProvider: FC<LocalizationProviderProps> = ({children}) => {
-  const [locale, setLocale] = useState(DEFAULT_LOCALES.ENGLISH);
+  const [currentLocale, setCurrentLocale] = useState(DEFAULT_LOCALES.ENGLISH);
+  const [supportedLocales, setSupportedLocales] = useState(Object.values(DEFAULT_LOCALES));
 
   return (
-    // @ts-ignore
-    <LocaleContext.Provider value={{locale, setLocale}}>
-      <IntlProvider locale={locale} messages={DEFAULT_MESSAGES[locale]}>
+    <LocaleContext.Provider
+      // @ts-ignore
+      value={{currentLocale, setCurrentLocale, supportedLocales, setSupportedLocales}}
+    >
+      <IntlProvider locale={currentLocale} messages={DEFAULT_MESSAGES[currentLocale]}>
         {children}
       </IntlProvider>
     </LocaleContext.Provider>
