@@ -1,7 +1,7 @@
 import React from 'react';
 import './app.css';
 import '@gemeente-denhaag/design-tokens-components';
-import {Example} from '@nl-portal/user-interface';
+import {Layout} from '@nl-portal/user-interface';
 import {KeycloakWrapper} from '@nl-portal/authentication';
 import {LocalizationProvider} from '@nl-portal/localization';
 import {CUSTOM_MESSAGES} from '../../i18n';
@@ -15,7 +15,7 @@ function App() {
       redirectUri={`${process.env.REACT_APP_KEYCLOAK_REDIRECT_URI}`}
     >
       <LocalizationProvider customMessages={CUSTOM_MESSAGES}>
-        <Example />
+        <Layout />
       </LocalizationProvider>
     </KeycloakWrapper>
   );
