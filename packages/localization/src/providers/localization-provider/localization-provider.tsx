@@ -20,12 +20,12 @@ const LocalizationProvider: FC<LocalizationProviderProps> = ({
   const messages = customMessages ? deepmerge(DEFAULT_MESSAGES, customMessages) : DEFAULT_MESSAGES;
   const locales = customLocales || DEFAULT_LOCALES;
   const [currentLocale, setCurrentLocale] = useState(locales[Object.keys(locales)[0]]);
-  const [supportedLocales, setSupportedLocales] = useState(Object.values(locales));
+  const [supportedLocales] = useState(Object.values(locales));
 
   return (
     <LocaleContext.Provider
       // @ts-ignore
-      value={{currentLocale, setCurrentLocale, supportedLocales, setSupportedLocales}}
+      value={{currentLocale, supportedLocales, setCurrentLocale}}
     >
       <IntlProvider locale={currentLocale} messages={messages[currentLocale]}>
         {children}
