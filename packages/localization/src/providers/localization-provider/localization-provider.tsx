@@ -4,11 +4,12 @@ import {IntlProvider} from 'react-intl';
 import deepmerge from 'deepmerge';
 import {DEFAULT_LOCALES, DEFAULT_MESSAGES} from '../../i18n';
 import {LocaleContext} from '../../contexts';
+import {Locales, Messages} from '../../interfaces';
 
 interface LocalizationProviderProps {
   children: React.ReactNode;
-  customMessages?: {[key: string]: {[key: string]: string}};
-  customLocales?: {[key: string]: string};
+  customMessages?: Messages;
+  customLocales?: Locales;
 }
 
 const LocalizationProvider: FC<LocalizationProviderProps> = ({
