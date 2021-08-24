@@ -18,6 +18,7 @@ const Example = () => {
 
   return (
     <StylesProvider>
+      <FormattedMessage id="app.testMessage" />
       <Button onClick={setNextLocale}>
         <FormattedMessage id="app.languageName" />
       </Button>

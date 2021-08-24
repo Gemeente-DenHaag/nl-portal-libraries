@@ -47,6 +47,7 @@
     "dist"
   ],
   "dependencies": {
+    "deepmerge": "^4.2.2",
     "react-intl": "^5.20.10"
   }
 }
