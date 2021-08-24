@@ -1,7 +1,7 @@
-import {DEFAULT_LOCALES} from '../default-locales';
+import {CUSTOM_LOCALES} from '../custom-locales';
 
 export const EN_GB_MESSAGES = {
-  [DEFAULT_LOCALES.ENGLISH]: {
+  [CUSTOM_LOCALES.ENGLISH]: {
     'app.testMessage': 'Test message',
   },
 };

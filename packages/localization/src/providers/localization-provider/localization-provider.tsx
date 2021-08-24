@@ -8,12 +8,20 @@ import {LocaleContext} from '../../contexts';
 interface LocalizationProviderProps {
   children: React.ReactNode;
   customMessages?: {[key: string]: {[key: string]: string}};
+  customLocales?: {[key: string]: string};
 }
 
-const LocalizationProvider: FC<LocalizationProviderProps> = ({children, customMessages}) => {
-  const [currentLocale, setCurrentLocale] = useState(DEFAULT_LOCALES.ENGLISH);
-  const [supportedLocales, setSupportedLocales] = useState(Object.values(DEFAULT_LOCALES));
+const LocalizationProvider: FC<LocalizationProviderProps> = ({
+  children,
+  customMessages,
+  customLocales,
+}) => {
   const messages = customMessages ? deepmerge(DEFAULT_MESSAGES, customMessages) : DEFAULT_MESSAGES;
+  const locales = customLocales || DEFAULT_LOCALES;
+  const [currentLocale, setCurrentLocale] = useState(locales[Object.keys(locales)[0]]);
+  const [supportedLocales, setSupportedLocales] = useState(Object.values(locales));
+
+  console.log(customLocales);
 
   return (
     <LocaleContext.Provider

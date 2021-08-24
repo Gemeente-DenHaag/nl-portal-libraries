@@ -1,2 +1,2 @@
-export * from './default-locales';
+export * from './custom-locales';
 export * from './messages';
