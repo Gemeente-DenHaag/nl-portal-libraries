@@ -5,11 +5,11 @@ import {IntlProvider} from 'react-intl';
 import {DEFAULT_LOCALES, DEFAULT_MESSAGES} from '../../i18n';
 import {LocaleContext} from '../../contexts';
 
-interface IntlWrapperProps {
+interface LocalizationProviderProps {
   children: React.ReactNode;
 }
 
-const LocalizationProvider: FC<IntlWrapperProps> = ({children}) => {
+const LocalizationProvider: FC<LocalizationProviderProps> = ({children}) => {
   const [locale, setLocale] = useState(DEFAULT_LOCALES.ENGLISH);
 
   return (

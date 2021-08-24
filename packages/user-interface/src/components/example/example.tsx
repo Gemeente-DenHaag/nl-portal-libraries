@@ -7,13 +7,15 @@ import {useContext} from 'react';
 
 const Example = () => {
   const {keycloak} = useKeycloak();
-  const {locale, setLocale} = useContext(LocaleContext);
+  const {setLocale} = useContext(LocaleContext);
 
   return (
     <StylesProvider>
-      <Button onClick={() => setLocale(DEFAULT_LOCALES.DUTCH)}>{locale}</Button>
+      <Button onClick={() => setLocale(DEFAULT_LOCALES.DUTCH)}>
+        <FormattedMessage id="app.languageName" />
+      </Button>
       <Button onClick={() => keycloak.logout()}>
-        <FormattedMessage id="logout" />
+        <FormattedMessage id="app.logout" />
       </Button>
       <Card title="Test" date={new Date()} href="test" variant="case" />
     </StylesProvider>
