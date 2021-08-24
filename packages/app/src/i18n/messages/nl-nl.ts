@@ -1,7 +1,7 @@
-import {CUSTOM_LOCALES} from '../custom-locales';
+import {DEFAULT_LOCALES} from '@nl-portal/localization';
 
 export const NL_NL_MESSAGES = {
-  [CUSTOM_LOCALES.DUTCH]: {
+  [DEFAULT_LOCALES.DUTCH]: {
     'app.testMessage': 'Testbericht',
   },
 };

@@ -21,8 +21,6 @@ const LocalizationProvider: FC<LocalizationProviderProps> = ({
   const [currentLocale, setCurrentLocale] = useState(locales[Object.keys(locales)[0]]);
   const [supportedLocales, setSupportedLocales] = useState(Object.values(locales));
 
-  console.log(customLocales);
-
   return (
     <LocaleContext.Provider
       // @ts-ignore
