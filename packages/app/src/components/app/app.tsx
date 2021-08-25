@@ -1,6 +1,6 @@
 import React from 'react';
-import './app.css';
 import '@gemeente-denhaag/design-tokens-components';
+import '@nl-portal/user-interface/dist/index.css';
 import {Layout} from '@nl-portal/user-interface';
 import {KeycloakWrapper} from '@nl-portal/authentication';
 import {LocalizationProvider} from '@nl-portal/localization';
