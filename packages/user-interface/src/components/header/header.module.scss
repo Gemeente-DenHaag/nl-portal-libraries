@@ -41,11 +41,11 @@
   align-items: center;
 
   p {
-    margin-right: 32px;
+    margin-right: var(--denhaag-menu-group-spacing);
   }
 
   button:not(:last-child) {
-    margin-right: 32px;
+    margin-right: var(--denhaag-alert-padding-inline-start);
   }
 }
 
