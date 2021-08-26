@@ -20,11 +20,17 @@
 
 .headerLogoContainer {
   height: 100%;
-  max-width: 50%;
+  max-width: 150px;
   display: flex;
   align-items: center;
 
   svg {
     width: 100%;
   }
+}
+
+.headerElementsContainer {
+  height: 100%;
+  display: flex;
+  align-items: center;
 }
