@@ -9,10 +9,10 @@ const UserName = () => {
   const [userName, setUserName] = useState('');
 
   useEffect(() => {
-    async function getUserName() {
+    const getUserName = async () => {
       const userProfile = await keycloak.loadUserProfile();
       setUserName(`${userProfile.firstName} ${userProfile.lastName}`);
-    }
+    };
 
     if (!userName) {
       getUserName();
