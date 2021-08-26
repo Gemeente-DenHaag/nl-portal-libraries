@@ -1,8 +1,17 @@
 .header {
-  width: 100%;
+  width: auto;
   height: 85px;
+  margin-inline-start: var(--denhaag-divider-margin-inline-start);
+  margin-inline-end: var(--denhaag-divider-margin-inline-end);
+  display: flex;
+  justify-content: center;
 }
 
-.header-inner {
+.headerInner {
+  width: 100%;
+  height: 100%;
   max-width: 1024px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }

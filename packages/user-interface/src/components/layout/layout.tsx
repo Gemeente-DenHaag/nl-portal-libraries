@@ -3,9 +3,13 @@ import {StylesProvider} from '@gemeente-denhaag/denhaag-component-library';
 import {FC} from 'react';
 import {Header} from '../header';
 
-const Layout: FC = () => (
+interface LayoutProps {
+  headerLogo: React.ReactNode;
+}
+
+const Layout: FC<LayoutProps> = ({headerLogo}) => (
   <StylesProvider>
-    <Header />
+    <Header logo={headerLogo} />
   </StylesProvider>
 );
 

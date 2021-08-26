@@ -5,6 +5,7 @@ import {Layout} from '@nl-portal/user-interface';
 import {KeycloakWrapper} from '@nl-portal/authentication';
 import {LocalizationProvider} from '@nl-portal/localization';
 import {CUSTOM_MESSAGES} from '../../i18n';
+import {ReactComponent as HeaderLogo} from '../../assets/header-logo.svg';
 
 function App() {
   return (
@@ -15,7 +16,7 @@ function App() {
       redirectUri={`${process.env.REACT_APP_KEYCLOAK_REDIRECT_URI}`}
     >
       <LocalizationProvider customMessages={CUSTOM_MESSAGES}>
-        <Layout />
+        <Layout headerLogo={<HeaderLogo />} />
       </LocalizationProvider>
     </KeycloakWrapper>
   );
