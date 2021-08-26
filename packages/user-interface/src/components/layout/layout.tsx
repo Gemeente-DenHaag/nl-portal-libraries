@@ -5,11 +5,12 @@ import {Header} from '../header';
 
 interface LayoutProps {
   headerLogo: React.ReactNode;
+  headerFacet?: React.ReactNode;
 }
 
-const Layout: FC<LayoutProps> = ({headerLogo}) => (
+const Layout: FC<LayoutProps> = ({headerLogo, headerFacet}) => (
   <StylesProvider>
-    <Header logo={headerLogo} />
+    <Header logo={headerLogo} facet={headerFacet} />
   </StylesProvider>
 );
 

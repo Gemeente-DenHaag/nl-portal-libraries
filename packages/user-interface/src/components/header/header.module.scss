@@ -1,3 +1,9 @@
+.headerContainer {
+  display: flex;
+  flex-direction: column;
+  width: auto;
+}
+
 .header {
   width: auto;
   height: 85px;
@@ -40,5 +46,16 @@
 
   button:not(:last-child) {
     margin-right: 32px;
+  }
+}
+
+.headerFacetContainer {
+  width: 100%;
+  height: 14px;
+  overflow: hidden;
+
+  img {
+    min-width: 100%;
+    min-height: 100%;
   }
 }

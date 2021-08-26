@@ -6,6 +6,7 @@ import {KeycloakWrapper} from '@nl-portal/authentication';
 import {LocalizationProvider} from '@nl-portal/localization';
 import {CUSTOM_MESSAGES} from '../../i18n';
 import {ReactComponent as HeaderLogo} from '../../assets/header-logo.svg';
+import Facet from '../../assets/facet.png';
 
 const App = () => (
   <KeycloakWrapper
@@ -15,7 +16,7 @@ const App = () => (
     redirectUri={`${process.env.REACT_APP_KEYCLOAK_REDIRECT_URI}`}
   >
     <LocalizationProvider customMessages={CUSTOM_MESSAGES}>
-      <Layout headerLogo={<HeaderLogo />} />
+      <Layout headerLogo={<HeaderLogo />} headerFacet={<img src={Facet} alt="" />} />
     </LocalizationProvider>
   </KeycloakWrapper>
 );
