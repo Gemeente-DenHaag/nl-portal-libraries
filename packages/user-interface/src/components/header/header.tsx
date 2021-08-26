@@ -8,8 +8,9 @@ interface HeaderProps {
 
 const Header: FC<HeaderProps> = ({logo}) => (
   <header className={styles.header}>
-    {logo}
-    <div className={styles.headerInner} />
+    <div className={styles.headerInner}>
+      <div className={styles.headerLogoContainer}>{logo}</div>
+    </div>
   </header>
 );
 
