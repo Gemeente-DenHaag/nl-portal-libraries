@@ -33,4 +33,12 @@
   height: 100%;
   display: flex;
   align-items: center;
+
+  p {
+    margin-right: 32px;
+  }
+
+  button:not(:last-child) {
+    margin-right: 32px;
+  }
 }
