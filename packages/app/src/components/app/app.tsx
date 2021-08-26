@@ -7,19 +7,17 @@ import {LocalizationProvider} from '@nl-portal/localization';
 import {CUSTOM_MESSAGES} from '../../i18n';
 import {ReactComponent as HeaderLogo} from '../../assets/header-logo.svg';
 
-function App() {
-  return (
-    <KeycloakWrapper
-      clientId={`${process.env.REACT_APP_KEYCLOAK_CLIENT_ID}`}
-      realm={`${process.env.REACT_APP_KEYCLOAK_REALM}`}
-      url={`${process.env.REACT_APP_KEYCLOAK_URL}`}
-      redirectUri={`${process.env.REACT_APP_KEYCLOAK_REDIRECT_URI}`}
-    >
-      <LocalizationProvider customMessages={CUSTOM_MESSAGES}>
-        <Layout headerLogo={<HeaderLogo />} />
-      </LocalizationProvider>
-    </KeycloakWrapper>
-  );
-}
+const App = () => (
+  <KeycloakWrapper
+    clientId={`${process.env.REACT_APP_KEYCLOAK_CLIENT_ID}`}
+    realm={`${process.env.REACT_APP_KEYCLOAK_REALM}`}
+    url={`${process.env.REACT_APP_KEYCLOAK_URL}`}
+    redirectUri={`${process.env.REACT_APP_KEYCLOAK_REDIRECT_URI}`}
+  >
+    <LocalizationProvider customMessages={CUSTOM_MESSAGES}>
+      <Layout headerLogo={<HeaderLogo />} />
+    </LocalizationProvider>
+  </KeycloakWrapper>
+);
 
 export {App};
