@@ -1,10 +1,9 @@
 import * as React from 'react';
 import {FC} from 'react';
-import {FormattedMessage} from 'react-intl';
-import {Paragraph} from '@gemeente-denhaag/denhaag-component-library';
 import styles from './header.module.scss';
 import {LanguageSwitcher} from '../language-switcher';
 import {Logout} from '../logout';
+import {UserName} from '../user-name';
 
 interface HeaderProps {
   logo: React.ReactNode;
@@ -17,9 +16,7 @@ const Header: FC<HeaderProps> = ({logo, facet}) => (
       <div className={styles.headerInner}>
         <div className={styles.headerLogoContainer}>{logo}</div>
         <div className={styles.headerElementsContainer}>
-          <Paragraph>
-            <FormattedMessage id="app.testMessage" />
-          </Paragraph>
+          <UserName />
           <Logout />
           <LanguageSwitcher />
         </div>
