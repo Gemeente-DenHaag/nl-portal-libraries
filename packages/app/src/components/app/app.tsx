@@ -4,7 +4,7 @@ import '@nl-portal/user-interface/dist/index.css';
 import {Layout} from '@nl-portal/user-interface';
 import {KeycloakWrapper} from '@nl-portal/authentication';
 import {LocalizationProvider} from '@nl-portal/localization';
-import {CUSTOM_LOCALES, CUSTOM_MESSAGES} from '../../i18n';
+import {CUSTOM_MESSAGES, CUSTOM_LOCALES} from '../../i18n';
 import {ReactComponent as HeaderLogo} from '../../assets/header-logo.svg';
 
 function App() {
