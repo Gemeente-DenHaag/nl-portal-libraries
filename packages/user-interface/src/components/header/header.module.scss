@@ -1,3 +1,5 @@
+@import '../../styles/mixins';
+
 .headerContainer {
   display: flex;
   flex-direction: column;
@@ -11,6 +13,10 @@
   margin-inline-end: var(--denhaag-divider-margin-inline-end);
   display: flex;
   justify-content: center;
+
+  @include breakpoint(mobile) {
+    height: 72px;
+  }
 }
 
 .headerInner {

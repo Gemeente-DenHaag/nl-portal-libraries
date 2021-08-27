@@ -8,7 +8,7 @@ const Logout = () => {
 
   return (
     <Button onClick={() => keycloak.logout()}>
-      <FormattedMessage id="app.logout" />
+      <FormattedMessage id="header.logout" />
     </Button>
   );
 };

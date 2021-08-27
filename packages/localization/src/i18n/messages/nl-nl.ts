@@ -4,7 +4,8 @@ import {Messages} from '../../interfaces';
 export const NL_NL_MESSAGES: Messages = {
   [DEFAULT_LOCALES.DUTCH]: {
     'app.languageName': 'Nederlands',
-    'app.logout': 'Uitloggen',
+    'header.logout': 'Uitloggen',
     'header.welcome': 'Welkom {userName}',
+    'header.menuButton': 'Menu',
   },
 };
