@@ -16,10 +16,19 @@ const LocalizationProvider: FC<LocalizationProviderProps> = ({
   customMessages,
   customLocales,
 }) => {
+  const LOCAL_STORAGE_LANG_KEY = 'NL_PORTAL_LANG';
+  const savedLocale = localStorage.getItem(LOCAL_STORAGE_LANG_KEY);
+
   const messages = customMessages ? deepmerge(DEFAULT_MESSAGES, customMessages) : DEFAULT_MESSAGES;
   const locales = customLocales || DEFAULT_LOCALES;
-  const [currentLocale, setCurrentLocale] = useState(locales[Object.keys(locales)[0]]);
+
+  const savedLocaleIndex = Object.values(locales).findIndex(locale => locale === savedLocale);
+  const localeToUse = locales[Object.keys(locales)[savedLocaleIndex !== -1 ? savedLocaleIndex : 0]];
+
+  const [currentLocale, setCurrentLocale] = useState(localeToUse);
   const [supportedLocales] = useState(Object.values(locales));
+
+  localStorage.setItem(LOCAL_STORAGE_LANG_KEY, currentLocale);
 
   return (
     <LocaleContext.Provider
