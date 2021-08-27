@@ -1,11 +1,11 @@
 :root {
-    --nl-portal-max-page-width: 1024px;
-    --nl-portal-space--xs: 8px;
-    --nl-portal-space--md: 16px;
-    --nl-portal-space--xl: 24px;
-    --nl-portal-space--3xl: 40px;
-    --nl-portal-header-height: 85px;
-    --nl-portal-header-height--mobile: 72px;
-    --nl-portal-header-max-logo-width: 150px;
-    --nl-portal-header-facet-height: 14px;
+    --nlportal-max-page-width: 1024px;
+    --nlportal-space--xs: 8px;
+    --nlportal-space--md: 16px;
+    --nlportal-space--xl: 24px;
+    --nlportal-space--3xl: 40px;
+    --nlportal-header-height: 85px;
+    --nlportal-header-height--mobile: 72px;
+    --nlportal-header-max-logo-width: 150px;
+    --nlportal-header-facet-height: 14px;
 }

@@ -30,6 +30,8 @@ const LocalizationProvider: FC<LocalizationProviderProps> = ({
 
   localStorage.setItem(LOCAL_STORAGE_LANG_KEY, currentLocale);
 
+  document.documentElement.lang = currentLocale.toLocaleLowerCase().split('-')[0];
+
   return (
     <LocaleContext.Provider
       // @ts-ignore
