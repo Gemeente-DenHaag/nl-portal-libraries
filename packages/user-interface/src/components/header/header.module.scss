@@ -8,36 +8,37 @@
 
 .header {
   width: auto;
-  height: 85px;
-  margin-inline-start: var(--denhaag-divider-margin-inline-start);
-  margin-inline-end: var(--denhaag-divider-margin-inline-end);
+  height: var(--nl-portal-header-height, 85px);
+  margin-inline-start: var(--nl-portal-space--md, 16px);
+  margin-inline-end: var(--nl-portal-space--md, 16px);
   display: flex;
   justify-content: center;
 
   @include breakpoint(mobile) {
-    height: 72px;
+    height: var(--nl-portal-header-height--mobile, 72px);
   }
 }
 
 .headerInner {
   width: 100%;
   height: auto;
-  max-width: 1024px;
+  max-width: var(--nl-portal-max-page-width, 1024px);
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding-block-start: var(--denhaag-button-padding-block);
-  padding-block-end: var(--denhaag-button-padding-block);
+  padding-block-start: var(--nl-portal-space--xs, 8px);
+  padding-block-end: var(--nl-portal-space--xs, 8px);
 }
 
 .headerLogoContainer {
   height: 100%;
-  max-width: 150px;
+  max-width: var(--nl-portal-header-max-logo-width);
   display: flex;
   align-items: center;
 
   svg {
     width: 100%;
+    height: 100%;
   }
 }
 
@@ -47,17 +48,17 @@
   align-items: center;
 
   p {
-    margin-right: var(--denhaag-menu-group-spacing);
+    margin-right: var(--nl-portal-space--3xl, 40px);
   }
 
   button:not(:last-child) {
-    margin-right: var(--denhaag-alert-padding-inline-start);
+    margin-right: var(--nl-portal-space--xl, 24px);
   }
 }
 
 .headerFacetContainer {
   width: 100%;
-  height: 14px;
+  height: var(--nl-portal-header-facet-height, 14px);
 
   img {
     width: 100%;
