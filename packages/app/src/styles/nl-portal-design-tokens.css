@@ -1,11 +1,11 @@
 :root {
+    --nlportal-space-block-xs: var(--utrecht-space-block-xs);
+    --nlportal-space-inline-2xl: var(--utrecht-space-inline-2xl);
+    --nlportal-space-inline-lg: var( --utrecht-space-inline-lg);
+    --nlportal-space-inline-md: var(--utrecht-space-inline-md);
     --nlportal-max-page-width: 1024px;
-    --nlportal-space--xs: 8px;
-    --nlportal-space--md: 16px;
-    --nlportal-space--xl: 24px;
-    --nlportal-space--3xl: 40px;
-    --nlportal-header-height: 85px;
-    --nlportal-header-height--mobile: 72px;
+    --nlportal-header-height: 72px;
+    --nlportal-header-height-large: 85px;
     --nlportal-header-max-logo-width: 150px;
     --nlportal-header-facet-height: 14px;
 }

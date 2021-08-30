@@ -1488,10 +1488,10 @@
     "@gemeente-denhaag/stylesprovider" "^0.1.1-alpha.7"
     "@gemeente-denhaag/surfaces" "^0.2.3-alpha.7"
 
-"@gemeente-denhaag/design-tokens-components@0.2.3-alpha.7":
-  version "0.2.3-alpha.7"
-  resolved "https://registry.yarnpkg.com/@gemeente-denhaag/design-tokens-components/-/design-tokens-components-0.2.3-alpha.7.tgz#1ebd926c8dd54665be12e1639f963a948178c621"
-  integrity sha512-72XSB9QvDqQJKDh3IBnK6Xle1S5ExY/T91m/u95zrQ1nnhoWjZUDPktDImMCgUq5BTtOaWfLz3lJgxMmHtXJcQ==
+"@gemeente-denhaag/design-tokens-components@0.2.3-alpha.16":
+  version "0.2.3-alpha.16"
+  resolved "https://registry.yarnpkg.com/@gemeente-denhaag/design-tokens-components/-/design-tokens-components-0.2.3-alpha.16.tgz#39419b8d06c367daf8854acfed54c23ab1da2a23"
+  integrity sha512-GQJeCs9poNg8K8OAI9vnmB0+WsuqgXJl4qp6nta38xnwipyQ3upMbaMHluDjc2fmtiE4m/wAdbZquOC3r841oQ==
 
 "@gemeente-denhaag/divider@^0.2.3-alpha.7":
   version "0.2.3-alpha.7"
