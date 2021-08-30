@@ -1,13 +1,8 @@
-@mixin breakpoint ($breakpoint) {
-  @if $breakpoint==tablet {
-    @media only screen and (max-width: 600px) {
-      @content;
-    }
-  }
+@use 'definitions' as definitions;
+@use 'sass:map';
 
-  @if $breakpoint==mobile {
-    @media only screen and (max-width: 480px) {
-      @content;
-    }
+@mixin breakpoint ($breakpoint) {
+  @media only screen and (max-width: map.get(definitions.$breakpoints, $breakpoint)) {
+    @content;
   }
 }
