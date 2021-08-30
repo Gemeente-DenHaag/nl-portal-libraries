@@ -11,10 +11,10 @@ import Facet from '../../assets/facet.png';
 
 const App = () => (
   <KeycloakWrapper
-    clientId={`${process.env.REACT_APP_KEYCLOAK_CLIENT_ID}`}
-    realm={`${process.env.REACT_APP_KEYCLOAK_REALM}`}
-    url={`${process.env.REACT_APP_KEYCLOAK_URL}`}
-    redirectUri={`${process.env.REACT_APP_KEYCLOAK_REDIRECT_URI}`}
+    clientId={process.env.REACT_APP_KEYCLOAK_CLIENT_ID}
+    realm={process.env.REACT_APP_KEYCLOAK_REALM}
+    url={process.env.REACT_APP_KEYCLOAK_URL}
+    redirectUri={process.env.REACT_APP_KEYCLOAK_REDIRECT_URI}
   >
     <LocalizationProvider customMessages={CUSTOM_MESSAGES}>
       <Layout headerLogo={<HeaderLogo />} headerFacet={<img src={Facet} alt="" />} />

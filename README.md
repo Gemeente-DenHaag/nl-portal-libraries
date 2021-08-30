@@ -22,52 +22,51 @@ Make sure to [install Yarn](https://yarnpkg.com/getting-started/install).
 ### Installing dependencies
 
 Install dependencies for all projects in the [packages](./packages) directory with the command
-`lerna bootstrap` or `npm run bootstrap` from the project root.
+`lerna bootstrap` or `yarn run bootstrap` from the project root.
 
-Avoid using commands like `npm install` or `yarn install`, either from the project root, or from any
+Avoid using commands like `yarn install`, either from the project root, or from any
 of the [packages](./packages) directories.
 
 _Tip: [Lerna](https://github.com/lerna/lerna) might not be installed when running `lerna bootstrap`
-for the first time. If this is the case, either install it globally with
-`npm install --global lerna` or` yarn global add lerna`, or run it through
+for the first time. If this is the case, either install it globally with `yarn global add lerna`, or run it through
 [npx](https://www.npmjs.com/package/npx): `npx lerna bootstrap`._
 
 ### Starting the project
 
-After installing dependencies, start the project with `npm run start` from the project root.
+After installing dependencies, start the project with `yarn run start` from the project root.
 
 This commands runs all the `start` scripts of each of the individual packages in the
 [packages](./packages) directory in parallel.
 
-_Tip: Packages can started individually by running `npm run start` from their respective
+_Tip: Packages can started individually by running `yarn run start` from their respective
 directories._
 
 ### Building
 
-After installing dependencies, build the project with `npm run build` from the project root.
+After installing dependencies, build the project with `yarn run build` from the project root.
 
 This commands runs all the `build` scripts of each of the individual packages in the
 [packages](./packages) directory.
 
-_Tip: Packages can built individually by running `npm run build` from their respective directories._
+_Tip: Packages can built individually by running `yarn run build` from their respective directories._
 
 ### Testing
 
 Testing in this project is done with [Jest](https://jestjs.io/). Run the tests of all packages with
-`npm run test` from the project root. To keep watching the tests for any changes, use
-`npm run test:watch`.
+`yarn run test` from the project root. To keep watching the tests for any changes, use
+`yarn run test:watch`.
 
 ### Linting
 
 Testing in this project is done with [ESLint](https://eslint.org/). Look for linting errors in all
-packages by running `npm run lint` from the project root. Use `npm run lint:fix` to automatically
+packages by running `yarn run lint` from the project root. Use `yarn run lint:fix` to automatically
 fix these errors.
 
 ### Prettifying
 
 Prettifying in this project is done with [Prettier](https://prettier.io/). Look for formatting
-errors in all packages by running `npm run prettier` from the project root. Use
-`npm run prettier:fix` to automatically fix these errors.
+errors in all packages by running `yarn run prettier` from the project root. Use
+`yarn run prettier:fix` to automatically fix these errors.
 
 ### Adding dependencies
 
@@ -85,7 +84,7 @@ project root. For example: `yarn add jest --dev -W`.
 ### Local dependencies
 
 Packages inside the [packages](./packages) folder may depend on each other, simply by adding them to
-their respective `package.json` files and running `npm run bootstrap` from the project root
+their respective `package.json` files and running `yarn run bootstrap` from the project root
 afterwards.
 
 For example, the `package.json` of [@nl-portal/app](./packages/app) might include
