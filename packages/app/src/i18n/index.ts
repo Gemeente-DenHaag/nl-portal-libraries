@@ -1,2 +1,2 @@
-export * from './custom-locales';
 export * from './custom-messages';
+export * from './custom-locales';
