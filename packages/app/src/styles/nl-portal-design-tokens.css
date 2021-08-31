@@ -1,4 +1,5 @@
 :root {
+    --nl-portal-space-block-2xl: var(--utrecht-space-block-2xl);
     --nlportal-space-block-xs: var(--utrecht-space-block-xs);
     --nlportal-space-inline-2xl: var(--utrecht-space-inline-2xl);
     --nlportal-space-inline-lg: var( --utrecht-space-inline-lg);
@@ -8,4 +9,5 @@
     --nlportal-header-height-large: 85px;
     --nlportal-header-max-logo-width: 150px;
     --nlportal-header-facet-height: 14px;
+    --nlportal-menu-background-color: var(--denhaag-color-white);
 }

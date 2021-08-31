@@ -1,10 +1,5 @@
 import * as React from 'react';
-import {Button} from '@gemeente-denhaag/denhaag-component-library';
-import {FormattedMessage} from 'react-intl';
+import styles from './menu.module.scss';
 
-const Menu = () => (
-  <Button>
-    <FormattedMessage id="header.menuButton" />
-  </Button>
-);
+const Menu = () => <div className={styles.menu}>menu</div>;
 export {Menu};
