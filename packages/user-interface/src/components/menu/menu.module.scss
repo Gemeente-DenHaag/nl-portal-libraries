@@ -10,3 +10,9 @@
   padding-inline-start: var(--nlportal-space-inline-2xl, 32px);
   padding-inline-end: var(--nlportal-space-inline-2xl, 32px);
 }
+
+.menu__header {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}

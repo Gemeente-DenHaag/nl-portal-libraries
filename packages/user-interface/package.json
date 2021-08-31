@@ -49,6 +49,7 @@
   ],
   "dependencies": {
     "@gemeente-denhaag/denhaag-component-library": "0.2.3-alpha.7",
+    "@gemeente-denhaag/icons": "^0.2.3-alpha.16",
     "@nl-portal/localization": "0.1.0",
     "@react-keycloak/web": "^3.4.0",
     "react-intl": "^5.20.10"
