@@ -48,7 +48,6 @@
   ],
   "dependencies": {
     "@react-keycloak/web": "^3.4.0",
-    "keycloak-js": "^15.0.1",
-    "prop-types": "^15.7.2"
+    "keycloak-js": "^15.0.1"
   }
 }
