@@ -7,6 +7,7 @@ import {FC, useContext} from 'react';
 import styles from './menu.module.scss';
 import {LayoutContext} from '../../contexts';
 import {PortalPage} from '../../interfaces';
+import {MenuItem} from '../menu-item';
 
 interface MenuProps {
   items: Array<PortalPage>;
@@ -27,7 +28,7 @@ const Menu: FC<MenuProps> = ({items}) => {
       </div>
       <div className={styles.menu__items}>
         {items.map(item => (
-          <div>{item.titleTranslationKey}</div>
+          <MenuItem item={item} />
         ))}
       </div>
     </div>
