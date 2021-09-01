@@ -52,6 +52,7 @@
     "@gemeente-denhaag/icons": "^0.2.3-alpha.16",
     "@nl-portal/localization": "0.1.0",
     "@react-keycloak/web": "^3.4.0",
+    "classnames": "^2.3.1",
     "react-intl": "^5.20.10"
   }
 }

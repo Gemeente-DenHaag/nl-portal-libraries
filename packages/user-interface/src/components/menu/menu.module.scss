@@ -11,8 +11,13 @@
   padding-inline-end: var(--nlportal-space-inline-2xl, 32px);
 }
 
+.menu--hidden {
+  display: none;
+}
+
 .menu__header {
   display: flex;
   justify-content: space-between;
   width: 100%;
+  margin-block-end: var(--nl-portal-space-block-2xl, 32px);
 }
