@@ -4,13 +4,15 @@ import {FC, ReactElement, useState} from 'react';
 import {Header} from '../header';
 import {Menu} from '../menu';
 import {LayoutContext} from '../../contexts';
+import {PortalPage} from '../../interfaces';
 
 interface LayoutProps {
+  pages: Array<PortalPage>;
   headerLogo: ReactElement;
   headerFacet?: ReactElement;
 }
 
-const Layout: FC<LayoutProps> = ({headerLogo, headerFacet}) => {
+const Layout: FC<LayoutProps> = ({headerLogo, headerFacet, pages}) => {
   const [menuOpened, setMenuState] = useState(false);
   const hideMenu = () => setMenuState(false);
   const showMenu = () => setMenuState(true);
@@ -19,7 +21,7 @@ const Layout: FC<LayoutProps> = ({headerLogo, headerFacet}) => {
     <StylesProvider>
       <LayoutContext.Provider value={{menuOpened, hideMenu, showMenu}}>
         <Header logo={headerLogo} facet={headerFacet} />
-        <Menu />
+        <Menu items={pages} />
       </LayoutContext.Provider>
     </StylesProvider>
   );

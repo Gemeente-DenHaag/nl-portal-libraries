@@ -1,9 +1,9 @@
 :root {
-    --nl-portal-space-block-2xl: var(--utrecht-space-block-2xl);
-    --nlportal-space-block-xs: var(--utrecht-space-block-xs);
-    --nlportal-space-inline-2xl: var(--utrecht-space-inline-2xl);
-    --nlportal-space-inline-lg: var( --utrecht-space-inline-lg);
-    --nlportal-space-inline-md: var(--utrecht-space-inline-md);
+    --nl-portal-space-block-2xl: var(--denhaag-space-block-2xl);
+    --nlportal-space-block-xs: var(--denhaag-space-block-xs);
+    --nlportal-space-inline-2xl: var(--denhaag-space-inline-2xl);
+    --nlportal-space-inline-lg: var( --denhaag-space-inline-lg);
+    --nlportal-space-inline-md: var(--denhaag-space-inline-md);
     --nlportal-max-page-width: 1024px;
     --nlportal-header-height: 72px;
     --nlportal-header-height-large: 85px;

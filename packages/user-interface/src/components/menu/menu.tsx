@@ -3,11 +3,16 @@ import {Heading4, IconButton} from '@gemeente-denhaag/denhaag-component-library'
 import {CloseIcon} from '@gemeente-denhaag/icons';
 import {FormattedMessage} from 'react-intl';
 import classNames from 'classnames';
-import {useContext} from 'react';
+import {FC, useContext} from 'react';
 import styles from './menu.module.scss';
 import {LayoutContext} from '../../contexts';
+import {PortalPage} from '../../interfaces';
 
-const Menu = () => {
+interface MenuProps {
+  items: Array<PortalPage>;
+}
+
+const Menu: FC<MenuProps> = ({items}) => {
   const {menuOpened, hideMenu} = useContext(LayoutContext);
 
   return (
@@ -19,6 +24,11 @@ const Menu = () => {
         <IconButton onClick={hideMenu}>
           <CloseIcon />
         </IconButton>
+      </div>
+      <div className={styles.menu__items}>
+        {items.map(item => (
+          <div>{item.titleTranslationKey}</div>
+        ))}
       </div>
     </div>
   );
