@@ -6,9 +6,9 @@
   width: 100vw;
   height: 100vh;
   background-color: var(--nlportal-menu-background-color, white);
-  padding-block-start: var(--nl-portal-space-block-2xl, 32px);
-  padding-inline-start: var(--nlportal-space-inline-2xl, 32px);
-  padding-inline-end: var(--nlportal-space-inline-2xl, 32px);
+  padding-block-start: var(--nl-portal-space-block-2xl, 2rem);
+  padding-inline-start: var(--nlportal-space-inline-2xl, 2rem);
+  padding-inline-end: var(--nlportal-space-inline-2xl, 2rem);
 }
 
 .menu--hidden {
@@ -19,5 +19,5 @@
   display: flex;
   justify-content: space-between;
   width: 100%;
-  margin-block-end: var(--nl-portal-space-block-2xl, 32px);
+  margin-block-end: var(--nl-portal-space-block-2xl, 2rem);
 }
