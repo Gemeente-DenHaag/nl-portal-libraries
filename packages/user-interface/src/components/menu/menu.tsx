@@ -27,9 +27,11 @@ const Menu: FC<MenuProps> = ({items}) => {
         </IconButton>
       </header>
       <nav className={styles.menu__items}>
-        {items.map(item => (
-          <MenuItem key={item.pathTranslationKey} item={item} />
-        ))}
+        {items
+          .filter(item => item.showInMenu)
+          .map(item => (
+            <MenuItem key={item.path} item={item} />
+          ))}
       </nav>
     </div>
   );

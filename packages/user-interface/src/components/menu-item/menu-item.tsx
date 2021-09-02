@@ -4,6 +4,7 @@ import {ArchiveIcon, ChevronRightIcon, GridIcon} from '@gemeente-denhaag/icons';
 import {LocaleContext} from '@nl-portal/localization';
 import {Link, useLocation} from 'react-router-dom';
 import classNames from 'classnames';
+import {FormattedMessage} from 'react-intl';
 import {PortalPage} from '../../interfaces';
 import {MenuIcon} from '../../enums';
 import styles from './menu-item.module.scss';
@@ -34,15 +35,15 @@ const MenuItem: FC<MenuItemProps> = ({item}) => {
   return (
     <Link
       title={item.titleTranslationKey}
-      to={item.pathTranslationKey}
+      to={item.path}
       onClick={hideMenu}
       hrefLang={hrefLang}
       className={classNames('denhaag-menu-button', styles['denhaag-menu-button--flex'], {
-        'denhaag-menu-button--active': location.pathname === item.pathTranslationKey,
+        'denhaag-menu-button--active': location.pathname === item.path,
       })}
     >
       <div className={styles['denhaag-menu-button__icon']}>{iconComponent}</div>
-      {item.titleTranslationKey}
+      <FormattedMessage id={`pageTitles.${item.titleTranslationKey}`} />
     </Link>
   );
 };

@@ -13,14 +13,16 @@ const pages: Array<PortalPage> = [
   {
     icon: MenuIcon.Overview,
     pageComponent: OverviewPage,
-    pathTranslationKey: '/',
+    path: '/',
     titleTranslationKey: 'overview',
+    showInMenu: true,
   },
   {
     icon: MenuIcon.Cases,
     pageComponent: CasesPage,
-    pathTranslationKey: '/cases',
+    path: '/zaken',
     titleTranslationKey: 'cases',
+    showInMenu: true,
   },
 ];
 

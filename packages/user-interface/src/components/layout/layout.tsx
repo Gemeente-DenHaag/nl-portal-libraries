@@ -32,7 +32,7 @@ const Layout: FC<LayoutProps> = ({headerLogo, headerFacet, pages}) => {
               <div className={styles['page-container__page']}>
                 <Switch>
                   {pages.map(page => (
-                    <Route exact key={page.pathTranslationKey} path={page.pathTranslationKey}>
+                    <Route exact key={page.path} path={page.path}>
                       {page.pageComponent}
                     </Route>
                   ))}
