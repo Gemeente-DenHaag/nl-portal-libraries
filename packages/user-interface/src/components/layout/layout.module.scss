@@ -4,9 +4,15 @@
   width: auto;
   display: flex;
   justify-content: center;
-  margin-inline-start: var(--nlportal-space-inline-md, 1rem);
-  margin-inline-end: var(--nlportal-space-inline-md, 1rem);
-  margin-block-start: var(--nlportal-space-block-5xl, 4rem);
+  margin-inline-start: var(--nlportal-space-inline-xl, 1.5rem);
+  margin-inline-end: var(--nlportal-space-inline-xl, 1.5rem);
+  margin-block-start: var(--nlportal-space-block-3xl, 2.5rem);
+
+  @include breakpoint(tablet) {
+    margin-inline-start: var(--nlportal-space-inline-md, 1rem);
+    margin-inline-end: var(--nlportal-space-inline-md, 1rem);
+    margin-block-start: var(--nlportal-space-block-5xl, 4rem);
+  }
 }
 
 .page-container__inner {
