@@ -6,17 +6,12 @@ import {useContext} from 'react';
 
 const LanguageSwitcher = () => {
   const {currentLocale, setCurrentLocale, supportedLocales} = useContext(LocaleContext);
-
-  const setNextLocale = (): void => {
-    const currentLocaleIndex = supportedLocales.findIndex(locale => locale === currentLocale);
-    const nextLocale = supportedLocales[currentLocaleIndex + 1];
-
-    setCurrentLocale(nextLocale || supportedLocales[0]);
-  };
+  const currentLocaleIndex = supportedLocales.findIndex(locale => locale === currentLocale);
+  const nextLocale = supportedLocales[currentLocaleIndex + 1] || supportedLocales[0];
 
   return (
-    <Button variant="secondary-action" onClick={setNextLocale}>
-      <FormattedMessage id="app.languageName" />
+    <Button variant="secondary-action" onClick={() => setCurrentLocale(nextLocale)}>
+      <FormattedMessage id={`locales.${nextLocale}`} />
     </Button>
   );
 };
