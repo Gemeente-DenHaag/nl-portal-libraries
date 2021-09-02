@@ -28,14 +28,16 @@ const LocalizationProvider: FC<LocalizationProviderProps> = ({
   const [currentLocale, setCurrentLocale] = useState(localeToUse);
   const [supportedLocales] = useState(Object.values(locales));
 
+  const hrefLang = currentLocale.toLocaleLowerCase().split('-')[0];
+
   localStorage.setItem(LOCAL_STORAGE_LANG_KEY, currentLocale);
 
-  document.documentElement.lang = currentLocale.toLocaleLowerCase().split('-')[0];
+  document.documentElement.lang = hrefLang;
 
   return (
     <LocaleContext.Provider
       // @ts-ignore
-      value={{currentLocale, supportedLocales, setCurrentLocale}}
+      value={{currentLocale, supportedLocales, setCurrentLocale, hrefLang}}
     >
       <IntlProvider locale={currentLocale} messages={messages[currentLocale]}>
         {children}
