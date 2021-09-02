@@ -18,14 +18,14 @@ const Menu: FC<MenuProps> = ({items}) => {
 
   return (
     <div className={classNames(styles.menu, {[styles['menu--hidden']]: !menuOpened})}>
-      <div className={styles.menu__header}>
+      <header className={styles.menu__header}>
         <Heading4>
           <FormattedMessage id="app.appName" />
         </Heading4>
         <IconButton onClick={hideMenu}>
           <CloseIcon />
         </IconButton>
-      </div>
+      </header>
       <nav className={styles.menu__items}>
         {items.map(item => (
           <MenuItem key={item.pathTranslationKey} item={item} />
