@@ -1,0 +1,12 @@
+.menu-item {
+  display: flex;
+  flex-direction: row;
+}
+
+.menu-item__icon {
+  margin-inline-end: var(--nlportal-space-inline-md, 1rem);
+}
+
+.menu-item__icon--active {
+  color: var(--nlportal-menu-button-active-color, hsl(207 80% 35%));
+}
