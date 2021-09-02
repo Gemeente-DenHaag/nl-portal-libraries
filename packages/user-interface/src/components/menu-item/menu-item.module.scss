@@ -1,6 +1,7 @@
 .menu-item {
   a {
     display: flex;
+    align-items: center;
 
     &:after {
       display: none;
@@ -9,5 +10,6 @@
 }
 
 .menu-item__icon {
+  display: flex;
   margin-inline-end: var(--nlportal-space-inline-md, 1rem);
 }
