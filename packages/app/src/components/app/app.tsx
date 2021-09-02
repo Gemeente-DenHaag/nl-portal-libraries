@@ -32,7 +32,11 @@ const App = () => (
     redirectUri={process.env.REACT_APP_KEYCLOAK_REDIRECT_URI}
   >
     <LocalizationProvider customMessages={CUSTOM_MESSAGES}>
-      <Layout pages={pages} headerLogo={<HeaderLogo />} headerFacet={<img src={Facet} alt="" />} />
+      <Layout
+        pages={pages}
+        headerLogo={<HeaderLogo />}
+        headerFacet={<img src={Facet} alt="Logo" />}
+      />
     </LocalizationProvider>
   </KeycloakWrapper>
 );

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {StylesProvider} from '@gemeente-denhaag/denhaag-component-library';
 import {FC, ReactElement, useState} from 'react';
-import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
+import {BrowserRouter as Router, Switch, Route, Redirect} from 'react-router-dom';
 import {Header} from '../header';
 import {Menu} from '../menu';
 import {LayoutContext} from '../../contexts';
@@ -30,6 +30,7 @@ const Layout: FC<LayoutProps> = ({headerLogo, headerFacet, pages}) => {
                 {page.pageComponent}
               </Route>
             ))}
+            <Route render={() => <Redirect to="/" />} />
           </Switch>
         </Router>
       </LayoutContext.Provider>
