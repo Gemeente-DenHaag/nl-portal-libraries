@@ -1,7 +1,13 @@
 .denhaag-menu-button--flex {
   display: flex !important;
   align-items: center;
-  margin-block-end: var(--nlportal-space-block-xl, 1.5rem);
+  padding-block-start: var(--nlportal-space-block-xs, 0.5rem) !important;
+  padding-block-end: var(--nlportal-space-block-xs, 0.5rem) !important;
+  margin-block-end: var(--nlportal-space-block-xs, 0.5rem);
+
+  &:after {
+    display: none !important;
+  }
 }
 
 .denhaag-menu-button__icon {

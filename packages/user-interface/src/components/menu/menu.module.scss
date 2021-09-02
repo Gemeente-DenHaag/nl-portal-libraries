@@ -23,5 +23,6 @@
 }
 
 .menu__items {
-
+  display: inline-flex;
+  flex-direction: column;
 }
