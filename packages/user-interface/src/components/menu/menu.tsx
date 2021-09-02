@@ -28,7 +28,7 @@ const Menu: FC<MenuProps> = ({items}) => {
       </div>
       <div className={styles.menu__items}>
         {items.map(item => (
-          <MenuItem item={item} />
+          <MenuItem key={item.pathTranslationKey} item={item} />
         ))}
       </div>
     </div>

@@ -26,7 +26,7 @@ const Layout: FC<LayoutProps> = ({headerLogo, headerFacet, pages}) => {
           <Menu items={pages} />
           <Switch>
             {pages.map(page => (
-              <Route key={page.pathTranslationKey} path={page.pathTranslationKey}>
+              <Route exact key={page.pathTranslationKey} path={page.pathTranslationKey}>
                 {page.pageComponent}
               </Route>
             ))}
