@@ -2,7 +2,7 @@ import React from 'react';
 import '@gemeente-denhaag/design-tokens-components';
 import '@nl-portal/user-interface/dist/index.css';
 import '../../styles/nl-portal-design-tokens.css';
-import {Layout, MenuIcon, OverviewPage, PortalPage} from '@nl-portal/user-interface';
+import {CasesPage, Layout, MenuIcon, OverviewPage, PortalPage} from '@nl-portal/user-interface';
 import {KeycloakWrapper} from '@nl-portal/authentication';
 import {LocalizationProvider} from '@nl-portal/localization';
 import {CUSTOM_MESSAGES} from '../../i18n';
@@ -13,8 +13,14 @@ const pages: Array<PortalPage> = [
   {
     icon: MenuIcon.Overview,
     pageComponent: OverviewPage,
-    pathTranslationKey: '',
+    pathTranslationKey: '/',
     titleTranslationKey: 'overview',
+  },
+  {
+    icon: MenuIcon.Cases,
+    pageComponent: CasesPage,
+    pathTranslationKey: '/cases',
+    titleTranslationKey: 'cases',
   },
 ];
 

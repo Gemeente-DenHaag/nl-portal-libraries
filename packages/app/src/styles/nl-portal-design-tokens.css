@@ -1,5 +1,6 @@
 :root {
-    --nl-portal-space-block-2xl: var(--denhaag-space-block-2xl);
+    --nlportal-space-block-2xl: var(--denhaag-space-block-2xl);
+    --nlportal-space-block-xl: var(--denhaag-space-block-xl);
     --nlportal-space-block-xs: var(--denhaag-space-block-xs);
     --nlportal-space-inline-2xl: var(--denhaag-space-inline-2xl);
     --nlportal-space-inline-lg: var( --denhaag-space-inline-lg);

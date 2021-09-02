@@ -1,15 +1,10 @@
-.menu-item {
-  a {
-    display: flex;
-    align-items: center;
-
-    &:after {
-      display: none;
-    }
-  }
+.denhaag-menu-button--flex {
+  display: flex !important;
+  align-items: center;
+  margin-block-end: var(--nlportal-space-block-xl, 1.5rem);
 }
 
-.menu-item__icon {
+.denhaag-menu-button__icon {
   display: flex;
   margin-inline-end: var(--nlportal-space-inline-md, 1rem);
 }
