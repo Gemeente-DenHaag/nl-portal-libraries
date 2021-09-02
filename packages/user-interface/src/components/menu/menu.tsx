@@ -26,11 +26,11 @@ const Menu: FC<MenuProps> = ({items}) => {
           <CloseIcon />
         </IconButton>
       </div>
-      <div className={styles.menu__items}>
+      <nav className={styles.menu__items}>
         {items.map(item => (
           <MenuItem key={item.pathTranslationKey} item={item} />
         ))}
-      </div>
+      </nav>
     </div>
   );
 };
