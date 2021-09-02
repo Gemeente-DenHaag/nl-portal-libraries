@@ -1,0 +1,33 @@
+@import '../../styles/mixins';
+
+.page-container {
+  width: auto;
+  display: flex;
+  justify-content: center;
+  margin-inline-start: var(--nlportal-space-inline-md, 1rem);
+  margin-inline-end: var(--nlportal-space-inline-md, 1rem);
+  margin-block-start: var(--nlportal-space-block-5xl, 4rem);
+}
+
+.page-container__inner {
+  width: 100%;
+  max-width: var(--nlportal-max-page-width, 1024px);
+  display: flex;
+  justify-content: space-between;
+}
+
+.page-container__menu {
+  width: 0;
+
+  @include breakpoint(tablet) {
+    width: var(--nlportal-desktop-menu-width, 230px);
+  }
+}
+
+.page-container__page {
+  width: 100%;
+
+  @include breakpoint(tablet) {
+    width: calc(100% - var(--nlportal-desktop-menu-width, 230px) - var(--nlportal-space-inline-2xl, 2rem));
+  }
+}

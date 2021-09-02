@@ -6,6 +6,7 @@ import {Header} from '../header';
 import {Menu} from '../menu';
 import {LayoutContext} from '../../contexts';
 import {PortalPage} from '../../interfaces';
+import styles from './layout.module.scss';
 
 interface LayoutProps {
   pages: Array<PortalPage>;
@@ -22,17 +23,25 @@ const Layout: FC<LayoutProps> = ({headerLogo, headerFacet, pages}) => {
     <StylesProvider>
       <LayoutContext.Provider value={{menuOpened, hideMenu, showMenu}}>
         <Header logo={headerLogo} facet={headerFacet} />
-        <Router>
-          <Menu items={pages} />
-          <Switch>
-            {pages.map(page => (
-              <Route exact key={page.pathTranslationKey} path={page.pathTranslationKey}>
-                {page.pageComponent}
-              </Route>
-            ))}
-            <Route render={() => <Redirect to="/" />} />
-          </Switch>
-        </Router>
+        <div className={styles['page-container']}>
+          <div className={styles['page-container__inner']}>
+            <Router>
+              <div className={styles['page-container__menu']}>
+                <Menu items={pages} />
+              </div>
+              <div className={styles['page-container__page']}>
+                <Switch>
+                  {pages.map(page => (
+                    <Route exact key={page.pathTranslationKey} path={page.pathTranslationKey}>
+                      {page.pageComponent}
+                    </Route>
+                  ))}
+                  <Route render={() => <Redirect to="/" />} />
+                </Switch>
+              </div>
+            </Router>
+          </div>
+        </div>
       </LayoutContext.Provider>
     </StylesProvider>
   );

@@ -1,3 +1,5 @@
+@import '../../styles/mixins';
+
 .menu {
   box-sizing: border-box;
   position: fixed;
@@ -9,10 +11,23 @@
   padding-block-start: var(--nl-portal-space-block-2xl, 2rem);
   padding-inline-start: var(--nlportal-space-inline-2xl, 2rem);
   padding-inline-end: var(--nlportal-space-inline-2xl, 2rem);
+
+  @include breakpoint(tablet) {
+    position: relative;
+    width: auto;
+    height: auto;
+    padding-block-start: 0;
+    padding-inline-start: 0;
+    padding-inline-end: 0;
+  }
 }
 
 .menu--hidden {
   display: none;
+
+  @include breakpoint(tablet) {
+    display: block;
+  }
 }
 
 .menu__header {
@@ -20,6 +35,10 @@
   justify-content: space-between;
   width: 100%;
   margin-block-end: var(--nlportal-space-block-2xl, 2rem);
+
+  @include breakpoint(tablet) {
+    display: none;
+  }
 }
 
 .menu__items {
