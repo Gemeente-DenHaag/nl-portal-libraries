@@ -10,5 +10,7 @@ export const NL_NL_MESSAGES: Messages = {
     'header.menuButton': 'Menu',
     'pageTitles.overview': 'Overzicht',
     'pageTitles.cases': 'Lopende zaken',
+    'pageTitles.notifications': 'Mijn berichten',
+    'pageTitles.themes': "Thema's",
   },
 };

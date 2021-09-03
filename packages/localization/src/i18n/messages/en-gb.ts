@@ -10,5 +10,7 @@ export const EN_GB_MESSAGES: Messages = {
     'header.menuButton': 'Menu',
     'pageTitles.overview': 'Overview',
     'pageTitles.cases': 'Current cases',
+    'pageTitles.notifications': 'My messages',
+    'pageTitles.themes': 'Themes',
   },
 };

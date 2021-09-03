@@ -1,11 +1,10 @@
 import {ReactElement} from 'react';
-import {MenuIcon} from '../enums';
 
 export interface PortalPage {
   path: string;
   titleTranslationKey: string;
   pageComponent: () => ReactElement;
-  icon: MenuIcon;
-  showInMenu: boolean;
+  showInMenu?: boolean;
+  icon?: ReactElement;
   children?: Array<PortalPage>;
 }
