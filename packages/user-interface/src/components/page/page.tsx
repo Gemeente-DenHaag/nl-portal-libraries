@@ -1,19 +1,23 @@
-import {FC, ReactElement, useEffect} from 'react';
+import {FC, ReactElement, useContext, useEffect} from 'react';
 import {useIntl} from 'react-intl';
+import {PortalPage} from '../../interfaces';
+import {LayoutContext} from '../../contexts';
 
 interface PageProps {
   children: ReactElement;
-  titleTranslationKey?: string;
+  page: PortalPage;
 }
 
-const Page: FC<PageProps> = ({children, titleTranslationKey}) => {
+const Page: FC<PageProps> = ({children, page}) => {
+  const {setCurrentPage} = useContext(LayoutContext);
   const intl = useIntl();
-  const pageTitle = intl.formatMessage({id: `pageTitles.${titleTranslationKey}`});
+  const pageTitle = intl.formatMessage({id: `pageTitles.${page?.titleTranslationKey}`});
   const appName = intl.formatMessage({id: 'app.appName'});
-  const documentTitle = titleTranslationKey ? `${pageTitle} - ${appName}` : appName;
+  const documentTitle = page?.titleTranslationKey ? `${pageTitle} - ${appName}` : appName;
 
   useEffect(() => {
     document.title = documentTitle;
+    setCurrentPage(page);
   }, [documentTitle]);
 
   return children;

@@ -1,0 +1,10 @@
+@import '../../styles/mixins';
+
+.current-page {
+  width: 100%;
+
+  @include breakpoint(tablet) {
+    display: none;
+  }
+
+}
