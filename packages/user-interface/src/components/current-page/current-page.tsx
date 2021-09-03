@@ -9,10 +9,14 @@ const CurrentPage = () => {
   const {currentPage} = useContext(LayoutContext);
   return (
     <div className={styles['current-page']}>
-      <Heading5>
-        <FormattedMessage id={`pageTitles.${currentPage?.titleTranslationKey}`} />
-      </Heading5>
-      {currentPage?.icon && currentPage.icon}
+      <div className={styles['current-page__inner']}>
+        {currentPage?.icon && (
+          <div className={styles['current-page__icon']}>{currentPage.icon}</div>
+        )}
+        <Heading5>
+          <FormattedMessage id={`pageTitles.${currentPage?.titleTranslationKey}`} />
+        </Heading5>
+      </div>
     </div>
   );
 };
