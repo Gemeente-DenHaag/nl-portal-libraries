@@ -3,7 +3,20 @@
 .header-wrapper {
   display: flex;
   flex-direction: column;
-  width: auto;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  transform: translateY(0);
+  transition: transform 0.1s ease-out;
+}
+
+.header-wrapper--hidden {
+  transform: translateY(-100%);
+
+  @include breakpoint(tablet) {
+    transform: translateY(0);
+  }
 }
 
 .header {
@@ -13,11 +26,10 @@
   height: var(--nlportal-header-height, 72px);
   margin-inline-start: var(--nlportal-space-inline-xl, 1.5rem);
   margin-inline-end: var(--nlportal-space-inline-xl, 1.5rem);
+  background-color: var(--nlportal-header-background-color, hsl(0 0% 100%));
 
   @include breakpoint(tablet) {
     height: var(--nlportal-header-height-large, 85px);
-    margin-inline-start: var(--nlportal-space-inline-md, 1rem);
-    margin-inline-end: var(--nlportal-space-inline-md, 1rem);
   }
 }
 

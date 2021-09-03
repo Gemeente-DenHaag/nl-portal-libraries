@@ -14,6 +14,7 @@
   --nlportal-header-height-large: 85px;
   --nlportal-header-max-logo-width: 150px;
   --nlportal-header-facet-height: 14px;
+  --nlportal-header-background-color: var(--denhaag-color-white);
   --nlportal-desktop-menu-width: 230px;
   --nlportal-menu-item-height: 3rem;
   --nlportal-menu-background-color: var(--denhaag-color-white);
@@ -21,6 +22,7 @@
   --nl-portal-base-font-size: var(--denhaag-typography-scale-base-font-size);
   --nl-portal-heading-5-color: var(--denhaag-color-blue-3);
   --nl-portal-current-page-indicator-background-color: var(--denhaag-color-blue-1);
+  --nl-portal-current-page-indicator-height: 56px;
   --utrecht-heading-color: var(--denhaag-color-blue-3);
   --denhaag-menu-button-font-size: var(--denhaag-typography-scale-lg-font-size);
   --denhaag-menu-button-line-height: var(--denhaag-typography-scale-xl-font-size);

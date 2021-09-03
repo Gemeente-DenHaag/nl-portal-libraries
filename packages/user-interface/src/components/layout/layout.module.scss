@@ -6,12 +6,30 @@
   justify-content: center;
   margin-inline-start: var(--nlportal-space-inline-xl, 1.5rem);
   margin-inline-end: var(--nlportal-space-inline-xl, 1.5rem);
-  margin-block-start: var(--nlportal-space-block-3xl, 2.5rem);
+  margin-block-start: calc(
+    var(--nlportal-space-block-3xl, 2.5rem) + var(--nlportal-header-height, 72px) +
+      var(--nl-portal-current-page-indicator-height, 56px)
+  );
 
   @include breakpoint(tablet) {
-    margin-inline-start: var(--nlportal-space-inline-md, 1rem);
-    margin-inline-end: var(--nlportal-space-inline-md, 1rem);
-    margin-block-start: var(--nlportal-space-block-5xl, 4rem);
+    margin-block-start: calc(
+      var(--nlportal-space-block-5xl, 4rem) + var(--nlportal-header-height-large, 85px)
+    );
+  }
+}
+
+.page-container--has-facet {
+  margin-block-start: calc(
+    var(--nlportal-space-block-3xl, 2.5rem) + var(--nlportal-header-height, 72px) +
+      var(--nl-portal-current-page-indicator-height, 56px) +
+      var(--nlportal-header-facet-height, 14px)
+  );
+
+  @include breakpoint(tablet) {
+    margin-block-start: calc(
+      var(--nlportal-space-block-5xl, 4rem) + var(--nlportal-header-height-large, 85px) +
+        var(--nlportal-header-facet-height, 14px)
+    );
   }
 }
 
@@ -27,6 +45,7 @@
 
   @include breakpoint(tablet) {
     width: var(--nlportal-desktop-menu-width, 230px);
+    position: fixed;
   }
 }
 
@@ -34,8 +53,8 @@
   width: 100%;
 
   @include breakpoint(tablet) {
-    width: calc(
-      100% - var(--nlportal-desktop-menu-width, 230px) - var(--nlportal-space-inline-2xl, 2rem)
+    margin-left: calc(
+      var(--nlportal-desktop-menu-width, 230px) + var(--nlportal-space-inline-2xl, 2rem)
     );
   }
 }

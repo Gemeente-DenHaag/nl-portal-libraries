@@ -2,6 +2,7 @@ import * as React from 'react';
 import {StylesProvider} from '@gemeente-denhaag/denhaag-component-library';
 import {FC, ReactElement, useState} from 'react';
 import {BrowserRouter as Router, Switch, Route, Redirect} from 'react-router-dom';
+import classNames from 'classnames';
 import {Header} from '../header';
 import {Menu} from '../menu';
 import {LayoutContext} from '../../contexts';
@@ -20,6 +21,7 @@ const Layout: FC<LayoutProps> = ({headerLogo, headerFacet, pages}) => {
   const [menuOpened, setMenuState] = useState(false);
   const [messagesCount, setMessagesCount] = useState(0);
   const [currentPage, setCurrentPage] = useState(pages[0]);
+  const [headerHidden, setHeaderHidden] = useState(false);
   const hideMenu = () => setMenuState(false);
   const showMenu = () => setMenuState(true);
 
@@ -34,6 +36,8 @@ const Layout: FC<LayoutProps> = ({headerLogo, headerFacet, pages}) => {
           setMessagesCount,
           currentPage,
           setCurrentPage,
+          headerHidden,
+          setHeaderHidden,
         }}
       >
         <Router>
@@ -42,8 +46,12 @@ const Layout: FC<LayoutProps> = ({headerLogo, headerFacet, pages}) => {
             facet={headerFacet}
             homePage={pages.find(page => page.isHome)}
           />
-          <CurrentPageIndicator />
-          <div className={styles['page-container']}>
+          <CurrentPageIndicator hasFacet={!!headerFacet} />
+          <div
+            className={classNames(styles['page-container'], {
+              [styles['page-container--has-facet']]: !!headerFacet,
+            })}
+          >
             <div className={styles['page-container__inner']}>
               <div className={styles['page-container__menu']}>
                 <Menu items={pages} />

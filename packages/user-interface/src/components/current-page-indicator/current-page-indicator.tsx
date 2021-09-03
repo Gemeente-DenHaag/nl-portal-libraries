@@ -1,15 +1,26 @@
 import * as React from 'react';
-import {useContext} from 'react';
+import {FC, useContext} from 'react';
 import {FormattedMessage} from 'react-intl';
 import {Heading5} from '@gemeente-denhaag/denhaag-component-library';
 import {ChevronDownIcon} from '@gemeente-denhaag/icons';
+import classNames from 'classnames';
 import {LayoutContext} from '../../contexts';
 import styles from './current-page-indicator.module.scss';
 
-const CurrentPageIndicator = () => {
-  const {currentPage} = useContext(LayoutContext);
+interface CurrentPageIndicatorProps {
+  hasFacet: boolean;
+}
+
+const CurrentPageIndicator: FC<CurrentPageIndicatorProps> = ({hasFacet}) => {
+  const {currentPage, headerHidden} = useContext(LayoutContext);
+
   return (
-    <div className={styles['current-page-indicator']}>
+    <div
+      className={classNames(styles['current-page-indicator'], {
+        [styles['current-page-indicator--has-facet']]: hasFacet,
+        [styles['current-page-indicator--header-hidden']]: headerHidden,
+      })}
+    >
       <header className={styles['current-page-indicator__header']}>
         {currentPage?.icon && (
           <div className={styles['current-page-indicator__icon']}>{currentPage.icon}</div>
