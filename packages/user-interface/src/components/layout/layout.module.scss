@@ -34,6 +34,8 @@
   width: 100%;
 
   @include breakpoint(tablet) {
-    width: calc(100% - var(--nlportal-desktop-menu-width, 230px) - var(--nlportal-space-inline-2xl, 2rem));
+    width: calc(
+      100% - var(--nlportal-desktop-menu-width, 230px) - var(--nlportal-space-inline-2xl, 2rem)
+    );
   }
 }
