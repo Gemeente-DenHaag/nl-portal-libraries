@@ -3,6 +3,7 @@
   --nlportal-space-block-3xl: var(--denhaag-space-block-3xl);
   --nlportal-space-block-2xl: var(--denhaag-space-block-2xl);
   --nlportal-space-block-xl: var(--denhaag-space-block-xl);
+  --nlportal-space-block-md: var(--denhaag-space-block-md);
   --nlportal-space-block-xs: var(--denhaag-space-block-xs);
   --nlportal-space-inline-2xl: var(--denhaag-space-inline-2xl);
   --nlportal-space-inline-xl: var(--denhaag-space-inline-xl);
@@ -18,6 +19,8 @@
   --nlportal-menu-background-color: var(--denhaag-color-white);
   --nlportal-menu-button-active-color: var(--denhaag-menu-button-active-color);
   --nl-portal-base-font-size: var(--denhaag-typography-scale-base-font-size);
+  --nl-portal-heading-5-color: var(--denhaag-color-blue-3);
+  --nl-portal-current-page-indicator-background-color: var(--denhaag-color-blue-1);
   --utrecht-heading-color: var(--denhaag-color-blue-3);
   --denhaag-menu-button-font-size: var(--denhaag-typography-scale-lg-font-size);
   --denhaag-menu-button-line-height: var(--denhaag-typography-scale-xl-font-size);

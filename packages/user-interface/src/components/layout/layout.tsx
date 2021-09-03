@@ -8,7 +8,7 @@ import {LayoutContext} from '../../contexts';
 import {PortalPage} from '../../interfaces';
 import styles from './layout.module.scss';
 import {Page} from '../page';
-import {CurrentPage} from '../current-page';
+import {CurrentPageIndicator} from '../current-page-indicator';
 
 interface LayoutProps {
   pages: Array<PortalPage>;
@@ -42,7 +42,7 @@ const Layout: FC<LayoutProps> = ({headerLogo, headerFacet, pages}) => {
             facet={headerFacet}
             homePage={pages.find(page => page.isHome)}
           />
-          <CurrentPage />
+          <CurrentPageIndicator />
           <div className={styles['page-container']}>
             <div className={styles['page-container__inner']}>
               <div className={styles['page-container__menu']}>
