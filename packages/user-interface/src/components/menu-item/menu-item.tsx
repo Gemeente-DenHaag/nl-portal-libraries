@@ -34,7 +34,6 @@ const MenuItem: FC<MenuItemProps> = ({item}) => {
 
   return (
     <Link
-      title={item.titleTranslationKey}
       to={item.path}
       onClick={hideMenu}
       hrefLang={hrefLang}
