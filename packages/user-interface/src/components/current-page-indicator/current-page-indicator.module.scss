@@ -14,7 +14,7 @@
   padding-block-start: var(--nlportal-space-block-md, 1rem);
   padding-block-end: var(--nlportal-space-block-md, 1rem);
   height: var(--nl-portal-current-page-indicator-height, 56px);
-  transition: top 0.1s ease-out;
+  transition: top 0.08s ease-out;
 
   @include breakpoint(tablet) {
     display: none;

@@ -18,7 +18,7 @@ const useDocumentScrollThrottled = (
     callback({previousScrollTop, currentScrollTop});
   }
 
-  const handleDocumentScrollThrottled = throttle(handleDocumentScroll, 250);
+  const handleDocumentScrollThrottled = throttle(handleDocumentScroll, 100);
 
   useEffect(() => {
     window.addEventListener('scroll', handleDocumentScrollThrottled);
