@@ -8,6 +8,7 @@ export const EN_GB_MESSAGES: Messages = {
     'header.logout': 'Log out',
     'header.welcome': 'Welcome {userName}',
     'header.menuButton': 'Menu',
+    'header.facetAlt': 'Facet image',
     'pageTitles.overview': 'Overview',
     'pageTitles.cases': 'Current cases',
     'pageTitles.notifications': 'My messages',
