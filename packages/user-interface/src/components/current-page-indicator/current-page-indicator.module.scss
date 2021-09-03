@@ -4,10 +4,11 @@
   display: flex;
   justify-content: center;
   box-sizing: border-box;
+  position: relative;
   width: 100%;
   background-color: var(--nl-portal-current-page-indicator-background-color, hsl(207 80% 35%));
-  padding-inline-start: var(--nlportal-space-inline-md, 1rem);
-  padding-inline-end: var(--nlportal-space-inline-md, 1rem);
+  padding-inline-start: var(--nlportal-space-inline-xl, 1.5rem);
+  padding-inline-end: var(--nlportal-space-inline-xl, 1.5rem);
   padding-block-start: var(--nlportal-space-block-md, 1rem);
   padding-block-end: var(--nlportal-space-block-md, 1rem);
 
@@ -16,13 +17,20 @@
   }
 }
 
-.current-page-indicator__inner {
+.current-page-indicator__header {
   display: flex;
   flex-direction: row;
   align-items: center;
 }
 
 .current-page-indicator__icon {
+  display: flex;
   margin-inline-end: var(--nlportal-space-inline-xs, 0.5rem);
+  color: var(--nl-portal-heading-5-color, hsl(207 80% 35%));
+}
+
+.current-page-indicator__chevron-down {
+  position: absolute;
+  right: var(--nlportal-space-inline-xl, 1.5rem);
   color: var(--nl-portal-heading-5-color, hsl(207 80% 35%));
 }
