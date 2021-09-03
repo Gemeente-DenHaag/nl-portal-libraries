@@ -31,6 +31,7 @@ const pages: Array<PortalPage> = [
     path: '/berichten',
     titleTranslationKey: 'notifications',
     showInMenu: true,
+    showMessagesCount: true,
   },
   {
     icon: <ArchiveIcon />,

@@ -3,9 +3,7 @@
 .denhaag-menu-button--flex {
   display: flex !important;
   align-items: center;
-  padding-block-start: var(--nlportal-space-block-xs, 0.5rem) !important;
-  padding-block-end: var(--nlportal-space-block-xs, 0.5rem) !important;
-  margin-block-end: var(--nlportal-space-block-xs, 0.5rem);
+  height: var(--nlportal-menu-item-height, 3rem);
 
   @include breakpoint(tablet) {
     --denhaag-menu-button-font-size: var(--nl-portal-base-font-size, 1rem);
@@ -19,4 +17,8 @@
 .denhaag-menu-button__icon {
   display: flex;
   margin-inline-end: var(--nlportal-space-inline-md, 1rem);
+}
+
+.denhaag-menu-button__counter {
+  margin-inline-start: var(--nlportal-space-block-xs, 0.5rem);
 }

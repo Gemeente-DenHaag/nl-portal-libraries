@@ -16,12 +16,15 @@ interface LayoutProps {
 
 const Layout: FC<LayoutProps> = ({headerLogo, headerFacet, pages}) => {
   const [menuOpened, setMenuState] = useState(false);
+  const [messagesCount, setMessagesCount] = useState(0);
   const hideMenu = () => setMenuState(false);
   const showMenu = () => setMenuState(true);
 
   return (
     <StylesProvider>
-      <LayoutContext.Provider value={{menuOpened, hideMenu, showMenu}}>
+      <LayoutContext.Provider
+        value={{menuOpened, hideMenu, showMenu, messagesCount, setMessagesCount}}
+      >
         <Header logo={headerLogo} facet={headerFacet} />
         <div className={styles['page-container']}>
           <div className={styles['page-container__inner']}>

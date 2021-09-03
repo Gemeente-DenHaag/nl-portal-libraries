@@ -1,7 +1,13 @@
 import * as React from 'react';
 
-export const LayoutContext = React.createContext({
-  menuOpened: false,
-  hideMenu: () => {},
-  showMenu: () => {},
-});
+interface LayoutContextInterface {
+  menuOpened: boolean;
+  hideMenu: () => void;
+  showMenu: () => void;
+  messagesCount: number;
+  setMessagesCount: (value: number) => void;
+}
+
+export const LayoutContext = React.createContext<LayoutContextInterface>(
+  {} as LayoutContextInterface
+);

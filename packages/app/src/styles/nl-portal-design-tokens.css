@@ -14,6 +14,7 @@
     --nlportal-header-max-logo-width: 150px;
     --nlportal-header-facet-height: 14px;
     --nlportal-desktop-menu-width: 230px;
+    --nlportal-menu-item-height: 3rem;
     --nlportal-menu-background-color: var(--denhaag-color-white);
     --nlportal-menu-button-active-color: var(--denhaag-menu-button-active-color);
     --nl-portal-base-font-size: var(--denhaag-typography-scale-base-font-size);

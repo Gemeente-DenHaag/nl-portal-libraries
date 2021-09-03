@@ -5,6 +5,7 @@ export interface PortalPage {
   titleTranslationKey: string;
   pageComponent: () => ReactElement;
   showInMenu?: boolean;
+  showMessagesCount?: boolean;
   icon?: ReactElement;
   children?: Array<PortalPage>;
 }
