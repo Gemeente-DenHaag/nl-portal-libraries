@@ -59,7 +59,6 @@ const Header: FC<HeaderProps> = ({logo, facet, homePage}) => {
         <div className={styles['header__facet-container']}>
           {React.cloneElement(facet, {
             className: styles['header__facet-image'],
-            alt: intl.formatMessage({id: 'header.facetAlt'}),
           })}
         </div>
       )}

@@ -8,7 +8,6 @@ export const NL_NL_MESSAGES: Messages = {
     'header.logout': 'Uitloggen',
     'header.welcome': 'Welkom {userName}',
     'header.menuButton': 'Menu',
-    'header.facetAlt': 'Facetafbeelding',
     'pageTitles.overview': 'Overzicht',
     'pageTitles.cases': 'Lopende zaken',
     'pageTitles.notifications': 'Mijn berichten',
