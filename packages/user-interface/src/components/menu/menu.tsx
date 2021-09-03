@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {Heading4, IconButton} from '@gemeente-denhaag/denhaag-component-library';
 import {CloseIcon} from '@gemeente-denhaag/icons';
-import {FormattedMessage} from 'react-intl';
+import {FormattedMessage, useIntl} from 'react-intl';
 import classNames from 'classnames';
 import {FC, useContext} from 'react';
 import styles from './menu.module.scss';
@@ -15,6 +15,7 @@ interface MenuProps {
 
 const Menu: FC<MenuProps> = ({items}) => {
   const {menuOpened, hideMenu} = useContext(LayoutContext);
+  const intl = useIntl();
 
   return (
     <div className={classNames(styles.menu, {[styles['menu--hidden']]: !menuOpened})}>
@@ -22,9 +23,12 @@ const Menu: FC<MenuProps> = ({items}) => {
         <Heading4>
           <FormattedMessage id="app.appName" />
         </Heading4>
-        <IconButton onClick={hideMenu}>
-          <CloseIcon />
-        </IconButton>
+        {React.cloneElement(
+          <IconButton onClick={hideMenu}>
+            <CloseIcon />
+          </IconButton>,
+          {title: intl.formatMessage({id: 'menu.close'})}
+        )}
       </header>
       <nav className={styles.menu__items}>
         {items
