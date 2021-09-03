@@ -1,29 +1,45 @@
 import * as React from 'react';
-import {FC, ReactElement} from 'react';
+import {FC, ReactElement, useContext} from 'react';
 import {useIntl} from 'react-intl';
+import {LocaleContext} from '@nl-portal/localization';
+import {Link} from 'react-router-dom';
 import styles from './header.module.scss';
 import {LanguageSwitcher} from '../language-switcher';
 import {Logout} from '../logout';
 import {UserName} from '../user-name';
 import {MenuButton} from '../menu-button';
+import {PortalPage} from '../../interfaces';
 
 interface HeaderProps {
   logo: ReactElement;
+  homePage?: PortalPage;
   facet?: ReactElement;
 }
 
-const Header: FC<HeaderProps> = ({logo, facet}) => {
+const Header: FC<HeaderProps> = ({logo, facet, homePage}) => {
   const intl = useIntl();
+  const {hrefLang} = useContext(LocaleContext);
+  const headerLogoElement = React.cloneElement(logo, {
+    className: styles['header__logo-image'],
+    alt: intl.formatMessage({id: 'app.appName'}),
+  });
 
   return (
     <div className={styles['header-wrapper']}>
       <header className={styles.header}>
         <div className={styles.header__inner}>
           <div className={styles['header__logo-container']}>
-            {React.cloneElement(logo, {
-              className: styles['header__logo-image'],
-              alt: intl.formatMessage({id: 'app.appName'}),
-            })}
+            {homePage ? (
+              <Link
+                to={homePage.path}
+                hrefLang={hrefLang}
+                title={intl.formatMessage({id: `pageTitles.${homePage.titleTranslationKey}`})}
+              >
+                {headerLogoElement}
+              </Link>
+            ) : (
+              headerLogoElement
+            )}
           </div>
           <div className={styles['header__elements-mobile']}>
             <MenuButton />

@@ -25,10 +25,14 @@ const Layout: FC<LayoutProps> = ({headerLogo, headerFacet, pages}) => {
       <LayoutContext.Provider
         value={{menuOpened, hideMenu, showMenu, messagesCount, setMessagesCount}}
       >
-        <Header logo={headerLogo} facet={headerFacet} />
-        <div className={styles['page-container']}>
-          <div className={styles['page-container__inner']}>
-            <Router>
+        <Router>
+          <Header
+            logo={headerLogo}
+            facet={headerFacet}
+            homePage={pages.find(page => page.isHome)}
+          />
+          <div className={styles['page-container']}>
+            <div className={styles['page-container__inner']}>
               <div className={styles['page-container__menu']}>
                 <Menu items={pages} />
               </div>
@@ -42,9 +46,9 @@ const Layout: FC<LayoutProps> = ({headerLogo, headerFacet, pages}) => {
                   <Route render={() => <Redirect to="/" />} />
                 </Switch>
               </div>
-            </Router>
+            </div>
           </div>
-        </div>
+        </Router>
       </LayoutContext.Provider>
     </StylesProvider>
   );

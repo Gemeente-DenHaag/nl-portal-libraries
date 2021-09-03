@@ -24,6 +24,7 @@ const pages: Array<PortalPage> = [
     path: '/',
     titleTranslationKey: 'overview',
     showInMenu: true,
+    isHome: true,
   },
   {
     icon: <InboxIcon />,
