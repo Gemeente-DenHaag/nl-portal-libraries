@@ -35,10 +35,7 @@ const LocalizationProvider: FC<LocalizationProviderProps> = ({
   document.documentElement.lang = hrefLang;
 
   return (
-    <LocaleContext.Provider
-      // @ts-ignore
-      value={{currentLocale, supportedLocales, setCurrentLocale, hrefLang}}
-    >
+    <LocaleContext.Provider value={{currentLocale, supportedLocales, setCurrentLocale, hrefLang}}>
       <IntlProvider locale={currentLocale} messages={messages[currentLocale]}>
         {children}
       </IntlProvider>
