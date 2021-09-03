@@ -7,6 +7,7 @@ import {Menu} from '../menu';
 import {LayoutContext} from '../../contexts';
 import {PortalPage} from '../../interfaces';
 import styles from './layout.module.scss';
+import {Page} from '../page';
 
 interface LayoutProps {
   pages: Array<PortalPage>;
@@ -40,7 +41,9 @@ const Layout: FC<LayoutProps> = ({headerLogo, headerFacet, pages}) => {
                 <Switch>
                   {pages.map(page => (
                     <Route exact key={page.path} path={page.path}>
-                      {page.pageComponent}
+                      <Page titleTranslationKey={page.titleTranslationKey}>
+                        {page.pageComponent}
+                      </Page>
                     </Route>
                   ))}
                   <Route render={() => <Redirect to="/" />} />
