@@ -1,7 +1,7 @@
 @use 'definitions' as definitions;
 @use 'sass:map';
 
-@mixin breakpoint ($breakpoint) {
+@mixin breakpoint($breakpoint) {
   @media only screen and (min-width: map.get(definitions.$breakpoints, $breakpoint)) {
     @content;
   }
