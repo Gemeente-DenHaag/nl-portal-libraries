@@ -8,6 +8,7 @@
   top: 0;
   left: 0;
   transform: translateY(0);
+  z-index: var(--nlportal-z-index-header, 100);
 
   @include breakpoint(tablet) {
     position: fixed;

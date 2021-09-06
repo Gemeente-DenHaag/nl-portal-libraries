@@ -14,6 +14,7 @@
   padding-block-start: var(--nlportal-space-block-md, 1rem);
   padding-block-end: var(--nlportal-space-block-md, 1rem);
   height: var(--nl-portal-current-page-indicator-height, 56px);
+  z-index: var(--nlportal-z-index-header, 100);
 
   @include breakpoint(tablet) {
     display: none;
