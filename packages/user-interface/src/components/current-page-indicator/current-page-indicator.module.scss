@@ -26,6 +26,7 @@
 }
 
 .current-page-indicator--header-fixed {
+  transition: top 0.08s ease-out;
   position: fixed;
 }
 

@@ -17,6 +17,7 @@
 
 .header-wrapper--fixed {
   position: fixed;
+  transition: transform 0.08s ease-out;
 }
 
 .header-wrapper--hidden {
