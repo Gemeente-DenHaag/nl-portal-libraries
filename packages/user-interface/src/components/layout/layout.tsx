@@ -63,7 +63,7 @@ const Layout: FC<LayoutProps> = ({headerLogo, headerFacet, pages}) => {
                 <Switch>
                   {pages.map(page => (
                     <Route exact key={page.path} path={page.path}>
-                      <Page page={page}>{page.pageComponent}</Page>
+                      <Page page={page}>{page.pageComponent()}</Page>
                     </Route>
                   ))}
                   <Route render={() => <Redirect to="/" />} />
