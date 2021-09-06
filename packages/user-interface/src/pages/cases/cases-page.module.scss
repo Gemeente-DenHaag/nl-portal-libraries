@@ -1,0 +1,15 @@
+@import '../../styles/mixins';
+
+.cases {
+  display: flex;
+  flex-direction: column;
+  --denhaag-card-width: 100%;
+}
+
+.cases__header {
+  margin-block-end: var(--nlportal-space-block-xl, 1.5rem);
+
+  @include breakpoint(tablet) {
+    margin-block-end: var(--nlportal-space-block-2xl, 2rem);
+  }
+}
