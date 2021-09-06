@@ -1,4 +1,4 @@
-/* eslint no-unused-vars: 0 */
+/* eslint @typescript-eslint/no-unused-vars: 0 */
 namespace NodeJS {
   interface ProcessEnv {
     REACT_APP_KEYCLOAK_CLIENT_ID: string;

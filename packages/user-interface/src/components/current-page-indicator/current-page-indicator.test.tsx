@@ -1,4 +1,4 @@
-import {CurrentPageIndicator} from './current-page';
+import {CurrentPageIndicator} from './current-page-indicator';
 
 describe('CurrentPage', () => {
   it('is truthy', () => {
