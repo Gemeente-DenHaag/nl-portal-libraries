@@ -20,15 +20,15 @@ interface HeaderProps {
 }
 
 const Header: FC<HeaderProps> = ({logo, facet, homePage}) => {
-  const {headerHidden, setHeaderHidden} = useContext(LayoutContext);
+  const {headerHidden, setHeaderHidden, headerFixed, setHeaderFixed} = useContext(LayoutContext);
   const intl = useIntl();
   const {hrefLang} = useContext(LocaleContext);
   const headerLogoElement = React.cloneElement(logo, {
     className: styles['header__logo-image'],
     alt: intl.formatMessage({id: 'app.appName'}),
   });
-  const MINIMUM_SCROLL = facet ? 86 : 72;
-  const TIMEOUT_DELAY = 400;
+  const MINIMUM_SCROLL = facet ? 85 : 71;
+  const TIMEOUT_DELAY = 200;
 
   useDocumentScrollThrottled(callbackData => {
     const {previousScrollTop, currentScrollTop} = callbackData;
@@ -37,13 +37,17 @@ const Header: FC<HeaderProps> = ({logo, facet, homePage}) => {
 
     setTimeout(() => {
       setHeaderHidden(isScrolledDown && isMinimumScrolled);
+      setHeaderFixed(currentScrollTop === 0 ? false : !isScrolledDown || isMinimumScrolled);
     }, TIMEOUT_DELAY);
   });
 
-  const hiddenStyle = headerHidden ? styles['header-wrapper--hidden'] : '';
-
   return (
-    <div className={classNames(hiddenStyle, styles['header-wrapper'])}>
+    <div
+      className={classNames(styles['header-wrapper'], {
+        [styles['header-wrapper--hidden']]: headerHidden,
+        [styles['header-wrapper--fixed']]: headerFixed,
+      })}
+    >
       <header className={styles.header}>
         <div className={styles.header__inner}>
           <div className={styles['header__logo-container']}>

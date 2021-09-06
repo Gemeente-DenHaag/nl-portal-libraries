@@ -1,7 +1,7 @@
 @import '../../styles/mixins';
 
 .current-page-indicator {
-  position: fixed;
+  position: absolute;
   left: 0;
   top: calc(var(--nlportal-header-height, 72px));
   display: flex;
@@ -14,7 +14,6 @@
   padding-block-start: var(--nlportal-space-block-md, 1rem);
   padding-block-end: var(--nlportal-space-block-md, 1rem);
   height: var(--nl-portal-current-page-indicator-height, 56px);
-  transition: top 0.08s ease-out;
 
   @include breakpoint(tablet) {
     display: none;
@@ -23,6 +22,10 @@
 
 .current-page-indicator--has-facet {
   top: calc(var(--nlportal-header-height, 72px) + var(--nlportal-header-facet-height, 14px));
+}
+
+.current-page-indicator--header-fixed {
+  position: fixed;
 }
 
 .current-page-indicator--header-hidden {

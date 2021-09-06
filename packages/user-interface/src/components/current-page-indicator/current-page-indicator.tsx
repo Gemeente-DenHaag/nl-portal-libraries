@@ -12,13 +12,14 @@ interface CurrentPageIndicatorProps {
 }
 
 const CurrentPageIndicator: FC<CurrentPageIndicatorProps> = ({hasFacet}) => {
-  const {currentPage, headerHidden} = useContext(LayoutContext);
+  const {currentPage, headerHidden, headerFixed} = useContext(LayoutContext);
 
   return (
     <div
       className={classNames(styles['current-page-indicator'], {
         [styles['current-page-indicator--has-facet']]: hasFacet,
         [styles['current-page-indicator--header-hidden']]: headerHidden,
+        [styles['current-page-indicator--header-fixed']]: headerFixed,
       })}
     >
       <header className={styles['current-page-indicator__header']}>

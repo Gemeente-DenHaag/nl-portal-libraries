@@ -22,6 +22,7 @@ const Layout: FC<LayoutProps> = ({headerLogo, headerFacet, pages}) => {
   const [messagesCount, setMessagesCount] = useState(0);
   const [currentPage, setCurrentPage] = useState(pages[0]);
   const [headerHidden, setHeaderHidden] = useState(false);
+  const [headerFixed, setHeaderFixed] = useState(false);
   const hideMenu = () => setMenuState(false);
   const showMenu = () => setMenuState(true);
 
@@ -38,6 +39,8 @@ const Layout: FC<LayoutProps> = ({headerLogo, headerFacet, pages}) => {
           setCurrentPage,
           headerHidden,
           setHeaderHidden,
+          headerFixed,
+          setHeaderFixed,
         }}
       >
         <Router>
