@@ -24,12 +24,12 @@ Make sure to [install Yarn](https://yarnpkg.com/getting-started/install).
 Install dependencies for all projects in the [packages](./packages) directory with the command
 `lerna bootstrap` or `yarn run bootstrap` from the project root.
 
-Avoid using commands like `yarn install`, either from the project root, or from any
-of the [packages](./packages) directories.
+Avoid using commands like `yarn install`, either from the project root, or from any of the
+[packages](./packages) directories.
 
 _Tip: [Lerna](https://github.com/lerna/lerna) might not be installed when running `lerna bootstrap`
-for the first time. If this is the case, either install it globally with `yarn global add lerna`, or run it through
-[npx](https://www.npmjs.com/package/npx): `npx lerna bootstrap`._
+for the first time. If this is the case, either install it globally with `yarn global add lerna`, or
+run it through [npx](https://www.npmjs.com/package/npx): `npx lerna bootstrap`._
 
 ### Starting the project
 
@@ -48,7 +48,8 @@ After installing dependencies, build the project with `yarn run build` from the 
 This commands runs all the `build` scripts of each of the individual packages in the
 [packages](./packages) directory.
 
-_Tip: Packages can built individually by running `yarn run build` from their respective directories._
+_Tip: Packages can built individually by running `yarn run build` from their respective
+directories._
 
 ### Testing
 

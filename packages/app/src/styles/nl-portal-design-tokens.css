@@ -1,11 +1,11 @@
 :root {
-    --nlportal-space-block-xs: var(--utrecht-space-block-xs);
-    --nlportal-space-inline-2xl: var(--utrecht-space-inline-2xl);
-    --nlportal-space-inline-lg: var( --utrecht-space-inline-lg);
-    --nlportal-space-inline-md: var(--utrecht-space-inline-md);
-    --nlportal-max-page-width: 1024px;
-    --nlportal-header-height: 72px;
-    --nlportal-header-height-large: 85px;
-    --nlportal-header-max-logo-width: 150px;
-    --nlportal-header-facet-height: 14px;
+  --nlportal-space-block-xs: var(--utrecht-space-block-xs);
+  --nlportal-space-inline-2xl: var(--utrecht-space-inline-2xl);
+  --nlportal-space-inline-lg: var(--utrecht-space-inline-lg);
+  --nlportal-space-inline-md: var(--utrecht-space-inline-md);
+  --nlportal-max-page-width: 1024px;
+  --nlportal-header-height: 72px;
+  --nlportal-header-height-large: 85px;
+  --nlportal-header-max-logo-width: 150px;
+  --nlportal-header-facet-height: 14px;
 }
