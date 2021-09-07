@@ -27,6 +27,7 @@ const CasesPage = () => {
           <Card
             variant="case"
             title={intl.formatMessage({id: `case.${mockCase.type}.title`})}
+            subTitle={mockCase.subtitle}
             date={mockCase.createdOn}
             href="#"
           />

@@ -10,6 +10,7 @@ export const mockCases: Array<PortalCase> = [
     createdOn: new Date(2021, 1, 3),
     id: '2',
     type: 'holiday-rental',
+    subtitle: 'Dierenselaan 88',
   },
   {
     createdOn: new Date(2021, 1, 5),
