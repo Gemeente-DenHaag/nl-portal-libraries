@@ -28,7 +28,7 @@ const CasesPage = () => {
             variant="case"
             title={intl.formatMessage({id: `case.${mockCase.type}.title`})}
             date={mockCase.createdOn}
-            href="./"
+            href="#"
           />
         </div>
       ));
@@ -61,4 +61,5 @@ const CasesPage = () => {
     </section>
   );
 };
+
 export {CasesPage};
