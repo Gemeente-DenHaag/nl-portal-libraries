@@ -1,3 +1,5 @@
+@import '../../styles/mixins';
+
 .footer {
   width: 100%;
   display: flex;
@@ -16,6 +18,11 @@
   padding-block-end: var(--nlportal-space-block-5xl, 4rem);
   margin-inline-start: var(--nlportal-space-inline-xl, 1.5rem);
   margin-inline-end: var(--nlportal-space-inline-xl, 1.5rem);
+
+  @include breakpoint(tablet) {
+    flex-direction: row;
+    justify-content: space-evenly;
+  }
 }
 
 .footer__column {
