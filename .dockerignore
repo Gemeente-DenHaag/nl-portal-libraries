@@ -1,0 +1,23 @@
+## The token in `.npmrc` should never end up in the Docker image
+*/.npmrc
+
+# Log files
+*.log
+*.err
+*.log*
+
+# Generated files
+**/dist/
+**/tmp/
+**/node_modules/
+**/build/
+**/coverage/
+
+# Version control files
+.git
+
+# Docker files
+.dockerignore
+docker-compose.yml
+docker-compose.*.yml
+Dockerfile
