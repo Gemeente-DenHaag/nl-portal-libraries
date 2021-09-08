@@ -1,0 +1,21 @@
+.footer {
+  width: 100%;
+  display: flex;
+  background-color: var(--nl-portal-footer-background-color, hsl(207 87% 27%));
+  --utrecht-heading-color: var(--nl-portal-footer-header-color, hsl(208 76% 92%));
+}
+
+.footer__inner {
+  width: 100%;
+  display: flex;
+  box-sizing: border-box;
+  justify-content: center;
+  padding-block-start: var(--nlportal-space-block-5xl, 4rem);
+  padding-block-end: var(--nlportal-space-block-5xl, 4rem);
+  padding-inline-start: var(--nlportal-space-inline-xl, 1.5rem);
+  padding-inline-end: var(--nlportal-space-inline-xl, 1.5rem);
+}
+
+.footer__column {
+  display: flex;
+}

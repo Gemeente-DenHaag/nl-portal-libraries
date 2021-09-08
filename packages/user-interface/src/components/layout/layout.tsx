@@ -6,18 +6,20 @@ import classNames from 'classnames';
 import {Header} from '../header';
 import {Menu} from '../menu';
 import {LayoutContext} from '../../contexts';
-import {PortalPage} from '../../interfaces';
+import {PortalFooter, PortalPage} from '../../interfaces';
 import styles from './layout.module.scss';
 import {Page} from '../page';
 import {CurrentPageIndicator} from '../current-page-indicator';
+import {Footer} from '../footer';
 
 interface LayoutProps {
   pages: Array<PortalPage>;
   headerLogo: ReactElement;
   headerFacet?: ReactElement;
+  footer: PortalFooter;
 }
 
-const Layout: FC<LayoutProps> = ({headerLogo, headerFacet, pages}) => {
+const Layout: FC<LayoutProps> = ({headerLogo, headerFacet, pages, footer}) => {
   const [menuOpened, setMenuState] = useState(false);
   const [messagesCount, setMessagesCount] = useState(0);
   const [currentPage, setCurrentPage] = useState(pages[0]);
@@ -82,6 +84,7 @@ const Layout: FC<LayoutProps> = ({headerLogo, headerFacet, pages}) => {
               </div>
             </div>
           </div>
+          <Footer footer={footer} />
         </Router>
       </LayoutContext.Provider>
     </StylesProvider>

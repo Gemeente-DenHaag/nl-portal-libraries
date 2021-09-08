@@ -7,5 +7,7 @@ export const EN_GB_MESSAGES: Messages = {
     'case.holiday-rental.title': 'Application for holiday rental',
     'case.welfare.title': 'Application for welfare',
     'case.relocation.title': 'Relocation',
+    'footerColumns.theHague': 'The Hague',
+    'footerColumns.disclaimers': 'Disclaimers',
   },
 };
