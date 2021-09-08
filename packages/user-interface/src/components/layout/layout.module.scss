@@ -4,29 +4,33 @@
   width: auto;
   display: flex;
   justify-content: center;
+  box-sizing: border-box;
+  min-height: 100%;
   margin-inline-start: var(--nlportal-space-inline-xl, 1.5rem);
   margin-inline-end: var(--nlportal-space-inline-xl, 1.5rem);
-  margin-block-start: calc(
+  padding-block-start: calc(
     var(--nlportal-space-block-3xl, 2.5rem) + var(--nlportal-header-height, 72px) +
       var(--nl-portal-current-page-indicator-height, 56px)
   );
+  padding-block-end: var(--nlportal-space-block-3xl, 2.5rem);
 
   @include breakpoint(tablet) {
-    margin-block-start: calc(
+    padding-block-start: calc(
       var(--nlportal-space-block-5xl, 4rem) + var(--nlportal-header-height-large, 85px)
     );
+    padding-block-end: var(--nlportal-space-block-5xl, 4rem);
   }
 }
 
 .page-container--has-facet {
-  margin-block-start: calc(
+  padding-block-start: calc(
     var(--nlportal-space-block-3xl, 2.5rem) + var(--nlportal-header-height, 72px) +
       var(--nl-portal-current-page-indicator-height, 56px) +
       var(--nlportal-header-facet-height, 14px)
   );
 
   @include breakpoint(tablet) {
-    margin-block-start: calc(
+    padding-block-start: calc(
       var(--nlportal-space-block-5xl, 4rem) + var(--nlportal-header-height-large, 85px) +
         var(--nlportal-header-facet-height, 14px)
     );
