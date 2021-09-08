@@ -12,6 +12,7 @@
   },
   "scripts": {
     "build": "microbundle-crl --format modern,cjs",
+    "build:dev": "yarn run build",
     "build:staging": "yarn run build",
     "start": "microbundle-crl watch --no-compress --no-sourcemap --format modern,cjs",
     "prepare": "run-s build",
