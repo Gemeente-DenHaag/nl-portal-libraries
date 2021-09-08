@@ -4,6 +4,7 @@
   "scripts": {
     "bootstrap": "lerna bootstrap",
     "build": "lerna run build",
+    "build:dev": "lerna run build:dev",
     "build:staging": "lerna run build:staging",
     "kill-ports": "kill-port --port 3000",
     "start": "npm run kill-ports && lerna run start --parallel",
