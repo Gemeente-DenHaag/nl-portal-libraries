@@ -2,6 +2,7 @@ import * as React from 'react';
 import {FormattedMessage} from 'react-intl';
 import {FC} from 'react';
 import {Heading4, Paragraph} from '@gemeente-denhaag/denhaag-component-library';
+import {ExternalLinkIcon} from '@gemeente-denhaag/icons';
 import {PortalFooter} from '../../interfaces';
 import styles from './footer.module.scss';
 
@@ -18,8 +19,17 @@ const Footer: FC<FooterProps> = ({footer}) => (
             <FormattedMessage id={`footerColumns.${column.titleTranslationKey}`} />
           </Heading4>
           {column.links.map(link => (
-            <a href={link.url} target="_blank" rel="noreferrer" hrefLang={link.hrefLang}>
-              <Paragraph>{link.linkTranslationKey}</Paragraph>
+            <a
+              href={link.url}
+              target="_blank"
+              rel="noreferrer"
+              hrefLang={link.hrefLang}
+              className={styles.footer__link}
+            >
+              <Paragraph>
+                <FormattedMessage id={`footerLinks.${link.linkTranslationKey}`} />
+              </Paragraph>
+              <ExternalLinkIcon />
             </a>
           ))}
         </div>

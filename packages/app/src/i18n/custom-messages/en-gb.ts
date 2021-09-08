@@ -9,5 +9,9 @@ export const EN_GB_MESSAGES: Messages = {
     'case.relocation.title': 'Relocation',
     'footerColumns.theHague': 'The Hague',
     'footerColumns.disclaimers': 'Disclaimers',
+    'footerLinks.goToTheHague': 'Go to denhaag.nl',
+    'footerLinks.accessibility': 'Accessibility statement',
+    'footerLinks.dataProtection': 'Data Protection Statement',
+    'footerLinks.proclaimer': 'Proclaimer',
   },
 };

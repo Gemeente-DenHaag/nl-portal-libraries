@@ -10,7 +10,7 @@
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
-  padding-block-start: var(--nlportal-space-block-5xl, 4rem);
+  padding-block-start: var(--nlportal-space-block-2xl, 2rem);
   padding-block-end: var(--nlportal-space-block-5xl, 4rem);
   padding-inline-start: var(--nlportal-space-inline-xl, 1.5rem);
   padding-inline-end: var(--nlportal-space-inline-xl, 1.5rem);
@@ -18,4 +18,18 @@
 
 .footer__column {
   display: flex;
+  flex-direction: column;
+  margin-block-start: var(--nlportal-space-block-2xl, 2rem);
+}
+
+.footer__link {
+  color: var(--nl-portal-footer-link-color, hsl(0 0% 95%));
+  margin-block-start: var(--nlportal-space-block-xs, 0.5rem);
+  display: flex;
+  align-items: center;
+
+  svg {
+    font-size: var(--nl-portal-footer-link-icon-size, 1rem);
+    margin-inline-start: var(--nlportal-space-inline-xs, 0.5rem);
+  }
 }
