@@ -3,7 +3,27 @@
 .header-wrapper {
   display: flex;
   flex-direction: column;
-  width: auto;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: translateY(0);
+
+  @include breakpoint(tablet) {
+    position: fixed;
+  }
+}
+
+.header-wrapper--fixed {
+  position: fixed;
+}
+
+.header-wrapper--hidden {
+  transform: translateY(-100%);
+
+  @include breakpoint(tablet) {
+    transform: translateY(0);
+  }
 }
 
 .header {
@@ -11,8 +31,9 @@
   justify-content: center;
   width: auto;
   height: var(--nlportal-header-height, 72px);
-  margin-inline-start: var(--nlportal-space-inline-md, 16px);
-  margin-inline-end: var(--nlportal-space-inline-md, 16px);
+  margin-inline-start: var(--nlportal-space-inline-xl, 1.5rem);
+  margin-inline-end: var(--nlportal-space-inline-xl, 1.5rem);
+  background-color: var(--nlportal-header-background-color, hsl(0 0% 100%));
 
   @include breakpoint(tablet) {
     height: var(--nlportal-header-height-large, 85px);
@@ -26,8 +47,8 @@
   width: 100%;
   height: auto;
   max-width: var(--nlportal-max-page-width, 1024px);
-  padding-block-start: var(--nlportal-space-block-xs, 8px);
-  padding-block-end: var(--nlportal-space-block-xs, 8px);
+  padding-block-start: var(--nlportal-space-block-xs, 0.5rem);
+  padding-block-end: var(--nlportal-space-block-xs, 0.5rem);
 }
 
 .header__logo-container {
@@ -59,11 +80,11 @@
 }
 
 .header__element--large-spacing {
-  margin-inline-end: var(--nlportal-space-inline-2xl, 32px);
+  margin-inline-end: var(--nlportal-space-inline-2xl, 2rem);
 }
 
 .header__element--medium-spacing {
-  margin-inline-end: var(--nlportal-space-inline-lg, 24px);
+  margin-inline-end: var(--nlportal-space-inline-lg, 1.5rem);
 }
 
 .header__facet-container {
