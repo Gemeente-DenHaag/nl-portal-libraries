@@ -29,7 +29,7 @@ const MenuItem: FC<MenuItemProps> = ({item}) => {
     >
       {item.icon && <div className={styles['denhaag-menu-button__icon']}>{item.icon}</div>}
       <FormattedMessage id={`pageTitles.${item.titleTranslationKey}`} />
-      {item.showMessagesCount && (
+      {item.showMessagesCount && messagesCount > 0 && (
         <div className={styles['denhaag-menu-button__counter']}>
           <BadgeCounter>{messagesCount}</BadgeCounter>
         </div>

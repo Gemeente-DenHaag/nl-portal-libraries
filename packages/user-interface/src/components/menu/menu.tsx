@@ -19,24 +19,26 @@ const Menu: FC<MenuProps> = ({items}) => {
 
   return (
     <div className={classNames(styles.menu, {[styles['menu--hidden']]: !menuOpened})}>
-      <header className={styles.menu__header}>
-        <Heading4>
-          <FormattedMessage id="app.appName" />
-        </Heading4>
-        {React.cloneElement(
-          <IconButton onClick={hideMenu}>
-            <CloseIcon />
-          </IconButton>,
-          {title: intl.formatMessage({id: 'menu.close'})}
-        )}
-      </header>
-      <nav className={styles.menu__items}>
-        {items
-          .filter(item => item.showInMenu)
-          .map(item => (
-            <MenuItem key={item.path} item={item} />
-          ))}
-      </nav>
+      <div className={styles.menu__inner}>
+        <header className={styles.menu__header}>
+          <Heading4>
+            <FormattedMessage id="app.appName" />
+          </Heading4>
+          {React.cloneElement(
+            <IconButton onClick={hideMenu}>
+              <CloseIcon />
+            </IconButton>,
+            {title: intl.formatMessage({id: 'menu.close'})}
+          )}
+        </header>
+        <nav className={styles.menu__items}>
+          {items
+            .filter(item => item.showInMenu)
+            .map(item => (
+              <MenuItem key={item.path} item={item} />
+            ))}
+        </nav>
+      </div>
     </div>
   );
 };
