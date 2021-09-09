@@ -14,7 +14,7 @@ COPY ./packages/user-interface/package.json /app/packages/user-interface/
 RUN yarn global add lerna && yarn run bootstrap
 
 COPY . /app
-RUN yarn run build:dev
+RUN yarn run build
 
 # stage 2 - build the final image and copy the react build files
 FROM nginx:1.21.1-alpine
