@@ -14,12 +14,13 @@ const Footer: FC<FooterProps> = ({footer}) => (
   <footer className={styles.footer}>
     <div className={styles.footer__inner}>
       {footer.footerColumns.map(column => (
-        <div className={styles.footer__column}>
+        <div className={styles.footer__column} key={column.titleTranslationKey}>
           <Heading4>
             <FormattedMessage id={`footerColumns.${column.titleTranslationKey}`} />
           </Heading4>
           {column.links.map(link => (
             <a
+              key={link.url}
               href={link.url}
               target="_blank"
               rel="noreferrer"
