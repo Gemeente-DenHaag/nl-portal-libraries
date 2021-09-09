@@ -23,6 +23,7 @@ RUN rm /etc/nginx/conf.d/default.conf
 COPY nginx/nginx.conf /etc/nginx/conf.d
 
 # needed for modifying env vars at runtime
+RUN chmod 775 /usr/share/nginx/html/config.js
 COPY entrypoint.sh /docker-entrypoint.d/entrypoint.sh
 RUN chmod 775 /docker-entrypoint.d/entrypoint.sh
 
