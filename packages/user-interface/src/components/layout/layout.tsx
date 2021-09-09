@@ -67,12 +67,12 @@ const Layout: FC<LayoutProps> = ({headerLogo, headerFacet, pages, footer}) => {
                     (accumulator, page) => [
                       ...accumulator,
                       <Route exact key={page.path} path={page.path}>
-                        <Page page={page}>{page.pageComponent()}</Page>
+                        <Page page={page}>{page.pageComponent}</Page>
                       </Route>,
                       ...(page.children
                         ? page.children.map(childPage => (
                             <Route key={childPage.path} path={`${page.path}${childPage.path}`}>
-                              <Page page={childPage}>{childPage.pageComponent()}</Page>
+                              <Page page={childPage}>{childPage.pageComponent}</Page>
                             </Route>
                           ))
                         : []),

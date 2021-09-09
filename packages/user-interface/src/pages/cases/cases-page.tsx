@@ -9,6 +9,7 @@ import {
 } from '@gemeente-denhaag/denhaag-component-library';
 import {FormattedMessage, useIntl} from 'react-intl';
 import {useState} from 'react';
+import {useHistory} from 'react-router-dom';
 import styles from './cases-page.module.scss';
 import {mockCases} from './cases-page-mock';
 import {useMediaQuery} from '../../hooks';
@@ -17,6 +18,8 @@ const CasesPage = () => {
   const [tabNumber, setTabNumber] = useState(0);
   const intl = useIntl();
   const isTablet = useMediaQuery('(min-width: 768px)');
+  const history = useHistory();
+  const caseUrl = '/zaken/zaak';
 
   const getCaseCards = (completed: boolean) =>
     mockCases
@@ -29,7 +32,8 @@ const CasesPage = () => {
             title={intl.formatMessage({id: `case.${mockCase.type}.title`})}
             subTitle={mockCase.subtitle}
             date={mockCase.createdOn}
-            href="#"
+            href={caseUrl}
+            onClick={() => history.push(caseUrl)}
           />
         </div>
       ));
