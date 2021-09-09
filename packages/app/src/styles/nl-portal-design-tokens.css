@@ -22,6 +22,7 @@
   --nlportal-menu-item-height: 3rem;
   --nlportal-menu-background-color: var(--denhaag-color-white);
   --nlportal-menu-button-active-color: var(--denhaag-menu-button-active-color);
+  --nlportal-menu-button-font-size: var(--denhaag-menu-button-font-size);
   --nl-portal-base-font-size: var(--denhaag-typography-scale-base-font-size);
   --nl-portal-heading-5-color: var(--denhaag-color-blue-3);
   --nl-portal-current-page-indicator-background-color: var(--denhaag-color-blue-1);
