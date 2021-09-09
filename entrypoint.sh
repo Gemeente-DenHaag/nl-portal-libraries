@@ -1,6 +1,5 @@
 #!/bin/sh
-useridu=$(id -u)
-USER root
+ls -al /usr/share/nginx/html
 if [ ! -z "$KEYCLOAK_URL" ]; then
     echo "Set KEYCLOAK_URL to $KEYCLOAK_URL"
     sed -i "s/\(KEYCLOAK_URL = '\).*\('\)/\1$KEYCLOAK_URL\2/g" /usr/share/nginx/html/config.js
@@ -17,4 +16,3 @@ if [ ! -z "$KEYCLOAK_REDIRECT_URI" ]; then
     echo "Set KEYCLOAK_REDIRECT_URI to $KEYCLOAK_REDIRECT_URI"
     sed -i "s/\(KEYCLOAK_REDIRECT_URI = '\).*\('\)/\1$KEYCLOAK_REDIRECT_URI\2/g" /usr/share/nginx/html/config.js
 fi
-USER $useridu
