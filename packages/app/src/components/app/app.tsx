@@ -8,13 +8,14 @@ import {LocalizationProvider} from '@nl-portal/localization';
 import {CUSTOM_MESSAGES} from '../../i18n';
 import {ReactComponent as HeaderLogo} from '../../assets/header-logo.svg';
 import Facet from '../../assets/facet.png';
+import {config} from '../../config';
 
 const App = () => (
   <KeycloakWrapper
-    clientId={process.env.REACT_APP_KEYCLOAK_CLIENT_ID}
-    realm={process.env.REACT_APP_KEYCLOAK_REALM}
-    url={process.env.REACT_APP_KEYCLOAK_URL}
-    redirectUri={process.env.REACT_APP_KEYCLOAK_REDIRECT_URI}
+    clientId={config.KEYCLOAK_CLIENT_ID}
+    realm={config.KEYCLOAK_REALM}
+    url={config.KEYCLOAK_URL}
+    redirectUri={config.KEYCLOAK_REDIRECT_URI}
   >
     <LocalizationProvider customMessages={CUSTOM_MESSAGES}>
       <Layout headerLogo={<HeaderLogo />} headerFacet={<img src={Facet} alt="" />} />
