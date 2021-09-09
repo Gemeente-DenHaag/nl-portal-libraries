@@ -21,12 +21,18 @@ FROM nginx:1.21.1-alpine
 COPY --from=build /app/packages/app/build /usr/share/nginx/html
 RUN rm /etc/nginx/conf.d/default.conf
 COPY nginx/nginx.conf /etc/nginx/conf.d
-# EXPOSE 80
+
+# needed for modifying env vars at runtime
+COPY entrypoint.sh /docker-entrypoint.d/entrypoint.sh
+RUN chmod 775 /docker-entrypoint.d/entrypoint.sh
+
 # support running as arbitrary user which belogs to the root group
 RUN chmod g+rwx /var/cache/nginx /var/run /var/log/nginx
+
 # users are not allowed to listen on priviliged ports
 # RUN sed -i.bak 's/listen\(.*\)80;/listen 8081;/' /etc/nginx/conf.d/default.conf
+
 # comment user directive as master process is run as user in OpenShift anyhow
 RUN sed -i.bak 's/^user/#user/' /etc/nginx/nginx.conf
-EXPOSE 8081
+EXPOSE 3000
 CMD ["nginx", "-g", "daemon off;"]
