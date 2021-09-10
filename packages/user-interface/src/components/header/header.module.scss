@@ -81,3 +81,16 @@
   height: 100%;
   object-fit: cover;
 }
+
+.header__mobile-menu {
+  display: flex;
+  flex-direction: column;
+
+  @include breakpoint(tablet) {
+    display: none;
+  }
+}
+
+.header__mobile-menu--hidden {
+  display: none;
+}

@@ -3,12 +3,14 @@ import {FC, ReactElement, useContext} from 'react';
 import {useIntl} from 'react-intl';
 import {LocaleContext} from '@nl-portal/localization';
 import {Link} from 'react-router-dom';
+import classNames from 'classnames';
 import styles from './header.module.scss';
 import {LanguageSwitcher} from '../language-switcher';
 import {Logout} from '../logout';
 import {UserName} from '../user-name';
 import {MenuButton} from '../menu-button';
 import {PortalPage} from '../../interfaces';
+import {LayoutContext} from '../../contexts';
 
 interface HeaderProps {
   logo: ReactElement;
@@ -17,12 +19,14 @@ interface HeaderProps {
 }
 
 const Header: FC<HeaderProps> = ({logo, facet, homePage}) => {
+  const {mobileMenuOpened} = useContext(LayoutContext);
   const intl = useIntl();
   const {hrefLang} = useContext(LocaleContext);
   const headerLogoElement = React.cloneElement(logo, {
     className: styles['header__logo-image'],
     alt: intl.formatMessage({id: 'app.appName'}),
   });
+
   return (
     <div className={styles['header-wrapper']}>
       <header className={styles.header}>
@@ -54,6 +58,15 @@ const Header: FC<HeaderProps> = ({logo, facet, homePage}) => {
           </div>
         </div>
       </header>
+      <div
+        className={classNames(styles['header__mobile-menu'], {
+          [styles['header__mobile-menu--hidden']]: !mobileMenuOpened,
+        })}
+      >
+        <UserName />
+        <Logout />
+        <LanguageSwitcher />
+      </div>
       {facet && (
         <div className={styles['header__facet-container']}>
           {React.cloneElement(facet, {

@@ -9,6 +9,9 @@ interface LayoutContextInterface {
   setMessagesCount: (value: number) => void;
   currentPage: PortalPage;
   setCurrentPage: (value: PortalPage) => void;
+  mobileMenuOpened: boolean;
+  hideMobileMenu: () => void;
+  showMobileMenu: () => void;
 }
 
 export const LayoutContext = React.createContext<LayoutContextInterface>(

@@ -5,10 +5,10 @@ import {useContext} from 'react';
 import {LayoutContext} from '../../contexts';
 
 const MenuButton = () => {
-  const {showMenu} = useContext(LayoutContext);
+  const {showMobileMenu, hideMobileMenu, mobileMenuOpened} = useContext(LayoutContext);
 
   return (
-    <Button onClick={showMenu}>
+    <Button onClick={() => (mobileMenuOpened ? hideMobileMenu() : showMobileMenu())}>
       <FormattedMessage id="header.menuButton" />
     </Button>
   );

@@ -22,8 +22,11 @@ const Layout: FC<LayoutProps> = ({headerLogo, facet, pages, footer}) => {
   const [menuOpened, setMenuState] = useState(false);
   const [messagesCount, setMessagesCount] = useState(0);
   const [currentPage, setCurrentPage] = useState(pages[0]);
+  const [mobileMenuOpened, setMobileMenuState] = useState(false);
   const hideMenu = () => setMenuState(false);
   const showMenu = () => setMenuState(true);
+  const hideMobileMenu = () => setMobileMenuState(false);
+  const showMobileMenu = () => setMobileMenuState(true);
 
   return (
     <StylesProvider>
@@ -36,6 +39,9 @@ const Layout: FC<LayoutProps> = ({headerLogo, facet, pages, footer}) => {
           setMessagesCount,
           currentPage,
           setCurrentPage,
+          mobileMenuOpened,
+          hideMobileMenu,
+          showMobileMenu,
         }}
       >
         <Router>
