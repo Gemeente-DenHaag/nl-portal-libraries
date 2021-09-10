@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nl-portal
+  labels:
+    app: nl-portal
+spec:
+  selector:
+    matchLabels:
+      app: nl-portal
+  template:
+    metadata:
+      labels:
+        app: nl-portal
+    spec:
+      containers:
+        - name: nl-portal
+          image: >-
+            denhaag.azurecr.io/nl-portal:latest
+          env:
+          - name: KEYCLOAK_URL
+            value: https://keycloak.apps.cluster.test.cg.denhaag.nl/auth/
+          - name: KEYCLOAK_CLIENT_ID
+            value: nl-portal-cg-test
+          - name: KEYCLOAK_REALM
+            value: Den Haag
+          - name: KEYCLOAK_REDIRECT_URI
+            value: http://nl-portal-cg-test.apps.cluster.test.cg.denhaag.nl/keycloak/callback
+      imagePullSecrets:
+        - name: az-acr-nlportal-secret
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nl-portal
+spec:
+  selector:
+    app: nl-portal
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 3000
