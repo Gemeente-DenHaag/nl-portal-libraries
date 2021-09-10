@@ -14,7 +14,7 @@ interface FooterProps {
 const Footer: FC<FooterProps> = ({footer}) => (
   <footer className={styles.footer}>
     <div className={styles.footer__inner}>
-      {footer.footerColumns.map((column, index) => (
+      {footer.map((column, index) => (
         <div
           className={classNames(styles.footer__column, {
             [styles['footer__column--spaced']]: index > 0,

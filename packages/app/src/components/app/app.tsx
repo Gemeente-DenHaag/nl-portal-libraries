@@ -61,36 +61,34 @@ const pages: Array<PortalPage> = [
   },
 ];
 
-const footer: PortalFooter = {
-  footerColumns: [
-    {
-      titleTranslationKey: 'theHague',
-      links: [
-        {linkTranslationKey: 'goToTheHague', url: 'https://www.denhaag.nl/nl.htm', hrefLang: 'nl'},
-      ],
-    },
-    {
-      titleTranslationKey: 'disclaimers',
-      links: [
-        {
-          linkTranslationKey: 'accessibility',
-          url: 'https://www.denhaag.nl/nl/toegankelijkheidsverklaring.htm',
-          hrefLang: 'nl',
-        },
-        {
-          linkTranslationKey: 'dataProtection',
-          url: 'https://www.denhaag.nl/nl/verklaring-inzake-gegevensbescherming.htm',
-          hrefLang: 'nl',
-        },
-        {
-          linkTranslationKey: 'proclaimer',
-          url: 'https://www.denhaag.nl/home/algemeen/proclaimer.htm',
-          hrefLang: 'nl',
-        },
-      ],
-    },
-  ],
-};
+const footer: PortalFooter = [
+  {
+    titleTranslationKey: 'theHague',
+    links: [
+      {linkTranslationKey: 'goToTheHague', url: 'https://www.denhaag.nl/nl.htm', hrefLang: 'nl'},
+    ],
+  },
+  {
+    titleTranslationKey: 'disclaimers',
+    links: [
+      {
+        linkTranslationKey: 'accessibility',
+        url: 'https://www.denhaag.nl/nl/toegankelijkheidsverklaring.htm',
+        hrefLang: 'nl',
+      },
+      {
+        linkTranslationKey: 'dataProtection',
+        url: 'https://www.denhaag.nl/nl/verklaring-inzake-gegevensbescherming.htm',
+        hrefLang: 'nl',
+      },
+      {
+        linkTranslationKey: 'proclaimer',
+        url: 'https://www.denhaag.nl/home/algemeen/proclaimer.htm',
+        hrefLang: 'nl',
+      },
+    ],
+  },
+];
 
 const App = () => (
   <KeycloakWrapper
