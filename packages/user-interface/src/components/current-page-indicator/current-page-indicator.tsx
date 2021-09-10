@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {FC, useContext} from 'react';
-import {FormattedMessage} from 'react-intl';
+import {FormattedMessage, useIntl} from 'react-intl';
 import {Heading5} from '@gemeente-denhaag/denhaag-component-library';
 import {ChevronDownIcon} from '@gemeente-denhaag/icons';
 import classNames from 'classnames';
@@ -12,15 +12,19 @@ interface CurrentPageIndicatorProps {
 }
 
 const CurrentPageIndicator: FC<CurrentPageIndicatorProps> = ({hasFacet}) => {
-  const {currentPage, headerHidden, headerFixed} = useContext(LayoutContext);
+  const {currentPage, headerHidden, headerFixed, showMenu} = useContext(LayoutContext);
+  const intl = useIntl();
 
   return (
-    <div
+    <button
+      onClick={showMenu}
+      type="button"
       className={classNames(styles['current-page-indicator'], {
         [styles['current-page-indicator--has-facet']]: hasFacet,
         [styles['current-page-indicator--header-hidden']]: headerHidden,
         [styles['current-page-indicator--header-fixed']]: headerFixed,
       })}
+      title={intl.formatMessage({id: 'menu.open'})}
     >
       <header className={styles['current-page-indicator__header']}>
         {currentPage?.icon && (
@@ -33,7 +37,7 @@ const CurrentPageIndicator: FC<CurrentPageIndicatorProps> = ({hasFacet}) => {
       <div className={styles['current-page-indicator__chevron-down']}>
         <ChevronDownIcon />
       </div>
-    </div>
+    </button>
   );
 };
 export {CurrentPageIndicator};

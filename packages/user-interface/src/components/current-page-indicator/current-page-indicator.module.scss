@@ -1,6 +1,7 @@
 @import '../../styles/mixins';
 
 .current-page-indicator {
+  cursor: pointer;
   position: absolute;
   left: 0;
   top: calc(var(--nlportal-header-height, 72px));
@@ -15,10 +16,24 @@
   padding-block-end: var(--nlportal-space-block-md, 1rem);
   height: var(--nl-portal-current-page-indicator-height, 56px);
   z-index: var(--nlportal-z-index-header, 100);
+  border: none;
+  outline: none;
 
   @include breakpoint(tablet) {
     display: none;
   }
+}
+
+.current-page-indicator:focus:after {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0px;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  border: var(--nlportal-focus-border, 2px dashed hsl(47 100% 40%));
+  border-radius: var(--nlportal-border-radius, 3px);
 }
 
 .current-page-indicator--has-facet {
