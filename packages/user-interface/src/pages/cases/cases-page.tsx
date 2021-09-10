@@ -18,8 +18,8 @@ const CasesPage = () => {
   const [tabNumber, setTabNumber] = useState(0);
   const intl = useIntl();
   const isTablet = useMediaQuery('(min-width: 768px)');
-  const history = useHistory();
   const caseUrl = '/zaken/zaak';
+  const history = useHistory();
 
   const getCaseCards = (completed: boolean) =>
     mockCases
