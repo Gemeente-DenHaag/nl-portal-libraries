@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {FormattedMessage} from 'react-intl';
-import {FC} from 'react';
+import {FC, ReactElement} from 'react';
 import {Heading4, Paragraph} from '@gemeente-denhaag/denhaag-component-library';
 import {ExternalLinkIcon} from '@gemeente-denhaag/icons';
 import classNames from 'classnames';
@@ -9,10 +9,18 @@ import styles from './footer.module.scss';
 
 interface FooterProps {
   footer: PortalFooter;
+  facet?: ReactElement;
 }
 
-const Footer: FC<FooterProps> = ({footer}) => (
+const Footer: FC<FooterProps> = ({footer, facet}) => (
   <footer className={styles.footer}>
+    {facet && (
+      <div className={styles['footer__facet-container']}>
+        {React.cloneElement(facet, {
+          className: styles['footer__facet-image'],
+        })}
+      </div>
+    )}
     <div className={styles.footer__inner}>
       {footer.map((column, index) => (
         <div

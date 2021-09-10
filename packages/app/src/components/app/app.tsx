@@ -101,7 +101,7 @@ const App = () => (
       <Layout
         pages={pages}
         headerLogo={<HeaderLogo />}
-        headerFacet={<img src={Facet} alt="" />}
+        facet={<img src={Facet} alt="" />}
         footer={footer}
       />
     </LocalizationProvider>

@@ -3,13 +3,14 @@
 .footer {
   width: 100%;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
   background-color: var(--nl-portal-footer-background-color, hsl(207 87% 27%));
   --utrecht-heading-color: var(--nl-portal-footer-header-color, hsl(208 76% 92%));
 }
 
 .footer__inner {
-  width: 100%;
+  width: calc(100% - var(--nlportal-space-inline-4xl, 3rem));
   max-width: var(--nlportal-max-page-width, 1024px);
   display: flex;
   flex-direction: column;
@@ -51,4 +52,15 @@
     font-size: var(--nl-portal-footer-link-icon-size, 1rem);
     margin-inline-start: var(--nlportal-space-inline-xs, 0.5rem);
   }
+}
+
+.footer__facet-container {
+  width: 100%;
+  height: var(--nlportal-header-facet-height, 14px);
+}
+
+.footer__facet-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
