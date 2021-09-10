@@ -16,7 +16,7 @@ if [ ! -z "$KEYCLOAK_CLIENT_ID" ]; then
     sed "s/\(KEYCLOAK_CLIENT_ID = '\).*\('\)/\1$KEYCLOAK_CLIENT_ID\2/g" /usr/share/nginx/html/config.js > /tmp/my.js && cat /tmp/my.js > /usr/share/nginx/html/config.js
 fi
 if [ ! -z "$KEYCLOAK_REDIRECT_URI" ]; then
-    KEYCLOAK_URL=$(printf '%s\n' "$KEYCLOAK_REDIRECT_URI" | sed 's,/,\\/,g')
+    KEYCLOAK_REDIRECT_URI=$(printf '%s\n' "$KEYCLOAK_REDIRECT_URI" | sed 's,/,\\/,g')
     echo "Set KEYCLOAK_REDIRECT_URI to $KEYCLOAK_REDIRECT_URI"
     sed "s/\(KEYCLOAK_REDIRECT_URI = '\).*\('\)/\1$KEYCLOAK_REDIRECT_URI\2/g" /usr/share/nginx/html/config.js > /tmp/my.js && cat /tmp/my.js > /usr/share/nginx/html/config.js
 fi
