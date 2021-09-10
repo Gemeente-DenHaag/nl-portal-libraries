@@ -6,18 +6,20 @@ import classNames from 'classnames';
 import {Header} from '../header';
 import {Menu} from '../menu';
 import {LayoutContext} from '../../contexts';
-import {PortalPage} from '../../interfaces';
+import {PortalFooter, PortalPage} from '../../interfaces';
 import styles from './layout.module.scss';
 import {Page} from '../page';
 import {CurrentPageIndicator} from '../current-page-indicator';
+import {Footer} from '../footer';
 
 interface LayoutProps {
   pages: Array<PortalPage>;
   headerLogo: ReactElement;
-  headerFacet?: ReactElement;
+  facet?: ReactElement;
+  footer: PortalFooter;
 }
 
-const Layout: FC<LayoutProps> = ({headerLogo, headerFacet, pages}) => {
+const Layout: FC<LayoutProps> = ({headerLogo, facet, pages, footer}) => {
   const [menuOpened, setMenuState] = useState(false);
   const [messagesCount, setMessagesCount] = useState(0);
   const [currentPage, setCurrentPage] = useState(pages[0]);
@@ -44,15 +46,11 @@ const Layout: FC<LayoutProps> = ({headerLogo, headerFacet, pages}) => {
         }}
       >
         <Router>
-          <Header
-            logo={headerLogo}
-            facet={headerFacet}
-            homePage={pages.find(page => page.isHome)}
-          />
-          <CurrentPageIndicator hasFacet={!!headerFacet} />
+          <Header logo={headerLogo} facet={facet} homePage={pages.find(page => page.isHome)} />
+          <CurrentPageIndicator hasFacet={!!facet} />
           <div
             className={classNames(styles['page-container'], {
-              [styles['page-container--has-facet']]: !!headerFacet,
+              [styles['page-container--has-facet']]: !!facet,
             })}
           >
             <div className={styles['page-container__inner']}>
@@ -82,6 +80,7 @@ const Layout: FC<LayoutProps> = ({headerLogo, headerFacet, pages}) => {
               </div>
             </div>
           </div>
+          <Footer footer={footer} facet={facet} />
         </Router>
       </LayoutContext.Provider>
     </StylesProvider>

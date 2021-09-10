@@ -8,3 +8,4 @@ export * from './menu';
 export * from './menu-item';
 export * from './page';
 export * from './current-page-indicator';
+export * from './footer';
