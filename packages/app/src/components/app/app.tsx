@@ -21,7 +21,7 @@ import Facet from '../../assets/facet.png';
 const pages: Array<PortalPage> = [
   {
     icon: <GridIcon />,
-    pageComponent: OverviewPage,
+    pageComponent: <OverviewPage />,
     path: '/',
     titleTranslationKey: 'overview',
     showInMenu: true,
@@ -29,7 +29,7 @@ const pages: Array<PortalPage> = [
   },
   {
     icon: <InboxIcon />,
-    pageComponent: NotificationsPage,
+    pageComponent: <NotificationsPage />,
     path: '/berichten',
     titleTranslationKey: 'notifications',
     showInMenu: true,
@@ -37,14 +37,14 @@ const pages: Array<PortalPage> = [
   },
   {
     icon: <ArchiveIcon />,
-    pageComponent: CasesPage,
+    pageComponent: <CasesPage />,
     path: '/zaken',
     titleTranslationKey: 'cases',
     showInMenu: true,
     children: [
       {
         icon: <ArchiveIcon />,
-        pageComponent: CasePage,
+        pageComponent: <CasePage />,
         path: '/zaak',
         titleTranslationKey: 'cases',
         showInMenu: true,
@@ -53,7 +53,7 @@ const pages: Array<PortalPage> = [
   },
   {
     icon: <DocumentIcon />,
-    pageComponent: ThemesPage,
+    pageComponent: <ThemesPage />,
     path: '/themas',
     titleTranslationKey: 'themes',
     showInMenu: true,

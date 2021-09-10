@@ -18,13 +18,8 @@ const CasesPage = () => {
   const [tabNumber, setTabNumber] = useState(0);
   const intl = useIntl();
   const isTablet = useMediaQuery('(min-width: 768px)');
+  const caseUrl = '/zaken/zaak';
   const history = useHistory();
-
-  const handleCardClick = (event: any) => {
-    event.stopPropagation();
-    console.log('hi');
-    history.push('/zaken');
-  };
 
   const getCaseCards = (completed: boolean) =>
     mockCases
@@ -37,7 +32,8 @@ const CasesPage = () => {
             title={intl.formatMessage({id: `case.${mockCase.type}.title`})}
             subTitle={mockCase.subtitle}
             date={mockCase.createdOn}
-            onClick={handleCardClick}
+            href={caseUrl}
+            onClick={() => history.push(caseUrl)}
           />
         </div>
       ));
