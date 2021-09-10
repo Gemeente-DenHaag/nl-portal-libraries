@@ -10,7 +10,7 @@
   margin-inline-end: var(--nlportal-space-inline-xl, 1.5rem);
   padding-block-start: calc(
     var(--nlportal-space-block-3xl, 2.5rem) + var(--nlportal-header-height, 72px) +
-      var(--nl-portal-current-page-indicator-height, 56px)
+      var(--nlportal-current-page-indicator-height, 56px)
   );
   padding-block-end: var(--nlportal-space-block-3xl, 2.5rem);
 
@@ -25,7 +25,7 @@
 .page-container--has-facet {
   padding-block-start: calc(
     var(--nlportal-space-block-3xl, 2.5rem) + var(--nlportal-header-height, 72px) +
-      var(--nl-portal-current-page-indicator-height, 56px) +
+      var(--nlportal-current-page-indicator-height, 56px) +
       var(--nlportal-header-facet-height, 14px)
   );
 

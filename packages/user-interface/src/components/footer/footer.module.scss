@@ -5,8 +5,8 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: var(--nl-portal-footer-background-color, hsl(207 87% 27%));
-  --utrecht-heading-color: var(--nl-portal-footer-header-color, hsl(208 76% 92%));
+  background-color: var(--nlportal-footer-background-color, hsl(207 87% 27%));
+  --utrecht-heading-color: var(--nlportal-footer-header-color, hsl(208 76% 92%));
 }
 
 .footer__inner {
@@ -34,22 +34,22 @@
 
 .footer__column--spaced {
   @include breakpoint(tablet) {
-    margin-inline-start: var(--nl-portal-footer-column-space-inline, 100px);
+    margin-inline-start: var(--nlportal-footer-column-space-inline, 100px);
   }
 
   @include breakpoint(desktop) {
-    margin-inline-start: var(--nl-portal-footer-column-space-inline-large, 250px);
+    margin-inline-start: var(--nlportal-footer-column-space-inline-large, 250px);
   }
 }
 
 .footer__link {
-  color: var(--nl-portal-footer-link-color, hsl(0 0% 95%));
+  color: var(--nlportal-footer-link-color, hsl(0 0% 95%));
   margin-block-start: var(--nlportal-space-block-xs, 0.5rem);
   display: flex;
   align-items: center;
 
   svg {
-    font-size: var(--nl-portal-footer-link-icon-size, 1rem);
+    font-size: var(--nlportal-footer-link-icon-size, 1rem);
     margin-inline-start: var(--nlportal-space-inline-xs, 0.5rem);
   }
 }
