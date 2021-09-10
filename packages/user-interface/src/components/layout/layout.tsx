@@ -61,11 +61,22 @@ const Layout: FC<LayoutProps> = ({headerLogo, headerFacet, pages}) => {
               </div>
               <div className={styles['page-container__page']}>
                 <Switch>
-                  {pages.map(page => (
-                    <Route exact key={page.path} path={page.path}>
-                      <Page page={page}>{page.pageComponent}</Page>
-                    </Route>
-                  ))}
+                  {pages.reduce(
+                    (accumulator, page) => [
+                      ...accumulator,
+                      <Route exact key={page.path} path={page.path}>
+                        <Page page={page}>{page.pageComponent}</Page>
+                      </Route>,
+                      ...(page.children
+                        ? page.children.map(childPage => (
+                            <Route key={childPage.path} path={`${page.path}${childPage.path}`}>
+                              <Page page={childPage}>{childPage.pageComponent}</Page>
+                            </Route>
+                          ))
+                        : []),
+                    ],
+                    []
+                  )}
                   <Route render={() => <Redirect to="/" />} />
                 </Switch>
               </div>

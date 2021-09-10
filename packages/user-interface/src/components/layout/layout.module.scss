@@ -42,6 +42,7 @@
 
 .page-container__menu {
   width: 0;
+  z-index: var(--nlportal-z-index-menu, 200);
 
   @include breakpoint(tablet) {
     width: var(--nlportal-desktop-menu-width, 230px);

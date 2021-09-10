@@ -17,6 +17,13 @@ const MenuItem: FC<MenuItemProps> = ({item}) => {
   const {hrefLang} = useContext(LocaleContext);
   const {hideMenu, messagesCount} = useContext(LayoutContext);
   const location = useLocation();
+  const getBasePath = (url: string) => {
+    const splitUrl = url.split('/');
+    if (splitUrl.length > 0) {
+      return splitUrl[1];
+    }
+    return url;
+  };
 
   return (
     <Link
@@ -24,7 +31,7 @@ const MenuItem: FC<MenuItemProps> = ({item}) => {
       onClick={hideMenu}
       hrefLang={hrefLang}
       className={classNames('denhaag-menu-button', styles['denhaag-menu-button--flex'], {
-        'denhaag-menu-button--active': location.pathname === item.path,
+        'denhaag-menu-button--active': getBasePath(location.pathname) === getBasePath(item.path),
       })}
     >
       {item.icon && <div className={styles['denhaag-menu-button__icon']}>{item.icon}</div>}
