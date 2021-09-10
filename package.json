@@ -1,1 +1,48 @@
-{  "name": "nl-portal-libraries",  "private": true,  "scripts": {    "bootstrap": "lerna bootstrap",    "build": "lerna run build",    "build:dev": "lerna run build:dev",    "build:staging": "lerna run build:staging",    "kill-ports": "kill-port --port 3000",    "start": "npm run kill-ports && lerna run start --parallel",    "test": "yarn jest",    "test:watch": "yarn jest --watchAll",    "lint": "eslint \"packages/**/*.{js,jsx,ts,tsx}\"",    "lint:fix": "eslint \"packages/**/*.{js,jsx,ts,tsx}\" --fix",    "prettier": "prettier --check .",    "prettier:fix": "prettier --write ."  },  "workspaces": [    "packages/*"  ],  "devDependencies": {    "@babel/plugin-transform-runtime": "^7.15.0",    "@babel/preset-env": "^7.15.0",    "@testing-library/jest-dom": "^5.14.1",    "@typescript-eslint/eslint-plugin": "^4.29.0",    "@typescript-eslint/parser": "^4.29.0",    "babel-core": "^6.26.3",    "babel-jest": "^27.0.6",    "eslint": "^7.32.0",    "eslint-config-airbnb": "^18.2.1",    "eslint-config-prettier": "^8.3.0",    "eslint-import-resolver-webpack": "^0.13.1",    "eslint-plugin-import": "^2.24.0",    "eslint-plugin-jsx-a11y": "^6.4.1",    "eslint-plugin-prettier": "^3.4.0",    "eslint-plugin-react": "^7.24.0",    "eslint-plugin-react-hooks": "^4.2.0",    "global-jsdom": "^8.1.0",    "identity-obj-proxy": "^3.0.0",    "jest": "^27.0.6",    "jsdom": "^16.7.0",    "kill-port": "^1.6.1",    "lerna": "^4.0.0",    "prettier": "^2.3.2",    "prettier-airbnb-config": "^1.0.0",    "ts-jest": "^27.0.4"  }}
+{
+  "name": "nl-portal-libraries",
+  "private": true,
+  "scripts": {
+    "bootstrap": "lerna bootstrap",
+    "build": "lerna run build",
+    "build:dev": "lerna run build:dev",
+    "build:staging": "lerna run build:staging",
+    "kill-ports": "kill-port --port 3000",
+    "start": "npm run kill-ports && lerna run start --parallel",
+    "test": "yarn jest",
+    "test:watch": "yarn jest --watchAll",
+    "lint": "eslint \"packages/**/*.{js,jsx,ts,tsx}\"",
+    "lint:fix": "eslint \"packages/**/*.{js,jsx,ts,tsx}\" --fix",
+    "prettier": "prettier --check .",
+    "prettier:fix": "prettier --write ."
+  },
+  "workspaces": [
+    "packages/*"
+  ],
+  "devDependencies": {
+    "@babel/plugin-transform-runtime": "^7.15.0",
+    "@babel/preset-env": "^7.15.0",
+    "@testing-library/jest-dom": "^5.14.1",
+    "@typescript-eslint/eslint-plugin": "^4.29.0",
+    "@typescript-eslint/parser": "^4.29.0",
+    "babel-core": "^6.26.3",
+    "babel-jest": "^27.0.6",
+    "eslint": "^7.32.0",
+    "eslint-config-airbnb": "^18.2.1",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-import-resolver-webpack": "^0.13.1",
+    "eslint-plugin-import": "^2.24.0",
+    "eslint-plugin-jsx-a11y": "^6.4.1",
+    "eslint-plugin-prettier": "^3.4.0",
+    "eslint-plugin-react": "^7.24.0",
+    "eslint-plugin-react-hooks": "^4.2.0",
+    "global-jsdom": "^8.1.0",
+    "identity-obj-proxy": "^3.0.0",
+    "jest": "^27.0.6",
+    "jsdom": "^16.7.0",
+    "kill-port": "^1.6.1",
+    "lerna": "^4.0.0",
+    "prettier": "^2.3.2",
+    "prettier-airbnb-config": "^1.0.0",
+    "ts-jest": "^27.0.4"
+  }
+}
