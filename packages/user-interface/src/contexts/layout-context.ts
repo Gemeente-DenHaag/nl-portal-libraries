@@ -9,10 +9,6 @@ interface LayoutContextInterface {
   setMessagesCount: (value: number) => void;
   currentPage: PortalPage;
   setCurrentPage: (value: PortalPage) => void;
-  headerHidden: boolean;
-  setHeaderHidden: (value: boolean) => void;
-  headerFixed: boolean;
-  setHeaderFixed: (value: boolean) => void;
 }
 
 export const LayoutContext = React.createContext<LayoutContextInterface>(
