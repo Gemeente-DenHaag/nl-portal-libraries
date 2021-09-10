@@ -18,3 +18,4 @@ if [ ! -z "$KEYCLOAK_REDIRECT_URI" ]; then
     echo "Set KEYCLOAK_REDIRECT_URI to $KEYCLOAK_REDIRECT_URI"
     sed "s/\(KEYCLOAK_REDIRECT_URI = '\).*\('\)/\1$KEYCLOAK_REDIRECT_URI\2/g" /usr/share/nginx/html/config.js > /tmp/my.js && cat /tmp/my.js > /usr/share/nginx/html/config.js
 fi
+cat /usr/share/nginx/html/config.js
