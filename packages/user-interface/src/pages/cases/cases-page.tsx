@@ -13,11 +13,12 @@ import {useHistory} from 'react-router-dom';
 import styles from './cases-page.module.scss';
 import {mockCases} from './cases-page-mock';
 import {useMediaQuery} from '../../hooks';
+import {BREAKPOINTS} from '../../constants';
 
 const CasesPage = () => {
   const [tabNumber, setTabNumber] = useState(0);
   const intl = useIntl();
-  const isTablet = useMediaQuery('(min-width: 768px)');
+  const isTablet = useMediaQuery(BREAKPOINTS.TABLET);
   const caseUrl = '/zaken/zaak';
   const history = useHistory();
 
