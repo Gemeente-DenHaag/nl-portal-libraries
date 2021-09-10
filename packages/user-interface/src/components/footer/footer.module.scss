@@ -21,7 +21,6 @@
 
   @include breakpoint(tablet) {
     flex-direction: row;
-    justify-content: space-evenly;
   }
 }
 
@@ -29,6 +28,16 @@
   display: flex;
   flex-direction: column;
   margin-block-start: var(--nlportal-space-block-2xl, 2rem);
+
+  @include breakpoint(tablet) {
+
+  }
+}
+
+.footer__column--spaced {
+  @include breakpoint(tablet) {
+    margin-inline-start: var(--nl-portal-footer-column-space-inline, 250px);
+  }
 }
 
 .footer__link {

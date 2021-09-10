@@ -3,6 +3,7 @@ import {FormattedMessage} from 'react-intl';
 import {FC} from 'react';
 import {Heading4, Paragraph} from '@gemeente-denhaag/denhaag-component-library';
 import {ExternalLinkIcon} from '@gemeente-denhaag/icons';
+import classNames from 'classnames';
 import {PortalFooter} from '../../interfaces';
 import styles from './footer.module.scss';
 
@@ -13,8 +14,13 @@ interface FooterProps {
 const Footer: FC<FooterProps> = ({footer}) => (
   <footer className={styles.footer}>
     <div className={styles.footer__inner}>
-      {footer.footerColumns.map(column => (
-        <div className={styles.footer__column} key={column.titleTranslationKey}>
+      {footer.footerColumns.map((column, index) => (
+        <div
+          className={classNames(styles.footer__column, {
+            [styles['footer__column--spaced']]: index > 0,
+          })}
+          key={column.titleTranslationKey}
+        >
           <Heading4>
             <FormattedMessage id={`footerColumns.${column.titleTranslationKey}`} />
           </Heading4>

@@ -31,6 +31,7 @@
   --nl-portal-footer-header-color: var(--denhaag-color-blue-1);
   --nl-portal-footer-link-color: var(--denhaag-color-grey-1);
   --nl-portal-footer-link-icon-size: 1rem;
+  --nl-portal-footer-column-space-inline: 250px;
   --utrecht-heading-color: var(--denhaag-color-blue-3);
   --denhaag-menu-button-font-size: var(--denhaag-typography-scale-lg-font-size);
   --denhaag-menu-button-line-height: var(--denhaag-typography-scale-xl-font-size);
