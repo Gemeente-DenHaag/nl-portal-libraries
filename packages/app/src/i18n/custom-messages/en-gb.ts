@@ -10,8 +10,8 @@ export const EN_GB_MESSAGES: Messages = {
     'footerColumns.theHague': 'The Hague',
     'footerColumns.disclaimers': 'Disclaimers',
     'footerLinks.goToTheHague': 'Go to denhaag.nl',
-    'footerLinks.accessibility': 'Accessibility statement',
-    'footerLinks.dataProtection': 'Data Protection Statement',
+    'footerLinks.accessibility': 'Accessibility declaration',
+    'footerLinks.dataProtection': 'Data Protection Declaration',
     'footerLinks.proclaimer': 'Proclaimer',
   },
 };
