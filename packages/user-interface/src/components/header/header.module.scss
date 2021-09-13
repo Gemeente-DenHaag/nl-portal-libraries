@@ -1,13 +1,19 @@
 @import '../../styles/mixins';
 
+.header-container {
+  display: flex;
+  flex-direction: column;
+  z-index: var(--nlportal-z-index-header, 100);
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+}
+
 .header-wrapper {
   display: flex;
   flex-direction: column;
   width: 100%;
-  top: 0;
-  left: 0;
-  transform: translateY(0);
-  z-index: var(--nlportal-z-index-header, 100);
 }
 
 .header {

@@ -10,6 +10,7 @@ interface LayoutProviderProps {
 const LayoutProvider: FC<LayoutProviderProps> = ({children, initialPage}) => {
   const [menuOpened, setMenuState] = useState(false);
   const [messagesCount, setMessagesCount] = useState(0);
+  const [headerHeight, setHeaderHeight] = useState(0);
   const [currentPage, setCurrentPage] = useState(initialPage);
   const [mobileMenuOpened, setMobileMenuState] = useState(false);
   const hideMenu = () => setMenuState(false);
@@ -30,6 +31,8 @@ const LayoutProvider: FC<LayoutProviderProps> = ({children, initialPage}) => {
         mobileMenuOpened,
         hideMobileMenu,
         showMobileMenu,
+        headerHeight,
+        setHeaderHeight,
       }}
     >
       {children}

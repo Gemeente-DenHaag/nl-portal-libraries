@@ -12,6 +12,8 @@ interface LayoutContextInterface {
   mobileMenuOpened: boolean;
   hideMobileMenu: () => void;
   showMobileMenu: () => void;
+  headerHeight: number;
+  setHeaderHeight: (value: number) => void;
 }
 
 export const LayoutContext = React.createContext<LayoutContextInterface>(
