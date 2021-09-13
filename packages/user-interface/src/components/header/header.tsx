@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {FC, ReactElement, useContext} from 'react';
+import {FC, ReactElement, useContext, useEffect} from 'react';
 import {useIntl} from 'react-intl';
 import {LocaleContext} from '@nl-portal/localization';
 import {Link} from 'react-router-dom';
@@ -11,6 +11,8 @@ import {UserName} from '../user-name';
 import {MenuButton} from '../menu-button';
 import {PortalPage} from '../../interfaces';
 import {LayoutContext} from '../../contexts';
+import {useMediaQuery} from '../../hooks';
+import {BREAKPOINTS} from '../../constants';
 
 interface HeaderProps {
   logo: ReactElement;
@@ -19,13 +21,21 @@ interface HeaderProps {
 }
 
 const Header: FC<HeaderProps> = ({logo, facet, homePage}) => {
-  const {mobileMenuOpened} = useContext(LayoutContext);
+  const {mobileMenuOpened, menuOpened, hideMobileMenu, hideMenu} = useContext(LayoutContext);
+  const isTablet = useMediaQuery(BREAKPOINTS.TABLET);
   const intl = useIntl();
   const {hrefLang} = useContext(LocaleContext);
   const headerLogoElement = React.cloneElement(logo, {
     className: styles['header__logo-image'],
     alt: intl.formatMessage({id: 'app.appName'}),
   });
+
+  useEffect(() => {
+    if (menuOpened || mobileMenuOpened) {
+      hideMenu();
+      hideMobileMenu();
+    }
+  }, [isTablet]);
 
   return (
     <div className={styles['header-wrapper']}>
