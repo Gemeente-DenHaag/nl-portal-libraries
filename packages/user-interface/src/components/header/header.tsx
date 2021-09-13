@@ -4,7 +4,7 @@ import {useIntl} from 'react-intl';
 import {LocaleContext} from '@nl-portal/localization';
 import {Link} from 'react-router-dom';
 import classNames from 'classnames';
-import useDimensions from 'react-cool-dimensions';
+import useSize from '@react-hook/size';
 import styles from './header.module.scss';
 import {LanguageSwitcher} from '../language-switcher';
 import {Logout} from '../logout';
@@ -33,13 +33,14 @@ const Header: FC<HeaderProps> = ({logo, facet, homePage}) => {
     alt: intl.formatMessage({id: 'app.appName'}),
   });
 
-  const {observe} = useDimensions({
-    onResize: ({height}) => {
-      if (height !== headerHeight) {
-        setHeaderHeight(height);
-      }
-    },
-  });
+  const headerContainerRef = React.useRef(null);
+  const [, height] = useSize(headerContainerRef);
+
+  useEffect(() => {
+    if (height !== headerHeight) {
+      setHeaderHeight(height);
+    }
+  }, [height]);
 
   useEffect(() => {
     if (menuOpened || mobileMenuOpened) {
@@ -49,7 +50,7 @@ const Header: FC<HeaderProps> = ({logo, facet, homePage}) => {
   }, [isTablet]);
 
   return (
-    <div className={styles['header-container']} ref={observe}>
+    <div className={styles['header-container']} ref={headerContainerRef}>
       <div className={styles['header-wrapper']}>
         <header className={styles.header}>
           <div className={styles.header__inner}>
