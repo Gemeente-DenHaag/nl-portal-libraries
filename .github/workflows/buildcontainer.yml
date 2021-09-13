@@ -33,5 +33,5 @@ jobs:
           with:
             push: true
             tags: nl-portal:latest
-            cache-from: type=registry,ref=user/nl-portal:latest
+            cache-from: type=registry,ref=nl-portal:latest
             cache-to: type=inline
