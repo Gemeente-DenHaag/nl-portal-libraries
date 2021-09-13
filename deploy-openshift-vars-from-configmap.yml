@@ -19,13 +19,25 @@ spec:
             denhaag.azurecr.io/nl-portal:latest
           env:
           - name: KEYCLOAK_URL
-            value: https://keycloak.apps.cluster.test.cg.denhaag.nl/auth/
-          - name: KEYCLOAK_CLIENT_ID
-            value: nl-portal-cg-test
+            valueFrom:
+              configMapKeyRef:
+                name: nl-portal
+                key: KEYCLOAK_URL
           - name: KEYCLOAK_REALM
-            value: Den Haag
+            valueFrom:
+              configMapKeyRef:
+                name: nl-portal
+                key: KEYCLOAK_REALM
+          - name: KEYCLOAK_CLIENT_ID
+            valueFrom:
+              configMapKeyRef:
+                name: nl-portal
+                key: KEYCLOAK_CLIENT_ID
           - name: KEYCLOAK_REDIRECT_URI
-            value: http://nl-portal-cg-test.apps.cluster.test.cg.denhaag.nl/keycloak/callback
+            valueFrom:
+              configMapKeyRef:
+                name: nl-portal
+                key: KEYCLOAK_REDIRECT_URI
       imagePullSecrets:
         - name: az-acr-nlportal-secret
 ---
@@ -37,6 +49,7 @@ spec:
   selector:
     app: nl-portal
   ports:
-    - protocol: TCP
-      port: 80
-      targetPort: 3000
+   - port: 3000
+     protocol: TCP
+     targetPort: 3000
+     name: http
