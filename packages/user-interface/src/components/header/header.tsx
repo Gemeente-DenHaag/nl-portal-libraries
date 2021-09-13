@@ -63,9 +63,9 @@ const Header: FC<HeaderProps> = ({logo, facet, homePage}) => {
           [styles['header__mobile-menu--hidden']]: !mobileMenuOpened,
         })}
       >
-        <UserName />
-        <Logout />
-        <LanguageSwitcher />
+        <UserName mobileMenu />
+        <Logout mobileMenu />
+        <LanguageSwitcher mobileMenu />
       </div>
       {facet && (
         <div className={styles['header__facet-container']}>
