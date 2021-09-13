@@ -7,12 +7,15 @@ import {LayoutContext} from '../../contexts';
 import styles from './current-page-indicator.module.scss';
 
 const CurrentPageIndicator = () => {
-  const {currentPage, showMenu} = useContext(LayoutContext);
+  const {currentPage, showMenu, hideMobileMenu} = useContext(LayoutContext);
   const intl = useIntl();
 
   return (
     <button
-      onClick={showMenu}
+      onClick={() => {
+        showMenu();
+        hideMobileMenu();
+      }}
       type="button"
       className={styles['current-page-indicator']}
       title={intl.formatMessage({id: 'menu.open'})}
