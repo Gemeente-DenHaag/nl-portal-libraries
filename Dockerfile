@@ -3,9 +3,9 @@ FROM node:14-alpine as build
 WORKDIR /app
 ENV PATH /app/node_modules/.bin:$PATH
 
-COPY ./package.json /app/
-COPY ./yarn.lock /app/
-COPY ./lerna.json /app/
+COPY ./package.json ./yarn.lock ./lerna.json /app/
+# COPY ./yarn.lock /app/
+# COPY ./lerna.json /app/
 COPY ./packages/app/package.json /app/packages/app/
 COPY ./packages/authentication/package.json /app/packages/authentication/
 COPY ./packages/localization/package.json /app/packages/localization/
