@@ -33,7 +33,9 @@ RUN \
     # support running as arbitrary user which belogs to the root group
     chmod g+rwx /var/cache/nginx /var/run /var/log/nginx && \
     # comment user directive as master process is run as user in OpenShift anyhow
-    sed -i.bak 's/^user/#user/' /etc/nginx/nginx.conf
+    sed -i.bak 's/^user/#user/' /etc/nginx/nginx.conf && \
+    # make entrypoint.sh executable
+    chmod 775 /docker-entrypoint.d/entrypoint.sh
 # RUN chown -R 1001:0 /usr/share/nginx/html
 
 # RUN chmod 775 /docker-entrypoint.d/entrypoint.sh
