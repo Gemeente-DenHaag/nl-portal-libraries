@@ -18,7 +18,4 @@ if [ ! -z "$KEYCLOAK_REDIRECT_URI" ]; then
     sed -i -r "s|(KEYCLOAK_REDIRECT_URI = ').*(')|\1$KEYCLOAK_REDIRECT_URI\2|g" $configfile
 fi
 
-# uncomment below for debugging
-# cat $configfile
-
 echo "Done replacing env vars in $configfile"
