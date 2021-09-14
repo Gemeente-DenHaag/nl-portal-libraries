@@ -3,9 +3,8 @@ FROM node:14-alpine as build
 WORKDIR /app
 ENV PATH /app/node_modules/.bin:$PATH
 
-COPY ./package.json /app/
-COPY ./yarn.lock /app/
-COPY ./lerna.json /app/
+COPY ./package.json ./yarn.lock ./lerna.json /app/
+
 COPY ./packages/app/package.json /app/packages/app/
 COPY ./packages/authentication/package.json /app/packages/authentication/
 COPY ./packages/localization/package.json /app/packages/localization/
@@ -19,21 +18,27 @@ RUN yarn run build
 # stage 2 - build the final image and copy the react build files
 FROM nginx:1.21.1-alpine
 COPY --from=build /app/packages/app/build /usr/share/nginx/html
-RUN rm /etc/nginx/conf.d/default.conf
 COPY nginx/nginx.conf /etc/nginx/conf.d
-
-# needed for modifying env vars at runtime
-RUN chmod 777 /usr/share/nginx/html/config.js
 COPY entrypoint.sh /docker-entrypoint.d/entrypoint.sh
-RUN chmod 775 /docker-entrypoint.d/entrypoint.sh
 
-# support running as arbitrary user which belogs to the root group
-RUN chmod g+rwx /var/cache/nginx /var/run /var/log/nginx
+RUN \
+    # remove default nginx conf 
+    rm /etc/nginx/conf.d/default.conf && \
+    # sets the directory and file permissions to allow users in the root group to access them with the same authorization as the directory and file owner
+    chgrp -R 0 /usr/share/nginx/html && \
+    chmod -R g=u /usr/share/nginx/html && \
+    # update the file and directory permissions
+    chown -R 1001:0 /usr/share/nginx/html && \
+    # support running as arbitrary user which belongs to the root group
+    chmod g+rwx /var/cache/nginx /var/run /var/log/nginx && \
+    # comment user directive as master process is run as user in OpenShift anyhow
+    sed -i.bak 's/^user/#user/' /etc/nginx/nginx.conf && \
+    # make entrypoint.sh executable
+    chmod 775 /docker-entrypoint.d/entrypoint.sh
 
 # users are not allowed to listen on priviliged ports
 # RUN sed -i.bak 's/listen\(.*\)80;/listen 8081;/' /etc/nginx/conf.d/default.conf
 
-# comment user directive as master process is run as user in OpenShift anyhow
-RUN sed -i.bak 's/^user/#user/' /etc/nginx/nginx.conf
 EXPOSE 3000
+USER 1001:0
 CMD ["nginx", "-g", "daemon off;"]
