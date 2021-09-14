@@ -1,7 +1,7 @@
 #!/bin/sh
 # touch /tmp/my.js
 configfile="/usr/share/nginx/html/config.js"
-echo "Start replacing env vars in config.js"
+echo "Start replacing env vars in $configfile"
 # mv /usr/share/nginx/html/config.js /tmp/build/config.js
 
 if [ ! -z "$KEYCLOAK_URL" ]; then
@@ -38,4 +38,4 @@ fi
 # uncomment below for debugging
 cat $configfile
 
-echo "Done replacing env vars in config.js"
+echo "Done replacing env vars in $configfile"

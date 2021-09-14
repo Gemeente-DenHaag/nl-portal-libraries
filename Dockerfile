@@ -23,10 +23,15 @@ COPY nginx/nginx.conf /etc/nginx/conf.d
 
 # needed for modifying env vars at runtime
 RUN chmod 777 /usr/share/nginx/html/config.js
-USER 1001
+
+RUN chgrp -R 0 /usr/share/nginx/html && \
+    chmod -R g=u /usr/share/nginx/html
 RUN chown -R 1001:0 /usr/share/nginx/html
 COPY entrypoint.sh /docker-entrypoint.d/entrypoint.sh
 RUN chmod 775 /docker-entrypoint.d/entrypoint.sh
+
+
+
 
 # support running as arbitrary user which belogs to the root group
 RUN chmod g+rwx /var/cache/nginx /var/run /var/log/nginx
@@ -37,4 +42,5 @@ RUN chmod g+rwx /var/cache/nginx /var/run /var/log/nginx
 # comment user directive as master process is run as user in OpenShift anyhow
 RUN sed -i.bak 's/^user/#user/' /etc/nginx/nginx.conf
 EXPOSE 3000
+USER 1001:0
 CMD ["nginx", "-g", "daemon off;"]
