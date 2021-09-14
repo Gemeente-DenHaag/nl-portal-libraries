@@ -4,3 +4,8 @@ export * from './language-switcher';
 export * from './logout';
 export * from './user-name';
 export * from './menu-button';
+export * from './menu';
+export * from './menu-item';
+export * from './page';
+export * from './current-page-indicator';
+export * from './footer';
