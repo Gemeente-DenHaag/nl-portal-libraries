@@ -1,8 +1,9 @@
 version: '3.7'
 
 services:
+
   frontend:
-    container_name: nl-portal-dev
+    container_name: nl-portal
     build:
       context: .
       dockerfile: Dockerfile
@@ -10,4 +11,4 @@ services:
       - '.:/app'
       - '/app/node_modules'
     ports:
-      - 3000:80
+      - 3000:3000
