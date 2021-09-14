@@ -17,13 +17,14 @@ RUN yarn run build
 
 # stage 2 - build the final image and copy the react build files
 FROM nginx:1.21.1-alpine
-WORKDIR /tmp/build
 COPY --from=build /app/packages/app/build /usr/share/nginx/html
 RUN rm /etc/nginx/conf.d/default.conf
 COPY nginx/nginx.conf /etc/nginx/conf.d
 
 # needed for modifying env vars at runtime
 RUN chmod 777 /usr/share/nginx/html/config.js
+USER 1001
+RUN chown -R 1001:0 /usr/share/nginx/html
 COPY entrypoint.sh /docker-entrypoint.d/entrypoint.sh
 RUN chmod 775 /docker-entrypoint.d/entrypoint.sh
 
