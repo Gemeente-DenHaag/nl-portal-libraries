@@ -20,7 +20,7 @@
   max-width: var(--nlportal-max-page-width, 1024px);
   display: flex;
   justify-content: space-between;
-  padding-block-start:var(--nlportal-space-block-3xl, 2.5rem);
+  padding-block-start: var(--nlportal-space-block-3xl, 2.5rem);
 
   @include breakpoint(tablet) {
     padding-block-start: var(--nlportal-space-block-5xl, 4rem);
