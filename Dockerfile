@@ -20,27 +20,32 @@ FROM nginx:1.21.1-alpine
 COPY --from=build /app/packages/app/build /usr/share/nginx/html
 RUN rm /etc/nginx/conf.d/default.conf
 COPY nginx/nginx.conf /etc/nginx/conf.d
-
-# needed for modifying env vars at runtime
-RUN chmod 777 /usr/share/nginx/html/config.js
-
-RUN chgrp -R 0 /usr/share/nginx/html && \
-    chmod -R g=u /usr/share/nginx/html
-RUN chown -R 1001:0 /usr/share/nginx/html
 COPY entrypoint.sh /docker-entrypoint.d/entrypoint.sh
-RUN chmod 775 /docker-entrypoint.d/entrypoint.sh
+# needed for modifying env vars at runtime
+# RUN chmod 777 /usr/share/nginx/html/config.js
 
+RUN \
+    # sets the directory and file permissions to allow users in the root group to access them with the same authorization as the directory and file owner
+    chgrp -R 0 /usr/share/nginx/html && \
+    chmod -R g=u /usr/share/nginx/html && \
+    # update the file and directory permissions accordingly
+    chown -R 1001:0 /usr/share/nginx/html && \
+    # support running as arbitrary user which belogs to the root group
+    chmod g+rwx /var/cache/nginx /var/run /var/log/nginx && \
+    # comment user directive as master process is run as user in OpenShift anyhow
+    sed -i.bak 's/^user/#user/' /etc/nginx/nginx.conf
+# RUN chown -R 1001:0 /usr/share/nginx/html
 
-
+# RUN chmod 775 /docker-entrypoint.d/entrypoint.sh
 
 # support running as arbitrary user which belogs to the root group
-RUN chmod g+rwx /var/cache/nginx /var/run /var/log/nginx
+# RUN chmod g+rwx /var/cache/nginx /var/run /var/log/nginx
 
 # users are not allowed to listen on priviliged ports
 # RUN sed -i.bak 's/listen\(.*\)80;/listen 8081;/' /etc/nginx/conf.d/default.conf
 
 # comment user directive as master process is run as user in OpenShift anyhow
-RUN sed -i.bak 's/^user/#user/' /etc/nginx/nginx.conf
+# RUN sed -i.bak 's/^user/#user/' /etc/nginx/nginx.conf
 EXPOSE 3000
 USER 1001:0
 CMD ["nginx", "-g", "daemon off;"]
