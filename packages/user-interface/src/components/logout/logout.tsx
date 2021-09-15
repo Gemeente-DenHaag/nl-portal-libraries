@@ -12,11 +12,13 @@ interface LogoutProps {
 const Logout: FC<LogoutProps> = ({mobileMenu}) => {
   const {keycloak} = useKeycloak();
 
-  return React.cloneElement(
-    <Button onClick={() => keycloak.logout()}>
+  return (
+    <Button
+      onClick={() => keycloak.logout()}
+      className={mobileMenu ? styles['denhaag-button--mobile-menu'] : ''}
+    >
       <FormattedMessage id="header.logout" />
-    </Button>,
-    {className: mobileMenu ? styles['denhaag-button--mobile-menu'] : ''}
+    </Button>
   );
 };
 

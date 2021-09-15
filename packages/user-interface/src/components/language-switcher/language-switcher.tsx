@@ -14,11 +14,14 @@ const LanguageSwitcher: FC<LanguageSwitcherProps> = ({mobileMenu}) => {
   const currentLocaleIndex = supportedLocales.findIndex(locale => locale === currentLocale);
   const nextLocale = supportedLocales[currentLocaleIndex + 1] || supportedLocales[0];
 
-  return React.cloneElement(
-    <Button variant="secondary-action" onClick={() => setCurrentLocale(nextLocale)}>
+  return (
+    <Button
+      variant="secondary-action"
+      onClick={() => setCurrentLocale(nextLocale)}
+      className={mobileMenu ? styles['denhaag-button--mobile-menu'] : ''}
+    >
       <FormattedMessage id={`locales.${nextLocale}`} />
-    </Button>,
-    {className: mobileMenu ? styles['denhaag-button--mobile-menu'] : ''}
+    </Button>
   );
 };
 
