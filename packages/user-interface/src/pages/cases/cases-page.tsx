@@ -10,6 +10,7 @@ import {
 import {FormattedMessage, useIntl} from 'react-intl';
 import {useState} from 'react';
 import {useHistory} from 'react-router-dom';
+import {useGetZakenQuery} from '@nl-portal/api';
 import styles from './cases-page.module.scss';
 import {mockCases} from './cases-page-mock';
 import {useMediaQuery} from '../../hooks';
@@ -21,6 +22,7 @@ const CasesPage = () => {
   const isTablet = useMediaQuery(BREAKPOINTS.TABLET);
   const caseUrl = '/zaken/zaak';
   const history = useHistory();
+  const {data, error, loading} = useGetZakenQuery();
 
   const getCaseCards = (completed: boolean) =>
     mockCases
@@ -38,6 +40,8 @@ const CasesPage = () => {
           />
         </div>
       ));
+
+  console.log(data, error, loading);
 
   return (
     <section className={styles.cases}>
