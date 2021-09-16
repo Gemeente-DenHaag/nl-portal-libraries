@@ -4,7 +4,7 @@ import {FormattedMessage} from 'react-intl';
 import {useContext} from 'react';
 import {LayoutContext} from '../../contexts';
 
-const MenuButton = () => {
+const MenuToggleButton = () => {
   const {showMobileMenu, hideMobileMenu, mobileMenuOpened} = useContext(LayoutContext);
 
   return (
@@ -13,4 +13,4 @@ const MenuButton = () => {
     </Button>
   );
 };
-export {MenuButton};
+export {MenuToggleButton};

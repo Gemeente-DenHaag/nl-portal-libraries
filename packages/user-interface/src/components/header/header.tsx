@@ -10,12 +10,12 @@ import styles from './header.module.scss';
 import {LanguageSwitcher} from '../language-switcher';
 import {Logout} from '../logout';
 import {UserName} from '../user-name';
-import {MenuButton} from '../menu-button';
 import {PortalPage} from '../../interfaces';
 import {LayoutContext} from '../../contexts';
 import {useMediaQuery} from '../../hooks';
 import {BREAKPOINTS} from '../../constants';
 import {CurrentPageIndicator} from '../current-page-indicator';
+import {MenuToggleButton} from '../menu-toggle-button';
 
 interface HeaderProps {
   logo: ReactElement;
@@ -111,7 +111,7 @@ const Header: FC<HeaderProps> = ({logo, facet, homePage}) => {
               )}
             </div>
             <div className={styles['header__elements-mobile']}>
-              <MenuButton />
+              <MenuToggleButton />
             </div>
             <div className={styles['header__elements-desktop']}>
               <div className={styles['header__element--large-spacing']}>
