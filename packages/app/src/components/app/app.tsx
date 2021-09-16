@@ -15,6 +15,7 @@ import {
 import {KeycloakWrapper} from '@nl-portal/authentication';
 import {LocalizationProvider} from '@nl-portal/localization';
 import {ArchiveIcon, DocumentIcon, GridIcon, InboxIcon} from '@gemeente-denhaag/icons';
+import {ApolloWrapper} from '@nl-portal/api';
 import {CUSTOM_MESSAGES} from '../../i18n';
 import {ReactComponent as HeaderLogo} from '../../assets/header-logo.svg';
 import Facet from '../../assets/facet.png';
@@ -114,14 +115,16 @@ const App = () => (
     url={config.KEYCLOAK_URL}
     redirectUri={config.KEYCLOAK_REDIRECT_URI}
   >
-    <LocalizationProvider customMessages={CUSTOM_MESSAGES}>
-      <Layout
-        pages={pages}
-        headerLogo={<HeaderLogo />}
-        facet={<img src={Facet} alt="" />}
-        footer={footer}
-      />
-    </LocalizationProvider>
+    <ApolloWrapper uri={config.GRAPHQL_URI}>
+      <LocalizationProvider customMessages={CUSTOM_MESSAGES}>
+        <Layout
+          pages={pages}
+          headerLogo={<HeaderLogo />}
+          facet={<img src={Facet} alt="" />}
+          footer={footer}
+        />
+      </LocalizationProvider>
+    </ApolloWrapper>
   </KeycloakWrapper>
 );
 
