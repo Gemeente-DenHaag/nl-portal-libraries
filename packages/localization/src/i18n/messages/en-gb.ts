@@ -13,6 +13,7 @@ export const EN_GB_MESSAGES: Messages = {
     'header.welcome': 'Welcome {userName}',
     'header.menuButton': 'Menu',
     'menu.close': 'Close menu',
+    'menu.open': 'Open menu',
     'titles.completedCases': 'Closed cases',
   },
 };

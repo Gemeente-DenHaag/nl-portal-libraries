@@ -9,10 +9,11 @@ interface LayoutContextInterface {
   setMessagesCount: (value: number) => void;
   currentPage: PortalPage;
   setCurrentPage: (value: PortalPage) => void;
-  headerHidden: boolean;
-  setHeaderHidden: (value: boolean) => void;
-  headerFixed: boolean;
-  setHeaderFixed: (value: boolean) => void;
+  mobileMenuOpened: boolean;
+  hideMobileMenu: () => void;
+  showMobileMenu: () => void;
+  headerHeight: number;
+  setHeaderHeight: (value: number) => void;
 }
 
 export const LayoutContext = React.createContext<LayoutContextInterface>(

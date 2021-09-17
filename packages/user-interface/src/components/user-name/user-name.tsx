@@ -1,10 +1,16 @@
 import * as React from 'react';
 import {Paragraph} from '@gemeente-denhaag/denhaag-component-library';
-import {useEffect, useState} from 'react';
+import {FC, useEffect, useState} from 'react';
 import {useKeycloak} from '@react-keycloak/web';
 import {FormattedMessage} from 'react-intl';
+import classNames from 'classnames';
+import styles from './user-name.module.scss';
 
-const UserName = () => {
+interface UserNameProps {
+  mobileMenu?: boolean;
+}
+
+const UserName: FC<UserNameProps> = ({mobileMenu}) => {
   const {keycloak} = useKeycloak();
   const [userName, setUserName] = useState('');
 
@@ -20,9 +26,11 @@ const UserName = () => {
   }, []);
 
   return (
-    <Paragraph>
-      <FormattedMessage id="header.welcome" values={{userName: userName || '...'}} />
-    </Paragraph>
+    <div className={classNames({[styles['user-name--mobile-menu']]: mobileMenu})}>
+      <Paragraph>
+        <FormattedMessage id="header.welcome" values={{userName: userName || '...'}} />
+      </Paragraph>
+    </div>
   );
 };
 export {UserName};

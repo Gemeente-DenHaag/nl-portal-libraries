@@ -1,9 +1,7 @@
 @import '../../styles/mixins';
 
 .current-page-indicator {
-  position: absolute;
-  left: 0;
-  top: calc(var(--nlportal-header-height, 72px));
+  cursor: pointer;
   display: flex;
   justify-content: center;
   box-sizing: border-box;
@@ -15,23 +13,24 @@
   padding-block-end: var(--nlportal-space-block-md, 1rem);
   height: var(--nlportal-current-page-indicator-height, 56px);
   z-index: var(--nlportal-z-index-header, 100);
+  border: none;
+  outline: none;
 
   @include breakpoint(tablet) {
     display: none;
   }
 }
 
-.current-page-indicator--has-facet {
-  top: calc(var(--nlportal-header-height, 72px) + var(--nlportal-header-facet-height, 14px));
-}
-
-.current-page-indicator--header-fixed {
-  transition: top 0.08s ease-out;
-  position: fixed;
-}
-
-.current-page-indicator--header-hidden {
-  top: 0;
+.current-page-indicator:focus:after {
+  content: '';
+  display: block;
+  position: absolute;
+  top: 0px;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  border: var(--nlportal-focus-border, 2px dashed hsl(47 100% 40%));
+  border-radius: var(--nlportal-border-radius, 3px);
 }
 
 .current-page-indicator__header {

@@ -13,6 +13,7 @@ export const NL_NL_MESSAGES: Messages = {
     'header.welcome': 'Welkom {userName}',
     'header.menuButton': 'Menu',
     'menu.close': 'Menu sluiten',
+    'menu.open': 'Menu openen',
     'titles.completedCases': 'Afgeronde zaken',
   },
 };
