@@ -18,4 +18,8 @@ if [ ! -z "$KEYCLOAK_REDIRECT_URI" ]; then
     sed -i -r "s|(KEYCLOAK_REDIRECT_URI = ').*(')|\1$KEYCLOAK_REDIRECT_URI\2|g" $configfile
 fi
 
+if [ ! -z "$GRAPHQL_URI" ]; then
+    sed -i -r "s|(GRAPHQL_URI = ').*(')|\1$GRAPHQL_URI\2|g" $configfile
+fi
+
 echo "Done replacing env vars in $configfile"

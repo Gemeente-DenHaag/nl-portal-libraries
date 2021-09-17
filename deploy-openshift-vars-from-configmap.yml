@@ -38,6 +38,11 @@ spec:
               configMapKeyRef:
                 name: nl-portal
                 key: KEYCLOAK_REDIRECT_URI
+          - name: GRAPHQL_URI
+            valueFrom:
+              configMapKeyRef:
+                name: nl-portal
+                key: GRAPHQL_URI
       imagePullSecrets:
         - name: az-acr-nlportal-secret
 ---

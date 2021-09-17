@@ -7,6 +7,7 @@ COPY ./package.json ./yarn.lock ./lerna.json /app/
 
 COPY ./packages/app/package.json /app/packages/app/
 COPY ./packages/authentication/package.json /app/packages/authentication/
+COPY ./packages/api/package.json /app/packages/api/
 COPY ./packages/localization/package.json /app/packages/localization/
 COPY ./packages/user-interface/package.json /app/packages/user-interface/
 
