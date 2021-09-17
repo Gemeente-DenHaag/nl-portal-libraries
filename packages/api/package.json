@@ -57,6 +57,7 @@
     "graphql": "^15.5.3",
     "graphql-tag": "^2.12.5",
     "react-apollo": "^3.1.5",
-    "react-apollo-hooks": "^0.5.0"
+    "react-apollo-hooks": "^0.5.0",
+    "@nl-portal/authentication": "0.1.0"
   }
 }

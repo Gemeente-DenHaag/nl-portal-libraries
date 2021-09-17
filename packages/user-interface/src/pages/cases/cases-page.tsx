@@ -8,11 +8,10 @@ import {
   TabPanel,
 } from '@gemeente-denhaag/denhaag-component-library';
 import {FormattedMessage, useIntl} from 'react-intl';
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import {useHistory} from 'react-router-dom';
 import {useGetZakenQuery} from '@nl-portal/api';
 import styles from './cases-page.module.scss';
-import {mockCases} from './cases-page-mock';
 import {useMediaQuery} from '../../hooks';
 import {BREAKPOINTS} from '../../constants';
 
@@ -20,28 +19,31 @@ const CasesPage = () => {
   const [tabNumber, setTabNumber] = useState(0);
   const intl = useIntl();
   const isTablet = useMediaQuery(BREAKPOINTS.TABLET);
-  const caseUrl = '/zaken/zaak';
+  const getCaseUrl = (id: string) => `/zaken/zaak?id=${id}`;
   const history = useHistory();
-  const {data, error, loading} = useGetZakenQuery();
+  const {data, loading, refetch} = useGetZakenQuery();
 
   const getCaseCards = (completed: boolean) =>
-    mockCases
-      .filter(mockCase => (completed ? mockCase.completed : !mockCase.completed))
-      .sort((a, b) => (b.createdOn as any) - (a.createdOn as any))
-      .map(mockCase => (
-        <div className={styles.cases__card} key={mockCase.id}>
+    data?.getZaken.map(zaak => {
+      const splitTypeName = zaak.zaaktype.split('/');
+      const name = splitTypeName[splitTypeName.length - 1];
+      return (
+        <div className={styles.cases__card} key={zaak.uuid}>
           <Card
+            archived={completed}
             variant="case"
-            title={intl.formatMessage({id: `case.${mockCase.type}.title`})}
-            subTitle={mockCase.subtitle}
-            date={mockCase.createdOn}
-            href={caseUrl}
-            onClick={() => history.push(caseUrl)}
+            title={name}
+            subTitle={zaak.omschrijving}
+            date={new Date(zaak.startdatum)}
+            onClick={() => history.push(getCaseUrl(zaak.uuid))}
           />
         </div>
-      ));
+      );
+    });
 
-  console.log(data, error, loading);
+  useEffect(() => {
+    refetch();
+  }, []);
 
   return (
     <section className={styles.cases}>
@@ -50,24 +52,26 @@ const CasesPage = () => {
           <FormattedMessage id="pageTitles.cases" />
         </Heading2>
       </header>
-      <TabContext value={tabNumber.toString()}>
-        <Tabs
-          variant={isTablet ? 'standard' : 'fullWidth'}
-          value={tabNumber}
-          onChange={(_event: React.ChangeEvent<unknown>, newValue: number) => {
-            setTabNumber(newValue);
-          }}
-        >
-          <Tab label={intl.formatMessage({id: 'pageTitles.cases'})} value={0} />
-          <Tab label={intl.formatMessage({id: 'titles.completedCases'})} value={1} />
-        </Tabs>
-        <TabPanel value="0">
-          <div className={styles.cases__cards}>{getCaseCards(false)}</div>
-        </TabPanel>
-        <TabPanel value="1">
-          <div className={styles.cases__cards}>{getCaseCards(true)}</div>
-        </TabPanel>
-      </TabContext>
+      {!loading && (
+        <TabContext value={tabNumber.toString()}>
+          <Tabs
+            variant={isTablet ? 'standard' : 'fullWidth'}
+            value={tabNumber}
+            onChange={(_event: React.ChangeEvent<unknown>, newValue: number) => {
+              setTabNumber(newValue);
+            }}
+          >
+            <Tab label={intl.formatMessage({id: 'pageTitles.cases'})} value={0} />
+            <Tab label={intl.formatMessage({id: 'titles.completedCases'})} value={1} />
+          </Tabs>
+          <TabPanel value="0">
+            <div className={styles.cases__cards}>{getCaseCards(false)}</div>
+          </TabPanel>
+          <TabPanel value="1">
+            <div className={styles.cases__cards}>{getCaseCards(true)}</div>
+          </TabPanel>
+        </TabContext>
+      )}
     </section>
   );
 };
