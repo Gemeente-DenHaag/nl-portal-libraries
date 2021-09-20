@@ -1,8 +1,8 @@
 import {gql} from '@apollo/client';
 
 export const QUERY_GET_ZAKEN = gql`
-  query GetZaak {
-    getZaak(id: "{{zaakId}}") {
+  query GetZaak($id: UUID!) {
+    getZaak(id: $id) {
       uuid
       omschrijving
       zaaktype {
