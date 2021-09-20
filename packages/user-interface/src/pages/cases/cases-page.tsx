@@ -35,7 +35,7 @@ const CasesPage = () => {
           <Card
             archived={completed}
             variant="case"
-            title={zaak.zaaktype.identificatie}
+            title={intl.formatMessage({id: `case.${zaak.zaaktype.identificatie}.title`})}
             subTitle={zaak.omschrijving}
             date={new Date(zaak.startdatum)}
             onClick={() => history.push(getCaseUrl(zaak.uuid))}
@@ -44,10 +44,15 @@ const CasesPage = () => {
       )) || [];
 
   const getNoDataMessage = (completed: boolean) => (
-    <Paragraph className={styles['cases__no-data-message']}>
+    <Paragraph>
       <FormattedMessage id={completed ? 'cases.noClosedCases' : 'cases.noOpenCases'} />
     </Paragraph>
   );
+
+  const getTabContent = (completed: boolean) => {
+    const cards = getCaseCards(completed);
+    return cards.length > 0 ? cards : getNoDataMessage(completed);
+  };
 
   useEffect(() => {
     refetch();
@@ -73,14 +78,10 @@ const CasesPage = () => {
             <Tab label={intl.formatMessage({id: 'titles.completedCases'})} value={1} />
           </Tabs>
           <TabPanel value="0">
-            <div className={styles.cases__cards}>
-              {getCaseCards(false)?.length > 0 ? getCaseCards(false) : getNoDataMessage(false)}
-            </div>
+            <div className={styles.cases__cards}>{getTabContent(false)}</div>
           </TabPanel>
           <TabPanel value="1">
-            <div className={styles.cases__cards}>
-              {getCaseCards(false)?.length > 0 ? getCaseCards(true) : getNoDataMessage(true)}
-            </div>
+            <div className={styles.cases__cards}>{getTabContent(true)}</div>
           </TabPanel>
         </TabContext>
       )}
