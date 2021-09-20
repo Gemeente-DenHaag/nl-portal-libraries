@@ -15,5 +15,7 @@ export const NL_NL_MESSAGES: Messages = {
     'menu.close': 'Menu sluiten',
     'menu.open': 'Menu openen',
     'titles.completedCases': 'Afgeronde zaken',
+    'cases.noOpenCases': 'Er zijn geen lopende zaken.',
+    'cases.noClosedCases': 'Er zijn geen afgeronde zaken.',
   },
 };

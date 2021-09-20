@@ -195,7 +195,7 @@ export type ZaakType = {
 export type GetZakenQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetZakenQuery = { __typename?: 'Query', getZaken: Array<{ __typename?: 'Zaak', uuid: any, omschrijving: string, startdatum: any, zaaktype: { __typename?: 'ZaakType', identificatie: string, omschrijving: string }, status?: Maybe<{ __typename?: 'ZaakStatus', datumStatusGezet: string, statustype: { __typename?: 'ZaakStatusType', omschrijving: string, isEindstatus: boolean } }>, statusGeschiedenis: Array<{ __typename?: 'ZaakStatus', datumStatusGezet: string, statustype: { __typename?: 'ZaakStatusType', omschrijving: string, isEindstatus: boolean } }> }> };
+export type GetZakenQuery = { __typename?: 'Query', getZaken: Array<{ __typename?: 'Zaak', uuid: any, omschrijving: string, startdatum: any, zaaktype: { __typename?: 'ZaakType', identificatie: string }, status?: Maybe<{ __typename?: 'ZaakStatus', statustype: { __typename?: 'ZaakStatusType', isEindstatus: boolean } }> }> };
 
 
 export const GetZakenDocument = gql`
@@ -205,20 +205,10 @@ export const GetZakenDocument = gql`
     omschrijving
     zaaktype {
       identificatie
-      omschrijving
     }
     startdatum
     status {
-      datumStatusGezet
       statustype {
-        omschrijving
-        isEindstatus
-      }
-    }
-    statusGeschiedenis {
-      datumStatusGezet
-      statustype {
-        omschrijving
         isEindstatus
       }
     }

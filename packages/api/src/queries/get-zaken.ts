@@ -7,20 +7,10 @@ export const QUERY_GET_ZAKEN = gql`
       omschrijving
       zaaktype {
         identificatie
-        omschrijving
       }
       startdatum
       status {
-        datumStatusGezet
         statustype {
-          omschrijving
-          isEindstatus
-        }
-      }
-      statusGeschiedenis {
-        datumStatusGezet
-        statustype {
-          omschrijving
           isEindstatus
         }
       }

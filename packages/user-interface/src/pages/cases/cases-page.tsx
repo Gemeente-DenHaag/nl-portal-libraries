@@ -6,6 +6,7 @@ import {
   Tab,
   TabContext,
   TabPanel,
+  Paragraph,
 } from '@gemeente-denhaag/denhaag-component-library';
 import {FormattedMessage, useIntl} from 'react-intl';
 import {useEffect, useState} from 'react';
@@ -24,22 +25,29 @@ const CasesPage = () => {
   const {data, loading, refetch} = useGetZakenQuery();
 
   const getCaseCards = (completed: boolean) =>
-    data?.getZaken.map(zaak => {
-      const splitTypeName = zaak.zaaktype.split('/');
-      const name = splitTypeName[splitTypeName.length - 1];
-      return (
+    data?.getZaken
+      .filter(zaak => {
+        const isEndStatus = zaak?.status?.statustype.isEindstatus;
+        return completed ? isEndStatus : !isEndStatus;
+      })
+      .map(zaak => (
         <div className={styles.cases__card} key={zaak.uuid}>
           <Card
             archived={completed}
             variant="case"
-            title={name}
+            title={zaak.zaaktype.identificatie}
             subTitle={zaak.omschrijving}
             date={new Date(zaak.startdatum)}
             onClick={() => history.push(getCaseUrl(zaak.uuid))}
           />
         </div>
-      );
-    });
+      )) || [];
+
+  const getNoDataMessage = (completed: boolean) => (
+    <Paragraph className={styles['cases__no-data-message']}>
+      <FormattedMessage id={completed ? 'cases.noClosedCases' : 'cases.noOpenCases'} />
+    </Paragraph>
+  );
 
   useEffect(() => {
     refetch();
@@ -65,10 +73,14 @@ const CasesPage = () => {
             <Tab label={intl.formatMessage({id: 'titles.completedCases'})} value={1} />
           </Tabs>
           <TabPanel value="0">
-            <div className={styles.cases__cards}>{getCaseCards(false)}</div>
+            <div className={styles.cases__cards}>
+              {getCaseCards(false)?.length > 0 ? getCaseCards(false) : getNoDataMessage(false)}
+            </div>
           </TabPanel>
           <TabPanel value="1">
-            <div className={styles.cases__cards}>{getCaseCards(true)}</div>
+            <div className={styles.cases__cards}>
+              {getCaseCards(false)?.length > 0 ? getCaseCards(true) : getNoDataMessage(true)}
+            </div>
           </TabPanel>
         </TabContext>
       )}
