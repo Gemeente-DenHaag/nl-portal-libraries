@@ -5,9 +5,25 @@ export const QUERY_GET_ZAKEN = gql`
     getZaken {
       uuid
       omschrijving
-      zaaktype
+      zaaktype {
+        identificatie
+        omschrijving
+      }
       startdatum
-      status
+      status {
+        datumStatusGezet
+        statustype {
+          omschrijving
+          isEindstatus
+        }
+      }
+      statusGeschiedenis {
+        datumStatusGezet
+        statustype {
+          omschrijving
+          isEindstatus
+        }
+      }
     }
   }
 `;

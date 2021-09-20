@@ -168,15 +168,34 @@ export type Zaak = {
   __typename?: 'Zaak';
   omschrijving: Scalars['String'];
   startdatum: Scalars['Date'];
-  status?: Maybe<Scalars['String']>;
-  uuid: Scalars['String'];
-  zaaktype: Scalars['String'];
+  status?: Maybe<ZaakStatus>;
+  statusGeschiedenis: Array<ZaakStatus>;
+  uuid: Scalars['UUID'];
+  zaaktype: ZaakType;
+};
+
+export type ZaakStatus = {
+  __typename?: 'ZaakStatus';
+  datumStatusGezet: Scalars['String'];
+  statustype: ZaakStatusType;
+};
+
+export type ZaakStatusType = {
+  __typename?: 'ZaakStatusType';
+  isEindstatus: Scalars['Boolean'];
+  omschrijving: Scalars['String'];
+};
+
+export type ZaakType = {
+  __typename?: 'ZaakType';
+  identificatie: Scalars['String'];
+  omschrijving: Scalars['String'];
 };
 
 export type GetZakenQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetZakenQuery = { __typename?: 'Query', getZaken: Array<{ __typename?: 'Zaak', uuid: string, omschrijving: string, zaaktype: string, startdatum: any, status?: Maybe<string> }> };
+export type GetZakenQuery = { __typename?: 'Query', getZaken: Array<{ __typename?: 'Zaak', uuid: any, omschrijving: string, startdatum: any, zaaktype: { __typename?: 'ZaakType', identificatie: string, omschrijving: string }, status?: Maybe<{ __typename?: 'ZaakStatus', datumStatusGezet: string, statustype: { __typename?: 'ZaakStatusType', omschrijving: string, isEindstatus: boolean } }>, statusGeschiedenis: Array<{ __typename?: 'ZaakStatus', datumStatusGezet: string, statustype: { __typename?: 'ZaakStatusType', omschrijving: string, isEindstatus: boolean } }> }> };
 
 
 export const GetZakenDocument = gql`
@@ -184,9 +203,25 @@ export const GetZakenDocument = gql`
   getZaken {
     uuid
     omschrijving
-    zaaktype
+    zaaktype {
+      identificatie
+      omschrijving
+    }
     startdatum
-    status
+    status {
+      datumStatusGezet
+      statustype {
+        omschrijving
+        isEindstatus
+      }
+    }
+    statusGeschiedenis {
+      datumStatusGezet
+      statustype {
+        omschrijving
+        isEindstatus
+      }
+    }
   }
 }
     `;

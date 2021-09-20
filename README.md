@@ -170,9 +170,12 @@ file.
 
 ### Configuration
 
-Environment variables are loaded from the implementation [@nl-portal/app](./packages/app) by default. Possible configuration values are specified in the [Config interface](./packages/app/src/interfaces/config.ts). 
+Environment variables are loaded from the implementation [@nl-portal/app](./packages/app) by
+default. Possible configuration values are specified in the
+[Config interface](./packages/app/src/interfaces/config.ts).
 
-These values are set to the window object by [config.js](./packages/app/public/config.js), which also contains the default values for local development.
+These values are set to the window object by [config.js](./packages/app/public/config.js), which
+also contains the default values for local development.
 
 When starting the app through Docker, these values can be optionally overridden, i.e.:
 
@@ -182,13 +185,20 @@ docker run --name test -e KEYCLOAK_URL=thekeycloakurl -e KEYCLOAK_REALM=therealr
 
 ### GraphQL
 
-The implementation [@nl-portal/app](./packages/app) uses [Apollo Client](https://www.apollographql.com/docs/react/) through the package [@nl-portal/api](./packages/api) to communicate with the GraphQL back-end.
+The implementation [@nl-portal/app](./packages/app) uses
+[Apollo Client](https://www.apollographql.com/docs/react/) through the package
+[@nl-portal/api](./packages/api) to communicate with the GraphQL back-end.
 
-New queries can be added as exported JavaScript variables from separate files [in the queries folder](./packages/api/src/queries).
+New queries can be added as exported JavaScript variables from separate files
+[in the queries folder](./packages/api/src/queries).
 
-Running `lerna codegen` from the project root will then generate TypeScript code based on these query files. For this to succeed, the GraphQL API endpoint specified in [codegen.yml](./packages/api/codegen.yml) must be available.
+Running `lerna codegen` from the project root will then generate TypeScript code based on these
+query files. For this to succeed, the GraphQL API endpoint specified in
+[codegen.yml](./packages/api/codegen.yml) must be available.
 
-Once the codegen completes, the queries are exported as hooks from [@nl-portal/api](./packages/api) and can be imported and used inside a functional component:
+Once the codegen completes, the queries are exported as hooks from [@nl-portal/api](./packages/api)
+and can be imported and used inside a functional component:
+
 ```
 ...
 import {useGetZakenQuery} from '@nl-portal/api';
@@ -199,4 +209,3 @@ const CasesPage = () => {
 }
 
 ```
-
