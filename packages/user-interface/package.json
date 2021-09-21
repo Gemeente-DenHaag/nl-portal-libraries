@@ -49,8 +49,8 @@
     "dist"
   ],
   "dependencies": {
-    "@gemeente-denhaag/denhaag-component-library": "0.2.3-alpha.28",
-    "@gemeente-denhaag/icons": "^0.2.3-alpha.16",
+    "@gemeente-denhaag/denhaag-component-library": "0.2.3-alpha.29",
+    "@gemeente-denhaag/icons": "0.2.3-alpha.29",
     "@nl-portal/api": "0.1.0",
     "@nl-portal/localization": "0.1.0",
     "@react-hook/size": "^2.1.2",
@@ -61,6 +61,7 @@
     "classnames": "^2.3.1",
     "lodash": "^4.17.21",
     "react-intl": "^5.20.10",
+    "react-loading-skeleton": "^2.2.0",
     "react-router-dom": "^5.2.1"
   }
 }

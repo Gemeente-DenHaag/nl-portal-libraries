@@ -1,4 +1,5 @@
 import * as React from 'react';
+import {Fragment, useEffect, useState} from 'react';
 import {
   Heading2,
   Card,
@@ -9,9 +10,9 @@ import {
   Paragraph,
 } from '@gemeente-denhaag/denhaag-component-library';
 import {FormattedMessage, useIntl} from 'react-intl';
-import {useEffect, useState} from 'react';
 import {useHistory} from 'react-router-dom';
 import {useGetZakenQuery} from '@nl-portal/api';
+import Skeleton from 'react-loading-skeleton';
 import styles from './cases-page.module.scss';
 import {useMediaQuery} from '../../hooks';
 import {BREAKPOINTS} from '../../constants';
@@ -54,6 +55,21 @@ const CasesPage = () => {
     return cards.length > 0 ? cards : getNoDataMessage(completed);
   };
 
+  const getSkeleton = () => {
+    const getSkeletonCard = (key: number) => (
+      <div className={styles.cases__card} key={key}>
+        <Skeleton height={220} />
+      </div>
+    );
+
+    return (
+      <Fragment>
+        {getSkeletonCard(0)}
+        {getSkeletonCard(1)}
+      </Fragment>
+    );
+  };
+
   useEffect(() => {
     refetch();
   }, []);
@@ -65,26 +81,26 @@ const CasesPage = () => {
           <FormattedMessage id="pageTitles.cases" />
         </Heading2>
       </header>
-      {!loading && (
-        <TabContext value={tabNumber.toString()}>
-          <Tabs
-            variant={isTablet ? 'standard' : 'fullWidth'}
-            value={tabNumber}
-            onChange={(_event: React.ChangeEvent<unknown>, newValue: number) => {
-              setTabNumber(newValue);
-            }}
-          >
-            <Tab label={intl.formatMessage({id: 'pageTitles.cases'})} value={0} />
-            <Tab label={intl.formatMessage({id: 'titles.completedCases'})} value={1} />
-          </Tabs>
-          <TabPanel value="0">
-            <div className={styles.cases__cards}>{getTabContent(false)}</div>
-          </TabPanel>
-          <TabPanel value="1">
-            <div className={styles.cases__cards}>{getTabContent(true)}</div>
-          </TabPanel>
-        </TabContext>
-      )}
+      <TabContext value={tabNumber.toString()}>
+        <Tabs
+          variant={isTablet ? 'standard' : 'fullWidth'}
+          value={tabNumber}
+          onChange={(_event: React.ChangeEvent<unknown>, newValue: number) => {
+            setTabNumber(newValue);
+          }}
+        >
+          <Tab label={intl.formatMessage({id: 'pageTitles.cases'})} value={0} />
+          <Tab label={intl.formatMessage({id: 'titles.completedCases'})} value={1} />
+        </Tabs>
+        <TabPanel value="0">
+          <div className={styles.cases__cards}>
+            {loading ? getSkeleton() : getTabContent(false)}
+          </div>
+        </TabPanel>
+        <TabPanel value="1">
+          <div className={styles.cases__cards}>{loading ? getSkeleton() : getTabContent(true)}</div>
+        </TabPanel>
+      </TabContext>
     </section>
   );
 };
