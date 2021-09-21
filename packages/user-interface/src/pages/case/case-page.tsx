@@ -2,12 +2,15 @@ import * as React from 'react';
 import {useGetZaakQuery} from '@nl-portal/api';
 import {useEffect} from 'react';
 import {Heading2} from '@gemeente-denhaag/denhaag-component-library';
-import {FormattedMessage} from 'react-intl';
+import {FormattedMessage, useIntl} from 'react-intl';
 import Skeleton from 'react-loading-skeleton';
+import {ArchiveIcon, CalendarIcon, DocumentIcon, MegaphoneIcon} from '@gemeente-denhaag/icons';
 import {useQuery} from '../../hooks';
 import styles from './case-page.module.scss';
+import {MetaIcon} from '../../components';
 
 const CasePage = () => {
+  const intl = useIntl();
   const query = useQuery();
   const {data, loading, refetch} = useGetZaakQuery({
     variables: {id: query.get('id')},
@@ -28,6 +31,28 @@ const CasePage = () => {
           )}
         </Heading2>
       </header>
+      <div className={styles['case__meta-icons']}>
+        <MetaIcon
+          title={intl.formatMessage({id: 'case.caseNumber'})}
+          subtitle={(!loading && data?.getZaak.identificatie) || ''}
+          icon={<ArchiveIcon />}
+        />
+        <MetaIcon
+          title={intl.formatMessage({id: 'case.creationDate'})}
+          subtitle={(!loading && data?.getZaak.startdatum) || ''}
+          icon={<CalendarIcon />}
+        />
+        <MetaIcon
+          title={intl.formatMessage({id: 'case.status'})}
+          subtitle={(!loading && data?.getZaak.status?.statustype.omschrijving) || ''}
+          icon={<MegaphoneIcon />}
+        />
+        <MetaIcon
+          title={intl.formatMessage({id: 'case.documents'})}
+          subtitle={(!loading && '0') || ''}
+          icon={<DocumentIcon />}
+        />
+      </div>
     </section>
   );
 };

@@ -40,6 +40,10 @@
   --nlportal-mobile-menu-background-color: var(--denhaag-color-grey-1);
   --nlportal-mobile-menu-font-color: var(--denhaag-color-green-3);
   --nlportal-mobile-menu-font-weight: var(--denhaag-menu-button-active-font-weight);
+  --nlportal-meta-icon-line-height: 1.5rem;
+  --nlportal-meta-icon-font-weight-bold: 700;
+  --nlportal-meta-icon-size: 2rem;
+  --nlportal-meta-icon-color: var(--denhaag-color-blue-3);
   --utrecht-heading-color: var(--denhaag-color-blue-3);
   --denhaag-menu-button-font-size: var(--denhaag-typography-scale-lg-font-size);
   --denhaag-menu-button-line-height: var(--denhaag-typography-scale-xl-font-size);

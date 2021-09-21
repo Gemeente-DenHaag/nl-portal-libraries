@@ -17,5 +17,9 @@ export const EN_GB_MESSAGES: Messages = {
     'titles.completedCases': 'Closed cases',
     'cases.noOpenCases': 'There are no current cases.',
     'cases.noClosedCases': 'There are no closed cases.',
+    'case.caseNumber': 'case number',
+    'case.creationDate': 'application date',
+    'case.status': 'status',
+    'case.documents': 'documents',
   },
 };
