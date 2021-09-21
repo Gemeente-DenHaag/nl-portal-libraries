@@ -5,6 +5,7 @@ export const QUERY_GET_ZAKEN = gql`
     getZaak(id: $id) {
       uuid
       omschrijving
+      identificatie
       zaaktype {
         identificatie
         omschrijving

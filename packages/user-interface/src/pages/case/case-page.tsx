@@ -3,6 +3,7 @@ import {useGetZaakQuery} from '@nl-portal/api';
 import {useEffect} from 'react';
 import {Heading2} from '@gemeente-denhaag/denhaag-component-library';
 import {FormattedMessage} from 'react-intl';
+import Skeleton from 'react-loading-skeleton';
 import {useQuery} from '../../hooks';
 import styles from './case-page.module.scss';
 
@@ -18,13 +19,15 @@ const CasePage = () => {
 
   return (
     <section className={styles.case}>
-      {!loading && (
-        <header className={styles.case__header}>
-          <Heading2>
+      <header className={styles.case__header}>
+        <Heading2>
+          {loading ? (
+            <Skeleton width={250} />
+          ) : (
             <FormattedMessage id={`case.${data?.getZaak.zaaktype.identificatie}.title`} />
-          </Heading2>
-        </header>
-      )}
+          )}
+        </Heading2>
+      </header>
     </section>
   );
 };
