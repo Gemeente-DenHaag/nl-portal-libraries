@@ -11,3 +11,4 @@ export * from './current-page-indicator';
 export * from './footer';
 export * from './mobile-menu-button';
 export * from './link-to-parent';
+export * from './meta-icon';
