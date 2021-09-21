@@ -14,6 +14,12 @@ const Page: FC<PageProps> = ({children, page}) => {
   const pageTitle = intl.formatMessage({id: `pageTitles.${page?.titleTranslationKey}`});
   const appName = intl.formatMessage({id: 'app.appName'});
   const documentTitle = page?.titleTranslationKey ? `${pageTitle} - ${appName}` : appName;
+  const ENTRY_URL_KEY = 'entryUrl';
+  const entryUrl = sessionStorage.getItem(ENTRY_URL_KEY);
+
+  if (entryUrl) {
+    sessionStorage.removeItem(ENTRY_URL_KEY);
+  }
 
   useEffect(() => {
     document.title = documentTitle;

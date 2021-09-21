@@ -53,7 +53,7 @@ const LayoutComponent: FC<LayoutComponentProps> = ({headerLogo, facet, pages, fo
                 ],
                 []
               )}
-              <Route render={() => <Redirect to="/" />} />
+              <Route render={() => <Redirect to={sessionStorage.getItem('entryUrl') || '/'} />} />
             </Switch>
           </div>
         </div>
