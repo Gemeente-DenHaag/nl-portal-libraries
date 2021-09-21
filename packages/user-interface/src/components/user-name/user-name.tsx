@@ -4,6 +4,7 @@ import {FC, useEffect, useState} from 'react';
 import {useKeycloak} from '@react-keycloak/web';
 import {FormattedMessage} from 'react-intl';
 import classNames from 'classnames';
+import Skeleton from 'react-loading-skeleton';
 import styles from './user-name.module.scss';
 
 interface UserNameProps {
@@ -28,7 +29,8 @@ const UserName: FC<UserNameProps> = ({mobileMenu}) => {
   return (
     <div className={classNames({[styles['user-name--mobile-menu']]: mobileMenu})}>
       <Paragraph>
-        <FormattedMessage id="header.welcome" values={{userName: userName || '...'}} />
+        <FormattedMessage id="header.welcome" values={{userName}} />
+        {!userName && <Skeleton width={80} />}
       </Paragraph>
     </div>
   );

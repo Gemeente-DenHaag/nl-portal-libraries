@@ -1,6 +1,9 @@
-.denhaag-button--mobile-menu {
-  height: var(--nlportal-mobile-menu-element-height, 43px);
-  color: var(--nlportal-mobile-menu-font-color, hsl(138 58% 33%)) !important;
-  background-color: var(--nlportal-mobile-menu-background-color, hsl(0 0% 95%)) !important;
-  font-weight: var(--nlportal-mobile-menu-font-weight, 700) !important;
+@import '../../styles/mixins';
+
+.link-to-parent {
+  margin-bottom: var(--nlportal-space-block-3xl, 2.5rem);
+
+  @include breakpoint(tablet) {
+    margin-block-end: var(--nlportal-space-block-xl, 1.5rem);
+  }
 }
