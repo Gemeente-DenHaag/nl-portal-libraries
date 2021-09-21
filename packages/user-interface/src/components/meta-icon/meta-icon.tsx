@@ -9,9 +9,10 @@ interface MetaIconProps {
   title: string;
   subtitle?: string;
   icon: ReactElement;
+  showRightBorder?: boolean;
 }
 
-const MetaIcon: FC<MetaIconProps> = ({title, subtitle, icon}) => (
+const MetaIcon: FC<MetaIconProps> = ({title, subtitle, icon, showRightBorder}) => (
   <div className={styles['meta-icon']}>
     {React.cloneElement(icon, {className: styles['meta-icon__icon']})}
     <Paragraph className={styles['meta-icon__paragraph']}>{title}</Paragraph>
@@ -20,6 +21,7 @@ const MetaIcon: FC<MetaIconProps> = ({title, subtitle, icon}) => (
     >
       {subtitle || <Skeleton width={100} />}
     </Paragraph>
+    {showRightBorder && <div className={styles['meta-icon__border']} />}
   </div>
 );
 export {MetaIcon};

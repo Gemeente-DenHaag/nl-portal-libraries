@@ -5,11 +5,12 @@
   flex-direction: column;
   align-items: center;
   box-sizing: border-box;
+  position: relative;
   width: 100%;
   margin-block-start: var(--nlportal-space-block-3xl, 2.5rem);
   margin-block-end: var(--nlportal-space-block-3xl, 2.5rem);
-  padding-inline-start: var(--nlportal-space-inline-xs, 0.5rem);
-  padding-inline-end: var(--nlportal-space-inline-xs, 0.5rem);
+  padding-inline-start: var(--nlportal-space-block-md, 1rem);
+  padding-inline-end: var(--nlportal-space-block-md, 1rem);
 
   @include breakpoint(mobile) {
     width: 50%;
@@ -30,8 +31,19 @@
   line-height: var(--nlportal-meta-icon-line-height, 1.5rem) !important;
   max-width: 100%;
   text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .meta-icon__paragraph--bold {
   font-weight: var(--nlportal-meta-icon-font-weight-bold, 700) !important;
+}
+
+.meta-icon__border {
+  background-color: var(--nlportal-meta-icon-border-color, hsl(0 0% 82%));
+  height: 50%;
+  width: 1px;
+  position: absolute;
+  right: 0;
+  top: 25%;
 }

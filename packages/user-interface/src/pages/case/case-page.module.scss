@@ -18,7 +18,6 @@
   flex-direction: column;
 
   @include breakpoint(mobile) {
-    flex-direction: row;
-    flex-flow: wrap;
+    flex-flow: row wrap;
   }
 }
