@@ -34,7 +34,9 @@ const CasePage: FC<CasePageProps> = ({statusHistoryFacet, statusHistoryBackgroun
       <header className={styles.case__header}>
         <Heading2>
           {loading ? (
-            <Skeleton width={250} />
+            <div aria-busy aria-disabled aria-label={intl.formatMessage({id: 'element.loading'})}>
+              <Skeleton width={250} />
+            </div>
           ) : (
             <FormattedMessage id={`case.${data?.getZaak.zaaktype.identificatie}.title`} />
           )}

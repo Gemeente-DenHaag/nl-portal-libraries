@@ -22,5 +22,6 @@ export const EN_GB_MESSAGES: Messages = {
     'case.status': 'status',
     'case.documents': 'documents',
     'case.statusHeader': 'Status',
+    'element.loading': 'Loading',
   },
 };

@@ -22,5 +22,6 @@ export const NL_NL_MESSAGES: Messages = {
     'case.status': 'status',
     'case.documents': 'documenten',
     'case.statusHeader': 'Status',
+    'element.loading': 'Aan het laden',
   },
 };

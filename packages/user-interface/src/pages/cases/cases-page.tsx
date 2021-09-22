@@ -57,7 +57,13 @@ const CasesPage = () => {
 
   const getSkeleton = () => {
     const getSkeletonCard = (key: number) => (
-      <div className={styles.cases__card} key={key}>
+      <div
+        className={styles.cases__card}
+        key={key}
+        aria-busy
+        aria-disabled
+        aria-label={intl.formatMessage({id: 'element.loading'})}
+      >
         <Skeleton height={220} />
       </div>
     );

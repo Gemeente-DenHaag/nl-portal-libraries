@@ -27,7 +27,13 @@ const StatusHistory: FC<StatusHistoryProps> = ({caseId, statuses, loading, facet
   const activeStep = amountOfStatuses ? amountOfStatuses - 1 : 0;
 
   const getSkeletonStep = (key: number) => (
-    <div key={key} className={styles['skeleton-step']}>
+    <div
+      key={key}
+      className={styles['skeleton-step']}
+      aria-busy
+      aria-disabled
+      aria-label={intl.formatMessage({id: 'element.loading'})}
+    >
       <div className={styles['skeleton-step__circle']}>
         <Skeleton circle height={20} width={20} />
       </div>
