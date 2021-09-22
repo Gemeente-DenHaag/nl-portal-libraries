@@ -12,9 +12,10 @@ import {BREAKPOINTS} from '../../constants';
 
 interface CasePageProps {
   statusHistoryFacet?: ReactElement;
+  statusHistoryBackground?: ReactElement;
 }
 
-const CasePage: FC<CasePageProps> = ({statusHistoryFacet}) => {
+const CasePage: FC<CasePageProps> = ({statusHistoryFacet, statusHistoryBackground}) => {
   const intl = useIntl();
   const query = useQuery();
   const {data, loading, refetch} = useGetZaakQuery({
@@ -72,6 +73,7 @@ const CasePage: FC<CasePageProps> = ({statusHistoryFacet}) => {
         statuses={data?.getZaak.statusGeschiedenis}
         loading={loading}
         facet={statusHistoryFacet}
+        background={statusHistoryBackground}
       />
     </section>
   );

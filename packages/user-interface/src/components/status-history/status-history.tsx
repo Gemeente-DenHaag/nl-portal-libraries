@@ -9,9 +9,10 @@ interface StatusHistoryProps {
   statuses: Array<ZaakStatus> | undefined;
   loading: boolean;
   facet?: ReactElement;
+  background?: ReactElement;
 }
 
-const StatusHistory: FC<StatusHistoryProps> = ({statuses, loading, facet}) => {
+const StatusHistory: FC<StatusHistoryProps> = ({statuses, loading, facet, background}) => {
   const sortedStatuses = statuses
     ?.map(status => ({
       ...status,
@@ -34,6 +35,11 @@ const StatusHistory: FC<StatusHistoryProps> = ({statuses, loading, facet}) => {
 
   return (
     <div className={styles['status-history-container']}>
+      {background && (
+        <div className={styles['background-container']}>
+          {React.cloneElement(background, {className: styles['background-image']})}
+        </div>
+      )}
       {facet && (
         <div className={styles['facet-container']}>
           {React.cloneElement(facet, {className: styles['facet-image']})}

@@ -4,6 +4,21 @@
   position: relative;
 }
 
+.background-container {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: var(--nlportal-status-history-border-radius, 2px);
+  overflow: hidden;
+}
+
+.background-image {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+}
+
 .facet-container {
   width: 100%;
   height: var(--nlportal-status-history-facet-height, 8px);

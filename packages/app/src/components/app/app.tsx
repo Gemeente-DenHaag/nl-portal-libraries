@@ -19,6 +19,7 @@ import {ApolloWrapper} from '@nl-portal/api';
 import {CUSTOM_MESSAGES} from '../../i18n';
 import {ReactComponent as HeaderLogo} from '../../assets/header-logo.svg';
 import Facet from '../../assets/facet.png';
+import StatusHistoryBackground from '../../assets/status-history-background.svg';
 import {config} from '../../config';
 
 const pages: Array<PortalPage> = [
@@ -47,7 +48,12 @@ const pages: Array<PortalPage> = [
     children: [
       {
         icon: <ArchiveIcon />,
-        pageComponent: <CasePage statusHistoryFacet={<img src={Facet} alt="" />} />,
+        pageComponent: (
+          <CasePage
+            statusHistoryFacet={<img src={Facet} alt="" />}
+            statusHistoryBackground={<img src={StatusHistoryBackground} alt="" />}
+          />
+        ),
         path: '/zaak',
         titleTranslationKey: 'cases',
         showInMenu: true,
