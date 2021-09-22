@@ -24,9 +24,9 @@ const MetaIcon: FC<MetaIconProps> = ({title, subtitle, icon, showRightBorder}) =
         className={classNames(styles['meta-icon__paragraph'], styles['meta-icon__paragraph--bold'])}
       >
         {subtitle || (
-          <div aria-busy aria-disabled aria-label={intl.formatMessage({id: 'element.loading'})}>
+          <span aria-busy aria-disabled aria-label={intl.formatMessage({id: 'element.loading'})}>
             <Skeleton width={100} />
-          </div>
+          </span>
         )}
       </Paragraph>
       {showRightBorder && <div className={styles['meta-icon__border']} />}
