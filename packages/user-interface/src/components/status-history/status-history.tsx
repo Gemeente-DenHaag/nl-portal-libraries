@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {FC, Fragment} from 'react';
+import {FC, Fragment, ReactElement} from 'react';
 import {ZaakStatus} from '@nl-portal/api';
 import {Paragraph, Step, Timeline} from '@gemeente-denhaag/denhaag-component-library';
 import Skeleton from 'react-loading-skeleton';
@@ -8,9 +8,10 @@ import styles from './status-history.module.scss';
 interface StatusHistoryProps {
   statuses: Array<ZaakStatus> | undefined;
   loading: boolean;
+  facet?: ReactElement;
 }
 
-const StatusHistory: FC<StatusHistoryProps> = ({statuses, loading}) => {
+const StatusHistory: FC<StatusHistoryProps> = ({statuses, loading, facet}) => {
   const sortedStatuses = statuses
     ?.map(status => ({
       ...status,
@@ -32,23 +33,30 @@ const StatusHistory: FC<StatusHistoryProps> = ({statuses, loading}) => {
   );
 
   return (
-    <div className={styles['status-history']}>
-      {!loading && sortedStatuses ? (
-        <Timeline activeStep={activeStep}>
-          {sortedStatuses?.map(status => (
-            <Step
-              key={status.statustype.omschrijving}
-              label={status.statustype.omschrijving}
-              completed
-            />
-          ))}
-        </Timeline>
-      ) : (
-        <Fragment>
-          {getSkeletonStep(0)}
-          {getSkeletonStep(1)}
-        </Fragment>
+    <div className={styles['status-history-container']}>
+      {facet && (
+        <div className={styles['facet-container']}>
+          {React.cloneElement(facet, {className: styles['facet-image']})}
+        </div>
       )}
+      <div className={styles['status-history']}>
+        {!loading && sortedStatuses ? (
+          <Timeline activeStep={activeStep}>
+            {sortedStatuses?.map(status => (
+              <Step
+                key={status.statustype.omschrijving}
+                label={status.statustype.omschrijving}
+                completed
+              />
+            ))}
+          </Timeline>
+        ) : (
+          <Fragment>
+            {getSkeletonStep(0)}
+            {getSkeletonStep(1)}
+          </Fragment>
+        )}
+      </div>
     </div>
   );
 };

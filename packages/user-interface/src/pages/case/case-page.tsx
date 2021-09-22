@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {useGetZaakQuery} from '@nl-portal/api';
-import {useEffect} from 'react';
+import {FC, ReactElement, useEffect} from 'react';
 import {Heading2, Heading3} from '@gemeente-denhaag/denhaag-component-library';
 import {FormattedMessage, useIntl} from 'react-intl';
 import Skeleton from 'react-loading-skeleton';
@@ -10,7 +10,11 @@ import styles from './case-page.module.scss';
 import {MetaIcon, StatusHistory} from '../../components';
 import {BREAKPOINTS} from '../../constants';
 
-const CasePage = () => {
+interface CasePageProps {
+  statusHistoryFacet?: ReactElement;
+}
+
+const CasePage: FC<CasePageProps> = ({statusHistoryFacet}) => {
   const intl = useIntl();
   const query = useQuery();
   const {data, loading, refetch} = useGetZaakQuery({
@@ -64,7 +68,11 @@ const CasePage = () => {
       <Heading3 className={styles['case__sub-header']}>
         <FormattedMessage id="case.statusHeader" />
       </Heading3>
-      <StatusHistory statuses={data?.getZaak.statusGeschiedenis} loading={loading} />
+      <StatusHistory
+        statuses={data?.getZaak.statusGeschiedenis}
+        loading={loading}
+        facet={statusHistoryFacet}
+      />
     </section>
   );
 };

@@ -47,7 +47,7 @@ const pages: Array<PortalPage> = [
     children: [
       {
         icon: <ArchiveIcon />,
-        pageComponent: <CasePage />,
+        pageComponent: <CasePage statusHistoryFacet={<img src={Facet} alt="" />} />,
         path: '/zaak',
         titleTranslationKey: 'cases',
         showInMenu: true,
