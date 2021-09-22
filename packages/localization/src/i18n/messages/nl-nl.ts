@@ -21,5 +21,6 @@ export const NL_NL_MESSAGES: Messages = {
     'case.creationDate': 'aanvraagdatum',
     'case.status': 'status',
     'case.documents': 'documenten',
+    'case.statusHeader': 'Status',
   },
 };

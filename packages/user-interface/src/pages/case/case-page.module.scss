@@ -16,6 +16,7 @@
 .case__meta-icons {
   display: flex;
   flex-direction: column;
+  margin-block-end: var(--nlportal-space-block-xl, 1.5rem);
 
   @include breakpoint(mobile) {
     flex-flow: row wrap;

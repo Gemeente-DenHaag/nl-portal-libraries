@@ -1,13 +1,13 @@
 import * as React from 'react';
 import {useGetZaakQuery} from '@nl-portal/api';
 import {useEffect} from 'react';
-import {Heading2} from '@gemeente-denhaag/denhaag-component-library';
+import {Heading2, Heading3} from '@gemeente-denhaag/denhaag-component-library';
 import {FormattedMessage, useIntl} from 'react-intl';
 import Skeleton from 'react-loading-skeleton';
 import {ArchiveIcon, CalendarIcon, DocumentIcon, MegaphoneIcon} from '@gemeente-denhaag/icons';
 import {useMediaQuery, useQuery} from '../../hooks';
 import styles from './case-page.module.scss';
-import {MetaIcon} from '../../components';
+import {MetaIcon, StatusHistory} from '../../components';
 import {BREAKPOINTS} from '../../constants';
 
 const CasePage = () => {
@@ -60,6 +60,12 @@ const CasePage = () => {
           subtitle={(!loading && '0') || ''}
           icon={<DocumentIcon />}
         />
+      </div>
+      <div className={styles.case__status}>
+        <Heading3>
+          <FormattedMessage id="case.statusHeader" />
+        </Heading3>
+        {!loading && <StatusHistory statuses={data?.getZaak.statusGeschiedenis} />}
       </div>
     </section>
   );

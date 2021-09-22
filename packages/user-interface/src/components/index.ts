@@ -12,3 +12,4 @@ export * from './footer';
 export * from './mobile-menu-button';
 export * from './link-to-parent';
 export * from './meta-icon';
+export * from './status-history';

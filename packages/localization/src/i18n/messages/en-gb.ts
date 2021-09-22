@@ -21,5 +21,6 @@ export const EN_GB_MESSAGES: Messages = {
     'case.creationDate': 'application date',
     'case.status': 'status',
     'case.documents': 'documents',
+    'case.statusHeader': 'Status',
   },
 };
