@@ -64,7 +64,7 @@ const CasePage = () => {
       <Heading3 className={styles['case__sub-header']}>
         <FormattedMessage id="case.statusHeader" />
       </Heading3>
-      {!loading && <StatusHistory statuses={data?.getZaak.statusGeschiedenis} />}
+      <StatusHistory statuses={data?.getZaak.statusGeschiedenis} loading={loading} />
     </section>
   );
 };

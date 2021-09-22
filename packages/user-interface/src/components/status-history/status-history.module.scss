@@ -12,3 +12,15 @@
   border-color: var(--nlportal-status-history-border-color, hsl(0 0% 82%));
   border-radius: var(--nlportal-status-history-border-radius, 2px);
 }
+
+.skeleton-step {
+  display: flex;
+  flex-direction: row;
+  padding-block-end: var(--nlportal-skeleton-step-padding, 12px);
+  padding-block-start: var(--nlportal-skeleton-step-padding, 12px);
+  align-items: center;
+}
+
+.skeleton-step__circle {
+  padding-inline-end: var(--nlportal-skeleton-step-circle-padding, 12px);
+}
