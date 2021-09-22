@@ -11,6 +11,8 @@
   --nlportal-space-inline-lg: var(--denhaag-space-inline-lg);
   --nlportal-space-inline-md: var(--denhaag-space-inline-md);
   --nlportal-space-inline-xs: var(--denhaag-space-inline-xs);
+  --nlportal-z-index-background: 10;
+  --nlportal-z-index-page: 50;
   --nlportal-z-index-header: 100;
   --nlportal-z-index-menu: 200;
   --nlportal-max-page-width: 1024px;

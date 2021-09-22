@@ -5,6 +5,7 @@
 }
 
 .background-container {
+  z-index: var(--nlportal-z-index-background, 10);
   position: absolute;
   width: 100%;
   height: 100%;
@@ -20,6 +21,7 @@
 }
 
 .facet-container {
+  z-index: var(--nlportal-z-index-background, 10);
   width: 100%;
   height: var(--nlportal-status-history-facet-height, 8px);
   position: absolute;
@@ -36,6 +38,8 @@
 }
 
 .status-history {
+  position: relative;
+  z-index: var(--nlportal-z-index-page, 50);
   width: 100%;
   box-sizing: border-box;
   padding-block-start: var(--nlportal-space-block-3xl, 2.5rem);
