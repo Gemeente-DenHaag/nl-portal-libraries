@@ -3,16 +3,20 @@ import {FC, Fragment, ReactElement} from 'react';
 import {ZaakStatus} from '@nl-portal/api';
 import {Paragraph, Step, Timeline} from '@gemeente-denhaag/denhaag-component-library';
 import Skeleton from 'react-loading-skeleton';
+import {useIntl} from 'react-intl';
 import styles from './status-history.module.scss';
+import {stringToId} from '../../utils';
 
 interface StatusHistoryProps {
-  statuses: Array<ZaakStatus> | undefined;
+  caseId?: string;
+  statuses?: Array<ZaakStatus>;
   loading: boolean;
   facet?: ReactElement;
   background?: ReactElement;
 }
 
-const StatusHistory: FC<StatusHistoryProps> = ({statuses, loading, facet, background}) => {
+const StatusHistory: FC<StatusHistoryProps> = ({caseId, statuses, loading, facet, background}) => {
+  const intl = useIntl();
   const sortedStatuses = statuses
     ?.map(status => ({
       ...status,
@@ -51,7 +55,9 @@ const StatusHistory: FC<StatusHistoryProps> = ({statuses, loading, facet, backgr
             {sortedStatuses?.map(status => (
               <Step
                 key={status.statustype.omschrijving}
-                label={status.statustype.omschrijving}
+                label={intl.formatMessage({
+                  id: `case.${caseId}.status.${stringToId(status.statustype.omschrijving)}`,
+                })}
                 completed
               />
             ))}

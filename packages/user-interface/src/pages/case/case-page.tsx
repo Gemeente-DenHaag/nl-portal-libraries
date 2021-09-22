@@ -9,6 +9,7 @@ import {useMediaQuery, useQuery} from '../../hooks';
 import styles from './case-page.module.scss';
 import {MetaIcon, StatusHistory} from '../../components';
 import {BREAKPOINTS} from '../../constants';
+import {stringToId} from '../../utils';
 
 interface CasePageProps {
   statusHistoryFacet?: ReactElement;
@@ -55,7 +56,15 @@ const CasePage: FC<CasePageProps> = ({statusHistoryFacet, statusHistoryBackgroun
         <MetaIcon
           title={intl.formatMessage({id: 'case.status'})}
           subtitle={
-            (!loading && data?.getZaak.status?.statustype.omschrijving?.toLowerCase()) || ''
+            (!loading &&
+              intl
+                .formatMessage({
+                  id: `case.${data?.getZaak.zaaktype.identificatie}.status.${stringToId(
+                    data?.getZaak.status?.statustype.omschrijving || ''
+                  )}`,
+                })
+                .toLowerCase()) ||
+            ''
           }
           icon={<MegaphoneIcon />}
           showRightBorder={isMobile || isDesktop}
@@ -70,6 +79,7 @@ const CasePage: FC<CasePageProps> = ({statusHistoryFacet, statusHistoryBackgroun
         <FormattedMessage id="case.statusHeader" />
       </Heading3>
       <StatusHistory
+        caseId={data?.getZaak.zaaktype.identificatie}
         statuses={data?.getZaak.statusGeschiedenis}
         loading={loading}
         facet={statusHistoryFacet}
