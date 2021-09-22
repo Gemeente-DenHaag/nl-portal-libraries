@@ -38,7 +38,8 @@ After installing dependencies, start the project with `yarn run start` from the 
 This commands runs all the `start` scripts of each of the individual packages in the
 [packages](./packages) directory in parallel.
 
-Please note that on first run, all packages must have been built first. Please refer to the section below.
+Please note that on first run, all packages must have been built first. Please refer to the section
+below.
 
 _Tip: Packages can started individually by running `yarn run start` from their respective
 directories._
