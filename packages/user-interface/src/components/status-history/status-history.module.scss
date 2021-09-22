@@ -2,4 +2,13 @@
 
 .status-history {
   width: 100%;
+  box-sizing: border-box;
+  padding-block-start: var(--nlportal-space-block-3xl, 2.5rem);
+  padding-block-end: var(--nlportal-space-block-3xl, 2.5rem);
+  padding-inline-start: var( --nlportal-space-inline-2xl, 2rem);
+  padding-inline-end: var( --nlportal-space-inline-2xl, 2rem);
+  border-style: solid;
+  border-width: 1px;
+  border-color: var(--nlportal-status-history-border-color, hsl(0 0% 82%));
+  border-radius: var(--nlportal-status-history-border-radius, 2px);
 }

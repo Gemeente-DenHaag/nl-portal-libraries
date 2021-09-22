@@ -61,12 +61,10 @@ const CasePage = () => {
           icon={<DocumentIcon />}
         />
       </div>
-      <div className={styles.case__status}>
-        <Heading3>
-          <FormattedMessage id="case.statusHeader" />
-        </Heading3>
-        {!loading && <StatusHistory statuses={data?.getZaak.statusGeschiedenis} />}
-      </div>
+      <Heading3 className={styles['case__sub-header']}>
+        <FormattedMessage id="case.statusHeader" />
+      </Heading3>
+      {!loading && <StatusHistory statuses={data?.getZaak.statusGeschiedenis} />}
     </section>
   );
 };
