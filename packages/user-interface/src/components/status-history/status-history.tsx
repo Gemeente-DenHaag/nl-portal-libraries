@@ -58,13 +58,13 @@ const StatusHistory: FC<StatusHistoryProps> = ({caseId, statuses, loading, facet
       <div className={styles['status-history']}>
         {!loading && sortedStatuses ? (
           <Timeline activeStep={activeStep}>
-            {sortedStatuses?.map(status => (
+            {sortedStatuses?.map((status, index) => (
               <Step
                 key={status.statustype.omschrijving}
                 label={intl.formatMessage({
                   id: `case.${caseId}.status.${stringToId(status.statustype.omschrijving)}`,
                 })}
-                completed
+                completed={index !== activeStep}
               />
             ))}
           </Timeline>
