@@ -57,7 +57,7 @@ const StatusHistory: FC<StatusHistoryProps> = ({caseId, statuses, loading, facet
       )}
       <div className={styles['status-history']}>
         {!loading && sortedStatuses ? (
-          <Timeline activeStep={activeStep}>
+          <Timeline activeStep={activeStep} className={styles['status-history__timeline']}>
             {sortedStatuses?.map((status, index) => (
               <Step
                 key={status.statustype.omschrijving}

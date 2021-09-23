@@ -53,6 +53,10 @@
   border-radius: var(--nlportal-status-history-border-radius, 2px);
 }
 
+.status-history__timeline {
+  background: none;
+}
+
 .skeleton-step {
   display: flex;
   flex-direction: row;
