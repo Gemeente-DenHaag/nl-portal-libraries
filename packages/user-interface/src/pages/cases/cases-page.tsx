@@ -1,4 +1,5 @@
 import * as React from 'react';
+import {Fragment, useEffect, useState} from 'react';
 import {
   Heading2,
   Card,
@@ -9,11 +10,11 @@ import {
   Paragraph,
 } from '@gemeente-denhaag/denhaag-component-library';
 import {FormattedMessage, useIntl} from 'react-intl';
-import {useEffect, useState} from 'react';
-import {useHistory} from 'react-router-dom';
+import {useHistory, useLocation} from 'react-router-dom';
 import {useGetZakenQuery} from '@nl-portal/api';
+import Skeleton from 'react-loading-skeleton';
 import styles from './cases-page.module.scss';
-import {useMediaQuery} from '../../hooks';
+import {useMediaQuery, useQuery} from '../../hooks';
 import {BREAKPOINTS} from '../../constants';
 
 const CasesPage = () => {
@@ -21,7 +22,11 @@ const CasesPage = () => {
   const intl = useIntl();
   const isTablet = useMediaQuery(BREAKPOINTS.TABLET);
   const getCaseUrl = (id: string) => `/zaken/zaak?id=${id}`;
+  const TAB_QUERY_PARAM = 'tab';
+  const location = useLocation();
   const history = useHistory();
+  const query = useQuery();
+  const queryTab = Number(query.get(TAB_QUERY_PARAM));
   const {data, loading, refetch} = useGetZakenQuery();
 
   const getCaseCards = (completed: boolean) =>
@@ -54,9 +59,42 @@ const CasesPage = () => {
     return cards.length > 0 ? cards : getNoDataMessage(completed);
   };
 
+  const getSkeleton = () => {
+    const getSkeletonCard = (key: number) => (
+      <div
+        className={styles.cases__card}
+        key={key}
+        aria-busy
+        aria-disabled
+        aria-label={intl.formatMessage({id: 'element.loading'})}
+      >
+        <Skeleton height={220} />
+      </div>
+    );
+
+    return (
+      <Fragment>
+        {getSkeletonCard(0)}
+        {getSkeletonCard(1)}
+      </Fragment>
+    );
+  };
+
   useEffect(() => {
     refetch();
   }, []);
+
+  useEffect(() => {
+    if (queryTab !== tabNumber) {
+      history.push(`${location.pathname}?${TAB_QUERY_PARAM}=${tabNumber}`);
+    }
+  }, [tabNumber]);
+
+  useEffect(() => {
+    if (queryTab && queryTab !== tabNumber) {
+      setTabNumber(queryTab);
+    }
+  }, [queryTab]);
 
   return (
     <section className={styles.cases}>
@@ -65,26 +103,26 @@ const CasesPage = () => {
           <FormattedMessage id="pageTitles.cases" />
         </Heading2>
       </header>
-      {!loading && (
-        <TabContext value={tabNumber.toString()}>
-          <Tabs
-            variant={isTablet ? 'standard' : 'fullWidth'}
-            value={tabNumber}
-            onChange={(_event: React.ChangeEvent<unknown>, newValue: number) => {
-              setTabNumber(newValue);
-            }}
-          >
-            <Tab label={intl.formatMessage({id: 'pageTitles.cases'})} value={0} />
-            <Tab label={intl.formatMessage({id: 'titles.completedCases'})} value={1} />
-          </Tabs>
-          <TabPanel value="0">
-            <div className={styles.cases__cards}>{getTabContent(false)}</div>
-          </TabPanel>
-          <TabPanel value="1">
-            <div className={styles.cases__cards}>{getTabContent(true)}</div>
-          </TabPanel>
-        </TabContext>
-      )}
+      <TabContext value={tabNumber.toString()}>
+        <Tabs
+          variant={isTablet ? 'standard' : 'fullWidth'}
+          value={tabNumber}
+          onChange={(_event: React.ChangeEvent<unknown>, newValue: number) => {
+            setTabNumber(newValue);
+          }}
+        >
+          <Tab label={intl.formatMessage({id: 'pageTitles.cases'})} value={0} />
+          <Tab label={intl.formatMessage({id: 'titles.completedCases'})} value={1} />
+        </Tabs>
+        <TabPanel value="0">
+          <div className={styles.cases__cards}>
+            {loading ? getSkeleton() : getTabContent(false)}
+          </div>
+        </TabPanel>
+        <TabPanel value="1">
+          <div className={styles.cases__cards}>{loading ? getSkeleton() : getTabContent(true)}</div>
+        </TabPanel>
+      </TabContext>
     </section>
   );
 };

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {StylesProvider} from '@gemeente-denhaag/denhaag-component-library';
-import {FC, ReactElement, useContext} from 'react';
+import {FC, Fragment, ReactElement, useContext} from 'react';
 import {BrowserRouter as Router, Switch, Route, Redirect} from 'react-router-dom';
 import {Header} from '../header';
 import {Menu} from '../menu';
@@ -10,6 +10,7 @@ import {Page} from '../page';
 import {Footer} from '../footer';
 import {LayoutProvider} from '../../providers';
 import {LayoutContext} from '../../contexts';
+import {LinkToParent} from '../link-to-parent';
 
 interface LayoutComponentProps {
   pages: Array<PortalPage>;
@@ -40,14 +41,19 @@ const LayoutComponent: FC<LayoutComponentProps> = ({headerLogo, facet, pages, fo
                   ...(page.children
                     ? page.children.map(childPage => (
                         <Route key={childPage.path} path={`${page.path}${childPage.path}`}>
-                          <Page page={childPage}>{childPage.pageComponent}</Page>
+                          <Page page={childPage}>
+                            <Fragment>
+                              <LinkToParent parentPage={page} />
+                              {childPage.pageComponent}
+                            </Fragment>
+                          </Page>
                         </Route>
                       ))
                     : []),
                 ],
                 []
               )}
-              <Route render={() => <Redirect to="/" />} />
+              <Route render={() => <Redirect to={sessionStorage.getItem('entryUrl') || '/'} />} />
             </Switch>
           </div>
         </div>

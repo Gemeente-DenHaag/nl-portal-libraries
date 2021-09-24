@@ -61,6 +61,12 @@
   height: 100%;
 }
 
+.header__logo-link {
+  &:focus {
+    outline: var(--nlportal-focus-border, 2px solid hsl(47 100% 40%));
+  }
+}
+
 .header__elements-desktop {
   display: none;
   align-items: center;

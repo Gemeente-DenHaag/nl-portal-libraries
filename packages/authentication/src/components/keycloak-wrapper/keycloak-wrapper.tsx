@@ -41,6 +41,15 @@ const KeycloakProvider: FC<KeycloakWrapperProps> = ({
 
 const KeycloakWrapper: FC<KeycloakWrapperProps> = props => {
   const [keycloakToken, setKeycloakToken] = useState('');
+  const ENTRY_URL_KEY = 'entryUrl';
+  const entryUrl = sessionStorage.getItem(ENTRY_URL_KEY);
+
+  if (!entryUrl) {
+    const {host, href} = window.location;
+    const splitHref = href.split(host);
+    const entryUrlPart = splitHref[1];
+    sessionStorage.setItem(ENTRY_URL_KEY, !entryUrlPart.includes('keycloak') ? entryUrlPart : '/');
+  }
 
   return (
     <KeycloakContext.Provider

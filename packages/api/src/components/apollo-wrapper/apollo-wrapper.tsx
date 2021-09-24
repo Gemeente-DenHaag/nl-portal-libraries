@@ -34,7 +34,7 @@ const ApolloWrapper: FC<ApolloWrapperProps> = ({children, uri}) => {
     client.setLink(getLink(keycloakToken));
   }, [keycloakToken]);
 
-  return <ApolloProvider client={client}>{children}</ApolloProvider>;
+  return keycloakToken ? <ApolloProvider client={client}>{children}</ApolloProvider> : null;
 };
 
 export {ApolloWrapper};

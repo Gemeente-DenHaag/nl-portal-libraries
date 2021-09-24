@@ -17,5 +17,11 @@ export const NL_NL_MESSAGES: Messages = {
     'titles.completedCases': 'Afgeronde zaken',
     'cases.noOpenCases': 'Er zijn geen lopende zaken.',
     'cases.noClosedCases': 'Er zijn geen afgeronde zaken.',
+    'case.caseNumber': 'zaaknummer',
+    'case.creationDate': 'aanvraagdatum',
+    'case.status': 'status',
+    'case.documents': 'documenten',
+    'case.statusHeader': 'Status',
+    'element.loading': 'Aan het laden',
   },
 };

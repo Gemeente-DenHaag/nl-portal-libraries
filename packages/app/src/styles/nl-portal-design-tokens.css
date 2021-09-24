@@ -11,6 +11,8 @@
   --nlportal-space-inline-lg: var(--denhaag-space-inline-lg);
   --nlportal-space-inline-md: var(--denhaag-space-inline-md);
   --nlportal-space-inline-xs: var(--denhaag-space-inline-xs);
+  --nlportal-z-index-background: 10;
+  --nlportal-z-index-page: 50;
   --nlportal-z-index-header: 100;
   --nlportal-z-index-menu: 200;
   --nlportal-max-page-width: 1024px;
@@ -40,6 +42,18 @@
   --nlportal-mobile-menu-background-color: var(--denhaag-color-grey-1);
   --nlportal-mobile-menu-font-color: var(--denhaag-color-green-3);
   --nlportal-mobile-menu-font-weight: var(--denhaag-menu-button-active-font-weight);
+  --nlportal-meta-icon-line-height: 1.5rem;
+  --nlportal-meta-icon-font-weight-bold: 700;
+  --nlportal-meta-icon-size: 2rem;
+  --nlportal-meta-icon-color: var(--denhaag-color-blue-3);
+  --nlportal-meta-icon-border-color: var(--denhaag-color-grey-2);
+  --nlportal-status-history-border-color: var(--denhaag-color-grey-2);
+  --nlportal-status-history-border-radius: 2px;
+  --nlportal-status-history-facet-height: 8px;
+  --nlportal-status-history-box-shadow: 0px 4px 4px 0px hsla(0, 0%, 0%, 0.1);
+  --nlportal-skeleton-step-padding: var(--denhaag-timeline-step-padding);
+  --nlportal-skeleton-step-circle-padding: var(--denhaag-timeline-step-icon-padding);
+  --nlportal-focus-border: var(--denhaag-focus-border);
   --utrecht-heading-color: var(--denhaag-color-blue-3);
   --denhaag-menu-button-font-size: var(--denhaag-typography-scale-lg-font-size);
   --denhaag-menu-button-line-height: var(--denhaag-typography-scale-xl-font-size);

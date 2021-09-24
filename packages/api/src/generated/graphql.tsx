@@ -107,6 +107,8 @@ export type Query = {
   getCaseInstance?: Maybe<CaseInstance>;
   /** find single form definition from repository */
   getFormDefinition?: Maybe<FormDefinition>;
+  /** Gets a zaak by id */
+  getZaak: Zaak;
   /** Gets all zaken for the user */
   getZaken: Array<Zaak>;
 };
@@ -134,6 +136,11 @@ export type QueryGetCaseInstanceArgs = {
 
 export type QueryGetFormDefinitionArgs = {
   name: Scalars['String'];
+};
+
+
+export type QueryGetZaakArgs = {
+  id: Scalars['UUID'];
 };
 
 
@@ -166,6 +173,7 @@ export type TaskInstance = {
 
 export type Zaak = {
   __typename?: 'Zaak';
+  identificatie: Scalars['String'];
   omschrijving: Scalars['String'];
   startdatum: Scalars['Date'];
   status?: Maybe<ZaakStatus>;
@@ -192,12 +200,75 @@ export type ZaakType = {
   omschrijving: Scalars['String'];
 };
 
+export type GetZaakQueryVariables = Exact<{
+  id: Scalars['UUID'];
+}>;
+
+
+export type GetZaakQuery = { __typename?: 'Query', getZaak: { __typename?: 'Zaak', uuid: any, omschrijving: string, identificatie: string, startdatum: any, zaaktype: { __typename?: 'ZaakType', identificatie: string, omschrijving: string }, status?: Maybe<{ __typename?: 'ZaakStatus', datumStatusGezet: string, statustype: { __typename?: 'ZaakStatusType', omschrijving: string, isEindstatus: boolean } }>, statusGeschiedenis: Array<{ __typename?: 'ZaakStatus', datumStatusGezet: string, statustype: { __typename?: 'ZaakStatusType', omschrijving: string, isEindstatus: boolean } }> } };
+
 export type GetZakenQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type GetZakenQuery = { __typename?: 'Query', getZaken: Array<{ __typename?: 'Zaak', uuid: any, omschrijving: string, startdatum: any, zaaktype: { __typename?: 'ZaakType', identificatie: string }, status?: Maybe<{ __typename?: 'ZaakStatus', statustype: { __typename?: 'ZaakStatusType', isEindstatus: boolean } }> }> };
 
 
+export const GetZaakDocument = gql`
+    query GetZaak($id: UUID!) {
+  getZaak(id: $id) {
+    uuid
+    omschrijving
+    identificatie
+    zaaktype {
+      identificatie
+      omschrijving
+    }
+    startdatum
+    status {
+      datumStatusGezet
+      statustype {
+        omschrijving
+        isEindstatus
+      }
+    }
+    statusGeschiedenis {
+      datumStatusGezet
+      statustype {
+        omschrijving
+        isEindstatus
+      }
+    }
+  }
+}
+    `;
+
+/**
+ * __useGetZaakQuery__
+ *
+ * To run a query within a React component, call `useGetZaakQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetZaakQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetZaakQuery({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useGetZaakQuery(baseOptions: Apollo.QueryHookOptions<GetZaakQuery, GetZaakQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetZaakQuery, GetZaakQueryVariables>(GetZaakDocument, options);
+      }
+export function useGetZaakLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetZaakQuery, GetZaakQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetZaakQuery, GetZaakQueryVariables>(GetZaakDocument, options);
+        }
+export type GetZaakQueryHookResult = ReturnType<typeof useGetZaakQuery>;
+export type GetZaakLazyQueryHookResult = ReturnType<typeof useGetZaakLazyQuery>;
+export type GetZaakQueryResult = Apollo.QueryResult<GetZaakQuery, GetZaakQueryVariables>;
 export const GetZakenDocument = gql`
     query GetZaken {
   getZaken {
