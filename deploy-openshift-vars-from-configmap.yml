@@ -18,26 +18,31 @@ spec:
           image: >-
             denhaag.azurecr.io/nl-portal:latest
           env:
-          - name: KEYCLOAK_URL
-            valueFrom:
-              configMapKeyRef:
-                name: nl-portal
-                key: KEYCLOAK_URL
-          - name: KEYCLOAK_REALM
-            valueFrom:
-              configMapKeyRef:
-                name: nl-portal
-                key: KEYCLOAK_REALM
-          - name: KEYCLOAK_CLIENT_ID
-            valueFrom:
-              configMapKeyRef:
-                name: nl-portal
-                key: KEYCLOAK_CLIENT_ID
-          - name: KEYCLOAK_REDIRECT_URI
-            valueFrom:
-              configMapKeyRef:
-                name: nl-portal
-                key: KEYCLOAK_REDIRECT_URI
+            - name: KEYCLOAK_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: nl-portal
+                  key: KEYCLOAK_URL
+            - name: KEYCLOAK_REALM
+              valueFrom:
+                configMapKeyRef:
+                  name: nl-portal
+                  key: KEYCLOAK_REALM
+            - name: KEYCLOAK_CLIENT_ID
+              valueFrom:
+                configMapKeyRef:
+                  name: nl-portal
+                  key: KEYCLOAK_CLIENT_ID
+            - name: KEYCLOAK_REDIRECT_URI
+              valueFrom:
+                configMapKeyRef:
+                  name: nl-portal
+                  key: KEYCLOAK_REDIRECT_URI
+            - name: GRAPHQL_URI
+              valueFrom:
+                configMapKeyRef:
+                  name: nl-portal
+                  key: GRAPHQL_URI
       imagePullSecrets:
         - name: az-acr-nlportal-secret
 ---
@@ -49,7 +54,7 @@ spec:
   selector:
     app: nl-portal
   ports:
-   - port: 3000
-     protocol: TCP
-     targetPort: 3000
-     name: http
+    - port: 3000
+      protocol: TCP
+      targetPort: 3000
+      name: http

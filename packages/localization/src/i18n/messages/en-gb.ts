@@ -15,5 +15,7 @@ export const EN_GB_MESSAGES: Messages = {
     'menu.close': 'Close menu',
     'menu.open': 'Open menu',
     'titles.completedCases': 'Closed cases',
+    'cases.noOpenCases': 'There are no current cases.',
+    'cases.noClosedCases': 'There are no closed cases.',
   },
 };

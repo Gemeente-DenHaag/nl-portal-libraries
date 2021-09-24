@@ -36,3 +36,8 @@
     width: calc(50% - var(--nlportal-space-inline-md, 1rem));
   }
 }
+
+.cases__no-data-message {
+  width: 100%;
+  text-align: center;
+}
