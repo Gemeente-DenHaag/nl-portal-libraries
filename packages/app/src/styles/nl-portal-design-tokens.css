@@ -53,6 +53,7 @@
   --nlportal-status-history-box-shadow: 0px 4px 4px 0px hsla(0, 0%, 0%, 0.1);
   --nlportal-skeleton-step-padding: var(--denhaag-timeline-step-padding);
   --nlportal-skeleton-step-circle-padding: var(--denhaag-timeline-step-icon-padding);
+  --nlportal-focus-border: var(--denhaag-focus-border);
   --utrecht-heading-color: var(--denhaag-color-blue-3);
   --denhaag-menu-button-font-size: var(--denhaag-typography-scale-lg-font-size);
   --denhaag-menu-button-line-height: var(--denhaag-typography-scale-xl-font-size);

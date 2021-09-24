@@ -103,6 +103,7 @@ const Header: FC<HeaderProps> = ({logo, facet, homePage}) => {
                   to={homePage.path}
                   hrefLang={hrefLang}
                   title={intl.formatMessage({id: `pageTitles.${homePage.titleTranslationKey}`})}
+                  className={styles['header__logo-link']}
                 >
                   {headerLogoElement}
                 </Link>
