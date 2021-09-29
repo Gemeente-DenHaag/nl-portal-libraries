@@ -9,6 +9,7 @@ export const EN_GB_MESSAGES: Messages = {
     'pageTitles.cases': 'Current cases',
     'pageTitles.notifications': 'My messages',
     'pageTitles.themes': 'Themes',
+    'pageTitles.form': 'Form',
     'header.logout': 'Log out',
     'header.welcome': 'Welcome {userName}',
     'header.menuButton': 'Menu',

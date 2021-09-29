@@ -9,6 +9,7 @@ export const NL_NL_MESSAGES: Messages = {
     'pageTitles.cases': 'Lopende zaken',
     'pageTitles.notifications': 'Mijn berichten',
     'pageTitles.themes': "Thema's",
+    'pageTitles.form': 'Formulier',
     'header.logout': 'Uitloggen',
     'header.welcome': 'Welkom {userName}',
     'header.menuButton': 'Menu',

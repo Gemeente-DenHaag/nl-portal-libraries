@@ -11,6 +11,7 @@ import {
   ThemesPage,
   CasePage,
   PortalFooter,
+  FormPage,
 } from '@nl-portal/user-interface';
 import {KeycloakWrapper} from '@nl-portal/authentication';
 import {LocalizationProvider} from '@nl-portal/localization';
@@ -66,6 +67,13 @@ const pages: Array<PortalPage> = [
     path: '/themas',
     titleTranslationKey: 'themes',
     showInMenu: true,
+  },
+  {
+    icon: <DocumentIcon />,
+    pageComponent: <FormPage />,
+    path: '/formulier',
+    titleTranslationKey: 'form',
+    showInMenu: false,
   },
 ];
 
