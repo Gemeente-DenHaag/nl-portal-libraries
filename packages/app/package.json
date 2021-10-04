@@ -4,8 +4,8 @@
   "author": "Municipality of The Hague",
   "license": "EUPL-1.2",
   "dependencies": {
-    "@gemeente-denhaag/design-tokens-components": "0.2.3-alpha.29",
-    "@gemeente-denhaag/icons": "0.2.3-alpha.29",
+    "@gemeente-denhaag/design-tokens-components": "0.2.3-alpha.34",
+    "@gemeente-denhaag/icons": "0.2.3-alpha.34",
     "@nl-portal/authentication": "0.1.0",
     "@nl-portal/localization": "0.1.0",
     "@nl-portal/user-interface": "0.1.0",
