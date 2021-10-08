@@ -23,6 +23,7 @@ export const EN_GB_MESSAGES: Messages = {
     'case.status': 'status',
     'case.documents': 'documents',
     'case.statusHeader': 'Status',
+    'case.fetchError': 'There was an error, try again later.',
     'element.loading': 'Loading',
   },
 };
