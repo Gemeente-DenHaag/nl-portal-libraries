@@ -17,6 +17,7 @@ export const NL_NL_MESSAGES: Messages = {
     'titles.completedCases': 'Afgeronde zaken',
     'cases.noOpenCases': 'Er zijn geen lopende zaken.',
     'cases.noClosedCases': 'Er zijn geen afgeronde zaken.',
+    'cases.fetchError': 'Er is een fout opgetreden, probeer het later nogmaals.',
     'case.caseNumber': 'zaaknummer',
     'case.creationDate': 'aanvraagdatum',
     'case.status': 'status',
