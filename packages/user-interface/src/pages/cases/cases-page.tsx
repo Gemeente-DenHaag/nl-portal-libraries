@@ -27,7 +27,7 @@ const CasesPage = () => {
   const history = useHistory();
   const query = useQuery();
   const queryTab = Number(query.get(TAB_QUERY_PARAM));
-  const {data, loading, refetch} = useGetZakenQuery();
+  const {data, loading, error, refetch} = useGetZakenQuery();
 
   const getCaseCards = (completed: boolean) =>
     data?.getZaken
@@ -54,8 +54,17 @@ const CasesPage = () => {
     </Paragraph>
   );
 
+  const getErrorMessage = () => (
+    <Paragraph>
+      <FormattedMessage id="cases.fetchError" />
+    </Paragraph>
+  );
+
   const getTabContent = (completed: boolean) => {
     const cards = getCaseCards(completed);
+    if (error) {
+      return getErrorMessage();
+    }
     return cards.length > 0 ? cards : getNoDataMessage(completed);
   };
 
