@@ -4,7 +4,7 @@ import {Link as RouterLink} from 'react-router-dom';
 import {FormattedMessage} from 'react-intl';
 import {LocaleContext} from '@nl-portal/localization';
 import {Link} from '@gemeente-denhaag/denhaag-component-library';
-import {ChevronUpIcon} from '@gemeente-denhaag/icons';
+import {ChevronLeftIcon} from '@gemeente-denhaag/icons';
 import styles from './link-to-parent.module.scss';
 import {PortalPage} from '../../interfaces';
 
@@ -20,7 +20,7 @@ const LinkToParent: FC<LinkToParentProps> = ({parentPage}) => {
       <Link
         component={RouterLink}
         to={parentPage.path}
-        icon={<ChevronUpIcon />}
+        icon={<ChevronLeftIcon />}
         iconAlign="start"
         hrefLang={hrefLang}
       >
