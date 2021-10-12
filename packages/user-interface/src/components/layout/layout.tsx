@@ -40,10 +40,10 @@ const LayoutComponent: FC<LayoutComponentProps> = ({headerLogo, facet, pages, fo
                   </Route>,
                   ...(page.children
                     ? page.children.map(childPage => (
-                        <Route key={childPage.path} path={`${page.path}${childPage.path}`}>
+                        <Route exact key={childPage.path} path={`${page.path}${childPage.path}`}>
                           <Page page={childPage}>
                             <Fragment>
-                              <LinkToParent parentPage={page} />
+                              {childPage.showLinkToParent && <LinkToParent parentPage={page} />}
                               {childPage.pageComponent}
                             </Fragment>
                           </Page>
