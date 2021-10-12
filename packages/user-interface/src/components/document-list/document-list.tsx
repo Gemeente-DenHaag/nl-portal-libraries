@@ -11,13 +11,12 @@ interface DocumentListProps {
 const DocumentList: FC<DocumentListProps> = ({documents}) => (
   <Fragment>
     {documents.map(document => (
-      <div className={styles.document}>
+      <div className={styles.document} key={`${document.name}${document.size}`}>
         <Document
           extension={document.extension}
           name={document.name}
           size={document.size}
           url={document.url}
-          key={`${document.name}${document.size}`}
         />
       </div>
     ))}
