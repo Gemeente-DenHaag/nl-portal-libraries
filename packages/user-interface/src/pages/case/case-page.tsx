@@ -7,9 +7,10 @@ import Skeleton from 'react-loading-skeleton';
 import {ArchiveIcon, CalendarIcon, DocumentIcon, MegaphoneIcon} from '@gemeente-denhaag/icons';
 import {useMediaQuery, useQuery} from '../../hooks';
 import styles from './case-page.module.scss';
-import {MetaIcon, StatusHistory} from '../../components';
+import {DocumentList, MetaIcon, StatusHistory} from '../../components';
 import {BREAKPOINTS} from '../../constants';
 import {stringToId} from '../../utils';
+import {getMockDocuments} from '../../mock';
 
 interface CasePageProps {
   statusHistoryFacet?: ReactElement;
@@ -95,9 +96,18 @@ const CasePage: FC<CasePageProps> = ({statusHistoryFacet, statusHistoryBackgroun
               background={statusHistoryBackground}
             />
           </div>
-          <Heading3 className={styles['case__sub-header']}>
-            <FormattedMessage id="case.documentsHeader" />
-          </Heading3>
+          <div className={styles.case__documents}>
+            <Heading3 className={styles['case__sub-header']}>
+              <FormattedMessage id="case.documentsHeader" />
+            </Heading3>
+            <DocumentList
+              documents={
+                loading
+                  ? [{name: undefined, size: undefined, url: undefined, extension: undefined}]
+                  : getMockDocuments()
+              }
+            />
+          </div>
         </Fragment>
       ) : (
         <Paragraph>
