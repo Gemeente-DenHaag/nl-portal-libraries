@@ -59,7 +59,8 @@
   --nlportal-document-border-style: solid;
   --nlportal-document-border-color: var(--denhaag-color-grey-2);
   --nlportal-document-border-radius: 3px;
-  --nlportal-document-border: var(--nlportal-document-border-width) var(--nlportal-document-border-style) var(--nlportal-document-border-color);
+  --nlportal-document-border: var(--nlportal-document-border-width)
+    var(--nlportal-document-border-style) var(--nlportal-document-border-color);
   --nlportal-document-icon-color: var(--denhaag-color-grey-4);
   --nlportal-document-icon-background-color: var(--denhaag-color-grey-1);
   --utrecht-heading-color: var(--denhaag-color-blue-3);
