@@ -9,4 +9,5 @@ export interface PortalPage {
   showMessagesCount?: boolean;
   icon?: ReactElement;
   children?: Array<PortalPage>;
+  showLinkToParent?: boolean;
 }
