@@ -140,7 +140,6 @@ const CasePage: FC<CasePageProps> = ({statusHistoryFacet, statusHistoryBackgroun
       ) : (
         <Paragraph>
           <FormattedMessage id="case.fetchError" />
-          test
         </Paragraph>
       )}
     </section>
