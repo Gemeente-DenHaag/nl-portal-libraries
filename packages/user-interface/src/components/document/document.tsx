@@ -4,7 +4,7 @@ import {DocumentIcon, ExternalLinkIcon} from '@gemeente-denhaag/icons';
 import {Link, Paragraph} from '@gemeente-denhaag/denhaag-component-library';
 import classNames from 'classnames';
 import Skeleton from 'react-loading-skeleton';
-import {FormattedMessage} from 'react-intl';
+import {FormattedMessage, useIntl} from 'react-intl';
 import {PortalDocument} from '../../interfaces';
 import styles from './document.module.scss';
 import {useMediaQuery} from '../../hooks';
@@ -14,6 +14,7 @@ type DocumentProps = Partial<PortalDocument>;
 
 const Document: FC<DocumentProps> = ({url, extension, name, size}) => {
   const isDesktop = useMediaQuery(BREAKPOINTS.DESKTOP);
+  const intl = useIntl();
 
   return (
     <div className={styles.document}>
@@ -26,7 +27,13 @@ const Document: FC<DocumentProps> = ({url, extension, name, size}) => {
         })}
       >
         <Paragraph className={styles['document__file-name']}>
-          {name ? `${name} (${extension}, ${size}kb)` : <Skeleton width={250} />}
+          {name ? (
+            `${name} (${extension}, ${size}kb)`
+          ) : (
+            <span aria-busy aria-disabled aria-label={intl.formatMessage({id: 'element.loading'})}>
+              <Skeleton width={250} />
+            </span>
+          )}
         </Paragraph>
         {url !== undefined ? (
           <Link iconAlign="start" icon={<ExternalLinkIcon />} href={url}>
@@ -34,7 +41,9 @@ const Document: FC<DocumentProps> = ({url, extension, name, size}) => {
           </Link>
         ) : (
           <Link iconAlign="start" disabled icon={<ExternalLinkIcon />} href="/">
-            <Skeleton width={65} />
+            <span aria-busy aria-disabled aria-label={intl.formatMessage({id: 'element.loading'})}>
+              <Skeleton width={65} />
+            </span>
           </Link>
         )}
       </div>
