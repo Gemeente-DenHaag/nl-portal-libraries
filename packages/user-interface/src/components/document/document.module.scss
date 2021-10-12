@@ -12,7 +12,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 100%;
 }
 
 .document__icon {
@@ -21,4 +20,26 @@
   margin-inline-end: var(--nlportal-space-inline-lg, 1.25rem);
   margin-block-start: var(--nlportal-space-block-lg, 1.25rem);
   margin-block-end: var(--nlportal-space-block-lg, 1.25rem);
+}
+
+.document__content {
+  display: flex;
+  flex-direction: column;
+  padding-inline-start: var(--nlportal-space-inline-md, 1rem);
+  padding-inline-end: var(--nlportal-space-inline-md, 1rem);
+  padding-block-start: var(--nlportal-space-block-md, 1rem);
+  padding-block-end: var(--nlportal-space-block-md, 1rem);
+  overflow: hidden;
+}
+
+.document__content--desktop {
+  justify-content: space-between;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+}
+
+.document__file-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
