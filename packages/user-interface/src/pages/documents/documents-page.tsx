@@ -4,8 +4,9 @@ import {FormattedMessage, useIntl} from 'react-intl';
 import {Fragment, useEffect} from 'react';
 import {Heading2} from '@gemeente-denhaag/denhaag-component-library';
 import {useQuery} from '../../hooks';
-import {LinkToParent} from '../../components';
+import {DocumentList, LinkToParent} from '../../components';
 import styles from './documents-page.module.scss';
+import {getMockDocuments} from '../../mock';
 
 const DocumentsPage = () => {
   const query = useQuery();
@@ -31,11 +32,12 @@ const DocumentsPage = () => {
         routePath={getCaseUrl(id || '')}
       />
       <section className={styles.documents}>
-        <header className={styles.case__header}>
+        <header className={styles.documents__header}>
           <Heading2>
             <FormattedMessage id="pageTitles.documents" />
           </Heading2>
         </header>
+        <DocumentList documents={loading ? undefined : getMockDocuments()} />
       </section>
     </Fragment>
   );

@@ -134,13 +134,7 @@ const CasePage: FC<CasePageProps> = ({statusHistoryFacet, statusHistoryBackgroun
                 </Link>
               </div>
             </div>
-            <DocumentList
-              documents={
-                loading
-                  ? [{name: undefined, size: undefined, url: undefined, extension: undefined}]
-                  : getMockDocuments(3)
-              }
-            />
+            <DocumentList documents={loading ? undefined : getMockDocuments(3)} />
           </div>
         </Fragment>
       ) : (
