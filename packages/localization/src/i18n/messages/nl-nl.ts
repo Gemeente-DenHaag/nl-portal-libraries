@@ -24,7 +24,9 @@ export const NL_NL_MESSAGES: Messages = {
     'case.documents': 'documenten',
     'case.statusHeader': 'Status',
     'case.documentsHeader': 'Documenten',
+    'case.showAllDocuments': 'Toon alle documenten',
     'case.fetchError': 'Er is een fout opgetreden, probeer het later nogmaals.',
     'element.loading': 'Aan het laden',
+    'element.download': 'Download',
   },
 };
