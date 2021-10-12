@@ -11,6 +11,7 @@ import {
   ThemesPage,
   CasePage,
   PortalFooter,
+  DocumentsPage,
 } from '@nl-portal/user-interface';
 import {KeycloakWrapper} from '@nl-portal/authentication';
 import {LocalizationProvider} from '@nl-portal/localization';
@@ -60,7 +61,7 @@ const pages: Array<PortalPage> = [
       },
       {
         icon: <ArchiveIcon />,
-        pageComponent: <NotificationsPage />,
+        pageComponent: <DocumentsPage />,
         path: '/zaak/documenten',
         titleTranslationKey: 'cases',
       },
