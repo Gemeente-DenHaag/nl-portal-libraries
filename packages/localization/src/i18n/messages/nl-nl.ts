@@ -23,6 +23,7 @@ export const NL_NL_MESSAGES: Messages = {
     'case.status': 'status',
     'case.documents': 'documenten',
     'case.statusHeader': 'Status',
+    'case.documentsHeader': 'Documenten',
     'case.fetchError': 'Er is een fout opgetreden, probeer het later nogmaals.',
     'element.loading': 'Aan het laden',
   },

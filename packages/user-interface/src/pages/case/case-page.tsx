@@ -83,20 +83,26 @@ const CasePage: FC<CasePageProps> = ({statusHistoryFacet, statusHistoryBackgroun
               icon={<DocumentIcon />}
             />
           </div>
+          <div className={styles.case__status}>
+            <Heading3 className={styles['case__sub-header']}>
+              <FormattedMessage id="case.statusHeader" />
+            </Heading3>
+            <StatusHistory
+              caseId={data?.getZaak.zaaktype.identificatie}
+              statuses={data?.getZaak.statusGeschiedenis}
+              loading={loading}
+              facet={statusHistoryFacet}
+              background={statusHistoryBackground}
+            />
+          </div>
           <Heading3 className={styles['case__sub-header']}>
-            <FormattedMessage id="case.statusHeader" />
+            <FormattedMessage id="case.documentsHeader" />
           </Heading3>
-          <StatusHistory
-            caseId={data?.getZaak.zaaktype.identificatie}
-            statuses={data?.getZaak.statusGeschiedenis}
-            loading={loading}
-            facet={statusHistoryFacet}
-            background={statusHistoryBackground}
-          />
         </Fragment>
       ) : (
         <Paragraph>
           <FormattedMessage id="case.fetchError" />
+          test
         </Paragraph>
       )}
     </section>
