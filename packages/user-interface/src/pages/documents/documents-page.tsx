@@ -1,9 +1,11 @@
 import * as React from 'react';
 import {useGetDocumentenQuery} from '@nl-portal/api';
-import {useIntl} from 'react-intl';
-import {useEffect} from 'react';
+import {FormattedMessage, useIntl} from 'react-intl';
+import {Fragment, useEffect} from 'react';
+import {Heading2} from '@gemeente-denhaag/denhaag-component-library';
 import {useQuery} from '../../hooks';
 import {LinkToParent} from '../../components';
+import styles from './documents-page.module.scss';
 
 const DocumentsPage = () => {
   const query = useQuery();
@@ -19,7 +21,7 @@ const DocumentsPage = () => {
   }, []);
 
   return (
-    <div>
+    <Fragment>
       <LinkToParent
         text={
           !loading
@@ -28,7 +30,14 @@ const DocumentsPage = () => {
         }
         routePath={getCaseUrl(id || '')}
       />
-    </div>
+      <section className={styles.documents}>
+        <header className={styles.case__header}>
+          <Heading2>
+            <FormattedMessage id="pageTitles.documents" />
+          </Heading2>
+        </header>
+      </section>
+    </Fragment>
   );
 };
 export {DocumentsPage};
