@@ -4,6 +4,7 @@ import {DocumentIcon, ExternalLinkIcon} from '@gemeente-denhaag/icons';
 import {Link, Paragraph} from '@gemeente-denhaag/denhaag-component-library';
 import classNames from 'classnames';
 import Skeleton from 'react-loading-skeleton';
+import {FormattedMessage} from 'react-intl';
 import {PortalDocument} from '../../interfaces';
 import styles from './document.module.scss';
 import {useMediaQuery} from '../../hooks';
@@ -29,7 +30,7 @@ const Document: FC<DocumentProps> = ({url, extension, name, size}) => {
         </Paragraph>
         {url !== undefined ? (
           <Link iconAlign="start" icon={<ExternalLinkIcon />} href={url}>
-            Download
+            <FormattedMessage id="element.download" />
           </Link>
         ) : (
           <Link iconAlign="start" disabled icon={<ExternalLinkIcon />} href="/">
