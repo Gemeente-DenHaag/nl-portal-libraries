@@ -3,6 +3,7 @@ import {FC} from 'react';
 import {DocumentIcon, ExternalLinkIcon} from '@gemeente-denhaag/icons';
 import {Link, Paragraph} from '@gemeente-denhaag/denhaag-component-library';
 import classNames from 'classnames';
+import Skeleton from 'react-loading-skeleton';
 import {PortalDocument} from '../../interfaces';
 import styles from './document.module.scss';
 import {useMediaQuery} from '../../hooks';
@@ -23,12 +24,18 @@ const Document: FC<DocumentProps> = ({url, extension, name, size}) => {
           [styles['document__content--desktop']]: isDesktop,
         })}
       >
-        <Paragraph
-          className={styles['document__file-name']}
-        >{`${name} (${extension}, ${size}kb)`}</Paragraph>
-        <Link iconAlign="start" icon={<ExternalLinkIcon />} href={url}>
-          Download
-        </Link>
+        <Paragraph className={styles['document__file-name']}>
+          {name ? `${name} (${extension}, ${size}kb)` : <Skeleton width={250} />}
+        </Paragraph>
+        {url !== undefined ? (
+          <Link iconAlign="start" icon={<ExternalLinkIcon />} href={url}>
+            Download
+          </Link>
+        ) : (
+          <Link iconAlign="start" disabled icon={<ExternalLinkIcon />} href="/">
+            <Skeleton width={65} />
+          </Link>
+        )}
       </div>
     </div>
   );
