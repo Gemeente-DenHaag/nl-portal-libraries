@@ -13,3 +13,5 @@ export * from './mobile-menu-button';
 export * from './link-to-parent';
 export * from './meta-icon';
 export * from './status-history';
+export * from './document';
+export * from './document-list';

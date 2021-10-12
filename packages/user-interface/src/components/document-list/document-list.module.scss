@@ -1,0 +1,7 @@
+.document {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  border: var(--nlportal-document-border, 1px solid hsl(0 0% 82%));
+  border-radius: var(--nlportal-document-border-radius, 3px);
+}
