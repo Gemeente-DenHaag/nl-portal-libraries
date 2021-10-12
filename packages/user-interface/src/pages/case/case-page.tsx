@@ -116,7 +116,7 @@ const CasePage: FC<CasePageProps> = ({statusHistoryFacet, statusHistoryBackgroun
               })}
             >
               <Heading3 className={classNames({[styles['case__sub-header']]: !isTablet})}>
-                <FormattedMessage id="case.documentsHeader" />
+                <FormattedMessage id="pageTitles.documents" />
               </Heading3>
               <div
                 className={classNames(styles['case__documents-link'], {
