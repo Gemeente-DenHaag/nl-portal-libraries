@@ -10,6 +10,7 @@ export const NL_NL_MESSAGES: Messages = {
     'pageTitles.notifications': 'Mijn berichten',
     'pageTitles.themes': "Thema's",
     'pageTitles.documents': 'Documenten',
+    'pageTitles.offline': 'Geen internetverbinding',
     'header.logout': 'Uitloggen',
     'header.welcome': 'Welkom {userName}',
     'header.menuButton': 'Menu',
@@ -28,6 +29,8 @@ export const NL_NL_MESSAGES: Messages = {
     'case.showAllDocuments': 'Toon alle documenten',
     'case.fetchError': 'Er is een fout opgetreden, probeer het later nogmaals.',
     'documents.fetchError': 'Er is een fout opgetreden, probeer het later nogmaals.',
+    'offline.warning':
+      'Maak verbinding met het internet om gebruik te maken van {applicationName}.',
     'element.loading': 'Aan het laden',
     'element.download': 'Download',
   },
