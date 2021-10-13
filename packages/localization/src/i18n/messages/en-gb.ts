@@ -26,6 +26,7 @@ export const EN_GB_MESSAGES: Messages = {
     'case.statusHeader': 'Status',
     'case.showAllDocuments': 'Show all documents',
     'case.fetchError': 'There was an error, try again later.',
+    'documents.fetchError': 'There was an error, try again later.',
     'element.loading': 'Loading',
     'element.download': 'Download',
   },
