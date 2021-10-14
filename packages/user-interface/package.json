@@ -51,8 +51,8 @@
     "dist"
   ],
   "dependencies": {
-    "@gemeente-denhaag/denhaag-component-library": "0.2.3-alpha.34",
-    "@gemeente-denhaag/icons": "0.2.3-alpha.36",
+    "@gemeente-denhaag/denhaag-component-library": "0.2.3-alpha.39",
+    "@gemeente-denhaag/icons": "0.2.3-alpha.39",
     "@nl-portal/api": "0.1.0",
     "@nl-portal/localization": "0.1.0",
     "@react-hook/size": "^2.1.2",
