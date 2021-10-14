@@ -41,6 +41,7 @@ const Header: FC<HeaderProps> = ({logo, facet, homePage, offline}) => {
     className: styles['header__logo-image'],
     alt: intl.formatMessage({id: 'app.appName'}),
   });
+  const online = !offline;
 
   useEffect(() => {
     if (height !== headerHeight) {
@@ -116,7 +117,7 @@ const Header: FC<HeaderProps> = ({logo, facet, homePage, offline}) => {
               <MenuToggleButton />
             </div>
             <div className={styles['header__elements-desktop']}>
-              {!offline && (
+              {online && (
                 <Fragment>
                   <div className={styles['header__element--large-spacing']}>
                     <UserName />
@@ -135,7 +136,7 @@ const Header: FC<HeaderProps> = ({logo, facet, homePage, offline}) => {
             [styles['header__mobile-menu--hidden']]: !mobileMenuOpened,
           })}
         >
-          {!offline && (
+          {online && (
             <Fragment>
               <UserName mobileMenu />
               <Logout mobileMenu />
@@ -151,7 +152,7 @@ const Header: FC<HeaderProps> = ({logo, facet, homePage, offline}) => {
           </div>
         )}
       </div>
-      {!offline && <CurrentPageIndicator />}
+      {online && <CurrentPageIndicator />}
     </div>
   );
 };

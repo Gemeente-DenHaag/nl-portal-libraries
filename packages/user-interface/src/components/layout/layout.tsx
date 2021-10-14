@@ -23,6 +23,7 @@ interface LayoutComponentProps {
 
 const LayoutComponent: FC<LayoutComponentProps> = ({headerLogo, facet, pages, footer, offline}) => {
   const {headerHeight} = useContext(LayoutContext);
+  const online = !offline;
   const offlinePage = {
     path: '/',
     titleTranslationKey: 'offline',
@@ -40,7 +41,7 @@ const LayoutComponent: FC<LayoutComponentProps> = ({headerLogo, facet, pages, fo
       />
       <div className={styles['page-container']} style={{paddingBlockStart: headerHeight}}>
         <div className={styles['page-container__inner']}>
-          {!offline ? (
+          {online && (
             <Fragment>
               <div className={styles['page-container__menu']}>
                 <Menu items={pages} />
@@ -78,7 +79,8 @@ const LayoutComponent: FC<LayoutComponentProps> = ({headerLogo, facet, pages, fo
                 </Switch>
               </div>
             </Fragment>
-          ) : (
+          )}
+          {offline && (
             <Switch>
               <Route exact key={0} path={offlinePage.path}>
                 <Page page={offlinePage}>{offlinePage.pageComponent}</Page>
@@ -88,7 +90,7 @@ const LayoutComponent: FC<LayoutComponentProps> = ({headerLogo, facet, pages, fo
           )}
         </div>
       </div>
-      <Footer footer={footer} facet={facet} />
+      {online && <Footer footer={footer} facet={facet} />}
     </Router>
   );
 };
