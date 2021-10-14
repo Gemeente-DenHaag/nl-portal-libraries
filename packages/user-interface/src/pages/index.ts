@@ -4,3 +4,4 @@ export * from './notifications';
 export * from './themes';
 export * from './case';
 export * from './documents';
+export * from './offline';
