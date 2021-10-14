@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {FC} from 'react';
-import {DocumentIcon, ExternalLinkIcon} from '@gemeente-denhaag/icons';
+import {DocumentIcon, DownloadIcon} from '@gemeente-denhaag/icons';
 import {Link, Paragraph} from '@gemeente-denhaag/denhaag-component-library';
 import classNames from 'classnames';
 import Skeleton from 'react-loading-skeleton';
@@ -36,11 +36,11 @@ const Document: FC<DocumentProps> = ({url, extension, name, size}) => {
           )}
         </Paragraph>
         {url !== undefined ? (
-          <Link iconAlign="start" icon={<ExternalLinkIcon />} href={url}>
+          <Link iconAlign="start" icon={<DownloadIcon />} href={url}>
             <FormattedMessage id="element.download" />
           </Link>
         ) : (
-          <Link iconAlign="start" disabled icon={<ExternalLinkIcon />} href="/">
+          <Link iconAlign="start" disabled icon={<DownloadIcon />} href="/">
             <span aria-busy aria-disabled aria-label={intl.formatMessage({id: 'element.loading'})}>
               <Skeleton width={65} />
             </span>

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {ReactKeycloakProvider} from '@react-keycloak/web';
 import Keycloak, {KeycloakConfig, KeycloakInitOptions} from 'keycloak-js';
-import {FC, useContext, useState} from 'react';
+import {FC, Fragment, useContext, useState} from 'react';
 import {KeycloakContext} from '../../contexts';
 
 interface KeycloakWrapperProps extends KeycloakConfig {
@@ -28,7 +28,7 @@ const KeycloakProvider: FC<KeycloakWrapperProps> = ({
     <ReactKeycloakProvider
       authClient={authClient}
       initOptions={initOptions}
-      LoadingComponent={<div>Loading</div>}
+      LoadingComponent={<Fragment />}
       autoRefreshToken
       onTokens={({token}) => {
         setKeycloakToken(token || '');
