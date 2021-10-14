@@ -13,7 +13,7 @@ env:
   PUSH_AND_DEPLOY: ${{ github.event_name != 'pull_request' && github.ref == 'refs/heads/master' }}
 
 jobs:
-  build-and-push:
+  build-and-push-and-deploy:
     runs-on: ubuntu-latest
     steps:
       - name: 'Check build and deploy var'
