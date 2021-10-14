@@ -43,7 +43,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "generate-pwa-assets": "pwa-asset-generator ./src/assets/pwa-logo.svg ./public/pwa -f -w -o false -e true -i ./public/index.html -m ./public/manifest.json -a \"%PUBLIC_URL%\""
+    "generate-pwa-assets": "pwa-asset-generator ./src/assets/pwa-logo.svg ./public/pwa -f -w -o false -e true -i ./public/index.html -m ./public/manifest.json -a \"%PUBLIC_URL%\"",
+    "clean": "rimraf build"
   },
   "browserslist": {
     "production": [
@@ -58,6 +59,7 @@
     ]
   },
   "devDependencies": {
-    "pwa-asset-generator": "^4.3.9"
+    "pwa-asset-generator": "^4.3.9",
+    "rimraf": "^3.0.2"
   }
 }
