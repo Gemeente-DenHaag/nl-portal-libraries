@@ -75,6 +75,6 @@ jobs:
           manifests: |
               zgw-kubernetes/klantportaal/test/configmap.yml
               zgw-kubernetes/klantportaal/test/ingress.yml
-              zgw-kubernetes/klantportaal/test/service.yml
-              zgw-kubernetes/klantportaal/test/deployment.yml
+              zgw-kubernetes/klantportaal/service.yml
+              zgw-kubernetes/klantportaal/deployment.yml
           images: '${{ steps.meta.outputs.tags }}'
