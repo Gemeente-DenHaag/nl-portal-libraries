@@ -118,21 +118,23 @@ const CasePage: FC<CasePageProps> = ({statusHistoryFacet, statusHistoryBackgroun
               <Heading3 className={classNames({[styles['case__sub-header']]: !isTablet})}>
                 <FormattedMessage id="pageTitles.documents" />
               </Heading3>
-              <div
-                className={classNames(styles['case__documents-link'], {
-                  [styles['case__documents-link--tablet']]: isTablet,
-                })}
-              >
-                <Link
-                  component={RouterLink}
-                  to={getDocumentsUrl(id || '')}
-                  icon={<ArrowRightIcon />}
-                  iconAlign="end"
-                  hrefLang={hrefLang}
+              {!loading && data?.getZaak?.documenten && data?.getZaak?.documenten.length > 0 && (
+                <div
+                  className={classNames(styles['case__documents-link'], {
+                    [styles['case__documents-link--tablet']]: isTablet,
+                  })}
                 >
-                  <FormattedMessage id="case.showAllDocuments" />
-                </Link>
-              </div>
+                  <Link
+                    component={RouterLink}
+                    to={getDocumentsUrl(id || '')}
+                    icon={<ArrowRightIcon />}
+                    iconAlign="end"
+                    hrefLang={hrefLang}
+                  >
+                    <FormattedMessage id="case.showAllDocuments" />
+                  </Link>
+                </div>
+              )}
             </div>
             <DocumentList documents={loading ? undefined : data?.getZaak.documenten} />
           </div>
