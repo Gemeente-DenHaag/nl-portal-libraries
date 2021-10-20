@@ -19,7 +19,6 @@ import styles from './case-page.module.scss';
 import {DocumentList, MetaIcon, StatusHistory} from '../../components';
 import {BREAKPOINTS} from '../../constants';
 import {stringToId} from '../../utils';
-import {getMockDocuments} from '../../mock';
 
 interface CasePageProps {
   statusHistoryFacet?: ReactElement;
@@ -134,7 +133,7 @@ const CasePage: FC<CasePageProps> = ({statusHistoryFacet, statusHistoryBackgroun
                 </Link>
               </div>
             </div>
-            <DocumentList documents={loading ? undefined : getMockDocuments(3)} />
+            <DocumentList documents={loading ? undefined : data?.getZaak.documenten} />
           </div>
         </Fragment>
       ) : (

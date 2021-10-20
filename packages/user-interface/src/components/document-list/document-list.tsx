@@ -1,23 +1,23 @@
 import * as React from 'react';
 import {FC, Fragment} from 'react';
-import {PortalDocument} from '../../interfaces';
-import {Document} from '../document';
+import {Document as PortalDocument} from '@nl-portal/api';
 import styles from './document-list.module.scss';
+import {Document} from '../document';
 
 interface DocumentListProps {
-  documents?: Array<Partial<PortalDocument>>;
+  documents?: Array<PortalDocument>;
 }
 
 const DocumentList: FC<DocumentListProps> = ({documents}) =>
   documents ? (
     <Fragment>
       {documents.map(document => (
-        <div className={styles.document} key={`${document.name}${document.size}`}>
+        <div className={styles.document} key={`${document.bestandsnaam}${document.bestandsomvang}`}>
           <Document
-            extension={document.extension}
-            name={document.name}
-            size={document.size}
-            url={document.url}
+            extension={document.formaat || ''}
+            name={document.bestandsnaam || ''}
+            size={document.bestandsomvang || 0}
+            url={document.url || ''}
           />
         </div>
       ))}
