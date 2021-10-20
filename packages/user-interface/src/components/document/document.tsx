@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {FC, useContext} from 'react';
+import {FC, useContext, useState} from 'react';
 import {DocumentIcon, DownloadIcon} from '@gemeente-denhaag/icons';
 import {Link, Paragraph} from '@gemeente-denhaag/denhaag-component-library';
 import classNames from 'classnames';
@@ -11,6 +11,7 @@ import {PortalDocument} from '../../interfaces';
 import styles from './document.module.scss';
 import {useMediaQuery} from '../../hooks';
 import {BREAKPOINTS} from '../../constants';
+import {DocumentDownload} from '../document-download';
 
 type DocumentProps = Partial<PortalDocument>;
 
@@ -18,6 +19,17 @@ const Document: FC<DocumentProps> = ({url, extension, name, size}) => {
   const isDesktop = useMediaQuery(BREAKPOINTS.DESKTOP);
   const {hrefLang} = useContext(LocaleContext);
   const intl = useIntl();
+  const [downloadId, setDownloadId] = useState('');
+
+  const documentClick = (event: MouseEvent) => {
+    const splitUrl = url?.split('/') || [''];
+    const downloadIdFromUrl = splitUrl[splitUrl.length - 1];
+
+    event.preventDefault();
+    event.stopPropagation();
+
+    setDownloadId(downloadIdFromUrl);
+  };
 
   return (
     <div className={styles.document}>
@@ -39,9 +51,15 @@ const Document: FC<DocumentProps> = ({url, extension, name, size}) => {
           )}
         </Paragraph>
         {url !== undefined ? (
-          <Link iconAlign="start" icon={<DownloadIcon />} href={url}>
-            <FormattedMessage id="element.download" />
-          </Link>
+          <button
+            className={styles['document__download-button']}
+            type="button"
+            onClick={event => documentClick(event as any as MouseEvent)}
+          >
+            <Link iconAlign="start" icon={<DownloadIcon />} href={url}>
+              <FormattedMessage id="element.download" />
+            </Link>
+          </button>
         ) : (
           <Link iconAlign="start" disabled icon={<DownloadIcon />} href="/">
             <span aria-busy aria-disabled aria-label={intl.formatMessage({id: 'element.loading'})}>
@@ -50,6 +68,9 @@ const Document: FC<DocumentProps> = ({url, extension, name, size}) => {
           </Link>
         )}
       </div>
+      {downloadId && (
+        <DocumentDownload downloadId={downloadId} name={`${name}`} extension={`${extension}`} />
+      )}
     </div>
   );
 };
