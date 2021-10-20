@@ -6,6 +6,15 @@ export const QUERY_GET_DOCUMENTEN = gql`
       zaaktype {
         identificatie
       }
+      documenten {
+        bestandsnaam
+        bestandsomvang
+        creatiedatum
+        formaat
+        identificatie
+        titel
+        url
+      }
     }
   }
 `;
