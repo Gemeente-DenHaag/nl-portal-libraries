@@ -20,6 +20,7 @@ const Document: FC<DocumentProps> = ({url, extension, name, size}) => {
   const {hrefLang} = useContext(LocaleContext);
   const intl = useIntl();
   const [downloadId, setDownloadId] = useState('');
+  const [downloadToggled, setDownloadToggle] = useState(false);
 
   const documentClick = (event: MouseEvent) => {
     const splitUrl = url?.split('/') || [''];
@@ -29,6 +30,7 @@ const Document: FC<DocumentProps> = ({url, extension, name, size}) => {
     event.stopPropagation();
 
     setDownloadId(downloadIdFromUrl);
+    setDownloadToggle(!downloadToggled);
   };
 
   return (
@@ -69,7 +71,12 @@ const Document: FC<DocumentProps> = ({url, extension, name, size}) => {
         )}
       </div>
       {downloadId && (
-        <DocumentDownload downloadId={downloadId} name={`${name}`} extension={`${extension}`} />
+        <DocumentDownload
+          downloadId={downloadId}
+          name={`${name}`}
+          extension={`${extension}`}
+          toggle={downloadToggled}
+        />
       )}
     </div>
   );

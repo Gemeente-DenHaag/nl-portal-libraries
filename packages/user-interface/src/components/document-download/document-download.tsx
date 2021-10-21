@@ -7,9 +7,10 @@ interface DocumentDownloadProps {
   downloadId: string;
   name: string;
   extension: string;
+  toggle: boolean;
 }
 
-const DocumentDownload: FC<DocumentDownloadProps> = ({downloadId, name, extension}) => {
+const DocumentDownload: FC<DocumentDownloadProps> = ({downloadId, name, extension, toggle}) => {
   const [href, setHref] = useState('');
   const {data} = useGetDocumentContentQuery({
     variables: {id: downloadId},
@@ -29,7 +30,7 @@ const DocumentDownload: FC<DocumentDownloadProps> = ({downloadId, name, extensio
     if (href) {
       (linkRef?.current as any).click();
     }
-  }, [href]);
+  }, [href, toggle]);
 
   // eslint-disable-next-line jsx-a11y/anchor-has-content,jsx-a11y/anchor-is-valid,jsx-a11y/control-has-associated-label
   return <a download={downloadName} ref={linkRef} href={href} />;
