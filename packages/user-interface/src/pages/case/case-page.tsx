@@ -92,7 +92,7 @@ const CasePage: FC<CasePageProps> = ({statusHistoryFacet, statusHistoryBackgroun
             />
             <MetaIcon
               title={intl.formatMessage({id: 'case.documents'})}
-              subtitle={(!loading && '0') || ''}
+              subtitle={(!loading && `${data?.getZaak.documenten.length || 0}`) || ''}
               icon={<DocumentIcon />}
             />
           </div>
