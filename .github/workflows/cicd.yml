@@ -27,6 +27,11 @@ jobs:
         uses: docker/metadata-action@v3
         with:
           images: ${{ secrets.ACR_LOGIN_SERVER }}/zgw/klantportaal
+          tags: |
+            # dynamically set the branch name as a prefix
+            type=sha,prefix={{branch}}-
+            # dynamically set the branch name and sha as a custom tag
+            type=raw,value=mytag-{{branch}}-{{sha}}
 
       - name: 'Set up QEMU'
         uses: docker/setup-qemu-action@v1
