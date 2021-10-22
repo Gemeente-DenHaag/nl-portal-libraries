@@ -28,8 +28,11 @@ jobs:
         with:
           images: ${{ secrets.ACR_LOGIN_SERVER }}/zgw/klantportaal
           tags: |
-            type=sha,prefix={{branch}}-
-            type=raw,value=mytag-{{branch}}-{{sha}}
+            type=ref,event=branch
+            type=ref,event=pr
+            type=semver,pattern={{version}}
+            type=semver,pattern={{major}}.{{minor}}
+            type=sha
 
       - name: 'Set up QEMU'
         uses: docker/setup-qemu-action@v1
