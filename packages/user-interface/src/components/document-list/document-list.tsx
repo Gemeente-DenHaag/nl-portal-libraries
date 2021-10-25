@@ -35,7 +35,7 @@ const DocumentList: FC<DocumentListProps> = ({documents}) => (
       </Fragment>
     )}
     {documents && documents.length === 0 && (
-      <Paragraph>
+      <Paragraph className={styles['document__no-data-message']}>
         <FormattedMessage id="documents.noDocuments" />
       </Paragraph>
     )}
