@@ -1,16 +1,19 @@
 import * as React from 'react';
-import {FC, useEffect, useRef, useState} from 'react';
+import {FC, useEffect, useState} from 'react';
 import mimeTypes from 'mime-types';
 import {useGetDocumentContentQuery} from '@nl-portal/api';
+import {DownloadIcon} from '@gemeente-denhaag/icons';
+import {FormattedMessage} from 'react-intl';
+import {Link} from '@gemeente-denhaag/denhaag-component-library';
+import useId from 'react-use-uuid';
 
 interface DocumentDownloadProps {
   downloadId: string;
   name: string;
   extension: string;
-  toggle: boolean;
 }
 
-const DocumentDownload: FC<DocumentDownloadProps> = ({downloadId, name, extension, toggle}) => {
+const DocumentDownload: FC<DocumentDownloadProps> = ({downloadId, name, extension}) => {
   const [href, setHref] = useState('');
   const {data} = useGetDocumentContentQuery({
     variables: {id: downloadId},
@@ -18,7 +21,7 @@ const DocumentDownload: FC<DocumentDownloadProps> = ({downloadId, name, extensio
   const mimeType = mimeTypes.lookup(extension);
   const downloadContent = data?.getDocumentContent.content;
   const downloadName = `${name}.${extension}`;
-  const linkRef = useRef(null);
+  const id = useId();
 
   useEffect(() => {
     if (downloadContent) {
@@ -27,13 +30,23 @@ const DocumentDownload: FC<DocumentDownloadProps> = ({downloadId, name, extensio
   }, [downloadContent]);
 
   useEffect(() => {
-    if (href) {
-      (linkRef?.current as any).click();
-    }
-  }, [href, toggle]);
+    const linkElement = document.getElementById(id);
 
-  // eslint-disable-next-line jsx-a11y/anchor-has-content,jsx-a11y/anchor-is-valid,jsx-a11y/control-has-associated-label
-  return <a download={downloadName} ref={linkRef} href={href} />;
+    if (href && linkElement) {
+      linkElement.focus();
+      linkElement.click();
+    }
+  }, [href]);
+
+  return downloadName && href ? (
+    <Link iconAlign="start" icon={<DownloadIcon />} href={href} download={downloadName} id={id}>
+      <FormattedMessage id="element.download" />
+    </Link>
+  ) : (
+    <Link iconAlign="start" disabled icon={<DownloadIcon />} href="/">
+      <FormattedMessage id="element.download" />
+    </Link>
+  );
 };
 
 export {DocumentDownload};
