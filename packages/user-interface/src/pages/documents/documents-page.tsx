@@ -6,7 +6,6 @@ import {Heading2, Paragraph} from '@gemeente-denhaag/denhaag-component-library';
 import {useQuery} from '../../hooks';
 import {DocumentList, LinkToParent} from '../../components';
 import styles from './documents-page.module.scss';
-import {getMockDocuments} from '../../mock';
 
 const DocumentsPage = () => {
   const query = useQuery();
@@ -40,7 +39,7 @@ const DocumentsPage = () => {
           </Heading2>
         </header>
         {!error ? (
-          <DocumentList documents={loading ? undefined : getMockDocuments()} />
+          <DocumentList documents={loading ? undefined : data?.getZaak.documenten} />
         ) : (
           <Paragraph>
             <FormattedMessage id="documents.fetchError" />

@@ -14,3 +14,5 @@ lint-staged.config.js
 webpack.config.js
 
 graphql.tsx
+
+.github

@@ -19,7 +19,6 @@ import styles from './case-page.module.scss';
 import {DocumentList, MetaIcon, StatusHistory} from '../../components';
 import {BREAKPOINTS} from '../../constants';
 import {stringToId} from '../../utils';
-import {getMockDocuments} from '../../mock';
 
 interface CasePageProps {
   statusHistoryFacet?: ReactElement;
@@ -93,7 +92,7 @@ const CasePage: FC<CasePageProps> = ({statusHistoryFacet, statusHistoryBackgroun
             />
             <MetaIcon
               title={intl.formatMessage({id: 'case.documents'})}
-              subtitle={(!loading && '0') || ''}
+              subtitle={(!loading && `${data?.getZaak.documenten.length || 0}`) || ''}
               icon={<DocumentIcon />}
             />
           </div>
@@ -103,7 +102,8 @@ const CasePage: FC<CasePageProps> = ({statusHistoryFacet, statusHistoryBackgroun
             </Heading3>
             <StatusHistory
               caseId={data?.getZaak.zaaktype.identificatie}
-              statuses={data?.getZaak.statusGeschiedenis}
+              statusHistory={data?.getZaak.statusGeschiedenis}
+              statuses={data?.getZaak.statussen}
               loading={loading}
               facet={statusHistoryFacet}
               background={statusHistoryBackground}
@@ -118,23 +118,25 @@ const CasePage: FC<CasePageProps> = ({statusHistoryFacet, statusHistoryBackgroun
               <Heading3 className={classNames({[styles['case__sub-header']]: !isTablet})}>
                 <FormattedMessage id="pageTitles.documents" />
               </Heading3>
-              <div
-                className={classNames(styles['case__documents-link'], {
-                  [styles['case__documents-link--tablet']]: isTablet,
-                })}
-              >
-                <Link
-                  component={RouterLink}
-                  to={getDocumentsUrl(id || '')}
-                  icon={<ArrowRightIcon />}
-                  iconAlign="end"
-                  hrefLang={hrefLang}
+              {!loading && data?.getZaak?.documenten && data?.getZaak?.documenten.length > 0 && (
+                <div
+                  className={classNames(styles['case__documents-link'], {
+                    [styles['case__documents-link--tablet']]: isTablet,
+                  })}
                 >
-                  <FormattedMessage id="case.showAllDocuments" />
-                </Link>
-              </div>
+                  <Link
+                    component={RouterLink}
+                    to={getDocumentsUrl(id || '')}
+                    icon={<ArrowRightIcon />}
+                    iconAlign="end"
+                    hrefLang={hrefLang}
+                  >
+                    <FormattedMessage id="case.showAllDocuments" />
+                  </Link>
+                </div>
+              )}
             </div>
-            <DocumentList documents={loading ? undefined : getMockDocuments(3)} />
+            <DocumentList documents={loading ? undefined : data?.getZaak.documenten} />
           </div>
         </Fragment>
       ) : (

@@ -25,6 +25,18 @@ export const QUERY_GET_ZAKEN = gql`
           isEindstatus
         }
       }
+      statussen {
+        omschrijving
+      }
+      documenten {
+        bestandsnaam
+        bestandsomvang
+        creatiedatum
+        formaat
+        identificatie
+        titel
+        url
+      }
     }
   }
 `;

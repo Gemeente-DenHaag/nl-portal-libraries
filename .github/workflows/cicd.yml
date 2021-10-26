@@ -15,7 +15,7 @@ env:
 jobs:
   build:
     runs-on: ubuntu-latest
-      
+
     steps:
       - name: 'Check build and deploy var'
         run: echo Check variable $PUSH_AND_DEPLOY
@@ -81,13 +81,13 @@ jobs:
           path: zgw-kubernetes
           token: ${{ secrets.ZGW_REPO_PAT }}
 
-      - name : 'Login to aks and set context'
+      - name: 'Login to aks and set context'
         if: env.PUSH_AND_DEPLOY == 'true'
         uses: azure/aks-set-context@v1
         with:
-            creds: '${{ secrets.AZURE_CREDENTIALS }}'
-            resource-group: '${{ secrets.AKS_RG_TEST_ACC }}'
-            cluster-name: '${{ secrets.AKS_CL_NAME_TEST_ACC }}'
+          creds: '${{ secrets.AZURE_CREDENTIALS }}'
+          resource-group: '${{ secrets.AKS_RG_TEST_ACC }}'
+          cluster-name: '${{ secrets.AKS_CL_NAME_TEST_ACC }}'
         id: login
 
       - name: 'Deploy to aks'
@@ -96,8 +96,8 @@ jobs:
         with:
           namespace: 'dhonline-staging'
           manifests: |
-              zgw-kubernetes/klantportaal/test/configmap.yml
-              zgw-kubernetes/klantportaal/test/ingress.yml
-              zgw-kubernetes/klantportaal/service.yml
-              zgw-kubernetes/klantportaal/deployment.yml
+            zgw-kubernetes/klantportaal/test/configmap.yml
+            zgw-kubernetes/klantportaal/test/ingress.yml
+            zgw-kubernetes/klantportaal/service.yml
+            zgw-kubernetes/klantportaal/deployment.yml
           images: '${{ steps.meta.outputs.tags }}'

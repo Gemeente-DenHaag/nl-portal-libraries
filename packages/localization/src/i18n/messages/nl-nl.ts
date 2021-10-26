@@ -29,6 +29,7 @@ export const NL_NL_MESSAGES: Messages = {
     'case.showAllDocuments': 'Toon alle documenten',
     'case.fetchError': 'Er is een fout opgetreden, probeer het later nogmaals.',
     'documents.fetchError': 'Er is een fout opgetreden, probeer het later nogmaals.',
+    'documents.noDocuments': 'Er zijn geen documenten.',
     'offline.warning':
       'Maak verbinding met het internet om gebruik te maken van {applicationName}.',
     'element.loading': 'Aan het laden',
