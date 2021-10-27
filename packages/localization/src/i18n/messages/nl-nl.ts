@@ -11,6 +11,7 @@ export const NL_NL_MESSAGES: Messages = {
     'pageTitles.themes': "Thema's",
     'pageTitles.documents': 'Documenten',
     'pageTitles.offline': 'Geen internetverbinding',
+    'pageTitles.form': 'Formulier',
     'header.logout': 'Uitloggen',
     'header.welcome': 'Welkom {userName}',
     'header.menuButton': 'Menu',

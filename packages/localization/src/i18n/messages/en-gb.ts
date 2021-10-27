@@ -11,6 +11,7 @@ export const EN_GB_MESSAGES: Messages = {
     'pageTitles.themes': 'Themes',
     'pageTitles.documents': 'Documents',
     'pageTitles.offline': 'No internet connection',
+    'pageTitles.form': 'Form',
     'header.logout': 'Log out',
     'header.welcome': 'Welcome {userName}',
     'header.menuButton': 'Menu',
