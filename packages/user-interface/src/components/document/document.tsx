@@ -8,6 +8,7 @@ import {FormattedMessage, useIntl} from 'react-intl';
 import prettyBytes from 'pretty-bytes';
 import {LocaleContext} from '@nl-portal/localization';
 import useId from 'react-use-uuid';
+import mimeTypes from 'mime-types';
 import {PortalDocument} from '../../interfaces';
 import styles from './document.module.scss';
 import {useMediaQuery} from '../../hooks';
@@ -55,7 +56,9 @@ const Document: FC<DocumentProps> = ({url, extension, name, size}) => {
       >
         <Paragraph className={styles['document__file-name']}>
           {name ? (
-            `${name} (${extension}, ${prettyBytes(size || 0, {locale: hrefLang})})`
+            `${name} (${mimeTypes.extension(extension || '')}, ${prettyBytes(size || 0, {
+              locale: hrefLang,
+            })})`
           ) : (
             <span aria-busy aria-disabled aria-label={intl.formatMessage({id: 'element.loading'})}>
               <Skeleton width={250} />

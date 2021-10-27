@@ -18,9 +18,12 @@ const DocumentDownload: FC<DocumentDownloadProps> = ({downloadId, name, extensio
   const {data} = useGetDocumentContentQuery({
     variables: {id: downloadId},
   });
-  const mimeType = mimeTypes.lookup(extension);
+  const mimeType = extension;
+  const fileExtension = mimeTypes.extension(extension || '');
   const downloadContent = data?.getDocumentContent.content;
-  const downloadName = `${name}.${extension}`;
+  const splitName = name.split('.');
+  const nameWithoutExtension = splitName[0];
+  const downloadName = `${nameWithoutExtension}.${fileExtension}`;
   const id = useId();
 
   useEffect(() => {
