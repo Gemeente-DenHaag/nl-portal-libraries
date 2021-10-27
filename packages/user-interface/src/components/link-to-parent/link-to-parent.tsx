@@ -1,26 +1,41 @@
 import * as React from 'react';
 import {FC, useContext} from 'react';
-// import styles from './link-to-parent.module.scss';
-import {Link} from 'react-router-dom';
-import {FormattedMessage} from 'react-intl';
+import {Link as RouterLink} from 'react-router-dom';
+import {FormattedMessage, useIntl} from 'react-intl';
 import {LocaleContext} from '@nl-portal/localization';
-import {Paragraph} from '@gemeente-denhaag/denhaag-component-library';
+import {Link} from '@gemeente-denhaag/denhaag-component-library';
+import {ChevronLeftIcon} from '@gemeente-denhaag/icons';
+import Skeleton from 'react-loading-skeleton';
 import styles from './link-to-parent.module.scss';
 import {PortalPage} from '../../interfaces';
 
 interface LinkToParentProps {
-  parentPage: PortalPage;
+  parentPage?: PortalPage;
+  routePath?: string;
+  text?: string;
 }
 
-const LinkToParent: FC<LinkToParentProps> = ({parentPage}) => {
+const LinkToParent: FC<LinkToParentProps> = ({parentPage, routePath, text}) => {
   const {hrefLang} = useContext(LocaleContext);
+  const intl = useIntl();
 
   return (
     <div className={styles['link-to-parent']}>
-      <Link to={parentPage.path} hrefLang={hrefLang}>
-        <Paragraph>
-          <FormattedMessage id={`pageTitles.${parentPage.titleTranslationKey}`} />
-        </Paragraph>
+      <Link
+        component={RouterLink}
+        to={routePath || parentPage?.path || '/'}
+        icon={<ChevronLeftIcon />}
+        iconAlign="start"
+        hrefLang={hrefLang}
+      >
+        {text ||
+          (parentPage?.titleTranslationKey ? (
+            <FormattedMessage id={`pageTitles.${parentPage?.titleTranslationKey}`} />
+          ) : (
+            <span aria-busy aria-disabled aria-label={intl.formatMessage({id: 'element.loading'})}>
+              <Skeleton width={100} />
+            </span>
+          ))}
       </Link>
     </div>
   );

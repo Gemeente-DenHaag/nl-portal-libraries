@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {FC, ReactElement, useContext, useEffect, useState} from 'react';
+import {FC, Fragment, ReactElement, useContext, useEffect, useState} from 'react';
 import {useIntl} from 'react-intl';
 import {LocaleContext} from '@nl-portal/localization';
 import {Link} from 'react-router-dom';
@@ -21,9 +21,10 @@ interface HeaderProps {
   logo: ReactElement;
   homePage?: PortalPage;
   facet?: ReactElement;
+  offline?: boolean;
 }
 
-const Header: FC<HeaderProps> = ({logo, facet, homePage}) => {
+const Header: FC<HeaderProps> = ({logo, facet, homePage, offline}) => {
   const {mobileMenuOpened, menuOpened, hideMobileMenu, hideMenu, headerHeight, setHeaderHeight} =
     useContext(LayoutContext);
   const {hrefLang} = useContext(LocaleContext);
@@ -40,6 +41,7 @@ const Header: FC<HeaderProps> = ({logo, facet, homePage}) => {
     className: styles['header__logo-image'],
     alt: intl.formatMessage({id: 'app.appName'}),
   });
+  const online = !offline;
 
   useEffect(() => {
     if (height !== headerHeight) {
@@ -115,12 +117,16 @@ const Header: FC<HeaderProps> = ({logo, facet, homePage}) => {
               <MenuToggleButton />
             </div>
             <div className={styles['header__elements-desktop']}>
-              <div className={styles['header__element--large-spacing']}>
-                <UserName />
-              </div>
-              <div className={styles['header__element--medium-spacing']}>
-                <Logout />
-              </div>
+              {online && (
+                <Fragment>
+                  <div className={styles['header__element--large-spacing']}>
+                    <UserName />
+                  </div>
+                  <div className={styles['header__element--medium-spacing']}>
+                    <Logout />
+                  </div>
+                </Fragment>
+              )}
               <LanguageSwitcher />
             </div>
           </div>
@@ -130,8 +136,12 @@ const Header: FC<HeaderProps> = ({logo, facet, homePage}) => {
             [styles['header__mobile-menu--hidden']]: !mobileMenuOpened,
           })}
         >
-          <UserName mobileMenu />
-          <Logout mobileMenu />
+          {online && (
+            <Fragment>
+              <UserName mobileMenu />
+              <Logout mobileMenu />
+            </Fragment>
+          )}
           <LanguageSwitcher mobileMenu />
         </div>
         {facet && (
@@ -142,7 +152,7 @@ const Header: FC<HeaderProps> = ({logo, facet, homePage}) => {
           </div>
         )}
       </div>
-      <CurrentPageIndicator />
+      {online && <CurrentPageIndicator />}
     </div>
   );
 };

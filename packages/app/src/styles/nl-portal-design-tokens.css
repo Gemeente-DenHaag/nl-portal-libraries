@@ -3,6 +3,7 @@
   --nlportal-space-block-3xl: var(--denhaag-space-block-3xl);
   --nlportal-space-block-2xl: var(--denhaag-space-block-2xl);
   --nlportal-space-block-xl: var(--denhaag-space-block-xl);
+  --nlportal-space-block-lg: var(--denhaag-space-block-lg);
   --nlportal-space-block-md: var(--denhaag-space-block-md);
   --nlportal-space-block-xs: var(--denhaag-space-block-xs);
   --nlportal-space-inline-4xl: var(--denhaag-space-inline-4xl);
@@ -54,6 +55,14 @@
   --nlportal-skeleton-step-padding: var(--denhaag-timeline-step-padding);
   --nlportal-skeleton-step-circle-padding: var(--denhaag-timeline-step-icon-padding);
   --nlportal-focus-border: var(--denhaag-focus-border);
+  --nlportal-document-border-width: 1px;
+  --nlportal-document-border-style: solid;
+  --nlportal-document-border-color: var(--denhaag-color-grey-2);
+  --nlportal-document-border-radius: 3px;
+  --nlportal-document-border: var(--nlportal-document-border-width)
+    var(--nlportal-document-border-style) var(--nlportal-document-border-color);
+  --nlportal-document-icon-color: var(--denhaag-color-grey-4);
+  --nlportal-document-icon-background-color: var(--denhaag-color-grey-1);
   --utrecht-heading-color: var(--denhaag-color-blue-3);
   --denhaag-menu-button-font-size: var(--denhaag-typography-scale-lg-font-size);
   --denhaag-menu-button-line-height: var(--denhaag-typography-scale-xl-font-size);

@@ -12,7 +12,9 @@
     "lint:fix": "eslint \"packages/**/*.{js,jsx,ts,tsx}\" --fix",
     "prettier": "prettier --check .",
     "prettier:fix": "prettier --write .",
-    "codegen": "lerna run codegen"
+    "codegen": "lerna run codegen",
+    "generate-pwa-assets": "lerna run generate-pwa-assets && prettier --write ./packages/app/public/index.html",
+    "clean": "lerna run clean"
   },
   "workspaces": [
     "packages/*"

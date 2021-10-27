@@ -1,0 +1,8 @@
+.documents {
+  display: flex;
+  flex-direction: column;
+}
+
+.documents__header {
+  margin-block-end: var(--nlportal-space-block-2xl, 2rem);
+}

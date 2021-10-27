@@ -1,27 +1,28 @@
-import React from 'react';
+import React, {Fragment} from 'react';
 import '@gemeente-denhaag/design-tokens-components';
 import '@nl-portal/user-interface/dist/index.css';
 import '../../styles/nl-portal-design-tokens.css';
+import {KeycloakWrapper} from '@nl-portal/authentication';
+import {LocalizationProvider} from '@nl-portal/localization';
+import {ApolloWrapper} from '@nl-portal/api';
+import {Offline, Online} from 'react-detect-offline';
 import {
+  CasePage,
   CasesPage,
+  DocumentsPage,
   Layout,
   NotificationsPage,
   OverviewPage,
+  PortalFooter,
   PortalPage,
   ThemesPage,
-  CasePage,
-  PortalFooter,
-  FormPage,
 } from '@nl-portal/user-interface';
-import {KeycloakWrapper} from '@nl-portal/authentication';
-import {LocalizationProvider} from '@nl-portal/localization';
 import {ArchiveIcon, DocumentIcon, GridIcon, InboxIcon} from '@gemeente-denhaag/icons';
-import {ApolloWrapper} from '@nl-portal/api';
 import {CUSTOM_MESSAGES} from '../../i18n';
 import {ReactComponent as HeaderLogo} from '../../assets/header-logo.svg';
 import Facet from '../../assets/facet.png';
-import StatusHistoryBackground from '../../assets/status-history-background.svg';
 import {config} from '../../config';
+import StatusHistoryBackground from '../../assets/status-history-background.svg';
 
 const pages: Array<PortalPage> = [
   {
@@ -57,7 +58,13 @@ const pages: Array<PortalPage> = [
         ),
         path: '/zaak',
         titleTranslationKey: 'cases',
-        showInMenu: true,
+        showLinkToParent: true,
+      },
+      {
+        icon: <ArchiveIcon />,
+        pageComponent: <DocumentsPage />,
+        path: '/zaak/documenten',
+        titleTranslationKey: 'cases',
       },
     ],
   },
@@ -67,13 +74,6 @@ const pages: Array<PortalPage> = [
     path: '/themas',
     titleTranslationKey: 'themes',
     showInMenu: true,
-  },
-  {
-    icon: <DocumentIcon />,
-    pageComponent: <FormPage />,
-    path: '/formulier',
-    titleTranslationKey: 'form',
-    showInMenu: false,
   },
 ];
 
@@ -123,23 +123,38 @@ const footer: PortalFooter = [
 ];
 
 const App = () => (
-  <KeycloakWrapper
-    clientId={config.KEYCLOAK_CLIENT_ID}
-    realm={config.KEYCLOAK_REALM}
-    url={config.KEYCLOAK_URL}
-    redirectUri={config.KEYCLOAK_REDIRECT_URI}
-  >
-    <ApolloWrapper uri={config.GRAPHQL_URI}>
+  <Fragment>
+    <Online>
+      <KeycloakWrapper
+        clientId={config.KEYCLOAK_CLIENT_ID}
+        realm={config.KEYCLOAK_REALM}
+        url={config.KEYCLOAK_URL}
+        redirectUri={config.KEYCLOAK_REDIRECT_URI}
+      >
+        <ApolloWrapper uri={config.GRAPHQL_URI}>
+          <LocalizationProvider customMessages={CUSTOM_MESSAGES}>
+            <Layout
+              pages={pages}
+              headerLogo={<HeaderLogo />}
+              facet={<img src={Facet} alt="" />}
+              footer={footer}
+            />
+          </LocalizationProvider>
+        </ApolloWrapper>
+      </KeycloakWrapper>
+    </Online>
+    <Offline>
       <LocalizationProvider customMessages={CUSTOM_MESSAGES}>
         <Layout
           pages={pages}
           headerLogo={<HeaderLogo />}
           facet={<img src={Facet} alt="" />}
           footer={footer}
+          offline
         />
       </LocalizationProvider>
-    </ApolloWrapper>
-  </KeycloakWrapper>
+    </Offline>
+  </Fragment>
 );
 
 export {App};

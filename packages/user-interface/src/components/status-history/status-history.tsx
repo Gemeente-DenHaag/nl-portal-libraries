@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {FC, Fragment, ReactElement} from 'react';
-import {ZaakStatus} from '@nl-portal/api';
+import {StatusType, ZaakStatus} from '@nl-portal/api';
 import {Paragraph, Step, Timeline} from '@gemeente-denhaag/denhaag-component-library';
 import Skeleton from 'react-loading-skeleton';
 import {useIntl} from 'react-intl';
@@ -9,21 +9,23 @@ import {stringToId} from '../../utils';
 
 interface StatusHistoryProps {
   caseId?: string;
-  statuses?: Array<ZaakStatus>;
+  statusHistory?: Array<ZaakStatus>;
+  statuses?: Array<StatusType>;
   loading: boolean;
   facet?: ReactElement;
   background?: ReactElement;
 }
 
-const StatusHistory: FC<StatusHistoryProps> = ({caseId, statuses, loading, facet, background}) => {
+const StatusHistory: FC<StatusHistoryProps> = ({
+  caseId,
+  statusHistory,
+  statuses,
+  loading,
+  facet,
+  background,
+}) => {
   const intl = useIntl();
-  const sortedStatuses = statuses
-    ?.map(status => ({
-      ...status,
-      datumStatusGezet: new Date(status.datumStatusGezet),
-    }))
-    .sort((a, b) => a.datumStatusGezet.getTime() - b.datumStatusGezet.getTime());
-  const amountOfStatuses = sortedStatuses?.length;
+  const amountOfStatuses = statusHistory?.length;
   const activeStep = amountOfStatuses ? amountOfStatuses - 1 : 0;
 
   const getSkeletonStep = (key: number) => (
@@ -56,15 +58,15 @@ const StatusHistory: FC<StatusHistoryProps> = ({caseId, statuses, loading, facet
         </div>
       )}
       <div className={styles['status-history']}>
-        {!loading && sortedStatuses ? (
+        {!loading && statuses ? (
           <Timeline activeStep={activeStep} className={styles['status-history__timeline']}>
-            {sortedStatuses?.map((status, index) => (
+            {statuses?.map((status, index) => (
               <Step
-                key={status.statustype.omschrijving}
+                key={status.omschrijving}
                 label={intl.formatMessage({
-                  id: `case.${caseId}.status.${stringToId(status.statustype.omschrijving)}`,
+                  id: `case.${caseId}.status.${stringToId(`${status.omschrijving}`)}`,
                 })}
-                completed={index !== activeStep}
+                completed={index < activeStep}
               />
             ))}
           </Timeline>
