@@ -13,10 +13,10 @@ const FormPage = () => {
 
   useEffect(() => {
     if (typeof OpenForms !== 'undefined') {
-      const formId = 'nlds\u002Dtest\u002Dform';
+      const formId = 'bezwaar\u002Dmaken';
       const baseUrl = 'https://denhaag.test.open\u002Dformulieren.nl/api/v1/';
       const targetNode = document.getElementById('openforms\u002Dcontainer');
-      const basePath = '/nlds\u002Dtest\u002Dform/';
+      const basePath = '/bezwaar\u002Dmaken/';
 
       const sentryEnv = 'denhaag\u002Dtest';
       const form = new OpenForms.OpenForm(targetNode, {baseUrl, formId, basePath, sentryEnv});
