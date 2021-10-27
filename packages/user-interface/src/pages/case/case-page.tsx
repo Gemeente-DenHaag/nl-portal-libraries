@@ -38,6 +38,21 @@ const CasePage: FC<CasePageProps> = ({statusHistoryFacet, statusHistoryBackgroun
   const isTablet = useMediaQuery(BREAKPOINTS.TABLET);
   const getDocumentsUrl = (caseId: string) => `/zaken/zaak/documenten?id=${caseId}`;
 
+  const getCurrentStatus = (): string => {
+    const description = data?.getZaak.status?.statustype.omschrijving;
+    const identification = data?.getZaak.zaaktype.identificatie;
+
+    if (description && identification) {
+      return intl
+        .formatMessage({
+          id: `case.${identification}.status.${stringToId(description)}`,
+        })
+        .toLowerCase();
+    }
+
+    return intl.formatMessage({id: 'case.statusUnknown'});
+  };
+
   useEffect(() => {
     refetch();
   }, []);
@@ -76,17 +91,7 @@ const CasePage: FC<CasePageProps> = ({statusHistoryFacet, statusHistoryBackgroun
             />
             <MetaIcon
               title={intl.formatMessage({id: 'case.status'})}
-              subtitle={
-                (!loading &&
-                  intl
-                    .formatMessage({
-                      id: `case.${data?.getZaak.zaaktype.identificatie}.status.${stringToId(
-                        data?.getZaak.status?.statustype.omschrijving || ''
-                      )}`,
-                    })
-                    .toLowerCase()) ||
-                ''
-              }
+              subtitle={!loading ? getCurrentStatus() : ''}
               icon={<MegaphoneIcon />}
               showRightBorder={isMobile || isDesktop}
             />
