@@ -10,6 +10,7 @@ import {
   CasePage,
   CasesPage,
   DocumentsPage,
+  FormPage,
   Layout,
   NotificationsPage,
   OverviewPage,
@@ -74,6 +75,13 @@ const pages: Array<PortalPage> = [
     path: '/themas',
     titleTranslationKey: 'themes',
     showInMenu: true,
+  },
+  {
+    icon: <DocumentIcon />,
+    pageComponent: <FormPage />,
+    path: '/formulier',
+    titleTranslationKey: 'form',
+    showInMenu: false,
   },
 ];
 
