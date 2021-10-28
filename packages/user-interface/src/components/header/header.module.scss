@@ -26,7 +26,8 @@
 }
 
 .header-wrapper--fullscreen {
-  border-bottom: var(--nlportal-header-border-width, 1px) var(--nlportal-header-border-style, solid) var(--nlportal-header-border-color, hsl(0 0% 95%));
+  border-bottom: var(--nlportal-header-border-width, 1px) var(--nlportal-header-border-style, solid)
+    var(--nlportal-header-border-color, hsl(0 0% 95%));
 }
 
 .header {
