@@ -67,7 +67,9 @@
 }
 
 .header__logo-container--fullscreen {
-  max-width: var(--nlportal-header-max-logo-width-fullscreen, 186px);
+  @include breakpoint(tablet) {
+    max-width: var(--nlportal-header-max-logo-width-fullscreen, 186px);
+  }
 }
 
 .header__logo-image {
