@@ -1,15 +1,23 @@
 import * as React from 'react';
-import {useEffect} from 'react';
+import {useContext, useEffect} from 'react';
 import {Helmet} from 'react-helmet';
 import {useScript} from 'usehooks-ts';
+import {LayoutContext} from '../../contexts';
 
 // eslint-disable-next-line
 declare const OpenForms: any;
 
 const FormPage = () => {
+  const {enableFullscreenForm, disableFullscreenForm} = useContext(LayoutContext);
   const openFormsScript = useScript(
     'https://openformulieren-cg.test.denhaag.nl/static/sdk/open-forms-sdk.js'
   );
+
+  useEffect(() => {
+    enableFullscreenForm();
+
+    return disableFullscreenForm;
+  });
 
   useEffect(() => {
     if (typeof OpenForms !== 'undefined') {

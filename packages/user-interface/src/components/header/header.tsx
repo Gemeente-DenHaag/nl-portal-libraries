@@ -25,8 +25,15 @@ interface HeaderProps {
 }
 
 const Header: FC<HeaderProps> = ({logo, facet, homePage, offline}) => {
-  const {mobileMenuOpened, menuOpened, hideMobileMenu, hideMenu, headerHeight, setHeaderHeight} =
-    useContext(LayoutContext);
+  const {
+    mobileMenuOpened,
+    menuOpened,
+    hideMobileMenu,
+    hideMenu,
+    headerHeight,
+    setHeaderHeight,
+    fullscreenForm,
+  } = useContext(LayoutContext);
   const {hrefLang} = useContext(LocaleContext);
   const isTablet = useMediaQuery(BREAKPOINTS.TABLET);
   const intl = useIntl();
@@ -113,38 +120,44 @@ const Header: FC<HeaderProps> = ({logo, facet, homePage, offline}) => {
                 headerLogoElement
               )}
             </div>
-            <div className={styles['header__elements-mobile']}>
-              <MenuToggleButton />
-            </div>
-            <div className={styles['header__elements-desktop']}>
-              {online && (
-                <Fragment>
-                  <div className={styles['header__element--large-spacing']}>
-                    <UserName />
-                  </div>
-                  <div className={styles['header__element--medium-spacing']}>
-                    <Logout />
-                  </div>
-                </Fragment>
-              )}
-              <LanguageSwitcher />
-            </div>
+            {!fullscreenForm && (
+              <div className={styles['header__elements-mobile']}>
+                <MenuToggleButton />
+              </div>
+            )}
+            {!fullscreenForm && (
+              <div className={styles['header__elements-desktop']}>
+                {online && (
+                  <Fragment>
+                    <div className={styles['header__element--large-spacing']}>
+                      <UserName />
+                    </div>
+                    <div className={styles['header__element--medium-spacing']}>
+                      <Logout />
+                    </div>
+                  </Fragment>
+                )}
+                <LanguageSwitcher />
+              </div>
+            )}
           </div>
         </header>
-        <div
-          className={classNames(styles['header__mobile-menu'], {
-            [styles['header__mobile-menu--hidden']]: !mobileMenuOpened,
-          })}
-        >
-          {online && (
-            <Fragment>
-              <UserName mobileMenu />
-              <Logout mobileMenu />
-            </Fragment>
-          )}
-          <LanguageSwitcher mobileMenu />
-        </div>
-        {facet && (
+        {!fullscreenForm && (
+          <div
+            className={classNames(styles['header__mobile-menu'], {
+              [styles['header__mobile-menu--hidden']]: !mobileMenuOpened,
+            })}
+          >
+            {online && (
+              <Fragment>
+                <UserName mobileMenu />
+                <Logout mobileMenu />
+              </Fragment>
+            )}
+            <LanguageSwitcher mobileMenu />
+          </div>
+        )}
+        {facet && !fullscreenForm && (
           <div className={styles['header__facet-container']}>
             {React.cloneElement(facet, {
               className: styles['header__facet-image'],

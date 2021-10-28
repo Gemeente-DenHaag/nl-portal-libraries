@@ -13,10 +13,13 @@ const LayoutProvider: FC<LayoutProviderProps> = ({children, initialPage}) => {
   const [headerHeight, setHeaderHeight] = useState(0);
   const [currentPage, setCurrentPage] = useState(initialPage);
   const [mobileMenuOpened, setMobileMenuState] = useState(false);
+  const [fullscreenForm, setFullscreenForm] = useState(false);
   const hideMenu = () => setMenuState(false);
   const showMenu = () => setMenuState(true);
   const hideMobileMenu = () => setMobileMenuState(false);
   const showMobileMenu = () => setMobileMenuState(true);
+  const enableFullscreenForm = () => setFullscreenForm(true);
+  const disableFullscreenForm = () => setFullscreenForm(false);
 
   return (
     <LayoutContext.Provider
@@ -33,6 +36,9 @@ const LayoutProvider: FC<LayoutProviderProps> = ({children, initialPage}) => {
         showMobileMenu,
         headerHeight,
         setHeaderHeight,
+        fullscreenForm,
+        enableFullscreenForm,
+        disableFullscreenForm,
       }}
     >
       {children}

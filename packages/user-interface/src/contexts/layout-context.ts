@@ -14,6 +14,9 @@ interface LayoutContextInterface {
   showMobileMenu: () => void;
   headerHeight: number;
   setHeaderHeight: (value: number) => void;
+  fullscreenForm: boolean;
+  enableFullscreenForm: () => void;
+  disableFullscreenForm: () => void;
 }
 
 export const LayoutContext = React.createContext<LayoutContextInterface>(

@@ -2,6 +2,7 @@ import * as React from 'react';
 import {StylesProvider} from '@gemeente-denhaag/denhaag-component-library';
 import {FC, Fragment, ReactElement, useContext} from 'react';
 import {BrowserRouter as Router, Switch, Route, Redirect} from 'react-router-dom';
+import classNames from 'classnames';
 import {Header} from '../header';
 import {Menu} from '../menu';
 import {PortalFooter, PortalPage} from '../../interfaces';
@@ -22,7 +23,7 @@ interface LayoutComponentProps {
 }
 
 const LayoutComponent: FC<LayoutComponentProps> = ({headerLogo, facet, pages, footer, offline}) => {
-  const {headerHeight} = useContext(LayoutContext);
+  const {headerHeight, fullscreenForm} = useContext(LayoutContext);
   const online = !offline;
   const offlinePage = {
     path: '/',
@@ -43,10 +44,16 @@ const LayoutComponent: FC<LayoutComponentProps> = ({headerLogo, facet, pages, fo
         <div className={styles['page-container__inner']}>
           {online && (
             <Fragment>
-              <div className={styles['page-container__menu']}>
-                <Menu items={pages} />
-              </div>
-              <div className={styles['page-container__page']}>
+              {!fullscreenForm && (
+                <div className={styles['page-container__menu']}>
+                  <Menu items={pages} />
+                </div>
+              )}
+              <div
+                className={classNames(styles['page-container__page'], {
+                  [styles['page-container__page--fullscreen']]: fullscreenForm,
+                })}
+              >
                 <Switch>
                   {pages.reduce(
                     (accumulator, page) => [
