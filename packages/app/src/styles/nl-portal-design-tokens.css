@@ -22,6 +22,12 @@
   --nlportal-header-max-logo-width: 150px;
   --nlportal-header-facet-height: 14px;
   --nlportal-header-background-color: var(--denhaag-color-white);
+  --nlportal-header-bar-height: 14px;
+  --nlportal-header-bar-height-tablet: 54px;
+  --nlportal-header-bar-background-color: var(--denhaag-color-blue-3);
+  --nlportal-header-border-width: 1px;
+  --nlportal-header-border-style: solid;
+  --nlportal-header-border-color: var(--denhaag-color-grey-1);
   --nlportal-desktop-menu-width: 230px;
   --nlportal-menu-item-height: 3rem;
   --nlportal-menu-background-color: var(--denhaag-color-white);

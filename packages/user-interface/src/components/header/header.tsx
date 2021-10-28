@@ -103,7 +103,12 @@ const Header: FC<HeaderProps> = ({logo, facet, homePage, offline}) => {
       ref={headerContainerRef}
       style={{marginBlockStart: !isTablet ? -headerMarginTop : 0}}
     >
-      <div className={styles['header-wrapper']}>
+      {fullscreenForm && <div className={styles['header-bar']} />}
+      <div
+        className={classNames(styles['header-wrapper'], {
+          [styles['header-wrapper--fullscreen']]: fullscreenForm,
+        })}
+      >
         <header className={styles.header}>
           <div className={styles.header__inner}>
             <div className={styles['header__logo-container']}>
@@ -165,7 +170,7 @@ const Header: FC<HeaderProps> = ({logo, facet, homePage, offline}) => {
           </div>
         )}
       </div>
-      {online && <CurrentPageIndicator />}
+      {online && !fullscreenForm && <CurrentPageIndicator />}
     </div>
   );
 };
