@@ -17,12 +17,20 @@ import {OfflinePage} from '../../pages';
 interface LayoutComponentProps {
   pages: Array<PortalPage>;
   headerLogo: ReactElement;
+  headerLogoSmall: ReactElement;
   facet?: ReactElement;
   footer: PortalFooter;
   offline?: boolean;
 }
 
-const LayoutComponent: FC<LayoutComponentProps> = ({headerLogo, facet, pages, footer, offline}) => {
+const LayoutComponent: FC<LayoutComponentProps> = ({
+  headerLogo,
+  facet,
+  pages,
+  footer,
+  offline,
+  headerLogoSmall,
+}) => {
   const {headerHeight, fullscreenForm} = useContext(LayoutContext);
   const online = !offline;
   const offlinePage = {
@@ -36,6 +44,7 @@ const LayoutComponent: FC<LayoutComponentProps> = ({headerLogo, facet, pages, fo
     <Router>
       <Header
         logo={headerLogo}
+        logoSmall={headerLogoSmall}
         facet={facet}
         homePage={pages.find(page => page.isHome)}
         offline={offline}
@@ -102,12 +111,20 @@ const LayoutComponent: FC<LayoutComponentProps> = ({headerLogo, facet, pages, fo
   );
 };
 
-const Layout: FC<LayoutComponentProps> = ({headerLogo, facet, pages, footer, offline}) => (
+const Layout: FC<LayoutComponentProps> = ({
+  headerLogo,
+  facet,
+  pages,
+  footer,
+  offline,
+  headerLogoSmall,
+}) => (
   <StylesProvider>
     <LayoutProvider initialPage={pages[0]}>
       <LayoutComponent
         pages={pages}
         headerLogo={headerLogo}
+        headerLogoSmall={headerLogoSmall}
         footer={footer}
         facet={facet}
         offline={offline}

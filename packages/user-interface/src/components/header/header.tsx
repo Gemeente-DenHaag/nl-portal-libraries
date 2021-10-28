@@ -22,12 +22,13 @@ import {MenuToggleButton} from '../menu-toggle-button';
 
 interface HeaderProps {
   logo: ReactElement;
+  logoSmall: ReactElement;
   homePage?: PortalPage;
   facet?: ReactElement;
   offline?: boolean;
 }
 
-const Header: FC<HeaderProps> = ({logo, facet, homePage, offline}) => {
+const Header: FC<HeaderProps> = ({logo, facet, homePage, offline, logoSmall}) => {
   const {
     mobileMenuOpened,
     menuOpened,
@@ -53,6 +54,12 @@ const Header: FC<HeaderProps> = ({logo, facet, homePage, offline}) => {
     className: styles['header__logo-image'],
     alt: intl.formatMessage({id: 'app.appName'}),
   });
+  const headerLogoSmallElement = React.cloneElement(logoSmall, {
+    className: styles['header__logo-image'],
+    alt: intl.formatMessage({id: 'app.appName'}),
+  });
+  const headerLogoElementToUse =
+    !isTablet && fullscreenForm ? headerLogoSmallElement : headerLogoElement;
   const online = !offline;
 
   useEffect(() => {
@@ -130,10 +137,10 @@ const Header: FC<HeaderProps> = ({logo, facet, homePage, offline}) => {
                   title={intl.formatMessage({id: `pageTitles.${homePage.titleTranslationKey}`})}
                   className={styles['header__logo-link']}
                 >
-                  {headerLogoElement}
+                  {headerLogoElementToUse}
                 </Link>
               ) : (
-                headerLogoElement
+                headerLogoElementToUse
               )}
             </div>
             {!fullscreenForm && (

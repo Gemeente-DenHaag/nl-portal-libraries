@@ -21,6 +21,7 @@ import {
 import {ArchiveIcon, DocumentIcon, GridIcon, InboxIcon} from '@gemeente-denhaag/icons';
 import {CUSTOM_MESSAGES} from '../../i18n';
 import {ReactComponent as HeaderLogo} from '../../assets/header-logo.svg';
+import {ReactComponent as HeaderLogoSmall} from '../../assets/header-logo-small.svg';
 import Facet from '../../assets/facet.png';
 import {config} from '../../config';
 import StatusHistoryBackground from '../../assets/status-history-background.svg';
@@ -144,6 +145,7 @@ const App = () => (
             <Layout
               pages={pages}
               headerLogo={<HeaderLogo />}
+              headerLogoSmall={<HeaderLogoSmall />}
               facet={<img src={Facet} alt="" />}
               footer={footer}
             />
@@ -156,6 +158,7 @@ const App = () => (
         <Layout
           pages={pages}
           headerLogo={<HeaderLogo />}
+          headerLogoSmall={<HeaderLogoSmall />}
           facet={<img src={Facet} alt="" />}
           footer={footer}
           offline
