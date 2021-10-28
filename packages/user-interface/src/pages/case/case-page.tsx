@@ -109,6 +109,7 @@ const CasePage: FC<CasePageProps> = ({statusHistoryFacet, statusHistoryBackgroun
               caseId={data?.getZaak.zaaktype.identificatie}
               statusHistory={data?.getZaak.statusGeschiedenis}
               statuses={data?.getZaak.statussen}
+              status={data?.getZaak.status}
               loading={loading}
               facet={statusHistoryFacet}
               background={statusHistoryBackground}

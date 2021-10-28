@@ -11,6 +11,7 @@ interface StatusHistoryProps {
   caseId?: string;
   statusHistory?: Array<ZaakStatus>;
   statuses?: Array<StatusType>;
+  status?: ZaakStatus | null;
   loading: boolean;
   facet?: ReactElement;
   background?: ReactElement;
@@ -20,13 +21,23 @@ const StatusHistory: FC<StatusHistoryProps> = ({
   caseId,
   statusHistory,
   statuses,
+  status,
   loading,
   facet,
   background,
 }) => {
   const intl = useIntl();
+  const currentStatusId = stringToId(status?.statustype?.omschrijving || '');
+  const statusIds = statuses?.map(statusType => stringToId(statusType.omschrijving || ''));
+  const currentStatusIndex = statusIds?.findIndex(statusId => statusId === currentStatusId);
   const amountOfStatuses = statusHistory?.length;
-  const activeStep = amountOfStatuses ? amountOfStatuses - 1 : 0;
+  let activeStep = 0;
+
+  if (currentStatusIndex && currentStatusIndex !== -1) {
+    activeStep = currentStatusIndex;
+  } else if (amountOfStatuses) {
+    activeStep = amountOfStatuses - 1;
+  }
 
   const getSkeletonStep = (key: number) => (
     <div
@@ -60,11 +71,11 @@ const StatusHistory: FC<StatusHistoryProps> = ({
       <div className={styles['status-history']}>
         {!loading && statuses ? (
           <Timeline activeStep={activeStep} className={styles['status-history__timeline']}>
-            {statuses?.map((status, index) => (
+            {statuses?.map((statusType, index) => (
               <Step
-                key={status.omschrijving}
+                key={statusType.omschrijving}
                 label={intl.formatMessage({
-                  id: `case.${caseId}.status.${stringToId(`${status.omschrijving}`)}`,
+                  id: `case.${caseId}.status.${stringToId(`${statusType.omschrijving}`)}`,
                 })}
                 completed={index < activeStep}
               />
