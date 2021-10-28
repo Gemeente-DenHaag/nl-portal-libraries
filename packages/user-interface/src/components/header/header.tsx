@@ -109,9 +109,15 @@ const Header: FC<HeaderProps> = ({logo, facet, homePage, offline}) => {
           [styles['header-wrapper--fullscreen']]: fullscreenForm,
         })}
       >
-        <header className={styles.header}>
+        <header
+          className={classNames(styles.header, {[styles['header--fullscreen']]: fullscreenForm})}
+        >
           <div className={styles.header__inner}>
-            <div className={styles['header__logo-container']}>
+            <div
+              className={classNames(styles['header__logo-container'], {
+                [styles['header__logo-container--fullscreen']]: fullscreenForm,
+              })}
+            >
               {homePage ? (
                 <Link
                   to={homePage.path}

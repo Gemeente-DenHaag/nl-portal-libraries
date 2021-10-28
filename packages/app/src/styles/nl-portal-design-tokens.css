@@ -19,7 +19,9 @@
   --nlportal-max-page-width: 1024px;
   --nlportal-header-height: 72px;
   --nlportal-header-height-large: 85px;
+  --nlportal-header-height-fullscreen-tablet: 128px;
   --nlportal-header-max-logo-width: 150px;
+  --nlportal-header-max-logo-width-fullscreen: 186px;
   --nlportal-header-facet-height: 14px;
   --nlportal-header-background-color: var(--denhaag-color-white);
   --nlportal-header-bar-height: 14px;
