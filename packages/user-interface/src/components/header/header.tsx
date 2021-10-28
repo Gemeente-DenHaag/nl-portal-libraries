@@ -2,10 +2,13 @@ import * as React from 'react';
 import {FC, Fragment, ReactElement, useContext, useEffect, useState} from 'react';
 import {useIntl} from 'react-intl';
 import {LocaleContext} from '@nl-portal/localization';
-import {Link} from 'react-router-dom';
+import {Link, useHistory} from 'react-router-dom';
 import classNames from 'classnames';
 import useSize from '@react-hook/size';
 import useScrollPosition from '@react-hook/window-scroll';
+import {Heading3, Heading4, IconButton} from '@gemeente-denhaag/denhaag-component-library';
+import {CloseIcon} from '@gemeente-denhaag/icons';
+import Skeleton from 'react-loading-skeleton';
 import styles from './header.module.scss';
 import {LanguageSwitcher} from '../language-switcher';
 import {Logout} from '../logout';
@@ -33,10 +36,12 @@ const Header: FC<HeaderProps> = ({logo, facet, homePage, offline}) => {
     headerHeight,
     setHeaderHeight,
     fullscreenForm,
+    currentFormTitle,
   } = useContext(LayoutContext);
   const {hrefLang} = useContext(LocaleContext);
   const isTablet = useMediaQuery(BREAKPOINTS.TABLET);
   const intl = useIntl();
+  const history = useHistory();
   const [previousScrollY, setPreviousScrollY] = useState(0);
   const [headerFixed, setHeaderFixed] = useState(false);
   const [headerMarginTop, setHeaderMarginTop] = useState(0);
@@ -149,6 +154,24 @@ const Header: FC<HeaderProps> = ({logo, facet, homePage, offline}) => {
                   </Fragment>
                 )}
                 <LanguageSwitcher />
+              </div>
+            )}
+            {fullscreenForm && (
+              <div className={styles['header__elements-fullscreen-form']}>
+                {isTablet ? (
+                  <Heading3>{currentFormTitle || <Skeleton width={250} />}</Heading3>
+                ) : (
+                  <Heading4>{currentFormTitle || <Skeleton width={150} />}</Heading4>
+                )}
+                {React.cloneElement(
+                  <IconButton
+                    className={styles['header__close-button']}
+                    onClick={() => history.push(homePage?.path || '/')}
+                  >
+                    <CloseIcon />
+                  </IconButton>,
+                  {title: intl.formatMessage({id: 'menu.close'})}
+                )}
               </div>
             )}
           </div>

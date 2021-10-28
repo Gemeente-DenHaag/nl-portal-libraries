@@ -17,6 +17,9 @@ interface LayoutContextInterface {
   fullscreenForm: boolean;
   enableFullscreenForm: () => void;
   disableFullscreenForm: () => void;
+  currentFormTitle: string;
+  setCurrentFormTitle: (value: string) => void;
+  clearCurrentFormTitle: () => void;
 }
 
 export const LayoutContext = React.createContext<LayoutContextInterface>(

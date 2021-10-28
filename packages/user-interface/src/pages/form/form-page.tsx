@@ -8,7 +8,8 @@ import {LayoutContext} from '../../contexts';
 declare const OpenForms: any;
 
 const FormPage = () => {
-  const {enableFullscreenForm, disableFullscreenForm} = useContext(LayoutContext);
+  const {enableFullscreenForm, disableFullscreenForm, setCurrentFormTitle, clearCurrentFormTitle} =
+    useContext(LayoutContext);
   const openFormsScript = useScript(
     'https://openformulieren-cg.test.denhaag.nl/static/sdk/open-forms-sdk.js'
   );
@@ -16,8 +17,11 @@ const FormPage = () => {
   useEffect(() => {
     enableFullscreenForm();
 
-    return disableFullscreenForm;
-  });
+    return () => {
+      disableFullscreenForm();
+      clearCurrentFormTitle();
+    };
+  }, []);
 
   useEffect(() => {
     if (typeof OpenForms !== 'undefined') {
@@ -28,7 +32,20 @@ const FormPage = () => {
 
       const sentryEnv = 'docker';
       const form = new OpenForms.OpenForm(targetNode, {baseUrl, formId, basePath, sentryEnv});
+
       form.init();
+
+      const checkFormName = () => {
+        const formName = form?.formObject?.name;
+
+        if (formName) {
+          setCurrentFormTitle(formName);
+        } else {
+          setTimeout(checkFormName, 250);
+        }
+      };
+
+      checkFormName();
     }
   }, [openFormsScript]);
 
