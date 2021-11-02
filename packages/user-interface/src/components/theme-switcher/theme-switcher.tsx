@@ -25,7 +25,20 @@ const ThemeSwitcher = () => {
       </Helmet>
       {scriptLoaded && (
         // @ts-ignore
-        <nl-theme-switcher />
+        <nl-theme-switcher // @ts-ignore
+          themes={JSON.stringify([
+            {
+              className: 'denhaag-theme',
+              title: 'Gemeente Den Haag',
+              href: 'https://unpkg.com/@utrecht/design-tokens/dist/theme/index.css',
+            },
+            {
+              className: 'utrecht-theme',
+              title: 'Gemeente Utrecht',
+              href: 'https://unpkg.com/@utrecht/design-tokens/dist/theme/index.css',
+            },
+          ])}
+        />
       )}
     </Fragment>
   );

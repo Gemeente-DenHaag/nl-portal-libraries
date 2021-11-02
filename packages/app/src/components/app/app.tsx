@@ -1,5 +1,5 @@
 import React, {Fragment} from 'react';
-import '@gemeente-denhaag/design-tokens-components';
+// import '@gemeente-denhaag/design-tokens-components';
 import '@nl-portal/user-interface/dist/index.css';
 import '../../styles/nl-portal-design-tokens.css';
 import {KeycloakWrapper} from '@nl-portal/authentication';
