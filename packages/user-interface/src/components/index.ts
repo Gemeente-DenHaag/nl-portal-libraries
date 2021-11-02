@@ -15,3 +15,4 @@ export * from './meta-icon';
 export * from './status-history';
 export * from './document';
 export * from './document-list';
+export * from './theme-switcher';
