@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {FormattedMessage} from 'react-intl';
 import {FC, ReactElement, useContext} from 'react';
-import {Heading4, Paragraph} from '@gemeente-denhaag/denhaag-component-library';
+import {Heading4, Link} from '@gemeente-denhaag/denhaag-component-library';
 import {ExternalLinkIcon} from '@gemeente-denhaag/icons';
 import classNames from 'classnames';
 import {LocaleContext} from '@nl-portal/localization';
@@ -41,19 +41,17 @@ const Footer: FC<FooterProps> = ({footer, facet}) => {
               {column.links
                 .filter(link => link.hrefLang === hrefLang)
                 .map(link => (
-                  <a
-                    key={link.url}
+                  <Link
+                    iconAlign="end"
+                    icon={<ExternalLinkIcon />}
                     href={link.url}
                     target="_blank"
                     rel="noreferrer"
                     hrefLang={link.hrefLang}
                     className={styles.footer__link}
                   >
-                    <Paragraph>
-                      <FormattedMessage id={`footerLinks.${link.linkTranslationKey}`} />
-                    </Paragraph>
-                    <ExternalLinkIcon />
-                  </a>
+                    <FormattedMessage id={`footerLinks.${link.linkTranslationKey}`} />
+                  </Link>
                 ))}
             </div>
           ))}

@@ -43,15 +43,8 @@
 }
 
 .footer__link {
-  color: var(--nlportal-footer-link-color, hsl(0 0% 95%));
+  color: var(--nlportal-footer-link-color, hsl(0 0% 95%)) !important;
   margin-block-start: var(--nlportal-space-block-xs, 0.5rem);
-  display: flex;
-  align-items: center;
-
-  svg {
-    font-size: var(--nlportal-footer-link-icon-size, 1rem);
-    margin-inline-start: var(--nlportal-space-inline-xs, 0.5rem);
-  }
 }
 
 .footer__facet-container {
