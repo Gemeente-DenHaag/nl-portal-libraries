@@ -1,8 +1,9 @@
 import * as React from 'react';
 import {StylesProvider} from '@gemeente-denhaag/denhaag-component-library';
-import {FC, Fragment, ReactElement, useContext, useEffect} from 'react';
+import {FC, Fragment, ReactElement, useContext} from 'react';
 import {BrowserRouter as Router, Switch, Route, Redirect} from 'react-router-dom';
 import classNames from 'classnames';
+import {Helmet} from 'react-helmet';
 import {Header} from '../header';
 import {Menu} from '../menu';
 import {PortalFooter, PortalPage} from '../../interfaces';
@@ -44,14 +45,12 @@ const LayoutComponent: FC<LayoutComponentProps> = ({
     isHome: true,
   };
 
-  useEffect(() => {
-    if (showThemeSwitcher && defaultThemeClass) {
-      document.documentElement.classList.add(defaultThemeClass);
-    }
-  }, []);
-
   return (
     <Router>
+      <Helmet>
+        {/* eslint-disable-next-line jsx-a11y/html-has-lang */}
+        <html className={showThemeSwitcher && defaultThemeClass ? defaultThemeClass : ''} />
+      </Helmet>
       <Header
         logo={headerLogo}
         logoSmall={headerLogoSmall}
