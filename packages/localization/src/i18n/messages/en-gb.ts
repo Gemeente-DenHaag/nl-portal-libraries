@@ -35,5 +35,6 @@ export const EN_GB_MESSAGES: Messages = {
     'offline.warning': 'In order to use {applicationName}, an internet connection is required.',
     'element.loading': 'Loading',
     'element.download': 'Download',
+    'footerColumns.theme': 'Theme',
   },
 };

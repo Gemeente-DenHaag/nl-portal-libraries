@@ -37,5 +37,6 @@ export const NL_NL_MESSAGES: Messages = {
       'Maak verbinding met het internet om gebruik te maken van {applicationName}.',
     'element.loading': 'Aan het laden',
     'element.download': 'Download',
+    'footerColumns.theme': 'Thema',
   },
 };

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {StylesProvider} from '@gemeente-denhaag/denhaag-component-library';
-import {FC, Fragment, ReactElement, useContext} from 'react';
+import {FC, Fragment, ReactElement, useContext, useEffect} from 'react';
 import {BrowserRouter as Router, Switch, Route, Redirect} from 'react-router-dom';
 import classNames from 'classnames';
 import {Header} from '../header';
@@ -21,6 +21,8 @@ interface LayoutComponentProps {
   facet?: ReactElement;
   footer: PortalFooter;
   offline?: boolean;
+  showThemeSwitcher: boolean;
+  defaultThemeClass?: string;
 }
 
 const LayoutComponent: FC<LayoutComponentProps> = ({
@@ -30,6 +32,8 @@ const LayoutComponent: FC<LayoutComponentProps> = ({
   footer,
   offline,
   headerLogoSmall,
+  showThemeSwitcher,
+  defaultThemeClass,
 }) => {
   const {headerHeight, fullscreenForm} = useContext(LayoutContext);
   const online = !offline;
@@ -39,6 +43,12 @@ const LayoutComponent: FC<LayoutComponentProps> = ({
     pageComponent: <OfflinePage />,
     isHome: true,
   };
+
+  useEffect(() => {
+    if (showThemeSwitcher && defaultThemeClass) {
+      document.documentElement.classList.add(defaultThemeClass);
+    }
+  }, []);
 
   return (
     <Router>
@@ -106,7 +116,7 @@ const LayoutComponent: FC<LayoutComponentProps> = ({
           )}
         </div>
       </div>
-      {online && <Footer footer={footer} facet={facet} />}
+      {online && <Footer footer={footer} facet={facet} showThemeSwitcher={showThemeSwitcher} />}
     </Router>
   );
 };
@@ -118,6 +128,8 @@ const Layout: FC<LayoutComponentProps> = ({
   footer,
   offline,
   headerLogoSmall,
+  showThemeSwitcher,
+  defaultThemeClass,
 }) => (
   <StylesProvider>
     <LayoutProvider initialPage={pages[0]}>
@@ -128,6 +140,8 @@ const Layout: FC<LayoutComponentProps> = ({
         footer={footer}
         facet={facet}
         offline={offline}
+        showThemeSwitcher={showThemeSwitcher}
+        defaultThemeClass={defaultThemeClass}
       />
     </LayoutProvider>
   </StylesProvider>

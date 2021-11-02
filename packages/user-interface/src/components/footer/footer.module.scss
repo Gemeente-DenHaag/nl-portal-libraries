@@ -9,7 +9,7 @@
   --utrecht-heading-color: var(--nlportal-footer-header-color, hsl(208 76% 92%));
 }
 
-.footer__inner {
+.footer__columns {
   width: calc(100% - var(--nlportal-space-inline-4xl, 3rem));
   max-width: var(--nlportal-max-page-width, 1024px);
   display: flex;
@@ -38,7 +38,7 @@
   }
 
   @include breakpoint(desktop) {
-    margin-inline-start: var(--nlportal-footer-column-space-inline-large, 250px);
+    margin-inline-start: var(--nlportal-footer-column-space-inline-large, 150px);
   }
 }
 
