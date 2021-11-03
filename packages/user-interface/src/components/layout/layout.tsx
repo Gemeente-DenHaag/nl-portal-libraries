@@ -53,6 +53,7 @@ const LayoutComponent: FC<LayoutComponentProps> = ({
       </Helmet>
       <Header
         logo={headerLogo}
+        logoSmall={headerLogoSmall}
         facet={facet}
         homePage={pages.find(page => page.isHome)}
         offline={offline}
@@ -114,7 +115,7 @@ const LayoutComponent: FC<LayoutComponentProps> = ({
           )}
         </div>
       </div>
-      {online && <Footer footer={footer} facet={facet} />}
+      {online && <Footer footer={footer} facet={facet} showThemeSwitcher={showThemeSwitcher} />}
     </Router>
   );
 };
