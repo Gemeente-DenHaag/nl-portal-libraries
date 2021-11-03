@@ -2,10 +2,13 @@ import * as React from 'react';
 import {FC, Fragment, ReactElement, useContext, useEffect, useState} from 'react';
 import {useIntl} from 'react-intl';
 import {LocaleContext} from '@nl-portal/localization';
-import {Link} from 'react-router-dom';
+import {Link, useHistory} from 'react-router-dom';
 import classNames from 'classnames';
 import useSize from '@react-hook/size';
 import useScrollPosition from '@react-hook/window-scroll';
+import {Heading3, Heading4, IconButton} from '@gemeente-denhaag/denhaag-component-library';
+import {CloseIcon} from '@gemeente-denhaag/icons';
+import Skeleton from 'react-loading-skeleton';
 import styles from './header.module.scss';
 import {LanguageSwitcher} from '../language-switcher';
 import {Logout} from '../logout';
@@ -19,17 +22,27 @@ import {MenuToggleButton} from '../menu-toggle-button';
 
 interface HeaderProps {
   logo: ReactElement;
+  logoSmall: ReactElement;
   homePage?: PortalPage;
   facet?: ReactElement;
   offline?: boolean;
 }
 
-const Header: FC<HeaderProps> = ({logo, facet, homePage, offline}) => {
-  const {mobileMenuOpened, menuOpened, hideMobileMenu, hideMenu, headerHeight, setHeaderHeight} =
-    useContext(LayoutContext);
+const Header: FC<HeaderProps> = ({logo, facet, homePage, offline, logoSmall}) => {
+  const {
+    mobileMenuOpened,
+    menuOpened,
+    hideMobileMenu,
+    hideMenu,
+    headerHeight,
+    setHeaderHeight,
+    fullscreenForm,
+    currentFormTitle,
+  } = useContext(LayoutContext);
   const {hrefLang} = useContext(LocaleContext);
   const isTablet = useMediaQuery(BREAKPOINTS.TABLET);
   const intl = useIntl();
+  const history = useHistory();
   const [previousScrollY, setPreviousScrollY] = useState(0);
   const [headerFixed, setHeaderFixed] = useState(false);
   const [headerMarginTop, setHeaderMarginTop] = useState(0);
@@ -41,6 +54,12 @@ const Header: FC<HeaderProps> = ({logo, facet, homePage, offline}) => {
     className: styles['header__logo-image'],
     alt: intl.formatMessage({id: 'app.appName'}),
   });
+  const headerLogoSmallElement = React.cloneElement(logoSmall, {
+    className: styles['header__logo-image'],
+    alt: intl.formatMessage({id: 'app.appName'}),
+  });
+  const headerLogoElementToUse =
+    !isTablet && fullscreenForm ? headerLogoSmallElement : headerLogoElement;
   const online = !offline;
 
   useEffect(() => {
@@ -96,10 +115,21 @@ const Header: FC<HeaderProps> = ({logo, facet, homePage, offline}) => {
       ref={headerContainerRef}
       style={{marginBlockStart: !isTablet ? -headerMarginTop : 0}}
     >
-      <div className={styles['header-wrapper']}>
-        <header className={styles.header}>
+      {fullscreenForm && <div className={styles['header-bar']} />}
+      <div
+        className={classNames(styles['header-wrapper'], {
+          [styles['header-wrapper--fullscreen']]: fullscreenForm,
+        })}
+      >
+        <header
+          className={classNames(styles.header, {[styles['header--fullscreen']]: fullscreenForm})}
+        >
           <div className={styles.header__inner}>
-            <div className={styles['header__logo-container']}>
+            <div
+              className={classNames(styles['header__logo-container'], {
+                [styles['header__logo-container--fullscreen']]: fullscreenForm,
+              })}
+            >
               {homePage ? (
                 <Link
                   to={homePage.path}
@@ -107,44 +137,68 @@ const Header: FC<HeaderProps> = ({logo, facet, homePage, offline}) => {
                   title={intl.formatMessage({id: `pageTitles.${homePage.titleTranslationKey}`})}
                   className={styles['header__logo-link']}
                 >
-                  {headerLogoElement}
+                  {headerLogoElementToUse}
                 </Link>
               ) : (
-                headerLogoElement
+                headerLogoElementToUse
               )}
             </div>
-            <div className={styles['header__elements-mobile']}>
-              <MenuToggleButton />
-            </div>
-            <div className={styles['header__elements-desktop']}>
-              {online && (
-                <Fragment>
-                  <div className={styles['header__element--large-spacing']}>
-                    <UserName />
-                  </div>
-                  <div className={styles['header__element--medium-spacing']}>
-                    <Logout />
-                  </div>
-                </Fragment>
-              )}
-              <LanguageSwitcher />
-            </div>
+            {!fullscreenForm && (
+              <div className={styles['header__elements-mobile']}>
+                <MenuToggleButton />
+              </div>
+            )}
+            {!fullscreenForm && (
+              <div className={styles['header__elements-desktop']}>
+                {online && (
+                  <Fragment>
+                    <div className={styles['header__element--large-spacing']}>
+                      <UserName />
+                    </div>
+                    <div className={styles['header__element--medium-spacing']}>
+                      <Logout />
+                    </div>
+                  </Fragment>
+                )}
+                <LanguageSwitcher />
+              </div>
+            )}
+            {fullscreenForm && (
+              <div className={styles['header__elements-fullscreen-form']}>
+                {isTablet ? (
+                  <Heading3>{currentFormTitle || <Skeleton width={250} />}</Heading3>
+                ) : (
+                  <Heading4>{currentFormTitle || <Skeleton width={150} />}</Heading4>
+                )}
+                {React.cloneElement(
+                  <IconButton
+                    className={styles['header__close-button']}
+                    onClick={() => history.push(homePage?.path || '/')}
+                  >
+                    <CloseIcon />
+                  </IconButton>,
+                  {title: intl.formatMessage({id: 'menu.close'})}
+                )}
+              </div>
+            )}
           </div>
         </header>
-        <div
-          className={classNames(styles['header__mobile-menu'], {
-            [styles['header__mobile-menu--hidden']]: !mobileMenuOpened,
-          })}
-        >
-          {online && (
-            <Fragment>
-              <UserName mobileMenu />
-              <Logout mobileMenu />
-            </Fragment>
-          )}
-          <LanguageSwitcher mobileMenu />
-        </div>
-        {facet && (
+        {!fullscreenForm && (
+          <div
+            className={classNames(styles['header__mobile-menu'], {
+              [styles['header__mobile-menu--hidden']]: !mobileMenuOpened,
+            })}
+          >
+            {online && (
+              <Fragment>
+                <UserName mobileMenu />
+                <Logout mobileMenu />
+              </Fragment>
+            )}
+            <LanguageSwitcher mobileMenu />
+          </div>
+        )}
+        {facet && !fullscreenForm && (
           <div className={styles['header__facet-container']}>
             {React.cloneElement(facet, {
               className: styles['header__facet-image'],
@@ -152,7 +206,7 @@ const Header: FC<HeaderProps> = ({logo, facet, homePage, offline}) => {
           </div>
         )}
       </div>
-      {online && <CurrentPageIndicator />}
+      {online && !fullscreenForm && <CurrentPageIndicator />}
     </div>
   );
 };
