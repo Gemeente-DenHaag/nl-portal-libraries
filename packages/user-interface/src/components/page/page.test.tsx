@@ -1,21 +1,29 @@
 import React from 'react';
-import {render, screen} from '@testing-library/react';
+import {render} from '@testing-library/react';
+import {intlWrapper} from '@nl-portal/localization';
 import {Page} from './page';
+import {LayoutProvider} from '../../providers';
 
-it('renders page components', () => {
-  render(
-    <Page
-      page={{
-        icon: <span />,
-        pageComponent: <span />,
-        path: '/',
-        titleTranslationKey: 'overview',
-        showInMenu: true,
-        isHome: true,
-      }}
-    >
-      <span>test</span>
-    </Page>
-  );
-  expect(screen.getByText('Learn React')).toBeInTheDocument();
+describe('Page component', () => {
+  it('should correctly set the document title', () => {
+    const testPage = {
+      icon: <span />,
+      pageComponent: <span />,
+      path: '/',
+      titleTranslationKey: 'overview',
+      showInMenu: true,
+      isHome: true,
+    };
+
+    render(
+      <LayoutProvider initialPage={testPage}>
+        <Page page={testPage}>
+          <span>test</span>
+        </Page>
+      </LayoutProvider>,
+      {wrapper: intlWrapper}
+    );
+
+    expect(document.title).toContain('Overview');
+  });
 });

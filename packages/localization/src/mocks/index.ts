@@ -1,1 +1,1 @@
-export * from './render-react-intl';
+export * from './intl-wrapper';
