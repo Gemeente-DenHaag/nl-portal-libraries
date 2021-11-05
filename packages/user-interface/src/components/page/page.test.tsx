@@ -1,6 +1,6 @@
 import React from 'react';
 import {render} from '@testing-library/react';
-import {intlWrapper} from '@nl-portal/localization';
+import {mockIntlWrapper} from '@nl-portal/localization';
 import {unmountComponentAtNode} from 'react-dom';
 import {Page} from './page';
 import {LayoutProvider} from '../../providers';
@@ -37,7 +37,7 @@ describe('Page', () => {
           <span>test</span>
         </Page>
       </LayoutProvider>,
-      {wrapper: intlWrapper, container}
+      {wrapper: mockIntlWrapper, container}
     );
 
     expect(document.title).toContain('Overview');

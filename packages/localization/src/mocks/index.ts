@@ -1,1 +1,1 @@
-export * from './intl-wrapper';
+export * from './mock-intl-wrapper';
