@@ -3,6 +3,7 @@ import {Messages} from '../../interfaces';
 
 export const EN_GB_MESSAGES: Messages = {
   [DEFAULT_LOCALES.ENGLISH]: {
+    'app.appName': 'NL Portal',
     'locales.en-GB': 'English',
     'locales.nl-NL': 'Nederlands',
     'pageTitles.overview': 'Overview',
