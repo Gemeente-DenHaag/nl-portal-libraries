@@ -17,7 +17,7 @@ const testPage: PortalPage = {
   isHome: true,
 };
 
-describe('Page component', () => {
+describe('Page', () => {
   beforeEach(() => {
     container = document.createElement('div');
     document.body.appendChild(container);
