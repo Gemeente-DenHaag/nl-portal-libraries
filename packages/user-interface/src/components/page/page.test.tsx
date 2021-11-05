@@ -4,8 +4,18 @@ import {intlWrapper} from '@nl-portal/localization';
 import {unmountComponentAtNode} from 'react-dom';
 import {Page} from './page';
 import {LayoutProvider} from '../../providers';
+import {PortalPage} from '../../interfaces';
 
 let container!: HTMLElement | undefined;
+
+const testPage: PortalPage = {
+  icon: <span />,
+  pageComponent: <span />,
+  path: '/',
+  titleTranslationKey: 'overview',
+  showInMenu: true,
+  isHome: true,
+};
 
 describe('Page component', () => {
   beforeEach(() => {
@@ -21,15 +31,6 @@ describe('Page component', () => {
   });
 
   it('should correctly set the document title', () => {
-    const testPage = {
-      icon: <span />,
-      pageComponent: <span />,
-      path: '/',
-      titleTranslationKey: 'overview',
-      showInMenu: true,
-      isHome: true,
-    };
-
     render(
       <LayoutProvider initialPage={testPage}>
         <Page page={testPage}>
