@@ -94,7 +94,7 @@ jobs:
         if: env.PUSH_AND_DEPLOY == 'true'
         uses: Azure/k8s-deploy@v1.4
         with:
-          namespace: 'dhonline-staging'
+          namespace: 'dhonline-test'
           manifests: |
             zgw-kubernetes/klantportaal/test/configmap.yml
             zgw-kubernetes/klantportaal/test/ingress.yml
