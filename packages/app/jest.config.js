@@ -6,4 +6,8 @@ module.exports = {
   displayName: pack.name,
   name: pack.name,
   setupFilesAfterEnv: ['<rootDir>/src/setupTests.ts'],
+  moduleNameMapper: {
+    ...base.moduleNameMapper,
+    '\\.svg$': '<rootDir>/src/mocks/svgr-mock.js',
+  },
 };
