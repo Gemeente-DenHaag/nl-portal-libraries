@@ -17,7 +17,7 @@ All such configuration takes place in the implementation [@nl-portal/app](./pack
 To contribute to this repository, first [clone](https://git-scm.com/docs/git-clone) it to your
 device.
 
-Make sure to [install Yarn](https://yarnpkg.com/getting-started/install).
+Make sure to [install yarn](https://yarnpkg.com/getting-started/install).
 
 ### Installing dependencies
 
