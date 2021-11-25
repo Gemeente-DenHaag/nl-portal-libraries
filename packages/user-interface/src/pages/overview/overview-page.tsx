@@ -3,7 +3,7 @@ import {Link as RouterLink} from 'react-router-dom';
 import {Link} from '@gemeente-denhaag/denhaag-component-library';
 import {FormattedMessage} from 'react-intl';
 import {useContext} from 'react';
-import {LocaleContext} from '@nl-portal/localization';
+import {LocaleContext} from '@gemeente-denhaag/nl-portal-localization';
 
 const OverviewPage = () => {
   const {hrefLang} = useContext(LocaleContext);

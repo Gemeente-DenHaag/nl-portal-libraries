@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {FC, useContext, useEffect, useState} from 'react';
 import {ApolloClient, ApolloLink, ApolloProvider, HttpLink, InMemoryCache} from '@apollo/client';
-import {KeycloakContext} from '@nl-portal/authentication';
+import {KeycloakContext} from '@gemeente-denhaag/nl-portal-authentication';
 
 interface ApolloWrapperProps {
   uri: string;

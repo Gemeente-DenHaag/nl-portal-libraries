@@ -11,7 +11,7 @@ import {
 } from '@gemeente-denhaag/denhaag-component-library';
 import {FormattedMessage, useIntl} from 'react-intl';
 import {useHistory, useLocation} from 'react-router-dom';
-import {useGetZakenQuery} from '@nl-portal/api';
+import {useGetZakenQuery} from '@gemeente-denhaag/nl-portal-api';
 import Skeleton from 'react-loading-skeleton';
 import styles from './cases-page.module.scss';
 import {useMediaQuery, useQuery} from '../../hooks';

@@ -1,10 +1,10 @@
 import React, {Fragment} from 'react';
 import '@gemeente-denhaag/design-tokens-components';
-import '@nl-portal/user-interface/dist/index.css';
+import '@gemeente-denhaag/nl-portal-user-interface/dist/index.css';
 import '../../styles/nl-portal-design-tokens.css';
-import {KeycloakWrapper} from '@nl-portal/authentication';
-import {LocalizationProvider} from '@nl-portal/localization';
-import {ApolloWrapper} from '@nl-portal/api';
+import {KeycloakWrapper} from '@gemeente-denhaag/nl-portal-authentication';
+import {LocalizationProvider} from '@gemeente-denhaag/nl-portal-localization';
+import {ApolloWrapper} from '@gemeente-denhaag/nl-portal-api';
 import {Offline, Online} from 'react-detect-offline';
 import {
   CasePage,
@@ -17,7 +17,7 @@ import {
   PortalFooter,
   PortalPage,
   ThemesPage,
-} from '@nl-portal/user-interface';
+} from '@gemeente-denhaag/nl-portal-user-interface';
 import {ArchiveIcon, DocumentIcon, GridIcon, InboxIcon} from '@gemeente-denhaag/icons';
 import {CUSTOM_MESSAGES} from '../../i18n';
 import {ReactComponent as HeaderLogo} from '../../assets/header-logo.svg';

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {FC, Fragment, ReactElement} from 'react';
-import {StatusType, ZaakStatus} from '@nl-portal/api';
+import {StatusType, ZaakStatus} from '@gemeente-denhaag/nl-portal-api';
 import {Paragraph, Step, Timeline} from '@gemeente-denhaag/denhaag-component-library';
 import Skeleton from 'react-loading-skeleton';
 import {useIntl} from 'react-intl';
