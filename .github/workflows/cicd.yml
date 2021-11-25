@@ -118,6 +118,7 @@ jobs:
       - name: lerna bootstrap
         run: |
           npm install -g yarn
+          npm install -g lerna
           yarn run bootstrap
       - name: build library
         run: yarn run build
@@ -131,7 +132,7 @@ jobs:
           GIT_COMMITTER_NAME: "Municipality of The Hague"
         run: |
           git push --set-upstream origin HEAD
-          yarn release -- --yes
+          yarn run release -- --yes
       - name: lerna publish
         env:
           NPM_ACCESS_TOKEN: ${{ secrets.NPM_ACCESS_TOKEN }}
