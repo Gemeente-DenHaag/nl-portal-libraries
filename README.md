@@ -213,5 +213,4 @@ const CasesPage = () => {
   const {data, loading, error, refetch} = useGetZakenQuery();
   ...
 }
-
 ```
