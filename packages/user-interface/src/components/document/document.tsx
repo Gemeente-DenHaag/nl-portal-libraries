@@ -6,7 +6,7 @@ import classNames from 'classnames';
 import Skeleton from 'react-loading-skeleton';
 import {FormattedMessage, useIntl} from 'react-intl';
 import prettyBytes from 'pretty-bytes';
-import {LocaleContext} from '@nl-portal/localization';
+import {LocaleContext} from '@gemeente-denhaag/nl-portal-localization';
 import useId from 'react-use-uuid';
 import mimeTypes from 'mime-types';
 import {PortalDocument} from '../../interfaces';

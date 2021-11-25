@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {FC, useEffect, useState} from 'react';
 import mimeTypes from 'mime-types';
-import {useGetDocumentContentQuery} from '@nl-portal/api';
+import {useGetDocumentContentQuery} from '@gemeente-denhaag/nl-portal-api';
 import {DownloadIcon} from '@gemeente-denhaag/icons';
 import {FormattedMessage} from 'react-intl';
 import {Link} from '@gemeente-denhaag/denhaag-component-library';

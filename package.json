@@ -19,7 +19,9 @@
     "prettier:fix": "prettier --write .",
     "codegen": "lerna run codegen",
     "generate-pwa-assets": "lerna run generate-pwa-assets && prettier --write ./packages/app/public/index.html",
-    "clean": "lerna run clean"
+    "clean": "lerna run clean",
+    "release": "lerna version prerelease --no-changelog --no-private --no-commit-hooks",
+    "publish": "lerna publish from-package"
   },
   "workspaces": [
     "packages/*"
