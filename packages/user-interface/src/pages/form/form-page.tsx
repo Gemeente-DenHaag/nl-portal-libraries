@@ -1,7 +1,5 @@
 import * as React from 'react';
 import {useContext, useEffect} from 'react';
-import {Helmet} from 'react-helmet';
-import {useScript} from 'usehooks-ts';
 import {LayoutContext} from '../../contexts';
 
 // eslint-disable-next-line
@@ -10,9 +8,6 @@ declare const OpenForms: any;
 const FormPage = () => {
   const {enableFullscreenForm, disableFullscreenForm, setCurrentFormTitle, clearCurrentFormTitle} =
     useContext(LayoutContext);
-  const openFormsScript = useScript(
-    'https://openformulieren-cg.test.denhaag.nl/static/sdk/open-forms-sdk.js'
-  );
 
   useEffect(() => {
     enableFullscreenForm();
@@ -47,16 +42,10 @@ const FormPage = () => {
 
       checkFormName();
     }
-  }, [openFormsScript]);
+  }, []);
 
   return (
     <div>
-      <Helmet>
-        <link
-          href="https://openformulieren-cg.test.denhaag.nl/static/sdk/open-forms-sdk.css"
-          rel="stylesheet"
-        />
-      </Helmet>
       <div id="openforms-container" />
     </div>
   );
