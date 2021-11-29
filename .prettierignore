@@ -6,3 +6,4 @@ coverage
 .git
 graphql.tsx
 .github
+packages/app/public/open-forms
