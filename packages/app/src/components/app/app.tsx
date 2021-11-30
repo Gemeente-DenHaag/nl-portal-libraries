@@ -148,6 +148,8 @@ const App = () => (
               headerLogoSmall={<HeaderLogoSmall />}
               facet={<img src={Facet} alt="" />}
               footer={footer}
+              showThemeSwitcher={config.SHOW_THEME_SWITCHER === 'true'}
+              defaultThemeClass={config.DEFAULT_THEME_CLASS}
             />
           </LocalizationProvider>
         </ApolloWrapper>
@@ -161,6 +163,8 @@ const App = () => (
           headerLogoSmall={<HeaderLogoSmall />}
           facet={<img src={Facet} alt="" />}
           footer={footer}
+          showThemeSwitcher={config.SHOW_THEME_SWITCHER === 'true'}
+          defaultThemeClass={config.DEFAULT_THEME_CLASS}
           offline
         />
       </LocalizationProvider>
