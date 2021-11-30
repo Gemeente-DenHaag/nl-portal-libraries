@@ -1,6 +1,6 @@
 {
-  "name": "@nl-portal/localization",
-  "version": "0.1.0",
+  "name": "@gemeente-denhaag/nl-portal-localization",
+  "version": "1.0.1-alpha.3",
   "description": "Made with create-react-library",
   "author": "Municipality of The Hague",
   "license": "EUPL-1.2",
@@ -13,7 +13,6 @@
   "scripts": {
     "build": "microbundle-crl --format modern,cjs",
     "start": "microbundle-crl watch --no-compress --no-sourcemap --format modern,cjs",
-    "prepare": "run-s build",
     "test": "run-s test:unit test:lint test:build",
     "test:build": "run-s build",
     "test:lint": "eslint .",
