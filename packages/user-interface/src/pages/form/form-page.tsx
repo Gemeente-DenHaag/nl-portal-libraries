@@ -23,10 +23,9 @@ const FormPage = () => {
       const formId = 'bezwaar\u002Dmaken';
       const baseUrl = 'https://openformulieren\u002Dcg.test.denhaag.nl/api/v1/';
       const targetNode = document.getElementById('openforms\u002Dcontainer');
-      const basePath = '/bezwaar\u002Dmaken/';
 
       const sentryEnv = 'docker';
-      const form = new OpenForms.OpenForm(targetNode, {baseUrl, formId, basePath, sentryEnv});
+      const form = new OpenForms.OpenForm(targetNode, {baseUrl, formId, sentryEnv});
 
       form.init();
 
