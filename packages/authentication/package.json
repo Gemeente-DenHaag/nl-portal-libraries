@@ -8,7 +8,7 @@
   "module": "dist/index.modern.js",
   "source": "src/index.ts",
   "engines": {
-    "node": ">=10"
+    "node": ">=14 <17"
   },
   "scripts": {
     "build": "microbundle-crl --format modern,cjs",

@@ -4,6 +4,9 @@
   "version": "1.0.0",
   "author": "Municipality of The Hague",
   "license": "EUPL-1.2",
+  "engines": {
+    "node": ">=14 <17"
+  },
   "dependencies": {
     "@gemeente-denhaag/design-tokens-components": "0.2.3-alpha.39",
     "@gemeente-denhaag/icons": "0.2.3-alpha.39",

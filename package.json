@@ -1,6 +1,9 @@
 {
   "name": "nl-portal-libraries",
   "private": true,
+  "engines": {
+    "node": ">=14 <17"
+  },
   "scripts": {
     "bootstrap": "lerna bootstrap",
     "build": "lerna run build",
