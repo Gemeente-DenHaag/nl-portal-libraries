@@ -1,6 +1,6 @@
 {
   "name": "@gemeente-denhaag/nl-portal-user-interface",
-  "version": "1.0.1-alpha.5",
+  "version": "1.0.1-alpha.6",
   "description": "Made with create-react-library",
   "author": "Municipality of The Hague",
   "license": "EUPL-1.2",
@@ -50,8 +50,8 @@
   "dependencies": {
     "@gemeente-denhaag/components-react": "0.1.1-alpha.1",
     "@gemeente-denhaag/icons": "0.2.3-alpha.39",
-    "@gemeente-denhaag/nl-portal-api": "^1.0.1-alpha.5",
-    "@gemeente-denhaag/nl-portal-localization": "^1.0.1-alpha.5",
+    "@gemeente-denhaag/nl-portal-api": "^1.0.1-alpha.6",
+    "@gemeente-denhaag/nl-portal-localization": "^1.0.1-alpha.6",
     "@react-hook/size": "^2.1.2",
     "@react-hook/window-scroll": "^1.3.0",
     "@react-keycloak/web": "^3.4.0",
