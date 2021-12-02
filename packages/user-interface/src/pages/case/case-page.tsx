@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {useGetZaakQuery} from '@gemeente-denhaag/nl-portal-api';
 import {FC, Fragment, ReactElement, useContext, useEffect} from 'react';
-import {Heading2, Heading3, Link, Paragraph} from '@gemeente-denhaag/denhaag-component-library';
+import {Heading2, Heading3, Link, Paragraph} from '@gemeente-denhaag/components-react';
 import {FormattedMessage, useIntl} from 'react-intl';
 import Skeleton from 'react-loading-skeleton';
 import {

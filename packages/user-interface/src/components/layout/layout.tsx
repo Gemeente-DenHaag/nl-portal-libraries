@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {StylesProvider} from '@gemeente-denhaag/denhaag-component-library';
+import {StylesProvider} from '@gemeente-denhaag/components-react';
 import {FC, Fragment, ReactElement, useContext} from 'react';
 import {BrowserRouter as Router, Switch, Route, Redirect} from 'react-router-dom';
 import classNames from 'classnames';

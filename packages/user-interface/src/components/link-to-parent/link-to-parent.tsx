@@ -3,7 +3,7 @@ import {FC, useContext} from 'react';
 import {Link as RouterLink} from 'react-router-dom';
 import {FormattedMessage, useIntl} from 'react-intl';
 import {LocaleContext} from '@gemeente-denhaag/nl-portal-localization';
-import {Link} from '@gemeente-denhaag/denhaag-component-library';
+import {Link} from '@gemeente-denhaag/components-react';
 import {ChevronLeftIcon} from '@gemeente-denhaag/icons';
 import Skeleton from 'react-loading-skeleton';
 import styles from './link-to-parent.module.scss';

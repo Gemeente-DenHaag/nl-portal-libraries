@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {Link as RouterLink} from 'react-router-dom';
-import {Link} from '@gemeente-denhaag/denhaag-component-library';
+import {Link} from '@gemeente-denhaag/components-react';
 import {FormattedMessage} from 'react-intl';
 import {useContext} from 'react';
 import {LocaleContext} from '@gemeente-denhaag/nl-portal-localization';

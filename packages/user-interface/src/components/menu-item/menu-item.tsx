@@ -4,7 +4,7 @@ import {LocaleContext} from '@gemeente-denhaag/nl-portal-localization';
 import {Link, useLocation} from 'react-router-dom';
 import classNames from 'classnames';
 import {FormattedMessage} from 'react-intl';
-import {BadgeCounter} from '@gemeente-denhaag/denhaag-component-library';
+import {BadgeCounter} from '@gemeente-denhaag/components-react';
 import {PortalPage} from '../../interfaces';
 import styles from './menu-item.module.scss';
 import {LayoutContext} from '../../contexts';

@@ -4,7 +4,7 @@ import mimeTypes from 'mime-types';
 import {useGetDocumentContentQuery} from '@gemeente-denhaag/nl-portal-api';
 import {DownloadIcon} from '@gemeente-denhaag/icons';
 import {FormattedMessage} from 'react-intl';
-import {Link} from '@gemeente-denhaag/denhaag-component-library';
+import {Link} from '@gemeente-denhaag/components-react';
 import useId from 'react-use-uuid';
 
 interface DocumentDownloadProps {

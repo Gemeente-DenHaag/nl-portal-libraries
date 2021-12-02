@@ -8,7 +8,7 @@ import {
   TabContext,
   TabPanel,
   Paragraph,
-} from '@gemeente-denhaag/denhaag-component-library';
+} from '@gemeente-denhaag/components-react';
 import {FormattedMessage, useIntl} from 'react-intl';
 import {useHistory, useLocation} from 'react-router-dom';
 import {useGetZakenQuery} from '@gemeente-denhaag/nl-portal-api';

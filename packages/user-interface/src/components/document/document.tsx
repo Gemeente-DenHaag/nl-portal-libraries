@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {FC, useContext, useEffect, useState} from 'react';
 import {DocumentIcon, DownloadIcon} from '@gemeente-denhaag/icons';
-import {Link, Paragraph} from '@gemeente-denhaag/denhaag-component-library';
+import {Link, Paragraph} from '@gemeente-denhaag/components-react';
 import classNames from 'classnames';
 import Skeleton from 'react-loading-skeleton';
 import {FormattedMessage, useIntl} from 'react-intl';

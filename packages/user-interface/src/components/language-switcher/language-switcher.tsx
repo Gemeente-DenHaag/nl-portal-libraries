@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {Button} from '@gemeente-denhaag/denhaag-component-library';
+import {Button} from '@gemeente-denhaag/components-react';
 import {FormattedMessage} from 'react-intl';
 import {LocaleContext} from '@gemeente-denhaag/nl-portal-localization';
 import {FC, useContext} from 'react';
