@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {Heading4, IconButton} from '@gemeente-denhaag/denhaag-component-library';
+import {Heading4, IconButton} from '@gemeente-denhaag/components-react';
 import {CloseIcon} from '@gemeente-denhaag/icons';
 import {FormattedMessage, useIntl} from 'react-intl';
 import classNames from 'classnames';

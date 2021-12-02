@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {FormattedMessage, useIntl} from 'react-intl';
-import {Paragraph} from '@gemeente-denhaag/denhaag-component-library';
+import {Paragraph} from '@gemeente-denhaag/components-react';
 
 const OfflinePage = () => {
   const intl = useIntl();

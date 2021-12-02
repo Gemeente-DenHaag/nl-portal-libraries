@@ -2,7 +2,7 @@ import * as React from 'react';
 import {useGetDocumentenQuery} from '@gemeente-denhaag/nl-portal-api';
 import {FormattedMessage, useIntl} from 'react-intl';
 import {Fragment, useEffect} from 'react';
-import {Heading2, Paragraph} from '@gemeente-denhaag/denhaag-component-library';
+import {Heading2, Paragraph} from '@gemeente-denhaag/components-react';
 import {useQuery} from '../../hooks';
 import {DocumentList, LinkToParent} from '../../components';
 import styles from './documents-page.module.scss';

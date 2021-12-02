@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {Paragraph} from '@gemeente-denhaag/denhaag-component-library';
+import {Paragraph} from '@gemeente-denhaag/components-react';
 import {FC, useEffect, useState} from 'react';
 import {useKeycloak} from '@react-keycloak/web';
 import {FormattedMessage} from 'react-intl';

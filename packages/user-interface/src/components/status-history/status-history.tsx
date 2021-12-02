@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {FC, Fragment, ReactElement} from 'react';
 import {StatusType, ZaakStatus} from '@gemeente-denhaag/nl-portal-api';
-import {Paragraph, Step, Timeline} from '@gemeente-denhaag/denhaag-component-library';
+import {Paragraph, Step, Timeline} from '@gemeente-denhaag/components-react';
 import Skeleton from 'react-loading-skeleton';
 import {useIntl} from 'react-intl';
 import styles from './status-history.module.scss';

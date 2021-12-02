@@ -6,7 +6,7 @@ import {Link, useHistory} from 'react-router-dom';
 import classNames from 'classnames';
 import useSize from '@react-hook/size';
 import useScrollPosition from '@react-hook/window-scroll';
-import {Heading3, Heading4, IconButton} from '@gemeente-denhaag/denhaag-component-library';
+import {Heading3, Heading4, IconButton} from '@gemeente-denhaag/components-react';
 import {CloseIcon} from '@gemeente-denhaag/icons';
 import Skeleton from 'react-loading-skeleton';
 import styles from './header.module.scss';

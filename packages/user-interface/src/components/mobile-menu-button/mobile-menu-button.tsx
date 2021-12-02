@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {Button, ButtonProps} from '@gemeente-denhaag/denhaag-component-library';
+import {Button, ButtonProps} from '@gemeente-denhaag/components-react';
 import {FC} from 'react';
 import styles from './mobile-menu-button.module.scss';
 
