@@ -7,6 +7,7 @@ import {LocalizationProvider} from '@gemeente-denhaag/nl-portal-localization';
 import {ApolloWrapper} from '@gemeente-denhaag/nl-portal-api';
 import {Offline, Online} from 'react-detect-offline';
 import {
+  AccountPage,
   CasePage,
   CasesPage,
   DocumentsPage,
@@ -18,7 +19,7 @@ import {
   PortalPage,
   ThemesPage,
 } from '@gemeente-denhaag/nl-portal-user-interface';
-import {ArchiveIcon, DocumentIcon, GridIcon, InboxIcon} from '@gemeente-denhaag/icons';
+import {ArchiveIcon, DocumentIcon, GridIcon, InboxIcon, UserIcon} from '@gemeente-denhaag/icons';
 import {CUSTOM_MESSAGES} from '../../i18n';
 import {ReactComponent as HeaderLogo} from '../../assets/header-logo.svg';
 import {ReactComponent as HeaderLogoSmall} from '../../assets/header-logo-small.svg';
@@ -75,6 +76,13 @@ const pages: Array<PortalPage> = [
     pageComponent: <ThemesPage />,
     path: '/themas',
     titleTranslationKey: 'themes',
+    showInMenu: true,
+  },
+  {
+    icon: <UserIcon />,
+    pageComponent: <AccountPage />,
+    path: '/account',
+    titleTranslationKey: 'account',
     showInMenu: true,
   },
   {
