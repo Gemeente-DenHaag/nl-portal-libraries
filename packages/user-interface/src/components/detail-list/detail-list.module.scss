@@ -1,4 +1,37 @@
+@import '../../styles/mixins';
+
 .detail-list__item {
+  display: flex;
+  flex-direction: column;
   border-bottom: var(--nlportal-account-detail-border-width, 1px) var(--nlportal-account-detail-border-style, solid)
   var(--nlportal-account-detail-border-color, hsl(0 0% 95%));
+  padding-inline-start: var(--nlportal-space-inline-md, 1rem);
+  padding-block-start: var(--nlportal-space-block-md, 1rem);
+  margin-block-end: var(--nlportal-space-block-md, 1rem);
+
+  @include breakpoint(tablet) {
+    padding-inline-start: 0;
+  }
+}
+
+.detail-list__header {
+  margin-block-end: var(--nlportal-space-block-xs, 0.5rem);
+}
+
+.detail-list__value-edit {
+  margin-block-end: var(--nlportal-space-block-md, 1rem);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+
+  svg {
+    color: var(--nlportal-account-detail-button-color, hsl(207 80% 35%))
+  }
+
+  button, button:hover, button:focus {
+    padding: 0;
+    background: none;
+    color: var(--nlportal-account-detail-button-color, hsl(207 80% 35%))
+  }
 }

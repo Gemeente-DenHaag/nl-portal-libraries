@@ -43,6 +43,7 @@ export const NL_NL_MESSAGES: Messages = {
     'account.notificationsHeader': 'Notificaties en updates',
     'account.detailsHeader': 'Persoonsgegevens',
     'account.addressHeader': 'Adres',
+    'account.edit': 'Aanpassen',
     'account.detail.email': 'E-mailadres',
     'account.detail.phone': 'Telefoonnummer',
     'account.detail.updatesOnCases': 'Updates over zaken',
