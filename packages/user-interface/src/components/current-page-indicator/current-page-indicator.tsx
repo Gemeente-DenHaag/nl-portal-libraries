@@ -24,7 +24,7 @@ const CurrentPageIndicator = () => {
         {currentPage?.icon && (
           <div className={styles['current-page-indicator__icon']}>{currentPage.icon}</div>
         )}
-        <Heading5>
+        <Heading5 className={styles['current-page-indicator__heading']}>
           <FormattedMessage id={`pageTitles.${currentPage?.titleTranslationKey}`} />
         </Heading5>
       </header>
