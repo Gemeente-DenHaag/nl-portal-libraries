@@ -37,5 +37,9 @@ export const EN_GB_MESSAGES: Messages = {
     'offline.warning': 'In order to use {applicationName}, an internet connection is required.',
     'element.loading': 'Loading',
     'element.download': 'Download',
+    'account.contactHeader': 'Contact',
+    'account.notificationsHeader': 'Notifications and updates',
+    'account.detailsHeader': 'Personal details',
+    'account.addressHeader': 'Address',
   },
 };

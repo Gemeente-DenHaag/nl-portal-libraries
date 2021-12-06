@@ -1,5 +1,6 @@
 :root {
   --nlportal-space-block-5xl: var(--denhaag-space-block-5xl);
+  --nlportal-space-block-4xl: var(--denhaag-space-block-4xl);
   --nlportal-space-block-3xl: var(--denhaag-space-block-3xl);
   --nlportal-space-block-2xl: var(--denhaag-space-block-2xl);
   --nlportal-space-block-xl: var(--denhaag-space-block-xl);
@@ -73,7 +74,7 @@
     var(--nlportal-document-border-style) var(--nlportal-document-border-color);
   --nlportal-document-icon-color: var(--denhaag-color-grey-4);
   --nlportal-document-icon-background-color: var(--denhaag-color-grey-1);
-  --utrecht-heading-color: var(--denhaag-color-blue-3);
+  --utrecht-heading-2-color: var(--denhaag-color-blue-3);
   --denhaag-menu-button-font-size: var(--denhaag-typography-scale-lg-font-size);
   --denhaag-menu-button-line-height: var(--denhaag-typography-scale-xl-font-size);
 }
