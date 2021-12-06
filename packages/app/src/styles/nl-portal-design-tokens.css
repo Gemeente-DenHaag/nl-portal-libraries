@@ -74,6 +74,9 @@
     var(--nlportal-document-border-style) var(--nlportal-document-border-color);
   --nlportal-document-icon-color: var(--denhaag-color-grey-4);
   --nlportal-document-icon-background-color: var(--denhaag-color-grey-1);
+  --nlportal-account-detail-border-width: 1px;
+  --nlportal-account-detail-border-style: solid;
+  --nlportal-account-detail-border-color: var(--denhaag-color-grey-1);
   --utrecht-heading-2-color: var(--denhaag-color-blue-3);
   --denhaag-menu-button-font-size: var(--denhaag-typography-scale-lg-font-size);
   --denhaag-menu-button-line-height: var(--denhaag-typography-scale-xl-font-size);
