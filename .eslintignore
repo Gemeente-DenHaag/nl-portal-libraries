@@ -16,3 +16,5 @@ webpack.config.js
 graphql.tsx
 
 .github
+
+packages/app/public/open-forms
