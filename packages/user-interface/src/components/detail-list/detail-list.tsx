@@ -26,7 +26,7 @@ const DetailList: FC<DetailListProps> = ({details, navigateFunction}) => {
   return (
     <Fragment>
       {details.map(detail => (
-        <div className={styles['detail-list__item']}>
+        <div className={styles['detail-list__item']} key={detail.headerTranslationKey}>
           <span className={styles['detail-list__header']}>
             <b>
               <FormattedMessage id={`account.detail.${detail.headerTranslationKey}`} />

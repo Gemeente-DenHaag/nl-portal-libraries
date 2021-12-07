@@ -9,7 +9,7 @@ const AccountPage = () => {
   const history = useHistory();
 
   const navigateToEditPage = (property: string) => {
-    history.push(`/account/edit?property=${property}`);
+    history.push(`/account/aanpassen?prop=${property}`);
   };
 
   return (

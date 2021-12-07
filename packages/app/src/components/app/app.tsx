@@ -89,7 +89,7 @@ const pages: Array<PortalPage> = [
       {
         icon: <UserIcon />,
         pageComponent: <EditAccountPage />,
-        path: '/edit',
+        path: '/aanpassen',
         titleTranslationKey: 'account',
       },
     ],
