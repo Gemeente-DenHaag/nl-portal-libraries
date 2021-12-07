@@ -14,7 +14,7 @@ interface DetailListProps {
 
 const DetailList: FC<DetailListProps> = ({details}) => {
   const [loading, setLoading] = useState(true);
-  const isTablet = useMediaQuery(BREAKPOINTS.TABLET);
+  const isDesktop = useMediaQuery(BREAKPOINTS.DESKTOP);
 
   useEffect(() => {
     setTimeout(() => {
@@ -33,9 +33,9 @@ const DetailList: FC<DetailListProps> = ({details}) => {
           </span>
           <div className={styles['detail-list__value-edit']}>
             <span className={styles['detail-list__value']}>
-              {loading ? <Skeleton width={isTablet ? 250 : 150} /> : detail.value}
+              {loading ? <Skeleton width={isDesktop ? 200 : 150} /> : detail.value}
             </span>
-            {isTablet ? (
+            {isDesktop ? (
               <Button icon={<EditIcon />} iconAlign="start">
                 <FormattedMessage id="account.edit" />
               </Button>
