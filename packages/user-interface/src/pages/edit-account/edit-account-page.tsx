@@ -3,15 +3,21 @@ import {Button, Heading2} from '@gemeente-denhaag/components-react';
 import {FormattedMessage, useIntl} from 'react-intl';
 import {useContext} from 'react';
 import {LocaleContext} from '@gemeente-denhaag/nl-portal-localization';
+import {useHistory} from 'react-router-dom';
 import {useQuery} from '../../hooks';
 import styles from './edit-account-page.module.scss';
 
 const EditAccountPage = () => {
   const query = useQuery();
   const intl = useIntl();
+  const history = useHistory();
   const prop = query.get('prop');
   const {currentLocale} = useContext(LocaleContext);
   const propTranslation = intl.formatMessage({id: `account.detail.${prop}`});
+
+  const navigateToAccountPage = () => {
+    history.push(`/account/`);
+  };
 
   return (
     <section className={styles['edit-account']}>
@@ -26,7 +32,11 @@ const EditAccountPage = () => {
         <Button className={styles['edit-account__button']}>
           <FormattedMessage id="account.save" />
         </Button>
-        <Button variant="secondary-action" className={styles['edit-account__button']}>
+        <Button
+          variant="secondary-action"
+          className={styles['edit-account__button']}
+          onClick={navigateToAccountPage}
+        >
           <FormattedMessage id="account.cancel" />
         </Button>
       </div>
