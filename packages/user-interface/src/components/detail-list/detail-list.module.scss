@@ -17,6 +17,7 @@
     margin-block-end: 0;
     flex-direction: row;
     justify-content: space-between;
+    min-height: var(--nlportal-detail-list-min-height, 2rem);
   }
 }
 
