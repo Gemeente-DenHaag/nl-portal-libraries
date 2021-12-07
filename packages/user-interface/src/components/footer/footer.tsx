@@ -49,6 +49,7 @@ const Footer: FC<FooterProps> = ({footer, facet}) => {
                     rel="noreferrer"
                     hrefLang={link.hrefLang}
                     className={styles.footer__link}
+                    key={link.url}
                   >
                     <FormattedMessage id={`footerLinks.${link.linkTranslationKey}`} />
                   </Link>
