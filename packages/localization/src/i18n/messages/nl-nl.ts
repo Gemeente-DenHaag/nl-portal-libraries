@@ -44,6 +44,8 @@ export const NL_NL_MESSAGES: Messages = {
     'account.detailsHeader': 'Persoonsgegevens',
     'account.addressHeader': 'Adres',
     'account.edit': 'Aanpassen',
+    'account.cancel': 'Annuleren',
+    'account.save': 'Opslaan',
     'account.detail.email': 'E-mailadres',
     'account.detail.phone': 'Telefoonnummer',
     'account.detail.updatesOnCases': 'Updates over zaken',

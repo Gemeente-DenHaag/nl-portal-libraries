@@ -1,6 +1,6 @@
 import * as React from 'react';
-import {Heading2} from '@gemeente-denhaag/components-react';
-import {useIntl} from 'react-intl';
+import {Button, Heading2} from '@gemeente-denhaag/components-react';
+import {FormattedMessage, useIntl} from 'react-intl';
 import {useContext} from 'react';
 import {LocaleContext} from '@gemeente-denhaag/nl-portal-localization';
 import {useQuery} from '../../hooks';
@@ -22,6 +22,14 @@ const EditAccountPage = () => {
             : `${intl.formatMessage({id: 'account.edit'})} ${propTranslation.toLowerCase()}`}
         </Heading2>
       </header>
+      <div className={styles['edit-account__buttons']}>
+        <Button className={styles['edit-account__button']}>
+          <FormattedMessage id="account.save" />
+        </Button>
+        <Button variant="secondary-action" className={styles['edit-account__button']}>
+          <FormattedMessage id="account.cancel" />
+        </Button>
+      </div>
     </section>
   );
 };

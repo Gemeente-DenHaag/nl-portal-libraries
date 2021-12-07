@@ -42,6 +42,8 @@ export const EN_GB_MESSAGES: Messages = {
     'account.detailsHeader': 'Personal details',
     'account.addressHeader': 'Address',
     'account.edit': 'Edit',
+    'account.cancel': 'Cancel',
+    'account.save': 'Save',
     'account.detail.email': 'Email address',
     'account.detail.phone': 'Phone number',
     'account.detail.updatesOnCases': 'Case updates',
