@@ -18,6 +18,7 @@ import {
   PortalFooter,
   PortalPage,
   ThemesPage,
+  EditAccountPage,
 } from '@gemeente-denhaag/nl-portal-user-interface';
 import {ArchiveIcon, DocumentIcon, GridIcon, InboxIcon, UserIcon} from '@gemeente-denhaag/icons';
 import {CUSTOM_MESSAGES} from '../../i18n';
@@ -84,6 +85,14 @@ const pages: Array<PortalPage> = [
     path: '/account',
     titleTranslationKey: 'account',
     showInMenu: true,
+    children: [
+      {
+        icon: <UserIcon />,
+        pageComponent: <EditAccountPage />,
+        path: '/edit',
+        titleTranslationKey: 'account',
+      },
+    ],
   },
   {
     icon: <DocumentIcon />,

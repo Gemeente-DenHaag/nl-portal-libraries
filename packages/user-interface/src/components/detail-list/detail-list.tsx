@@ -10,9 +10,10 @@ import {BREAKPOINTS} from '../../constants';
 
 interface DetailListProps {
   details: Array<{headerTranslationKey: string; value: string; showEditButton?: boolean}>;
+  navigateFunction: (property: string) => void;
 }
 
-const DetailList: FC<DetailListProps> = ({details}) => {
+const DetailList: FC<DetailListProps> = ({details, navigateFunction}) => {
   const [loading, setLoading] = useState(true);
   const isDesktop = useMediaQuery(BREAKPOINTS.DESKTOP);
 
@@ -37,11 +38,15 @@ const DetailList: FC<DetailListProps> = ({details}) => {
             </span>
             {detail.showEditButton &&
               (isDesktop ? (
-                <Button icon={<EditIcon />} iconAlign="start">
+                <Button
+                  icon={<EditIcon />}
+                  iconAlign="start"
+                  onClick={() => navigateFunction(detail.headerTranslationKey)}
+                >
                   <FormattedMessage id="account.edit" />
                 </Button>
               ) : (
-                <IconButton>
+                <IconButton onClick={() => navigateFunction(detail.headerTranslationKey)}>
                   <EditIcon />
                 </IconButton>
               ))}
