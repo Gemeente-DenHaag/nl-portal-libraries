@@ -35,15 +35,16 @@ const DetailList: FC<DetailListProps> = ({details}) => {
             <span className={styles['detail-list__value']}>
               {loading ? <Skeleton width={isDesktop ? 200 : 150} /> : detail.value}
             </span>
-            {isDesktop ? (
-              <Button icon={<EditIcon />} iconAlign="start">
-                <FormattedMessage id="account.edit" />
-              </Button>
-            ) : (
-              <IconButton>
-                <EditIcon />
-              </IconButton>
-            )}
+            {detail.showEditButton &&
+              (isDesktop ? (
+                <Button icon={<EditIcon />} iconAlign="start">
+                  <FormattedMessage id="account.edit" />
+                </Button>
+              ) : (
+                <IconButton>
+                  <EditIcon />
+                </IconButton>
+              ))}
           </div>
         </div>
       ))}
