@@ -43,21 +43,19 @@
     color: var(--nlportal-account-detail-button-color, hsl(207 80% 35%));
   }
 
-  button,
-  button:hover,
-  button:focus {
-    background: none;
-    color: var(--nlportal-account-detail-button-color, hsl(207 80% 35%));
-
-    @include breakpoint(desktop) {
-      padding-block-start: 0;
-      padding-block-end: 0;
-    }
-  }
-
   @include breakpoint(desktop) {
     margin-block-end: 0;
     margin-inline-start: var(--nlportal-space-inline-2xl, 2rem);
     width: 65%;
+  }
+}
+
+.detail-list__edit-button, .detail-list__edit-button:hover, .detail-list__edit-button:focus {
+  background: none !important;
+  color: var(--nlportal-account-detail-button-color, hsl(207 80% 35%)) !important;
+
+  @include breakpoint(desktop) {
+    padding-block-start: 0 !important;
+    padding-block-end: 0 !important;
   }
 }

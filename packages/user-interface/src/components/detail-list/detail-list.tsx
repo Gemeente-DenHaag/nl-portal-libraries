@@ -42,6 +42,7 @@ const DetailList: FC<DetailListProps> = ({details, navigateFunction}) => {
                   icon={<EditIcon />}
                   iconAlign="start"
                   onClick={() => navigateFunction(detail.headerTranslationKey)}
+                  className={styles['detail-list__edit-button']}
                 >
                   <FormattedMessage id="account.edit" />
                 </Button>
