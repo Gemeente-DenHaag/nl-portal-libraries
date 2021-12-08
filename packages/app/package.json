@@ -8,8 +8,8 @@
     "node": ">=14 <17"
   },
   "dependencies": {
-    "@gemeente-denhaag/design-tokens-components": "latest",
-    "@gemeente-denhaag/icons": "latest",
+    "@gemeente-denhaag/design-tokens-components": "0.2.3-alpha.70",
+    "@gemeente-denhaag/icons": "0.2.3-alpha.70",
     "@gemeente-denhaag/nl-portal-api": "^1.0.1-alpha.0",
     "@gemeente-denhaag/nl-portal-authentication": "^1.0.1-alpha.0",
     "@gemeente-denhaag/nl-portal-localization": "^1.0.1-alpha.0",

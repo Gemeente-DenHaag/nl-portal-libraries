@@ -1913,7 +1913,7 @@
     "@gemeente-denhaag/baseprops" "0.2.3-alpha.70"
     "@gemeente-denhaag/icons" "0.2.3-alpha.70"
 
-"@gemeente-denhaag/components-react@latest":
+"@gemeente-denhaag/components-react@0.1.1-alpha.8":
   version "0.1.1-alpha.8"
   resolved "https://registry.yarnpkg.com/@gemeente-denhaag/components-react/-/components-react-0.1.1-alpha.8.tgz#64f3525e39bd6668e0cca818714339dbc9d42067"
   integrity sha512-8KcDRTaIYr5FP2jBeZVmIZsQALLAkpAurM00cDepqjR3RKtPdg7Sr21UXzCsvY0GKllf3SzjNedN0cQ/zCytCw==
@@ -1946,7 +1946,7 @@
     "@gemeente-denhaag/timeline" "0.2.3-alpha.70"
     "@gemeente-denhaag/typography" "0.2.3-alpha.70"
 
-"@gemeente-denhaag/design-tokens-components@latest":
+"@gemeente-denhaag/design-tokens-components@0.2.3-alpha.70":
   version "0.2.3-alpha.70"
   resolved "https://registry.yarnpkg.com/@gemeente-denhaag/design-tokens-components/-/design-tokens-components-0.2.3-alpha.70.tgz#67a229f7f6d11ae6fd05b7855adb2ca197f4d8cb"
   integrity sha512-OarhoeRT663mTLVcFEWcr/83W3MjcfBJ4j8+DXBUqpZEapJeLRPTNMo4E34IuB7d3eiJTFz0eWRmBXkFvWyaSQ==
@@ -1999,7 +1999,7 @@
     "@gemeente-denhaag/baseprops" "0.2.3-alpha.70"
     "@material-ui/core" "4.12.3"
 
-"@gemeente-denhaag/icons@0.2.3-alpha.70", "@gemeente-denhaag/icons@latest":
+"@gemeente-denhaag/icons@0.2.3-alpha.70":
   version "0.2.3-alpha.70"
   resolved "https://registry.yarnpkg.com/@gemeente-denhaag/icons/-/icons-0.2.3-alpha.70.tgz#eccfe0c105134f969e4527a3759c9a4bde314428"
   integrity sha512-L64C2CRdhe/vPs9rYmObFBwRfWHhH72TX2Lst4McaCwazLWF7I2ao8VDIecLf2SPUgv6kTwn7MvLS73/Pa4BxQ==

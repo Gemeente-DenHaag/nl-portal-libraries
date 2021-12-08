@@ -48,8 +48,8 @@
     "dist"
   ],
   "dependencies": {
-    "@gemeente-denhaag/components-react": "latest",
-    "@gemeente-denhaag/icons": "latest",
+    "@gemeente-denhaag/components-react": "0.1.1-alpha.8",
+    "@gemeente-denhaag/icons": "0.2.3-alpha.70",
     "@gemeente-denhaag/nl-portal-api": "^1.0.1-alpha.8",
     "@gemeente-denhaag/nl-portal-localization": "^1.0.1-alpha.8",
     "@react-hook/size": "^2.1.2",
