@@ -13,6 +13,7 @@ export const NL_NL_MESSAGES: Messages = {
     'pageTitles.documents': 'Documenten',
     'pageTitles.offline': 'Geen internetverbinding',
     'pageTitles.form': 'Formulier',
+    'pageTitles.account': 'Mijn account',
     'header.logout': 'Uitloggen',
     'header.welcome': 'Welkom {userName}',
     'header.menuButton': 'Menu',
