@@ -15,7 +15,7 @@ export const NL_NL_MESSAGES: Messages = {
     'pageTitles.form': 'Formulier',
     'pageTitles.account': 'Mijn account',
     'header.logout': 'Uitloggen',
-    'header.welcome': 'Welkom {userName}',
+    'header.welcome': 'Welkom',
     'header.menuButton': 'Menu',
     'menu.close': 'Menu sluiten',
     'menu.open': 'Menu openen',

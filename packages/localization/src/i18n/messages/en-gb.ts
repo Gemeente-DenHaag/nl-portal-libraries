@@ -15,7 +15,7 @@ export const EN_GB_MESSAGES: Messages = {
     'pageTitles.form': 'Form',
     'pageTitles.account': 'My account',
     'header.logout': 'Log out',
-    'header.welcome': 'Welcome {userName}',
+    'header.welcome': 'Welcome',
     'header.menuButton': 'Menu',
     'menu.close': 'Close menu',
     'menu.open': 'Open menu',
