@@ -4,7 +4,8 @@ import {FormattedMessage, useIntl} from 'react-intl';
 import {Fragment, useEffect} from 'react';
 import {Heading2, Paragraph} from '@gemeente-denhaag/components-react';
 import {useQuery} from '../../hooks';
-import {DocumentList, LinkToParent} from '../../components';
+import {DocumentList} from '../../components/document-list';
+import {LinkToParent} from '../../components/link-to-parent';
 import styles from './documents-page.module.scss';
 
 const DocumentsPage = () => {

@@ -39,6 +39,10 @@
   align-items: center;
 }
 
+.current-page-indicator__heading {
+  color: var(--nlportal-heading-5-color, hsl(207 80% 35%)) !important;
+}
+
 .current-page-indicator__icon {
   display: flex;
   margin-inline-end: var(--nlportal-space-inline-xs, 0.5rem);
