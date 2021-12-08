@@ -16,7 +16,9 @@ import {LocaleContext} from '@gemeente-denhaag/nl-portal-localization';
 import classNames from 'classnames';
 import {useMediaQuery, useQuery} from '../../hooks';
 import styles from './case-page.module.scss';
-import {DocumentList, MetaIcon, StatusHistory} from '../../components';
+import {DocumentList} from '../../components/document-list';
+import {MetaIcon} from '../../components/meta-icon';
+import {StatusHistory} from '../../components/status-history';
 import {BREAKPOINTS} from '../../constants';
 import {stringToId} from '../../utils';
 

@@ -2,7 +2,7 @@ import * as React from 'react';
 import {Heading2, Heading3} from '@gemeente-denhaag/components-react';
 import {FormattedMessage} from 'react-intl';
 import styles from './account-page.module.scss';
-import {DetailList} from '../../components';
+import {DetailList} from '../../components/detail-list';
 
 const AccountPage = () => (
   <section className={styles.account}>
