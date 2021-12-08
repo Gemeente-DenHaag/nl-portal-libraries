@@ -77,7 +77,7 @@
   --nlportal-account-detail-border-width: 1px;
   --nlportal-account-detail-border-style: solid;
   --nlportal-account-detail-border-color: var(--denhaag-color-grey-1);
-  --nlportal-account-detail-button-color: var(--denhaag-color-blue-3);
+  --nlportal-edit-account-text-field-width: 260px;
   --nlportal-detail-list-min-height: 2rem;
   --utrecht-heading-2-color: var(--denhaag-color-blue-3);
   --denhaag-menu-button-font-size: var(--denhaag-typography-scale-lg-font-size);

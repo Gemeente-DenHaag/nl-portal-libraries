@@ -1,19 +1,21 @@
 import * as React from 'react';
-import {FC, Fragment, useEffect, useState} from 'react';
+import {FC, Fragment, useContext, useEffect, useState} from 'react';
 import {FormattedMessage} from 'react-intl';
-import {IconButton, Button} from '@gemeente-denhaag/components-react';
+import {Link} from '@gemeente-denhaag/components-react';
 import {EditIcon} from '@gemeente-denhaag/icons';
 import Skeleton from 'react-loading-skeleton';
+import {LocaleContext} from '@gemeente-denhaag/nl-portal-localization';
+import {Link as RouterLink} from 'react-router-dom';
 import styles from './detail-list.module.scss';
 import {useMediaQuery} from '../../hooks';
 import {BREAKPOINTS} from '../../constants';
 
 interface DetailListProps {
   details: Array<{headerTranslationKey: string; value: string; showEditButton?: boolean}>;
-  navigateFunction: (property: string) => void;
 }
 
-const DetailList: FC<DetailListProps> = ({details, navigateFunction}) => {
+const DetailList: FC<DetailListProps> = ({details}) => {
+  const {hrefLang} = useContext(LocaleContext);
   const [loading, setLoading] = useState(true);
   const isDesktop = useMediaQuery(BREAKPOINTS.DESKTOP);
 
@@ -36,21 +38,17 @@ const DetailList: FC<DetailListProps> = ({details, navigateFunction}) => {
             <span className={styles['detail-list__value']}>
               {loading ? <Skeleton width={isDesktop ? 200 : 150} /> : detail.value}
             </span>
-            {detail.showEditButton &&
-              (isDesktop ? (
-                <Button
-                  icon={<EditIcon />}
-                  iconAlign="start"
-                  onClick={() => navigateFunction(detail.headerTranslationKey)}
-                  className={styles['detail-list__edit-button']}
-                >
-                  <FormattedMessage id="account.edit" />
-                </Button>
-              ) : (
-                <IconButton onClick={() => navigateFunction(detail.headerTranslationKey)}>
-                  <EditIcon />
-                </IconButton>
-              ))}
+            {detail.showEditButton && (
+              <Link
+                component={RouterLink}
+                to={`/account/aanpassen?prop=${detail.headerTranslationKey}`}
+                hrefLang={hrefLang}
+                icon={<EditIcon />}
+                iconAlign="start"
+              >
+                {isDesktop && <FormattedMessage id="account.edit" />}
+              </Link>
+            )}
           </div>
         </div>
       ))}

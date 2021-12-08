@@ -43,3 +43,17 @@
     }
   }
 }
+
+.edit-account__text-field-container {
+  margin-block-end: var(--nlportal-space-block-4xl, 3rem);
+  width: 100%;
+  display: flex;
+
+  @include breakpoint(tablet) {
+    width: var(--nlportal-edit-account-text-field-width, 260px);
+  }
+}
+
+.edit-account__text-field {
+  width: 100%;
+}

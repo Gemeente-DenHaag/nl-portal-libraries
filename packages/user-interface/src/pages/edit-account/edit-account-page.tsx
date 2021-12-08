@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {Button, Heading2} from '@gemeente-denhaag/components-react';
+import {Button, Heading2, TextField} from '@gemeente-denhaag/components-react';
 import {FormattedMessage, useIntl} from 'react-intl';
 import {useContext} from 'react';
 import {LocaleContext} from '@gemeente-denhaag/nl-portal-localization';
@@ -28,8 +28,11 @@ const EditAccountPage = () => {
             : `${intl.formatMessage({id: 'account.edit'})} ${propTranslation.toLowerCase()}`}
         </Heading2>
       </header>
+      <div className={styles['edit-account__text-field-container']}>
+        <TextField label={propTranslation} className={styles['edit-account__text-field']} />
+      </div>
       <div className={styles['edit-account__buttons']}>
-        <Button className={styles['edit-account__button']}>
+        <Button className={styles['edit-account__button']} onClick={navigateToAccountPage}>
           <FormattedMessage id="account.save" />
         </Button>
         <Button
