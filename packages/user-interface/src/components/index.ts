@@ -16,3 +16,4 @@ export * from './status-history';
 export * from './document';
 export * from './document-list';
 export * from './detail-list';
+export * from './locale-date';

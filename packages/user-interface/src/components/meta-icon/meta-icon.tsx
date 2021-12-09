@@ -8,7 +8,7 @@ import styles from './meta-icon.module.scss';
 
 interface MetaIconProps {
   title: string;
-  subtitle?: string;
+  subtitle?: string | ReactElement;
   icon: ReactElement;
   showRightBorder?: boolean;
 }
