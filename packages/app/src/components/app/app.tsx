@@ -91,6 +91,7 @@ const pages: Array<PortalPage> = [
         pageComponent: <EditAccountPage />,
         path: '/aanpassen',
         titleTranslationKey: 'account',
+        showLinkToParent: true,
       },
     ],
   },
