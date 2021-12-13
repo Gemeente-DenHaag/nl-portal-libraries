@@ -90,7 +90,7 @@ const CasePage: FC<CasePageProps> = ({statusHistoryFacet, statusHistoryBackgroun
               title={intl.formatMessage({id: 'case.creationDate'})}
               subtitle={
                 !loading && data?.getZaak.startdatum ? (
-                  <LocaleDate date={data?.getZaak.startdatum} />
+                  <LocaleDate date={new Date(data?.getZaak.startdatum)} />
                 ) : (
                   ''
                 )
