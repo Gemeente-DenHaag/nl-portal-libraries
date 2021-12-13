@@ -21,6 +21,7 @@ import {MetaIcon} from '../../components/meta-icon';
 import {StatusHistory} from '../../components/status-history';
 import {BREAKPOINTS} from '../../constants';
 import {stringToId} from '../../utils';
+import {LocaleDate} from '../../components/locale-date';
 
 interface CasePageProps {
   statusHistoryFacet?: ReactElement;
@@ -87,7 +88,13 @@ const CasePage: FC<CasePageProps> = ({statusHistoryFacet, statusHistoryBackgroun
             />
             <MetaIcon
               title={intl.formatMessage({id: 'case.creationDate'})}
-              subtitle={(!loading && data?.getZaak.startdatum) || ''}
+              subtitle={
+                !loading && data?.getZaak.startdatum ? (
+                  <LocaleDate date={new Date(data?.getZaak.startdatum)} />
+                ) : (
+                  ''
+                )
+              }
               icon={<CalendarIcon />}
               showRightBorder={isDesktop}
             />
