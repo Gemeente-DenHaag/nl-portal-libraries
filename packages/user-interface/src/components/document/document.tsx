@@ -17,7 +17,7 @@ import {DocumentDownload} from '../document-download';
 
 type DocumentProps = Partial<PortalDocument>;
 
-const Document: FC<DocumentProps> = ({url, extension, name, size}) => {
+const Document: FC<DocumentProps> = ({uuid, extension, name, size}) => {
   const id = useId();
   const isDesktop = useMediaQuery(BREAKPOINTS.DESKTOP);
   const {hrefLang} = useContext(LocaleContext);
@@ -25,24 +25,21 @@ const Document: FC<DocumentProps> = ({url, extension, name, size}) => {
   const [downloadId, setDownloadId] = useState('');
 
   const documentClick = (event: MouseEvent) => {
-    const splitUrl = url?.split('/') || [''];
-    const downloadIdFromUrl = splitUrl[splitUrl.length - 1];
-
     event.preventDefault();
     event.stopPropagation();
 
-    setDownloadId(downloadIdFromUrl);
+    setDownloadId(`${uuid}`);
   };
 
   useEffect(() => {
-    if (url && id) {
+    if (uuid && id) {
       const linkElement = document.getElementById(id);
 
       if (linkElement) {
         linkElement.onclick = documentClick;
       }
     }
-  }, [id, url]);
+  }, [id, uuid]);
 
   return (
     <div className={styles.document}>
@@ -66,8 +63,8 @@ const Document: FC<DocumentProps> = ({url, extension, name, size}) => {
           )}
         </Paragraph>
         {!downloadId &&
-          (url !== undefined ? (
-            <Link iconAlign="start" icon={<DownloadIcon />} href={url} id={id}>
+          (uuid !== undefined ? (
+            <Link iconAlign="start" icon={<DownloadIcon />} href={`/document/${uuid}`} id={id}>
               <FormattedMessage id="element.download" />
             </Link>
           ) : (

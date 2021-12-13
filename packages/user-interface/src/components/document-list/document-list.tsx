@@ -28,7 +28,7 @@ const DocumentList: FC<DocumentListProps> = ({documents}) => (
               extension={document.formaat || ''}
               name={document.bestandsnaam || ''}
               size={document.bestandsomvang || 0}
-              url={document.url || ''}
+              uuid={document.uuid || ''}
             />
           </div>
         ))}
