@@ -33,24 +33,15 @@ const AccountPage = () => {
           details={[
             {
               headerTranslationKey: 'emailadres',
-              value: contactData?.getBurgerProfiel?.emailadres,
+              value: !contactLoading && !contactError && contactData?.getBurgerProfiel?.emailadres,
               showEditButton: true,
-              hasValue: !!(
-                !contactLoading &&
-                !contactError &&
-                contactData?.getBurgerProfiel?.emailadres
-              ),
               loading: contactLoading,
             },
             {
               headerTranslationKey: 'telefoonnummer',
-              value: contactData?.getBurgerProfiel?.telefoonnummer,
+              value:
+                !contactLoading && !contactError && contactData?.getBurgerProfiel?.telefoonnummer,
               showEditButton: true,
-              hasValue: !!(
-                !contactLoading &&
-                !contactError &&
-                contactData?.getBurgerProfiel?.telefoonnummer
-              ),
               loading: contactLoading,
             },
           ]}

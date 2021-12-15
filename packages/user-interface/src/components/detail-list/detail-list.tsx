@@ -14,8 +14,7 @@ interface DetailListProps {
   details: Array<{
     headerTranslationKey: string;
     loading?: boolean;
-    hasValue?: boolean;
-    value?: string | undefined | null;
+    value?: string | undefined | null | false;
     showEditButton?: boolean;
   }>;
 }
@@ -36,20 +35,17 @@ const DetailList: FC<DetailListProps> = ({details}) => {
           </span>
           <div className={styles['detail-list__value-edit']}>
             <span className={styles['detail-list__value']}>
-              {/* eslint-disable-next-line no-nested-ternary */}
               {detail.loading ? (
                 <Skeleton width={isDesktop ? 200 : 150} />
-              ) : detail.hasValue ? (
-                detail.value
               ) : (
-                EMPTY_VALUE
+                detail.value || EMPTY_VALUE
               )}
             </span>
             {detail.showEditButton && (
               <Link
                 component={RouterLink}
                 to={`/account/aanpassen?prop=${detail.headerTranslationKey}${
-                  detail.hasValue ? `&default=${detail.value}` : ''
+                  detail.value ? `&default=${detail.value}` : ''
                 }`}
                 hrefLang={hrefLang}
                 icon={<EditIcon />}
