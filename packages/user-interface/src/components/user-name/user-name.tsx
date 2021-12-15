@@ -21,8 +21,12 @@ const UserName: FC<UserNameProps> = ({mobileMenu}) => {
     try {
       const userProfile = await keycloak.loadUserProfile();
 
-      if (userProfile) {
-        setUserName(`${userProfile.firstName} ${userProfile.lastName}`);
+      if (userProfile?.lastName) {
+        if (userProfile?.firstName) {
+          setUserName(`${userProfile.firstName} ${userProfile.lastName}`);
+        } else {
+          setUserName(`${userProfile.lastName}`);
+        }
       }
 
       setUserNameRetrieved(true);
