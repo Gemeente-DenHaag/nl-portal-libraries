@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {Button, Heading2, TextField} from '@gemeente-denhaag/components-react';
 import {FormattedMessage, useIntl} from 'react-intl';
-import {useContext} from 'react';
+import {useContext, useEffect, useState} from 'react';
 import {LocaleContext} from '@gemeente-denhaag/nl-portal-localization';
 import {useHistory} from 'react-router-dom';
 import {useQuery} from '../../hooks';
@@ -12,13 +12,30 @@ const EditAccountPage = () => {
   const intl = useIntl();
   const history = useHistory();
   const prop = query.get('prop');
-  const {currentLocale} = useContext(LocaleContext);
   const propTranslation = intl.formatMessage({id: `account.detail.${prop}`});
+  const errorTranslation = intl.formatMessage({id: `account.detail.${prop}.error`});
+
   const defaultValueKey = `account.${prop}.default`;
   const defaultValue = sessionStorage.getItem(defaultValueKey);
+
+  const regexKey = `account.${prop}.regex`;
+  const regexValue = sessionStorage.getItem(regexKey);
+  const regexObject = regexValue && JSON.parse(regexValue);
+  const regex: RegExp = regexObject && new RegExp(regexObject.source, regexObject.flags);
+
+  const {currentLocale} = useContext(LocaleContext);
+  const [valid, setValidity] = useState(regex ? regex.test(defaultValue || '') : true);
+  const [value, setValue] = useState(defaultValue || '');
+
   const navigateToAccountPage = () => {
     history.push(`/account/`);
   };
+
+  useEffect(() => {
+    if (regex) {
+      setValidity(regex.test(value));
+    }
+  }, [value]);
 
   return (
     <section className={styles['edit-account']}>
@@ -31,15 +48,20 @@ const EditAccountPage = () => {
       </header>
       <div className={styles['edit-account__text-field-container']}>
         <TextField
+          onChange={e => setValue(e.target.value)}
           label={propTranslation}
           className={styles['edit-account__text-field']}
           defaultValue={defaultValue || ''}
-          error
-          helperText="error"
+          error={!valid}
+          helperText={!valid ? errorTranslation : ''}
         />
       </div>
       <div className={styles['edit-account__buttons']}>
-        <Button className={styles['edit-account__button']} onClick={navigateToAccountPage}>
+        <Button
+          className={styles['edit-account__button']}
+          onClick={navigateToAccountPage}
+          disabled={!valid}
+        >
           <FormattedMessage id="account.save" />
         </Button>
         <Button

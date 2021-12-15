@@ -32,17 +32,20 @@ const AccountPage = () => {
         <DetailList
           details={[
             {
-              headerTranslationKey: 'emailadres',
+              translationKey: 'emailadres',
               value: !contactLoading && !contactError && contactData?.getBurgerProfiel?.emailadres,
               showEditButton: true,
               loading: contactLoading,
+              regex:
+                /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
             },
             {
-              headerTranslationKey: 'telefoonnummer',
+              translationKey: 'telefoonnummer',
               value:
                 !contactLoading && !contactError && contactData?.getBurgerProfiel?.telefoonnummer,
               showEditButton: true,
               loading: contactLoading,
+              regex: /^\d{10}$/,
             },
           ]}
         />
@@ -54,16 +57,13 @@ const AccountPage = () => {
         <DetailList
           details={[
             {
-              headerTranslationKey: 'updatesOnCases',
-              showEditButton: true,
+              translationKey: 'updatesOnCases',
             },
             {
-              headerTranslationKey: 'newsOnNeighborhood',
-              showEditButton: true,
+              translationKey: 'newsOnNeighborhood',
             },
             {
-              headerTranslationKey: 'tips',
-              showEditButton: true,
+              translationKey: 'tips',
             },
           ]}
         />
@@ -75,25 +75,25 @@ const AccountPage = () => {
         <DetailList
           details={[
             {
-              headerTranslationKey: 'firstNames',
+              translationKey: 'firstNames',
             },
             {
-              headerTranslationKey: 'lastName',
+              translationKey: 'lastName',
             },
             {
-              headerTranslationKey: 'gender',
+              translationKey: 'gender',
             },
             {
-              headerTranslationKey: 'citizenServiceNumber',
+              translationKey: 'citizenServiceNumber',
             },
             {
-              headerTranslationKey: 'dateOfBirth',
+              translationKey: 'dateOfBirth',
             },
             {
-              headerTranslationKey: 'countryOfBirth',
+              translationKey: 'countryOfBirth',
             },
             {
-              headerTranslationKey: 'nationality',
+              translationKey: 'nationality',
             },
           ]}
         />
@@ -105,10 +105,10 @@ const AccountPage = () => {
         <DetailList
           details={[
             {
-              headerTranslationKey: 'street',
+              translationKey: 'street',
             },
             {
-              headerTranslationKey: 'postalCodeAndCity',
+              translationKey: 'postalCodeAndCity',
             },
           ]}
         />

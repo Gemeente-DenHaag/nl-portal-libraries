@@ -12,10 +12,11 @@ import {BREAKPOINTS} from '../../constants';
 
 interface DetailListProps {
   details: Array<{
-    headerTranslationKey: string;
+    translationKey: string;
     loading?: boolean;
     value?: string | undefined | null | false;
     showEditButton?: boolean;
+    regex?: RegExp;
   }>;
 }
 
@@ -24,23 +25,30 @@ const DetailList: FC<DetailListProps> = ({details}) => {
   const isDesktop = useMediaQuery(BREAKPOINTS.DESKTOP);
   const EMPTY_VALUE = '-';
 
-  const setSessionStorageForProp = (prop: string, value: any) => {
+  const setSessionStorageForProp = (prop: string, value: any, regex?: RegExp) => {
     const defaultValueKey = `account.${prop}.default`;
+    const regexKey = `account.${prop}.regex`;
 
     sessionStorage.removeItem(defaultValueKey);
+    sessionStorage.removeItem(regexKey);
 
     if (value) {
       sessionStorage.setItem(defaultValueKey, value);
+    }
+
+    if (regex) {
+      const regexObject = {flags: regex.flags, source: regex.source};
+      sessionStorage.setItem(regexKey, JSON.stringify(regexObject));
     }
   };
 
   return (
     <Fragment>
       {details.map(detail => (
-        <div className={styles['detail-list__item']} key={detail.headerTranslationKey}>
+        <div className={styles['detail-list__item']} key={detail.translationKey}>
           <span className={styles['detail-list__header']}>
             <b>
-              <FormattedMessage id={`account.detail.${detail.headerTranslationKey}`} />
+              <FormattedMessage id={`account.detail.${detail.translationKey}`} />
             </b>
           </span>
           <div className={styles['detail-list__value-edit']}>
@@ -53,9 +61,11 @@ const DetailList: FC<DetailListProps> = ({details}) => {
             </span>
             {detail.showEditButton && (
               <Link
-                onClick={() => setSessionStorageForProp(detail.headerTranslationKey, detail.value)}
+                onClick={() =>
+                  setSessionStorageForProp(detail.translationKey, detail.value, detail.regex)
+                }
                 component={RouterLink}
-                to={`/account/aanpassen?prop=${detail.headerTranslationKey}`}
+                to={`/account/aanpassen?prop=${detail.translationKey}`}
                 hrefLang={hrefLang}
                 icon={<EditIcon />}
                 iconAlign="start"
