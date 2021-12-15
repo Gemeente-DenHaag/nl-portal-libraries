@@ -13,7 +13,7 @@ export const QUERY_GET_DOCUMENTEN = gql`
         formaat
         identificatie
         titel
-        url
+        uuid
       }
     }
   }

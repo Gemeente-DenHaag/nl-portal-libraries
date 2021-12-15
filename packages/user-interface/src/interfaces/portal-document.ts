@@ -1,5 +1,5 @@
 export interface PortalDocument {
-  url: string;
+  uuid: string;
   extension: string;
   name: string;
   size: number;

@@ -35,7 +35,7 @@ export const QUERY_GET_ZAKEN = gql`
         formaat
         identificatie
         titel
-        url
+        uuid
       }
     }
   }

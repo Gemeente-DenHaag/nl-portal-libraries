@@ -14,38 +14,8 @@ export type Scalars = {
   Float: number;
   /** A date */
   Date: any;
-  /** A type representing a formatted JSON */
-  JSON: any;
   /** A type representing a formatted java.util.UUID */
   UUID: any;
-};
-
-export type CaseCreated = {
-  __typename?: 'CaseCreated';
-  caseId: Scalars['UUID'];
-};
-
-export type CaseDefinition = {
-  __typename?: 'CaseDefinition';
-  id: Scalars['String'];
-  schema: Scalars['JSON'];
-  statusDefinition: Array<Scalars['String']>;
-};
-
-export type CaseInstance = {
-  __typename?: 'CaseInstance';
-  caseDefinitionId: Scalars['String'];
-  createdOn: Scalars['String'];
-  externalId?: Maybe<Scalars['String']>;
-  id: Scalars['UUID'];
-  status?: Maybe<Status>;
-  statusHistory?: Maybe<Array<HistoricStatus>>;
-  submission: Scalars['JSON'];
-  userId: Scalars['String'];
-};
-
-export type CaseInstanceOrderingInput = {
-  createdOn: Sort;
 };
 
 export type Document = {
@@ -56,7 +26,7 @@ export type Document = {
   formaat?: Maybe<Scalars['String']>;
   identificatie?: Maybe<Scalars['String']>;
   titel?: Maybe<Scalars['String']>;
-  url?: Maybe<Scalars['String']>;
+  uuid?: Maybe<Scalars['UUID']>;
 };
 
 export type DocumentContent = {
@@ -64,67 +34,10 @@ export type DocumentContent = {
   content: Scalars['String'];
 };
 
-export type FormDefinition = {
-  __typename?: 'FormDefinition';
-  formDefinition: Scalars['JSON'];
-  name: Scalars['String'];
-};
-
-export type HistoricStatus = {
-  __typename?: 'HistoricStatus';
-  createdOn: Scalars['String'];
-  status: Status;
-};
-
-export type Mutation = {
-  __typename?: 'Mutation';
-  /** Mutation used to complete public tasks */
-  completePublicTask: TaskInstance;
-  /** Complete task mutation */
-  completeTask: TaskInstance;
-  /** Convert submission to json return resulting data */
-  processSubmission: CaseCreated;
-};
-
-
-export type MutationCompletePublicTaskArgs = {
-  submission: Scalars['JSON'];
-  taskExternalId: Scalars['String'];
-};
-
-
-export type MutationCompleteTaskArgs = {
-  submission: Scalars['JSON'];
-  taskId: Scalars['UUID'];
-};
-
-
-export type MutationProcessSubmissionArgs = {
-  caseDefinitionId: Scalars['String'];
-  initialStatus?: Maybe<Scalars['String']>;
-  submission: Scalars['JSON'];
-};
-
 export type Query = {
   __typename?: 'Query';
-  /** retrieves all available case definitions */
-  allCaseDefinitions: Array<CaseDefinition>;
-  /** retrieves all available case instances */
-  allCaseInstances: Array<CaseInstance>;
-  /** find all form definitions from repository */
-  allFormDefinitions: Array<FormDefinition>;
-  /** find all available tasks */
-  findAllTasks: Array<TaskInstance>;
-  /** find public task with id */
-  findPublicTask: TaskInstance;
-  /** find all available tasks for external case id */
-  findTasks?: Maybe<Array<TaskInstance>>;
-  /** retrieves single case instance from repository */
-  getCaseInstance?: Maybe<CaseInstance>;
   /** Gets a document content by id as base64 encoded */
   getDocumentContent: DocumentContent;
-  /** find single form definition from repository */
-  getFormDefinition?: Maybe<FormDefinition>;
   /** Gets a zaak by id */
   getZaak: Zaak;
   /** Gets all zaken for the user */
@@ -132,33 +45,8 @@ export type Query = {
 };
 
 
-export type QueryAllCaseInstancesArgs = {
-  orderBy: CaseInstanceOrderingInput;
-};
-
-
-export type QueryFindPublicTaskArgs = {
-  taskId: Scalars['String'];
-};
-
-
-export type QueryFindTasksArgs = {
-  caseId: Scalars['UUID'];
-};
-
-
-export type QueryGetCaseInstanceArgs = {
-  id: Scalars['UUID'];
-};
-
-
 export type QueryGetDocumentContentArgs = {
   id: Scalars['UUID'];
-};
-
-
-export type QueryGetFormDefinitionArgs = {
-  name: Scalars['String'];
 };
 
 
@@ -171,33 +59,10 @@ export type QueryGetZakenArgs = {
   page?: Maybe<Scalars['Int']>;
 };
 
-export enum Sort {
-  Asc = 'ASC',
-  Desc = 'DESC'
-}
-
-export type Status = {
-  __typename?: 'Status';
-  createdOn: Scalars['String'];
-  name: Scalars['String'];
-};
-
 export type StatusType = {
   __typename?: 'StatusType';
   isEindstatus?: Maybe<Scalars['Boolean']>;
   omschrijving?: Maybe<Scalars['String']>;
-};
-
-export type TaskInstance = {
-  __typename?: 'TaskInstance';
-  caseDefinitionId?: Maybe<Scalars['String']>;
-  createdOn: Scalars['String'];
-  externalCaseId: Scalars['String'];
-  externalTaskId: Scalars['String'];
-  formDefinition: Scalars['JSON'];
-  isCompleted: Scalars['Boolean'];
-  taskDefinitionKey: Scalars['String'];
-  taskId: Scalars['UUID'];
 };
 
 export type Zaak = {
@@ -232,25 +97,6 @@ export type ZaakType = {
   omschrijving: Scalars['String'];
 };
 
-export type GetDocumentenQueryVariables = Exact<{
-  id: Scalars['UUID'];
-}>;
-
-
-export type GetDocumentenQuery = { __typename?: 'Query', getZaak: { __typename?: 'Zaak', zaaktype: { __typename?: 'ZaakType', identificatie: string }, documenten: Array<{ __typename?: 'Document', bestandsnaam?: Maybe<string>, bestandsomvang?: Maybe<number>, creatiedatum?: Maybe<string>, formaat?: Maybe<string>, identificatie?: Maybe<string>, titel?: Maybe<string>, url?: Maybe<string> }> } };
-
-export type GetZaakQueryVariables = Exact<{
-  id: Scalars['UUID'];
-}>;
-
-
-export type GetZaakQuery = { __typename?: 'Query', getZaak: { __typename?: 'Zaak', uuid: any, omschrijving: string, identificatie: string, startdatum: any, zaaktype: { __typename?: 'ZaakType', identificatie: string, omschrijving: string }, status?: Maybe<{ __typename?: 'ZaakStatus', datumStatusGezet: string, statustype: { __typename?: 'ZaakStatusType', omschrijving: string, isEindstatus: boolean } }>, statusGeschiedenis: Array<{ __typename?: 'ZaakStatus', datumStatusGezet: string, statustype: { __typename?: 'ZaakStatusType', omschrijving: string, isEindstatus: boolean } }>, statussen: Array<{ __typename?: 'StatusType', omschrijving?: Maybe<string> }>, documenten: Array<{ __typename?: 'Document', bestandsnaam?: Maybe<string>, bestandsomvang?: Maybe<number>, creatiedatum?: Maybe<string>, formaat?: Maybe<string>, identificatie?: Maybe<string>, titel?: Maybe<string>, url?: Maybe<string> }> } };
-
-export type GetZakenQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type GetZakenQuery = { __typename?: 'Query', getZaken: Array<{ __typename?: 'Zaak', uuid: any, omschrijving: string, startdatum: any, zaaktype: { __typename?: 'ZaakType', identificatie: string }, status?: Maybe<{ __typename?: 'ZaakStatus', statustype: { __typename?: 'ZaakStatusType', isEindstatus: boolean } }> }> };
-
 export type GetDocumentContentQueryVariables = Exact<{
   id: Scalars['UUID'];
 }>;
@@ -258,7 +104,61 @@ export type GetDocumentContentQueryVariables = Exact<{
 
 export type GetDocumentContentQuery = { __typename?: 'Query', getDocumentContent: { __typename?: 'DocumentContent', content: string } };
 
+export type GetDocumentenQueryVariables = Exact<{
+  id: Scalars['UUID'];
+}>;
 
+
+export type GetDocumentenQuery = { __typename?: 'Query', getZaak: { __typename?: 'Zaak', zaaktype: { __typename?: 'ZaakType', identificatie: string }, documenten: Array<{ __typename?: 'Document', bestandsnaam?: Maybe<string>, bestandsomvang?: Maybe<number>, creatiedatum?: Maybe<string>, formaat?: Maybe<string>, identificatie?: Maybe<string>, titel?: Maybe<string>, uuid?: Maybe<any> }> } };
+
+export type GetZaakQueryVariables = Exact<{
+  id: Scalars['UUID'];
+}>;
+
+
+export type GetZaakQuery = { __typename?: 'Query', getZaak: { __typename?: 'Zaak', uuid: any, omschrijving: string, identificatie: string, startdatum: any, zaaktype: { __typename?: 'ZaakType', identificatie: string, omschrijving: string }, status?: Maybe<{ __typename?: 'ZaakStatus', datumStatusGezet: string, statustype: { __typename?: 'ZaakStatusType', omschrijving: string, isEindstatus: boolean } }>, statusGeschiedenis: Array<{ __typename?: 'ZaakStatus', datumStatusGezet: string, statustype: { __typename?: 'ZaakStatusType', omschrijving: string, isEindstatus: boolean } }>, statussen: Array<{ __typename?: 'StatusType', omschrijving?: Maybe<string> }>, documenten: Array<{ __typename?: 'Document', bestandsnaam?: Maybe<string>, bestandsomvang?: Maybe<number>, creatiedatum?: Maybe<string>, formaat?: Maybe<string>, identificatie?: Maybe<string>, titel?: Maybe<string>, uuid?: Maybe<any> }> } };
+
+export type GetZakenQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetZakenQuery = { __typename?: 'Query', getZaken: Array<{ __typename?: 'Zaak', uuid: any, omschrijving: string, startdatum: any, zaaktype: { __typename?: 'ZaakType', identificatie: string }, status?: Maybe<{ __typename?: 'ZaakStatus', statustype: { __typename?: 'ZaakStatusType', isEindstatus: boolean } }> }> };
+
+
+export const GetDocumentContentDocument = gql`
+    query GetDocumentContent($id: UUID!) {
+  getDocumentContent(id: $id) {
+    content
+  }
+}
+    `;
+
+/**
+ * __useGetDocumentContentQuery__
+ *
+ * To run a query within a React component, call `useGetDocumentContentQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetDocumentContentQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetDocumentContentQuery({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useGetDocumentContentQuery(baseOptions: Apollo.QueryHookOptions<GetDocumentContentQuery, GetDocumentContentQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetDocumentContentQuery, GetDocumentContentQueryVariables>(GetDocumentContentDocument, options);
+      }
+export function useGetDocumentContentLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetDocumentContentQuery, GetDocumentContentQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetDocumentContentQuery, GetDocumentContentQueryVariables>(GetDocumentContentDocument, options);
+        }
+export type GetDocumentContentQueryHookResult = ReturnType<typeof useGetDocumentContentQuery>;
+export type GetDocumentContentLazyQueryHookResult = ReturnType<typeof useGetDocumentContentLazyQuery>;
+export type GetDocumentContentQueryResult = Apollo.QueryResult<GetDocumentContentQuery, GetDocumentContentQueryVariables>;
 export const GetDocumentenDocument = gql`
     query GetDocumenten($id: UUID!) {
   getZaak(id: $id) {
@@ -272,7 +172,7 @@ export const GetDocumentenDocument = gql`
       formaat
       identificatie
       titel
-      url
+      uuid
     }
   }
 }
@@ -340,7 +240,7 @@ export const GetZaakDocument = gql`
       formaat
       identificatie
       titel
-      url
+      uuid
     }
   }
 }
@@ -417,38 +317,3 @@ export function useGetZakenLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<G
 export type GetZakenQueryHookResult = ReturnType<typeof useGetZakenQuery>;
 export type GetZakenLazyQueryHookResult = ReturnType<typeof useGetZakenLazyQuery>;
 export type GetZakenQueryResult = Apollo.QueryResult<GetZakenQuery, GetZakenQueryVariables>;
-export const GetDocumentContentDocument = gql`
-    query GetDocumentContent($id: UUID!) {
-  getDocumentContent(id: $id) {
-    content
-  }
-}
-    `;
-
-/**
- * __useGetDocumentContentQuery__
- *
- * To run a query within a React component, call `useGetDocumentContentQuery` and pass it any options that fit your needs.
- * When your component renders, `useGetDocumentContentQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useGetDocumentContentQuery({
- *   variables: {
- *      id: // value for 'id'
- *   },
- * });
- */
-export function useGetDocumentContentQuery(baseOptions: Apollo.QueryHookOptions<GetDocumentContentQuery, GetDocumentContentQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<GetDocumentContentQuery, GetDocumentContentQueryVariables>(GetDocumentContentDocument, options);
-      }
-export function useGetDocumentContentLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetDocumentContentQuery, GetDocumentContentQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<GetDocumentContentQuery, GetDocumentContentQueryVariables>(GetDocumentContentDocument, options);
-        }
-export type GetDocumentContentQueryHookResult = ReturnType<typeof useGetDocumentContentQuery>;
-export type GetDocumentContentLazyQueryHookResult = ReturnType<typeof useGetDocumentContentLazyQuery>;
-export type GetDocumentContentQueryResult = Apollo.QueryResult<GetDocumentContentQuery, GetDocumentContentQueryVariables>;
