@@ -8,9 +8,11 @@ import {useQuery} from '../../hooks';
 import styles from './edit-account-page.module.scss';
 
 const EditAccountPage = () => {
+  const {currentLocale} = useContext(LocaleContext);
   const query = useQuery();
   const intl = useIntl();
   const history = useHistory();
+
   const prop = query.get('prop');
   const propTranslation = intl.formatMessage({id: `account.detail.${prop}`});
   const errorTranslation = intl.formatMessage({id: `account.detail.${prop}.error`});
@@ -23,7 +25,6 @@ const EditAccountPage = () => {
   const regexObject = regexValue && JSON.parse(regexValue);
   const regex: RegExp = regexObject && new RegExp(regexObject.source, regexObject.flags);
 
-  const {currentLocale} = useContext(LocaleContext);
   const [valid, setValidity] = useState(regex ? regex.test(defaultValue || '') : true);
   const [value, setValue] = useState(defaultValue || '');
 
