@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {FC, Fragment, useContext, useEffect, useState} from 'react';
+import {FC, Fragment, useContext} from 'react';
 import {FormattedMessage} from 'react-intl';
 import {Link} from '@gemeente-denhaag/components-react';
 import {EditIcon} from '@gemeente-denhaag/icons';
@@ -16,14 +16,7 @@ interface DetailListProps {
 
 const DetailList: FC<DetailListProps> = ({details}) => {
   const {hrefLang} = useContext(LocaleContext);
-  const [loading, setLoading] = useState(true);
   const isDesktop = useMediaQuery(BREAKPOINTS.DESKTOP);
-
-  useEffect(() => {
-    setTimeout(() => {
-      setLoading(false);
-    }, 500);
-  }, []);
 
   return (
     <Fragment>
@@ -36,7 +29,7 @@ const DetailList: FC<DetailListProps> = ({details}) => {
           </span>
           <div className={styles['detail-list__value-edit']}>
             <span className={styles['detail-list__value']}>
-              {loading ? <Skeleton width={isDesktop ? 200 : 150} /> : detail.value}
+              {!detail.value ? <Skeleton width={isDesktop ? 200 : 150} /> : detail.value}
             </span>
             {detail.showEditButton && (
               <Link
