@@ -24,6 +24,16 @@ const DetailList: FC<DetailListProps> = ({details}) => {
   const isDesktop = useMediaQuery(BREAKPOINTS.DESKTOP);
   const EMPTY_VALUE = '-';
 
+  const setSessionStorageForProp = (prop: string, value: any) => {
+    const defaultValueKey = `account.${prop}.default`;
+
+    sessionStorage.removeItem(defaultValueKey);
+
+    if (value) {
+      sessionStorage.setItem(defaultValueKey, value);
+    }
+  };
+
   return (
     <Fragment>
       {details.map(detail => (
@@ -43,10 +53,9 @@ const DetailList: FC<DetailListProps> = ({details}) => {
             </span>
             {detail.showEditButton && (
               <Link
+                onClick={() => setSessionStorageForProp(detail.headerTranslationKey, detail.value)}
                 component={RouterLink}
-                to={`/account/aanpassen?prop=${detail.headerTranslationKey}${
-                  detail.value ? `&default=${detail.value}` : ''
-                }`}
+                to={`/account/aanpassen?prop=${detail.headerTranslationKey}`}
                 hrefLang={hrefLang}
                 icon={<EditIcon />}
                 iconAlign="start"

@@ -12,10 +12,10 @@ const EditAccountPage = () => {
   const intl = useIntl();
   const history = useHistory();
   const prop = query.get('prop');
-  const defaultValue = query.get('default');
   const {currentLocale} = useContext(LocaleContext);
   const propTranslation = intl.formatMessage({id: `account.detail.${prop}`});
-
+  const defaultValueKey = `account.${prop}.default`;
+  const defaultValue = sessionStorage.getItem(defaultValueKey);
   const navigateToAccountPage = () => {
     history.push(`/account/`);
   };
@@ -34,6 +34,8 @@ const EditAccountPage = () => {
           label={propTranslation}
           className={styles['edit-account__text-field']}
           defaultValue={defaultValue || ''}
+          error
+          helperText="error"
         />
       </div>
       <div className={styles['edit-account__buttons']}>
