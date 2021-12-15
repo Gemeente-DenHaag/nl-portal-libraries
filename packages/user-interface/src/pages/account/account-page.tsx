@@ -13,7 +13,6 @@ const AccountPage = () => {
     error: contactError,
     refetch: contactRefetch,
   } = useGetBurgerProfielQuery();
-  const EMPTY_VALUE = '-';
 
   useEffect(() => {
     contactRefetch();
@@ -34,19 +33,25 @@ const AccountPage = () => {
           details={[
             {
               headerTranslationKey: 'emailadres',
-              value:
-                contactLoading && !contactError
-                  ? ''
-                  : contactData?.getBurgerProfiel?.emailadres || EMPTY_VALUE,
+              value: contactData?.getBurgerProfiel?.emailadres,
               showEditButton: true,
+              hasValue: !!(
+                !contactLoading &&
+                !contactError &&
+                contactData?.getBurgerProfiel?.emailadres
+              ),
+              loading: contactLoading,
             },
             {
               headerTranslationKey: 'telefoonnummer',
-              value:
-                contactLoading && !contactError
-                  ? ''
-                  : contactData?.getBurgerProfiel?.telefoonnummer || EMPTY_VALUE,
+              value: contactData?.getBurgerProfiel?.telefoonnummer,
               showEditButton: true,
+              hasValue: !!(
+                !contactLoading &&
+                !contactError &&
+                contactData?.getBurgerProfiel?.telefoonnummer
+              ),
+              loading: contactLoading,
             },
           ]}
         />
@@ -59,17 +64,14 @@ const AccountPage = () => {
           details={[
             {
               headerTranslationKey: 'updatesOnCases',
-              value: EMPTY_VALUE,
               showEditButton: true,
             },
             {
               headerTranslationKey: 'newsOnNeighborhood',
-              value: EMPTY_VALUE,
               showEditButton: true,
             },
             {
               headerTranslationKey: 'tips',
-              value: EMPTY_VALUE,
               showEditButton: true,
             },
           ]}
@@ -83,31 +85,24 @@ const AccountPage = () => {
           details={[
             {
               headerTranslationKey: 'firstNames',
-              value: EMPTY_VALUE,
             },
             {
               headerTranslationKey: 'lastName',
-              value: EMPTY_VALUE,
             },
             {
               headerTranslationKey: 'gender',
-              value: EMPTY_VALUE,
             },
             {
               headerTranslationKey: 'citizenServiceNumber',
-              value: EMPTY_VALUE,
             },
             {
               headerTranslationKey: 'dateOfBirth',
-              value: EMPTY_VALUE,
             },
             {
               headerTranslationKey: 'countryOfBirth',
-              value: EMPTY_VALUE,
             },
             {
               headerTranslationKey: 'nationality',
-              value: EMPTY_VALUE,
             },
           ]}
         />
@@ -120,11 +115,9 @@ const AccountPage = () => {
           details={[
             {
               headerTranslationKey: 'street',
-              value: EMPTY_VALUE,
             },
             {
               headerTranslationKey: 'postalCodeAndCity',
-              value: EMPTY_VALUE,
             },
           ]}
         />

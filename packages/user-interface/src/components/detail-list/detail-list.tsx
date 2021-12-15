@@ -11,12 +11,19 @@ import {useMediaQuery} from '../../hooks';
 import {BREAKPOINTS} from '../../constants';
 
 interface DetailListProps {
-  details: Array<{headerTranslationKey: string; value: string; showEditButton?: boolean}>;
+  details: Array<{
+    headerTranslationKey: string;
+    loading?: boolean;
+    hasValue?: boolean;
+    value?: string | undefined | null;
+    showEditButton?: boolean;
+  }>;
 }
 
 const DetailList: FC<DetailListProps> = ({details}) => {
   const {hrefLang} = useContext(LocaleContext);
   const isDesktop = useMediaQuery(BREAKPOINTS.DESKTOP);
+  const EMPTY_VALUE = '-';
 
   return (
     <Fragment>
@@ -29,12 +36,21 @@ const DetailList: FC<DetailListProps> = ({details}) => {
           </span>
           <div className={styles['detail-list__value-edit']}>
             <span className={styles['detail-list__value']}>
-              {!detail.value ? <Skeleton width={isDesktop ? 200 : 150} /> : detail.value}
+              {/* eslint-disable-next-line no-nested-ternary */}
+              {detail.loading ? (
+                <Skeleton width={isDesktop ? 200 : 150} />
+              ) : detail.hasValue ? (
+                detail.value
+              ) : (
+                EMPTY_VALUE
+              )}
             </span>
             {detail.showEditButton && (
               <Link
                 component={RouterLink}
-                to={`/account/aanpassen?prop=${detail.headerTranslationKey}`}
+                to={`/account/aanpassen?prop=${detail.headerTranslationKey}${
+                  detail.hasValue ? `&default=${detail.value}` : ''
+                }`}
                 hrefLang={hrefLang}
                 icon={<EditIcon />}
                 iconAlign="start"
