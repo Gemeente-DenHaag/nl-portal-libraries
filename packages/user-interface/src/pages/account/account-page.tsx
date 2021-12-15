@@ -13,7 +13,6 @@ const AccountPage = () => {
     error: contactError,
     refetch: contactRefetch,
   } = useGetBurgerProfielQuery();
-  const EMPTY_VALUE = '-';
 
   useEffect(() => {
     contactRefetch();
@@ -33,20 +32,21 @@ const AccountPage = () => {
         <DetailList
           details={[
             {
-              headerTranslationKey: 'emailadres',
-              value:
-                contactLoading && !contactError
-                  ? ''
-                  : contactData?.getBurgerProfiel?.emailadres || EMPTY_VALUE,
+              translationKey: 'emailadres',
+              value: !contactLoading && !contactError && contactData?.getBurgerProfiel?.emailadres,
               showEditButton: true,
+              loading: contactLoading,
+              regex:
+                // eslint-disable-next-line
+                /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
             },
             {
-              headerTranslationKey: 'telefoonnummer',
+              translationKey: 'telefoonnummer',
               value:
-                contactLoading && !contactError
-                  ? ''
-                  : contactData?.getBurgerProfiel?.telefoonnummer || EMPTY_VALUE,
+                !contactLoading && !contactError && contactData?.getBurgerProfiel?.telefoonnummer,
               showEditButton: true,
+              loading: contactLoading,
+              regex: /^\d{10}$/,
             },
           ]}
         />
@@ -58,19 +58,13 @@ const AccountPage = () => {
         <DetailList
           details={[
             {
-              headerTranslationKey: 'updatesOnCases',
-              value: EMPTY_VALUE,
-              showEditButton: true,
+              translationKey: 'updatesOnCases',
             },
             {
-              headerTranslationKey: 'newsOnNeighborhood',
-              value: EMPTY_VALUE,
-              showEditButton: true,
+              translationKey: 'newsOnNeighborhood',
             },
             {
-              headerTranslationKey: 'tips',
-              value: EMPTY_VALUE,
-              showEditButton: true,
+              translationKey: 'tips',
             },
           ]}
         />
@@ -82,32 +76,25 @@ const AccountPage = () => {
         <DetailList
           details={[
             {
-              headerTranslationKey: 'firstNames',
-              value: EMPTY_VALUE,
+              translationKey: 'firstNames',
             },
             {
-              headerTranslationKey: 'lastName',
-              value: EMPTY_VALUE,
+              translationKey: 'lastName',
             },
             {
-              headerTranslationKey: 'gender',
-              value: EMPTY_VALUE,
+              translationKey: 'gender',
             },
             {
-              headerTranslationKey: 'citizenServiceNumber',
-              value: EMPTY_VALUE,
+              translationKey: 'citizenServiceNumber',
             },
             {
-              headerTranslationKey: 'dateOfBirth',
-              value: EMPTY_VALUE,
+              translationKey: 'dateOfBirth',
             },
             {
-              headerTranslationKey: 'countryOfBirth',
-              value: EMPTY_VALUE,
+              translationKey: 'countryOfBirth',
             },
             {
-              headerTranslationKey: 'nationality',
-              value: EMPTY_VALUE,
+              translationKey: 'nationality',
             },
           ]}
         />
@@ -119,12 +106,10 @@ const AccountPage = () => {
         <DetailList
           details={[
             {
-              headerTranslationKey: 'street',
-              value: EMPTY_VALUE,
+              translationKey: 'street',
             },
             {
-              headerTranslationKey: 'postalCodeAndCity',
-              value: EMPTY_VALUE,
+              translationKey: 'postalCodeAndCity',
             },
           ]}
         />

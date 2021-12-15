@@ -40,6 +40,22 @@ export type Klant = {
   telefoonnummer?: Maybe<Scalars['String']>;
 };
 
+export type KlantUpdateInput = {
+  emailadres?: Maybe<Scalars['String']>;
+  telefoonnummer?: Maybe<Scalars['String']>;
+};
+
+export type Mutation = {
+  __typename?: 'Mutation';
+  /** Updates the profile for the user */
+  updateBurgerProfiel?: Maybe<Klant>;
+};
+
+
+export type MutationUpdateBurgerProfielArgs = {
+  klant: KlantUpdateInput;
+};
+
 export type Query = {
   __typename?: 'Query';
   /** Gets the profile for the user */
@@ -105,6 +121,18 @@ export type ZaakType = {
   omschrijving: Scalars['String'];
 };
 
+export type UpdateBurgerProfielMutationVariables = Exact<{
+  klant: KlantUpdateInput;
+}>;
+
+
+export type UpdateBurgerProfielMutation = { __typename?: 'Mutation', updateBurgerProfiel?: Maybe<{ __typename?: 'Klant', emailadres?: Maybe<string>, telefoonnummer?: Maybe<string> }> };
+
+export type GetBurgerProfielQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetBurgerProfielQuery = { __typename?: 'Query', getBurgerProfiel?: Maybe<{ __typename?: 'Klant', emailadres?: Maybe<string>, telefoonnummer?: Maybe<string> }> };
+
 export type GetDocumentContentQueryVariables = Exact<{
   id: Scalars['UUID'];
 }>;
@@ -131,12 +159,76 @@ export type GetZakenQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type GetZakenQuery = { __typename?: 'Query', getZaken: Array<{ __typename?: 'Zaak', uuid: any, omschrijving: string, startdatum: any, zaaktype: { __typename?: 'ZaakType', identificatie: string }, status?: Maybe<{ __typename?: 'ZaakStatus', statustype: { __typename?: 'ZaakStatusType', isEindstatus: boolean } }> }> };
 
-export type GetBurgerProfielQueryVariables = Exact<{ [key: string]: never; }>;
 
+export const UpdateBurgerProfielDocument = gql`
+    mutation UpdateBurgerProfiel($klant: KlantUpdateInput!) {
+  updateBurgerProfiel(klant: $klant) {
+    emailadres
+    telefoonnummer
+  }
+}
+    `;
+export type UpdateBurgerProfielMutationFn = Apollo.MutationFunction<UpdateBurgerProfielMutation, UpdateBurgerProfielMutationVariables>;
 
-export type GetBurgerProfielQuery = { __typename?: 'Query', getBurgerProfiel?: Maybe<{ __typename?: 'Klant', emailadres?: Maybe<string>, telefoonnummer?: Maybe<string> }> };
+/**
+ * __useUpdateBurgerProfielMutation__
+ *
+ * To run a mutation, you first call `useUpdateBurgerProfielMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpdateBurgerProfielMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [updateBurgerProfielMutation, { data, loading, error }] = useUpdateBurgerProfielMutation({
+ *   variables: {
+ *      klant: // value for 'klant'
+ *   },
+ * });
+ */
+export function useUpdateBurgerProfielMutation(baseOptions?: Apollo.MutationHookOptions<UpdateBurgerProfielMutation, UpdateBurgerProfielMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<UpdateBurgerProfielMutation, UpdateBurgerProfielMutationVariables>(UpdateBurgerProfielDocument, options);
+      }
+export type UpdateBurgerProfielMutationHookResult = ReturnType<typeof useUpdateBurgerProfielMutation>;
+export type UpdateBurgerProfielMutationResult = Apollo.MutationResult<UpdateBurgerProfielMutation>;
+export type UpdateBurgerProfielMutationOptions = Apollo.BaseMutationOptions<UpdateBurgerProfielMutation, UpdateBurgerProfielMutationVariables>;
+export const GetBurgerProfielDocument = gql`
+    query GetBurgerProfiel {
+  getBurgerProfiel {
+    emailadres
+    telefoonnummer
+  }
+}
+    `;
 
-
+/**
+ * __useGetBurgerProfielQuery__
+ *
+ * To run a query within a React component, call `useGetBurgerProfielQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetBurgerProfielQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetBurgerProfielQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useGetBurgerProfielQuery(baseOptions?: Apollo.QueryHookOptions<GetBurgerProfielQuery, GetBurgerProfielQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetBurgerProfielQuery, GetBurgerProfielQueryVariables>(GetBurgerProfielDocument, options);
+      }
+export function useGetBurgerProfielLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetBurgerProfielQuery, GetBurgerProfielQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetBurgerProfielQuery, GetBurgerProfielQueryVariables>(GetBurgerProfielDocument, options);
+        }
+export type GetBurgerProfielQueryHookResult = ReturnType<typeof useGetBurgerProfielQuery>;
+export type GetBurgerProfielLazyQueryHookResult = ReturnType<typeof useGetBurgerProfielLazyQuery>;
+export type GetBurgerProfielQueryResult = Apollo.QueryResult<GetBurgerProfielQuery, GetBurgerProfielQueryVariables>;
 export const GetDocumentContentDocument = gql`
     query GetDocumentContent($id: UUID!) {
   getDocumentContent(id: $id) {
@@ -330,38 +422,3 @@ export function useGetZakenLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<G
 export type GetZakenQueryHookResult = ReturnType<typeof useGetZakenQuery>;
 export type GetZakenLazyQueryHookResult = ReturnType<typeof useGetZakenLazyQuery>;
 export type GetZakenQueryResult = Apollo.QueryResult<GetZakenQuery, GetZakenQueryVariables>;
-export const GetBurgerProfielDocument = gql`
-    query GetBurgerProfiel {
-  getBurgerProfiel {
-    emailadres
-    telefoonnummer
-  }
-}
-    `;
-
-/**
- * __useGetBurgerProfielQuery__
- *
- * To run a query within a React component, call `useGetBurgerProfielQuery` and pass it any options that fit your needs.
- * When your component renders, `useGetBurgerProfielQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useGetBurgerProfielQuery({
- *   variables: {
- *   },
- * });
- */
-export function useGetBurgerProfielQuery(baseOptions?: Apollo.QueryHookOptions<GetBurgerProfielQuery, GetBurgerProfielQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<GetBurgerProfielQuery, GetBurgerProfielQueryVariables>(GetBurgerProfielDocument, options);
-      }
-export function useGetBurgerProfielLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetBurgerProfielQuery, GetBurgerProfielQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<GetBurgerProfielQuery, GetBurgerProfielQueryVariables>(GetBurgerProfielDocument, options);
-        }
-export type GetBurgerProfielQueryHookResult = ReturnType<typeof useGetBurgerProfielQuery>;
-export type GetBurgerProfielLazyQueryHookResult = ReturnType<typeof useGetBurgerProfielLazyQuery>;
-export type GetBurgerProfielQueryResult = Apollo.QueryResult<GetBurgerProfielQuery, GetBurgerProfielQueryVariables>;
