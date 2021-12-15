@@ -4,6 +4,7 @@ import {FormattedMessage, useIntl} from 'react-intl';
 import {useContext, useEffect, useState} from 'react';
 import {LocaleContext} from '@gemeente-denhaag/nl-portal-localization';
 import {useHistory} from 'react-router-dom';
+import {useUpdateBurgerProfielMutation} from '@gemeente-denhaag/nl-portal-api';
 import {useQuery} from '../../hooks';
 import styles from './edit-account-page.module.scss';
 
@@ -12,6 +13,7 @@ const EditAccountPage = () => {
   const query = useQuery();
   const intl = useIntl();
   const history = useHistory();
+  const [mutateFunction, {loading, error}] = useUpdateBurgerProfielMutation();
 
   const prop = query.get('prop');
   const propTranslation = intl.formatMessage({id: `account.detail.${prop}`});
@@ -27,9 +29,15 @@ const EditAccountPage = () => {
 
   const [valid, setValidity] = useState(regex ? regex.test(defaultValue || '') : true);
   const [value, setValue] = useState(defaultValue || '');
+  const [mutating, setMutationStatus] = useState(false);
 
-  const navigateToAccountPage = () => {
+  const navigateToAccountPage = (): void => {
     history.push(`/account/`);
+  };
+
+  const onSave = (): void => {
+    setMutationStatus(true);
+    mutateFunction({variables: {klant: {[`${prop}`]: `${value}`}}});
   };
 
   useEffect(() => {
@@ -37,6 +45,15 @@ const EditAccountPage = () => {
       setValidity(regex.test(value));
     }
   }, [value]);
+
+  useEffect(() => {
+    if (mutating && !loading) {
+      if (!error) {
+        navigateToAccountPage();
+      }
+      setMutationStatus(false);
+    }
+  }, [loading]);
 
   return (
     <section className={styles['edit-account']}>
@@ -55,13 +72,14 @@ const EditAccountPage = () => {
           defaultValue={defaultValue || ''}
           error={!valid}
           helperText={!valid ? errorTranslation : ''}
+          disabled={loading}
         />
       </div>
       <div className={styles['edit-account__buttons']}>
         <Button
           className={styles['edit-account__button']}
-          onClick={navigateToAccountPage}
-          disabled={!valid}
+          onClick={onSave}
+          disabled={!valid || loading}
         >
           <FormattedMessage id="account.save" />
         </Button>
@@ -69,6 +87,7 @@ const EditAccountPage = () => {
           variant="secondary-action"
           className={styles['edit-account__button']}
           onClick={navigateToAccountPage}
+          disabled={loading}
         >
           <FormattedMessage id="account.cancel" />
         </Button>
