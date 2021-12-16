@@ -36,9 +36,6 @@ const AccountPage = () => {
               value: !contactLoading && !contactError && contactData?.getBurgerProfiel?.emailadres,
               showEditButton: true,
               loading: contactLoading,
-              regex:
-                // eslint-disable-next-line
-                /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
             },
             {
               translationKey: 'telefoonnummer',
@@ -46,7 +43,6 @@ const AccountPage = () => {
                 !contactLoading && !contactError && contactData?.getBurgerProfiel?.telefoonnummer,
               showEditButton: true,
               loading: contactLoading,
-              regex: /^\d{10}$/,
             },
           ]}
         />

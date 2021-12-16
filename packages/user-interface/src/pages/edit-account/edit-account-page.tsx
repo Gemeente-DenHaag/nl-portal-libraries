@@ -7,9 +7,12 @@ import {useHistory} from 'react-router-dom';
 import {useUpdateBurgerProfielMutation} from '@gemeente-denhaag/nl-portal-api';
 import {useQuery} from '../../hooks';
 import styles from './edit-account-page.module.scss';
+import {UserInformationContext} from '../../contexts';
+import {REGEX_PATTERNS} from '../../constants';
 
 const EditAccountPage = () => {
   const {currentLocale} = useContext(LocaleContext);
+  const {userInformation} = useContext(UserInformationContext);
   const query = useQuery();
   const intl = useIntl();
   const history = useHistory();
@@ -19,15 +22,10 @@ const EditAccountPage = () => {
   const propTranslation = intl.formatMessage({id: `account.detail.${prop}`});
   const errorTranslation = intl.formatMessage({id: `account.detail.${prop}.error`});
 
-  const defaultValueKey = `account.${prop}.default`;
-  const defaultValue = sessionStorage.getItem(defaultValueKey);
+  const defaultValue = userInformation[`${prop}`];
+  const regex = REGEX_PATTERNS[`${prop}`];
 
-  const regexKey = `account.${prop}.regex`;
-  const regexValue = sessionStorage.getItem(regexKey);
-  const regexObject = regexValue && JSON.parse(regexValue);
-  const regex: RegExp = regexObject && new RegExp(regexObject.source, regexObject.flags);
-
-  const [valid, setValidity] = useState(regex ? regex.test(defaultValue || '') : true);
+  const [valid, setValidity] = useState(true);
   const [value, setValue] = useState(defaultValue || '');
   const [mutating, setMutationStatus] = useState(false);
 
@@ -79,7 +77,7 @@ const EditAccountPage = () => {
         <Button
           className={styles['edit-account__button']}
           onClick={onSave}
-          disabled={!valid || loading}
+          disabled={!valid || loading || `${value}`.length === 0}
         >
           <FormattedMessage id="account.save" />
         </Button>
