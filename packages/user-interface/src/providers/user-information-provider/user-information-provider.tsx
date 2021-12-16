@@ -3,16 +3,17 @@ import {FC, useState} from 'react';
 import {UserInformationContext} from '../../contexts';
 
 const UserInformationProvider: FC = ({children}) => {
-  const [emailadres, setEmailadres] = useState('');
-  const [telefoonnummer, setTelefoonnummer] = useState('');
+  const [userInformation, modifyUserInformation] = useState({});
+
+  const setUserInformation = (key: string, value: string): void => {
+    modifyUserInformation({...userInformation, [key]: value});
+  };
 
   return (
     <UserInformationContext.Provider
       value={{
-        emailadres,
-        setEmailadres,
-        telefoonnummer,
-        setTelefoonnummer,
+        userInformation,
+        setUserInformation,
       }}
     >
       {children}
