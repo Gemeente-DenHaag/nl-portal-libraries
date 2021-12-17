@@ -9,6 +9,7 @@ import {Link as RouterLink} from 'react-router-dom';
 import styles from './detail-list.module.scss';
 import {useMediaQuery} from '../../hooks';
 import {BREAKPOINTS} from '../../constants';
+import {UserInformationContext} from '../../contexts';
 
 interface DetailListProps {
   details: Array<{
@@ -16,31 +17,14 @@ interface DetailListProps {
     loading?: boolean;
     value?: string | undefined | null | false;
     showEditButton?: boolean;
-    regex?: RegExp;
   }>;
 }
 
 const DetailList: FC<DetailListProps> = ({details}) => {
   const {hrefLang} = useContext(LocaleContext);
+  const {setUserInformation} = useContext(UserInformationContext);
   const isDesktop = useMediaQuery(BREAKPOINTS.DESKTOP);
   const EMPTY_VALUE = '-';
-
-  const setSessionStorageForProp = (prop: string, value: any, regex?: RegExp) => {
-    const defaultValueKey = `account.${prop}.default`;
-    const regexKey = `account.${prop}.regex`;
-
-    sessionStorage.removeItem(defaultValueKey);
-    sessionStorage.removeItem(regexKey);
-
-    if (value) {
-      sessionStorage.setItem(defaultValueKey, value);
-    }
-
-    if (regex) {
-      const regexObject = {flags: regex.flags, source: regex.source};
-      sessionStorage.setItem(regexKey, JSON.stringify(regexObject));
-    }
-  };
 
   return (
     <Fragment>
@@ -61,9 +45,7 @@ const DetailList: FC<DetailListProps> = ({details}) => {
             </span>
             {detail.showEditButton && (
               <Link
-                onClick={() =>
-                  setSessionStorageForProp(detail.translationKey, detail.value, detail.regex)
-                }
+                onClick={() => setUserInformation(detail.translationKey, `${detail.value}`)}
                 component={RouterLink}
                 to={`/account/aanpassen?prop=${detail.translationKey}`}
                 hrefLang={hrefLang}

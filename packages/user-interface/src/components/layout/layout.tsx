@@ -9,7 +9,7 @@ import {PortalFooter, PortalPage} from '../../interfaces';
 import styles from './layout.module.scss';
 import {Page} from '../page';
 import {Footer} from '../footer';
-import {LayoutProvider} from '../../providers';
+import {LayoutProvider, UserInformationProvider} from '../../providers';
 import {LayoutContext} from '../../contexts';
 import {LinkToParent} from '../link-to-parent';
 import {OfflinePage} from '../../pages';
@@ -121,14 +121,16 @@ const Layout: FC<LayoutComponentProps> = ({
 }) => (
   <StylesProvider>
     <LayoutProvider initialPage={pages[0]}>
-      <LayoutComponent
-        pages={pages}
-        headerLogo={headerLogo}
-        headerLogoSmall={headerLogoSmall}
-        footer={footer}
-        facet={facet}
-        offline={offline}
-      />
+      <UserInformationProvider>
+        <LayoutComponent
+          pages={pages}
+          headerLogo={headerLogo}
+          headerLogoSmall={headerLogoSmall}
+          footer={footer}
+          facet={facet}
+          offline={offline}
+        />
+      </UserInformationProvider>
     </LayoutProvider>
   </StylesProvider>
 );
