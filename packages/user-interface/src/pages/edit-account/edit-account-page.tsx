@@ -68,8 +68,8 @@ const EditAccountPage = () => {
           label={propTranslation}
           className={styles['edit-account__text-field']}
           defaultValue={defaultValue || ''}
-          error={!valid}
-          helperText={!valid ? errorTranslation : ''}
+          error={!valid && `${value}`.length >= 1}
+          helperText={!valid && `${value}`.length >= 1 ? errorTranslation : ''}
           disabled={loading}
         />
       </div>
