@@ -45,7 +45,7 @@ const DetailList: FC<DetailListProps> = ({details}) => {
             </span>
             {detail.showEditButton && (
               <Link
-                onClick={() => setUserInformation(detail.translationKey, `${detail.value}`)}
+                onClick={() => setUserInformation(detail.translationKey, detail.value)}
                 component={RouterLink}
                 to={`/account/aanpassen?prop=${detail.translationKey}`}
                 hrefLang={hrefLang}
