@@ -97,7 +97,15 @@ const pages: Array<PortalPage> = [
   },
   {
     icon: <DocumentIcon />,
-    pageComponent: <FormPage />,
+    pageComponent: (
+      <FormPage
+        openFormsBaseUrl={config.OPEN_FORMS_BASE_URL}
+        openFormsFormId={config.OPEN_FORMS_FORM_ID}
+        openFormsEntryEnv={config.OPEN_FORMS_ENTRY_ENV}
+        openFormsSdkUrl={config.OPEN_FORMS_SDK_URL}
+        openFormsStylesUrl={config.OPEN_FORMS_STYLES_URL}
+      />
+    ),
     path: '/formulier',
     titleTranslationKey: 'form',
     showInMenu: false,

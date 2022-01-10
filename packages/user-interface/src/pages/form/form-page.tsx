@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {useContext, useEffect} from 'react';
+import {FC, useContext, useEffect} from 'react';
 import {useScript} from 'usehooks-ts';
 import {Helmet} from 'react-helmet';
 import {LayoutContext} from '../../contexts';
@@ -7,13 +7,25 @@ import {LayoutContext} from '../../contexts';
 // eslint-disable-next-line
 declare const OpenForms: any;
 
-const FormPage = () => {
+interface FormPageProps {
+  openFormsBaseUrl: string;
+  openFormsFormId: string;
+  openFormsEntryEnv: string;
+  openFormsSdkUrl: string;
+  openFormsStylesUrl: string;
+}
+
+const FormPage: FC<FormPageProps> = ({
+  openFormsBaseUrl,
+  openFormsFormId,
+  openFormsEntryEnv,
+  openFormsSdkUrl,
+  openFormsStylesUrl,
+}) => {
   const {enableFullscreenForm, disableFullscreenForm, setCurrentFormTitle, clearCurrentFormTitle} =
     useContext(LayoutContext);
 
-  const openFormsScript = useScript(
-    'https://openformulieren-cg.test.denhaag.nl/static/sdk/open-forms-sdk.js'
-  );
+  const openFormsScript = useScript(openFormsSdkUrl);
 
   useEffect(() => {
     enableFullscreenForm();
@@ -26,11 +38,11 @@ const FormPage = () => {
 
   useEffect(() => {
     if (typeof OpenForms !== 'undefined') {
-      const formId = 'bezwaar\u002Dmaken';
-      const baseUrl = 'https://openformulieren\u002Dcg.test.denhaag.nl/api/v1/';
+      const formId = openFormsFormId;
+      const baseUrl = openFormsBaseUrl;
       const targetNode = document.getElementById('openforms\u002Dcontainer');
 
-      const sentryEnv = 'docker';
+      const sentryEnv = openFormsEntryEnv;
       const form = new OpenForms.OpenForm(targetNode, {baseUrl, formId, sentryEnv});
 
       form.init();
@@ -52,10 +64,7 @@ const FormPage = () => {
   return (
     <div>
       <Helmet>
-        <link
-          href="https://openformulieren-cg.test.denhaag.nl/static/sdk/open-forms-sdk.css"
-          rel="stylesheet"
-        />
+        <link href={openFormsStylesUrl} rel="stylesheet" />
       </Helmet>
       <div id="openforms-container" />
     </div>
