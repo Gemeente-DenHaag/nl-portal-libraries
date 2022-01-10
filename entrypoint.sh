@@ -22,4 +22,24 @@ if [ ! -z "$GRAPHQL_URI" ]; then
     sed -i -r "s|(GRAPHQL_URI = ').*(')|\1$GRAPHQL_URI\2|g" $configfile
 fi
 
+if [ ! -z "$OPEN_FORMS_SDK_URL" ]; then
+    sed -i -r "s|(OPEN_FORMS_SDK_URL = ').*(')|\1$OPEN_FORMS_SDK_URL\2|g" $configfile
+fi
+
+if [ ! -z "$OPEN_FORMS_BASE_URL" ]; then
+    sed -i -r "s|(OPEN_FORMS_BASE_URL = ').*(')|\1$OPEN_FORMS_BASE_URL\2|g" $configfile
+fi
+
+if [ ! -z "$OPEN_FORMS_FORM_ID" ]; then
+    sed -i -r "s|(OPEN_FORMS_FORM_ID = ').*(')|\1$OPEN_FORMS_FORM_ID\2|g" $configfile
+fi
+
+if [ ! -z "$OPEN_FORMS_ENTRY_ENV" ]; then
+    sed -i -r "s|(OPEN_FORMS_ENTRY_ENV = ').*(')|\1$OPEN_FORMS_ENTRY_ENV\2|g" $configfile
+fi
+
+if [ ! -z "$OPEN_FORMS_STYLES_URL" ]; then
+    sed -i -r "s|(OPEN_FORMS_STYLES_URL = ').*(')|\1$OPEN_FORMS_STYLES_URL\2|g" $configfile
+fi
+
 echo "Done replacing env vars in $configfile"
