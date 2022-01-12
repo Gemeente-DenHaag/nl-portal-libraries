@@ -166,7 +166,7 @@ const App = () => (
         url={config.KEYCLOAK_URL}
         redirectUri={config.KEYCLOAK_REDIRECT_URI}
       >
-        <ApiWrapper graphqlUri={config.GRAPHQL_URI}>
+        <ApiWrapper graphqlUri={config.GRAPHQL_URI} restUri={config.REST_URI}>
           <LocalizationProvider customMessages={CUSTOM_MESSAGES}>
             <Layout
               pages={pages}
