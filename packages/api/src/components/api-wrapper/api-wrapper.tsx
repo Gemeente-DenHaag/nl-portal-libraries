@@ -4,12 +4,12 @@ import {ApolloClient, ApolloLink, ApolloProvider, HttpLink, InMemoryCache} from 
 import {KeycloakContext} from '@gemeente-denhaag/nl-portal-authentication';
 
 interface ApolloWrapperProps {
-  uri: string;
+  graphqlUri: string;
 }
 
-const ApolloWrapper: FC<ApolloWrapperProps> = ({children, uri}) => {
+const ApiWrapper: FC<ApolloWrapperProps> = ({children, graphqlUri}) => {
   const {keycloakToken} = useContext(KeycloakContext);
-  const httpLink = new HttpLink({uri});
+  const httpLink = new HttpLink({uri: graphqlUri});
 
   const getLink = (authToken: string) =>
     new ApolloLink((operation, forward) => {
@@ -24,7 +24,7 @@ const ApolloWrapper: FC<ApolloWrapperProps> = ({children, uri}) => {
   const [client] = useState(
     () =>
       new ApolloClient({
-        uri,
+        uri: graphqlUri,
         cache: new InMemoryCache(),
         link: getLink(keycloakToken),
       })
@@ -37,4 +37,4 @@ const ApolloWrapper: FC<ApolloWrapperProps> = ({children, uri}) => {
   return keycloakToken ? <ApolloProvider client={client}>{children}</ApolloProvider> : null;
 };
 
-export {ApolloWrapper};
+export {ApiWrapper};
