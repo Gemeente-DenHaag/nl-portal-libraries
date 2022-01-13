@@ -3,6 +3,7 @@ window.KEYCLOAK_REALM = 'master';
 window.KEYCLOAK_CLIENT_ID = 'gzac-portal';
 window.KEYCLOAK_REDIRECT_URI = 'http://localhost:3000/keycloak/callback';
 window.GRAPHQL_URI = 'http://localhost:8081/graphql';
+window.REST_URI = 'http://localhost:8081/api';
 window.OPEN_FORMS_BASE_URL = 'https://openformulieren\u002Dcg.test.denhaag.nl/api/v1/';
 window.OPEN_FORMS_FORM_ID = 'bezwaar\u002Dmaken';
 window.OPEN_FORMS_ENTRY_ENV = 'docker';

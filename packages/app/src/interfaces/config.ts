@@ -4,6 +4,7 @@ export interface Config {
   KEYCLOAK_CLIENT_ID: string;
   KEYCLOAK_REDIRECT_URI: string;
   GRAPHQL_URI: string;
+  REST_URI: string;
   OPEN_FORMS_SDK_URL: string;
   OPEN_FORMS_BASE_URL: string;
   OPEN_FORMS_FORM_ID: string;
