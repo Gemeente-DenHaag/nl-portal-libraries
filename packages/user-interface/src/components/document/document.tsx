@@ -7,7 +7,6 @@ import Skeleton from 'react-loading-skeleton';
 import {useIntl} from 'react-intl';
 import prettyBytes from 'pretty-bytes';
 import {LocaleContext} from '@gemeente-denhaag/nl-portal-localization';
-import mimeTypes from 'mime-types';
 import {PortalDocument} from '../../interfaces';
 import styles from './document.module.scss';
 import {useMediaQuery} from '../../hooks';
@@ -33,7 +32,7 @@ const Document: FC<DocumentProps> = ({uuid, extension, name, size}) => {
       >
         <Paragraph className={styles['document__file-name']}>
           {name ? (
-            `${name} (${mimeTypes.extension(extension || '')}, ${prettyBytes(size || 0, {
+            `${name} (${extension}, ${prettyBytes(size || 0, {
               locale: hrefLang,
             })})`
           ) : (
@@ -42,7 +41,7 @@ const Document: FC<DocumentProps> = ({uuid, extension, name, size}) => {
             </span>
           )}
         </Paragraph>
-        <DocumentDownload uuid={uuid} name={name} extension={extension} />
+        <DocumentDownload uuid={uuid} name={name} />
       </div>
     </div>
   );

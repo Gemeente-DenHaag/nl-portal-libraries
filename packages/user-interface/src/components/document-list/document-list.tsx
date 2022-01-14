@@ -19,19 +19,28 @@ const DocumentList: FC<DocumentListProps> = ({documents}) => (
     )}
     {documents && documents.length > 0 && (
       <Fragment>
-        {documents.map(document => (
-          <div
-            className={styles.document}
-            key={`${document.bestandsnaam}${document.bestandsomvang}`}
-          >
-            <Document
-              extension={document.formaat || ''}
-              name={document.bestandsnaam || ''}
-              size={document.bestandsomvang || 0}
-              uuid={document.uuid || ''}
-            />
-          </div>
-        ))}
+        {documents.map(document => {
+          const documentName = document?.bestandsnaam || '';
+          const splitName = documentName?.split('.');
+          const documentExtension =
+            splitName && Array.isArray(splitName) && splitName.length > 1
+              ? splitName[splitName.length - 1]
+              : '';
+
+          return (
+            <div
+              className={styles.document}
+              key={`${document.bestandsnaam}${document.bestandsomvang}`}
+            >
+              <Document
+                extension={documentExtension}
+                name={documentName}
+                size={document.bestandsomvang || 0}
+                uuid={document.uuid || ''}
+              />
+            </div>
+          );
+        })}
       </Fragment>
     )}
     {documents && documents.length === 0 && (

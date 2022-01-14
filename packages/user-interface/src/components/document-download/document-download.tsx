@@ -1,6 +1,5 @@
 import * as React from 'react';
 import {FC, useContext} from 'react';
-import mimeTypes from 'mime-types';
 import {DownloadIcon} from '@gemeente-denhaag/icons';
 import {FormattedMessage, useIntl} from 'react-intl';
 import {Link} from '@gemeente-denhaag/components-react';
@@ -11,18 +10,13 @@ import {KeycloakContext} from '@gemeente-denhaag/nl-portal-authentication';
 interface DocumentDownloadProps {
   uuid?: string;
   name?: string;
-  extension?: string;
 }
 
-const DocumentDownload: FC<DocumentDownloadProps> = ({uuid, name, extension}) => {
+const DocumentDownload: FC<DocumentDownloadProps> = ({uuid, name}) => {
   const {restUri} = useContext(ApiContext);
   const {keycloakToken} = useContext(KeycloakContext);
   const intl = useIntl();
   const downloadLink = `${restUri}/document/${uuid}/content`;
-  const fileExtension = mimeTypes.extension(extension || '');
-  const splitName = name?.split('.');
-  const nameWithoutExtension = splitName && splitName[0];
-  const downloadName = `${nameWithoutExtension}.${fileExtension}`;
 
   const handleLink = async (event: React.MouseEvent<HTMLElement>) => {
     event.preventDefault();
@@ -36,14 +30,14 @@ const DocumentDownload: FC<DocumentDownloadProps> = ({uuid, name, extension}) =>
     const link = document.createElement('a');
 
     link.href = href;
-    link.download = downloadName;
+    link.download = `${name}`;
     document.body.appendChild(link);
     link.dispatchEvent(new MouseEvent('click', {bubbles: true, cancelable: true, view: window}));
     link.remove();
     window.URL.revokeObjectURL(link.href);
   };
 
-  return uuid && name && extension ? (
+  return uuid && name ? (
     React.cloneElement(
       <Link iconAlign="start" icon={<DownloadIcon />} href={downloadLink} id={uuid}>
         <FormattedMessage id="element.download" />
