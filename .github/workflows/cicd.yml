@@ -96,10 +96,9 @@ jobs:
         with:
           namespace: 'dhonline-test'
           manifests: |
-            zgw-kubernetes/klantportaal/test/configmap.yml
-            zgw-kubernetes/klantportaal/test/ingress.yml
-            zgw-kubernetes/klantportaal/service.yml
-            zgw-kubernetes/klantportaal/deployment.yml
+            zgw-kubernetes/klantportaal/test/configmap.yaml
+            zgw-kubernetes/klantportaal/test/ingress.yaml
+            zgw-kubernetes/klantportaal/klantportaal.yaml
           images: '${{ steps.meta.outputs.tags }}'
 
   publish-npm:
