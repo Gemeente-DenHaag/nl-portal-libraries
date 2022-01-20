@@ -160,6 +160,11 @@ export type GetZakenQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type GetZakenQuery = { __typename?: 'Query', getZaken: Array<{ __typename?: 'Zaak', uuid: any, omschrijving: string, startdatum: any, zaaktype: { __typename?: 'ZaakType', identificatie: string }, status?: Maybe<{ __typename?: 'ZaakStatus', statustype: { __typename?: 'ZaakStatusType', isEindstatus: boolean } }> }> };
 
+export type GetFormsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetFormsQuery = { __typename?: 'Query', getFormList: Array<{ __typename?: 'Form', name: string, uuid: any }> };
+
 
 export const UpdateBurgerProfielDocument = gql`
     mutation UpdateBurgerProfiel($klant: KlantUpdateInput!) {
@@ -388,3 +393,38 @@ export function useGetZakenLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<G
 export type GetZakenQueryHookResult = ReturnType<typeof useGetZakenQuery>;
 export type GetZakenLazyQueryHookResult = ReturnType<typeof useGetZakenLazyQuery>;
 export type GetZakenQueryResult = Apollo.QueryResult<GetZakenQuery, GetZakenQueryVariables>;
+export const GetFormsDocument = gql`
+    query GetForms {
+  getFormList {
+    name
+    uuid
+  }
+}
+    `;
+
+/**
+ * __useGetFormsQuery__
+ *
+ * To run a query within a React component, call `useGetFormsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetFormsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetFormsQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useGetFormsQuery(baseOptions?: Apollo.QueryHookOptions<GetFormsQuery, GetFormsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetFormsQuery, GetFormsQueryVariables>(GetFormsDocument, options);
+      }
+export function useGetFormsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetFormsQuery, GetFormsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetFormsQuery, GetFormsQueryVariables>(GetFormsDocument, options);
+        }
+export type GetFormsQueryHookResult = ReturnType<typeof useGetFormsQuery>;
+export type GetFormsLazyQueryHookResult = ReturnType<typeof useGetFormsLazyQuery>;
+export type GetFormsQueryResult = Apollo.QueryResult<GetFormsQuery, GetFormsQueryVariables>;
