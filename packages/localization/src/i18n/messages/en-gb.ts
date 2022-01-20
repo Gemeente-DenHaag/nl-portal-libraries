@@ -14,6 +14,7 @@ export const EN_GB_MESSAGES: Messages = {
     'pageTitles.offline': 'No internet connection',
     'pageTitles.form': 'Form',
     'pageTitles.account': 'My account',
+    'pageTitles.forms': 'Forms',
     'header.logout': 'Log out',
     'header.welcome': 'Welcome',
     'header.menuButton': 'Menu',

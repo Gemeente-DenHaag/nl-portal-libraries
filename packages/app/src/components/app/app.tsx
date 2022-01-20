@@ -19,6 +19,7 @@ import {
   PortalPage,
   ThemesPage,
   EditAccountPage,
+  FormsPage,
 } from '@gemeente-denhaag/nl-portal-user-interface';
 import {ArchiveIcon, DocumentIcon, GridIcon, InboxIcon, UserIcon} from '@gemeente-denhaag/icons';
 import {CUSTOM_MESSAGES} from '../../i18n';
@@ -77,6 +78,13 @@ const pages: Array<PortalPage> = [
     pageComponent: <ThemesPage />,
     path: '/themas',
     titleTranslationKey: 'themes',
+    showInMenu: true,
+  },
+  {
+    icon: <DocumentIcon />,
+    pageComponent: <FormsPage />,
+    path: '/formulieren',
+    titleTranslationKey: 'forms',
     showInMenu: true,
   },
   {
