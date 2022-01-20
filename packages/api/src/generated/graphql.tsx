@@ -34,6 +34,12 @@ export type DocumentContent = {
   content: Scalars['String'];
 };
 
+export type Form = {
+  __typename?: 'Form';
+  name: Scalars['String'];
+  uuid: Scalars['UUID'];
+};
+
 export type Klant = {
   __typename?: 'Klant';
   emailadres?: Maybe<Scalars['String']>;
@@ -62,6 +68,8 @@ export type Query = {
   getBurgerProfiel?: Maybe<Klant>;
   /** Gets a document content by id as base64 encoded */
   getDocumentContent: DocumentContent;
+  /** Gets the forms available to the user */
+  getFormList: Array<Form>;
   /** Gets a zaak by id */
   getZaak: Zaak;
   /** Gets all zaken for the user */
@@ -132,13 +140,6 @@ export type GetBurgerProfielQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type GetBurgerProfielQuery = { __typename?: 'Query', getBurgerProfiel?: Maybe<{ __typename?: 'Klant', emailadres?: Maybe<string>, telefoonnummer?: Maybe<string> }> };
-
-export type GetDocumentContentQueryVariables = Exact<{
-  id: Scalars['UUID'];
-}>;
-
-
-export type GetDocumentContentQuery = { __typename?: 'Query', getDocumentContent: { __typename?: 'DocumentContent', content: string } };
 
 export type GetDocumentenQueryVariables = Exact<{
   id: Scalars['UUID'];
@@ -229,41 +230,6 @@ export function useGetBurgerProfielLazyQuery(baseOptions?: Apollo.LazyQueryHookO
 export type GetBurgerProfielQueryHookResult = ReturnType<typeof useGetBurgerProfielQuery>;
 export type GetBurgerProfielLazyQueryHookResult = ReturnType<typeof useGetBurgerProfielLazyQuery>;
 export type GetBurgerProfielQueryResult = Apollo.QueryResult<GetBurgerProfielQuery, GetBurgerProfielQueryVariables>;
-export const GetDocumentContentDocument = gql`
-    query GetDocumentContent($id: UUID!) {
-  getDocumentContent(id: $id) {
-    content
-  }
-}
-    `;
-
-/**
- * __useGetDocumentContentQuery__
- *
- * To run a query within a React component, call `useGetDocumentContentQuery` and pass it any options that fit your needs.
- * When your component renders, `useGetDocumentContentQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useGetDocumentContentQuery({
- *   variables: {
- *      id: // value for 'id'
- *   },
- * });
- */
-export function useGetDocumentContentQuery(baseOptions: Apollo.QueryHookOptions<GetDocumentContentQuery, GetDocumentContentQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<GetDocumentContentQuery, GetDocumentContentQueryVariables>(GetDocumentContentDocument, options);
-      }
-export function useGetDocumentContentLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetDocumentContentQuery, GetDocumentContentQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<GetDocumentContentQuery, GetDocumentContentQueryVariables>(GetDocumentContentDocument, options);
-        }
-export type GetDocumentContentQueryHookResult = ReturnType<typeof useGetDocumentContentQuery>;
-export type GetDocumentContentLazyQueryHookResult = ReturnType<typeof useGetDocumentContentLazyQuery>;
-export type GetDocumentContentQueryResult = Apollo.QueryResult<GetDocumentContentQuery, GetDocumentContentQueryVariables>;
 export const GetDocumentenDocument = gql`
     query GetDocumenten($id: UUID!) {
   getZaak(id: $id) {
