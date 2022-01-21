@@ -22,3 +22,11 @@
     max-width: var(--nlportal-forms-list-max-width-desktop, 50%);
   }
 }
+
+.forms__list-item-button {
+  width: 100%;
+  background: none;
+  border: none;
+  cursor: pointer;
+  outline: none;
+}

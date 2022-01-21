@@ -3,13 +3,25 @@ import {Heading2, List, ListItem, ListSubheader} from '@gemeente-denhaag/compone
 import {DocumentIcon} from '@gemeente-denhaag/icons';
 import {FormattedMessage, useIntl} from 'react-intl';
 import {useGetFormsQuery} from '@gemeente-denhaag/nl-portal-api';
-import {Fragment} from 'react';
+import {Fragment, useEffect} from 'react';
+import {useHistory} from 'react-router-dom';
 import styles from './forms-page.module.scss';
 import {ListItemSkeleton} from '../../components';
 
 const FormsPage = () => {
   const intl = useIntl();
-  const {data, loading} = useGetFormsQuery();
+  const {data, loading, refetch} = useGetFormsQuery();
+  const history = useHistory();
+
+  const onClickFunction = (event: React.MouseEvent<HTMLButtonElement>, formId: string): void => {
+    event.stopPropagation();
+    event.preventDefault();
+    history.push(`/formulier?id=${formId}`);
+  };
+
+  useEffect(() => {
+    refetch();
+  }, []);
 
   return (
     <section className={styles.forms}>
@@ -31,7 +43,13 @@ const FormsPage = () => {
             </Fragment>
           ) : (
             data?.getFormList.map(form => (
-              <ListItem primaryText={form.name} leftIcon={<DocumentIcon />} key={form.uuid} />
+              <button
+                onClick={event => onClickFunction(event, form.uuid)}
+                type="button"
+                className={styles['forms__list-item-button']}
+              >
+                <ListItem primaryText={form.name} leftIcon={<DocumentIcon />} key={form.uuid} />
+              </button>
             ))
           )}
         </List>
