@@ -63,5 +63,6 @@ export const NL_NL_MESSAGES: Messages = {
     'account.detail.nationality': 'Nationaliteit',
     'account.detail.street': 'Straat',
     'account.detail.postalCodeAndCity': 'Postcode en plaats',
+    'forms.listSubHeader': 'Beschikbare formulieren',
   },
 };

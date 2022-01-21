@@ -61,5 +61,6 @@ export const EN_GB_MESSAGES: Messages = {
     'account.detail.nationality': 'Nationality',
     'account.detail.street': 'Street',
     'account.detail.postalCodeAndCity': 'Postal code and city',
+    'forms.listSubHeader': 'Available forms',
   },
 };

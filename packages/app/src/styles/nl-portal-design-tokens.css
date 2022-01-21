@@ -79,6 +79,12 @@
   --nlportal-account-detail-border-color: var(--denhaag-color-grey-1);
   --nlportal-edit-account-text-field-width: 260px;
   --nlportal-detail-list-min-height: 2rem;
+  --nlportal-forms-list-max-width-tablet: 75%;
+  --nlportal-forms-list-max-width-desktop: 50%;
+  --nlportal-list-item-skeleton-padding-block: var(--denhaag-list-item-padding-block);
+  --nlportal-list-item-skeleton-padding-inline: var(--denhaag-list-item-padding-inline);
+  --nlportal-list-item-skeleton-color: var(--denhaag-color-grey-3);
+  --nlportal-list-item-skeleton-icon-min-width: 48px;
   --utrecht-heading-2-color: var(--denhaag-color-blue-3);
   --denhaag-menu-button-font-size: var(--denhaag-typography-scale-lg-font-size);
   --denhaag-menu-button-line-height: var(--denhaag-typography-scale-xl-font-size);
