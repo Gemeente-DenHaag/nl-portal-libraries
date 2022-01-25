@@ -14,6 +14,7 @@ export const NL_NL_MESSAGES: Messages = {
     'pageTitles.offline': 'Geen internetverbinding',
     'pageTitles.form': 'Formulier',
     'pageTitles.account': 'Mijn account',
+    'pageTitles.forms': 'Formulieren',
     'header.logout': 'Uitloggen',
     'header.welcome': 'Welkom',
     'header.menuButton': 'Menu',
@@ -62,5 +63,6 @@ export const NL_NL_MESSAGES: Messages = {
     'account.detail.nationality': 'Nationaliteit',
     'account.detail.street': 'Straat',
     'account.detail.postalCodeAndCity': 'Postcode en plaats',
+    'forms.listSubHeader': 'Beschikbare formulieren',
   },
 };

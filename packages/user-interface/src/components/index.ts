@@ -17,3 +17,4 @@ export * from './document';
 export * from './document-list';
 export * from './detail-list';
 export * from './locale-date';
+export * from './list-item-skeleton';

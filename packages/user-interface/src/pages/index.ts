@@ -8,3 +8,4 @@ export * from './documents';
 export * from './offline';
 export * from './account';
 export * from './edit-account';
+export * from './forms';

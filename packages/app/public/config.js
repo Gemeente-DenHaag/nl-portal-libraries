@@ -7,5 +7,5 @@ window.REST_URI = 'http://localhost:8081/api';
 window.OPEN_FORMS_BASE_URL = 'https://openformulieren\u002Dcg.test.denhaag.nl/api/v1/';
 window.OPEN_FORMS_FORM_ID = 'bezwaar\u002Dmaken';
 window.OPEN_FORMS_ENTRY_ENV = 'docker';
-window.OPEN_FORMS_SDK_URL = 'https://openformulieren-cg.test.denhaag.nl/static/sdk/open-forms-sdk.js';
-window.OPEN_FORMS_STYLES_URL = 'https://openformulieren-cg.test.denhaag.nl/static/sdk/open-forms-sdk.css';
+window.OPEN_FORMS_SDK_URL = 'https://openformulieren-cg.test.denhaag.nl/static/sdk/oidc-digid/open-forms-sdk.js';
+window.OPEN_FORMS_STYLES_URL = 'https://openformulieren-cg.test.denhaag.nl/static/sdk/oidc-digid/open-forms-sdk.css';

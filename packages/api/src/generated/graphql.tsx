@@ -34,6 +34,12 @@ export type DocumentContent = {
   content: Scalars['String'];
 };
 
+export type Form = {
+  __typename?: 'Form';
+  name: Scalars['String'];
+  uuid: Scalars['UUID'];
+};
+
 export type Klant = {
   __typename?: 'Klant';
   emailadres?: Maybe<Scalars['String']>;
@@ -62,6 +68,8 @@ export type Query = {
   getBurgerProfiel?: Maybe<Klant>;
   /** Gets a document content by id as base64 encoded */
   getDocumentContent: DocumentContent;
+  /** Gets the forms available to the user */
+  getFormList: Array<Form>;
   /** Gets a zaak by id */
   getZaak: Zaak;
   /** Gets all zaken for the user */
@@ -133,13 +141,6 @@ export type GetBurgerProfielQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type GetBurgerProfielQuery = { __typename?: 'Query', getBurgerProfiel?: Maybe<{ __typename?: 'Klant', emailadres?: Maybe<string>, telefoonnummer?: Maybe<string> }> };
 
-export type GetDocumentContentQueryVariables = Exact<{
-  id: Scalars['UUID'];
-}>;
-
-
-export type GetDocumentContentQuery = { __typename?: 'Query', getDocumentContent: { __typename?: 'DocumentContent', content: string } };
-
 export type GetDocumentenQueryVariables = Exact<{
   id: Scalars['UUID'];
 }>;
@@ -158,6 +159,11 @@ export type GetZakenQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type GetZakenQuery = { __typename?: 'Query', getZaken: Array<{ __typename?: 'Zaak', uuid: any, omschrijving: string, startdatum: any, zaaktype: { __typename?: 'ZaakType', identificatie: string }, status?: Maybe<{ __typename?: 'ZaakStatus', statustype: { __typename?: 'ZaakStatusType', isEindstatus: boolean } }> }> };
+
+export type GetFormsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetFormsQuery = { __typename?: 'Query', getFormList: Array<{ __typename?: 'Form', name: string, uuid: any }> };
 
 
 export const UpdateBurgerProfielDocument = gql`
@@ -229,41 +235,6 @@ export function useGetBurgerProfielLazyQuery(baseOptions?: Apollo.LazyQueryHookO
 export type GetBurgerProfielQueryHookResult = ReturnType<typeof useGetBurgerProfielQuery>;
 export type GetBurgerProfielLazyQueryHookResult = ReturnType<typeof useGetBurgerProfielLazyQuery>;
 export type GetBurgerProfielQueryResult = Apollo.QueryResult<GetBurgerProfielQuery, GetBurgerProfielQueryVariables>;
-export const GetDocumentContentDocument = gql`
-    query GetDocumentContent($id: UUID!) {
-  getDocumentContent(id: $id) {
-    content
-  }
-}
-    `;
-
-/**
- * __useGetDocumentContentQuery__
- *
- * To run a query within a React component, call `useGetDocumentContentQuery` and pass it any options that fit your needs.
- * When your component renders, `useGetDocumentContentQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useGetDocumentContentQuery({
- *   variables: {
- *      id: // value for 'id'
- *   },
- * });
- */
-export function useGetDocumentContentQuery(baseOptions: Apollo.QueryHookOptions<GetDocumentContentQuery, GetDocumentContentQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<GetDocumentContentQuery, GetDocumentContentQueryVariables>(GetDocumentContentDocument, options);
-      }
-export function useGetDocumentContentLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetDocumentContentQuery, GetDocumentContentQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<GetDocumentContentQuery, GetDocumentContentQueryVariables>(GetDocumentContentDocument, options);
-        }
-export type GetDocumentContentQueryHookResult = ReturnType<typeof useGetDocumentContentQuery>;
-export type GetDocumentContentLazyQueryHookResult = ReturnType<typeof useGetDocumentContentLazyQuery>;
-export type GetDocumentContentQueryResult = Apollo.QueryResult<GetDocumentContentQuery, GetDocumentContentQueryVariables>;
 export const GetDocumentenDocument = gql`
     query GetDocumenten($id: UUID!) {
   getZaak(id: $id) {
@@ -422,3 +393,38 @@ export function useGetZakenLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<G
 export type GetZakenQueryHookResult = ReturnType<typeof useGetZakenQuery>;
 export type GetZakenLazyQueryHookResult = ReturnType<typeof useGetZakenLazyQuery>;
 export type GetZakenQueryResult = Apollo.QueryResult<GetZakenQuery, GetZakenQueryVariables>;
+export const GetFormsDocument = gql`
+    query GetForms {
+  getFormList {
+    name
+    uuid
+  }
+}
+    `;
+
+/**
+ * __useGetFormsQuery__
+ *
+ * To run a query within a React component, call `useGetFormsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetFormsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetFormsQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useGetFormsQuery(baseOptions?: Apollo.QueryHookOptions<GetFormsQuery, GetFormsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetFormsQuery, GetFormsQueryVariables>(GetFormsDocument, options);
+      }
+export function useGetFormsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetFormsQuery, GetFormsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetFormsQuery, GetFormsQueryVariables>(GetFormsDocument, options);
+        }
+export type GetFormsQueryHookResult = ReturnType<typeof useGetFormsQuery>;
+export type GetFormsLazyQueryHookResult = ReturnType<typeof useGetFormsLazyQuery>;
+export type GetFormsQueryResult = Apollo.QueryResult<GetFormsQuery, GetFormsQueryVariables>;
