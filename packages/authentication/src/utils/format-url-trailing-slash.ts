@@ -2,12 +2,6 @@ export const formatUrlTrailingSlash = (url: string, returnWithTrailingSlash: boo
   const urlLastCharacter = url[url.length - 1];
   const urlLastCharacterIsSlash = urlLastCharacter === '/';
 
-  if (
-    (returnWithTrailingSlash && urlLastCharacterIsSlash) ||
-    (!returnWithTrailingSlash && !urlLastCharacterIsSlash)
-  ) {
-    return url;
-  }
   if (!returnWithTrailingSlash && urlLastCharacterIsSlash) {
     return url.slice(0, -1);
   }
