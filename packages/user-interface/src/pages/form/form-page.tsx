@@ -2,6 +2,7 @@ import * as React from 'react';
 import {FC, useContext, useEffect} from 'react';
 import {useScript} from 'usehooks-ts';
 import {Helmet} from 'react-helmet';
+import {formatUrlTrailingSlash} from '@gemeente-denhaag/nl-portal-authentication';
 import {LayoutContext} from '../../contexts';
 import {useQuery} from '../../hooks';
 
@@ -25,7 +26,7 @@ const FormPage: FC<FormPageProps> = ({
 }) => {
   const {enableFullscreenForm, disableFullscreenForm, setCurrentFormTitle, clearCurrentFormTitle} =
     useContext(LayoutContext);
-  const openFormsScript = useScript(openFormsSdkUrl);
+  const openFormsScript = useScript(formatUrlTrailingSlash(openFormsSdkUrl, false));
   const query = useQuery();
   const queryFormId = query.get('id');
 
@@ -41,7 +42,7 @@ const FormPage: FC<FormPageProps> = ({
   useEffect(() => {
     if (typeof OpenForms !== 'undefined') {
       const formId = queryFormId || openFormsFormId;
-      const baseUrl = openFormsBaseUrl;
+      const baseUrl = formatUrlTrailingSlash(openFormsBaseUrl, true);
       const targetNode = document.getElementById('openforms\u002Dcontainer');
 
       const sentryEnv = openFormsEntryEnv;
@@ -66,7 +67,7 @@ const FormPage: FC<FormPageProps> = ({
   return (
     <div>
       <Helmet>
-        <link href={openFormsStylesUrl} rel="stylesheet" />
+        <link href={formatUrlTrailingSlash(openFormsStylesUrl, false)} rel="stylesheet" />
       </Helmet>
       <div id="openforms-container" />
     </div>

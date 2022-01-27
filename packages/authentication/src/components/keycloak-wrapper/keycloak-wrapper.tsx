@@ -2,6 +2,7 @@ import * as React from 'react';
 import {ReactKeycloakProvider} from '@react-keycloak/web';
 import Keycloak, {KeycloakConfig, KeycloakInitOptions} from 'keycloak-js';
 import {FC, Fragment, useContext, useState} from 'react';
+import {formatUrlTrailingSlash} from '../../utils';
 import {KeycloakContext} from '../../contexts';
 
 interface KeycloakWrapperProps extends KeycloakConfig {
@@ -16,12 +17,14 @@ const KeycloakProvider: FC<KeycloakWrapperProps> = ({
   redirectUri,
 }) => {
   const {setKeycloakToken} = useContext(KeycloakContext);
-  const [authClient] = useState(() => new (Keycloak as any)({url, clientId, realm}));
+  const [authClient] = useState(
+    () => new (Keycloak as any)({url: formatUrlTrailingSlash(`${url}`, false), clientId, realm})
+  );
   const initOptions: KeycloakInitOptions = {
     checkLoginIframe: false,
     onLoad: 'login-required',
     flow: 'standard',
-    redirectUri,
+    redirectUri: formatUrlTrailingSlash(redirectUri, false),
   };
 
   return (
