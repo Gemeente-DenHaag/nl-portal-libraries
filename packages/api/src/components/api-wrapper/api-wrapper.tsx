@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {FC, useContext, useEffect, useState} from 'react';
 import {ApolloClient, ApolloLink, ApolloProvider, HttpLink, InMemoryCache} from '@apollo/client';
-import {KeycloakContext} from '@gemeente-denhaag/nl-portal-authentication';
+import {KeycloakContext, formatUrlTrailingSlash} from '@gemeente-denhaag/nl-portal-authentication';
 import {ApiContext} from '../../contexts';
 
 interface ApiWrapperProps {
@@ -10,8 +10,10 @@ interface ApiWrapperProps {
 }
 
 const ApiWrapper: FC<ApiWrapperProps> = ({children, graphqlUri, restUri}) => {
+  const formattedGraphqlUri = formatUrlTrailingSlash(graphqlUri, false);
+  const formattedRestUri = formatUrlTrailingSlash(restUri, false);
   const {keycloakToken} = useContext(KeycloakContext);
-  const httpLink = new HttpLink({uri: graphqlUri});
+  const httpLink = new HttpLink({uri: formattedGraphqlUri});
 
   const getLink = (authToken: string) =>
     new ApolloLink((operation, forward) => {
@@ -26,7 +28,7 @@ const ApiWrapper: FC<ApiWrapperProps> = ({children, graphqlUri, restUri}) => {
   const [client] = useState(
     () =>
       new ApolloClient({
-        uri: graphqlUri,
+        uri: formattedGraphqlUri,
         cache: new InMemoryCache(),
         link: getLink(keycloakToken),
       })
@@ -37,7 +39,7 @@ const ApiWrapper: FC<ApiWrapperProps> = ({children, graphqlUri, restUri}) => {
   }, [keycloakToken]);
 
   return keycloakToken ? (
-    <ApiContext.Provider value={{restUri}}>
+    <ApiContext.Provider value={{restUri: formattedRestUri}}>
       <ApolloProvider client={client}>{children}</ApolloProvider>
     </ApiContext.Provider>
   ) : null;
