@@ -11,7 +11,6 @@ declare const OpenForms: any;
 
 interface FormPageProps {
   openFormsBaseUrl: string;
-  openFormsFormId: string;
   openFormsEntryEnv: string;
   openFormsSdkUrl: string;
   openFormsStylesUrl: string;
@@ -19,7 +18,6 @@ interface FormPageProps {
 
 const FormPage: FC<FormPageProps> = ({
   openFormsBaseUrl,
-  openFormsFormId,
   openFormsEntryEnv,
   openFormsSdkUrl,
   openFormsStylesUrl,
@@ -29,27 +27,25 @@ const FormPage: FC<FormPageProps> = ({
   const openFormsScript = useScript(formatUrlTrailingSlash(openFormsSdkUrl, false));
   const query = useQuery();
   const queryFormId = query.get('id');
-  const FORM_ID_SESSION_STORAGE_KEY = 'FORM_ID';
+  const FORM_ID_LOCAL_STORAGE_KEY = 'FORM_ID';
 
   useEffect(() => {
-    localStorage.removeItem(FORM_ID_SESSION_STORAGE_KEY);
     enableFullscreenForm();
 
     if (queryFormId) {
-      localStorage.setItem(FORM_ID_SESSION_STORAGE_KEY, queryFormId);
+      localStorage.setItem(FORM_ID_LOCAL_STORAGE_KEY, queryFormId);
     }
 
     return () => {
       disableFullscreenForm();
       clearCurrentFormTitle();
-      localStorage.removeItem(FORM_ID_SESSION_STORAGE_KEY);
     };
   }, []);
 
   useEffect(() => {
     if (typeof OpenForms !== 'undefined') {
-      const sessionStorageFormId = localStorage.getItem(FORM_ID_SESSION_STORAGE_KEY);
-      const formId = queryFormId || sessionStorageFormId || openFormsFormId;
+      const localStorageFormId = localStorage.getItem(FORM_ID_LOCAL_STORAGE_KEY);
+      const formId = queryFormId || localStorageFormId || '';
       const baseUrl = formatUrlTrailingSlash(openFormsBaseUrl, true);
       const targetNode = document.getElementById('openforms\u002Dcontainer');
 

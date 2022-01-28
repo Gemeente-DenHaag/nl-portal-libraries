@@ -21,7 +21,7 @@ export const NL_NL_MESSAGES: Messages = {
     'menu.close': 'Menu sluiten',
     'menu.open': 'Menu openen',
     'titles.completedCases': 'Afgeronde zaken',
-    'overview.lodgeObjection': 'Bezwaar maken',
+    'overview.defaultFormTitle': 'Bezwaar maken',
     'cases.noOpenCases': 'Er zijn geen lopende zaken.',
     'cases.noClosedCases': 'Er zijn geen afgeronde zaken.',
     'cases.fetchError': 'Er is een fout opgetreden, probeer het later nogmaals.',

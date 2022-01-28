@@ -32,7 +32,7 @@ import StatusHistoryBackground from '../../assets/status-history-background.svg'
 const pages: Array<PortalPage> = [
   {
     icon: <GridIcon />,
-    pageComponent: <OverviewPage />,
+    pageComponent: <OverviewPage openFormsFormId={config.OPEN_FORMS_FORM_ID} />,
     path: '/',
     titleTranslationKey: 'overview',
     showInMenu: true,
@@ -108,7 +108,6 @@ const pages: Array<PortalPage> = [
     pageComponent: (
       <FormPage
         openFormsBaseUrl={config.OPEN_FORMS_BASE_URL}
-        openFormsFormId={config.OPEN_FORMS_FORM_ID}
         openFormsEntryEnv={config.OPEN_FORMS_ENTRY_ENV}
         openFormsSdkUrl={config.OPEN_FORMS_SDK_URL}
         openFormsStylesUrl={config.OPEN_FORMS_STYLES_URL}
