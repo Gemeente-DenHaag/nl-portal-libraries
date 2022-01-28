@@ -10,7 +10,8 @@ on:
       - master
 
 env:
-  PUSH_AND_DEPLOY: ${{ github.event_name != 'pull_request' && github.ref == 'refs/heads/master' }}
+  PUSH_AND_DEPLOY: ${{ github.event_name != 'pull_request' && github.ref_name == 'master' }}
+  CR_REPO: zgw/klantportaal
 
 jobs:
   build:
@@ -27,7 +28,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v3
         with:
-          images: ${{ secrets.ACR_LOGIN_SERVER }}/zgw/klantportaal
+          images: ${{ secrets.ACR_LOGIN_SERVER }}/${{ env.CR_REPO }}
           tags: |
             type=ref,event=branch
             type=ref,event=pr
@@ -47,17 +48,48 @@ jobs:
           username: ${{ secrets.ACR_USERNAME }}
           password: ${{ secrets.ACR_PASSWORD }}
 
-      - name: 'Build and push image'
+      - name: 'Build and push deps image'
         uses: docker/build-push-action@v2
         with:
-          push: ${{ env.PUSH_AND_DEPLOY }}
+          target: deps
+          push: true
+          tags: ${{ secrets.ACR_LOGIN_SERVER }}/${{ env.CR_REPO }}:deps
+          labels: ${{ steps.meta.outputs.labels }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+      - name: 'Build and push deps image'
+        uses: docker/build-push-action@v2
+        with:
+          target: build
+          push: true
+          tags: ${{ secrets.ACR_LOGIN_SERVER }}/${{ env.CR_REPO }}:build
+          labels: ${{ steps.meta.outputs.labels }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+      
+      - name: 'Run test image'
+        uses: docker/build-push-action@v2
+        with:
+          target: test
+          push: false
+          tags: ${{ secrets.ACR_LOGIN_SERVER }}/${{ env.CR_REPO }}:test
+          labels: ${{ steps.meta.outputs.labels }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+      - name: 'Build and push deploy image'
+        uses: docker/build-push-action@v2
+        with:
+          target: deploy
+          push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
   deploy-to-test:
-    if: contains(github.ref, 'master')
+    if: github.ref_name == 'master'
     runs-on: ubuntu-latest
     needs: build
     environment: test
@@ -104,7 +136,7 @@ jobs:
   publish-npm:
     runs-on: ubuntu-latest
     needs: build
-    if: github.ref == 'refs/heads/master'
+    if: github.ref_name == 'master'
 
     steps:
       - uses: actions/checkout@v2

@@ -1,5 +1,5 @@
 # stage1 - build react app first 
-FROM node:14-alpine as build
+FROM node:14-alpine as deps
 WORKDIR /app
 ENV PATH /app/node_modules/.bin:$PATH
 
@@ -13,11 +13,22 @@ COPY ./packages/user-interface/package.json /app/packages/user-interface/
 
 RUN yarn global add lerna && yarn run bootstrap
 
+FROM deps as build
+WORKDIR /app
 COPY . /app
 RUN yarn run build
 
-# stage 2 - build the final image and copy the react build files
-FROM nginx:1.21.1-alpine
+# stage 2 - run tests
+FROM build as test
+WORKDIR /app
+# COPY --from=build /app /app
+RUN \
+    yarn run test && \
+    yarn run lint && \
+    yarn run prettier
+
+# stage 3 - build the final image and copy the react build files
+FROM nginx:1.21.1-alpine as deploy
 COPY --from=build /app/packages/app/build /usr/share/nginx/html
 COPY nginx/nginx.conf /etc/nginx/conf.d
 COPY entrypoint.sh /docker-entrypoint.d/entrypoint.sh
