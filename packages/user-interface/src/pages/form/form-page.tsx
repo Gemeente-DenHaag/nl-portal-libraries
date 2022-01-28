@@ -32,23 +32,23 @@ const FormPage: FC<FormPageProps> = ({
   const FORM_ID_SESSION_STORAGE_KEY = 'FORM_ID';
 
   useEffect(() => {
-    sessionStorage.removeItem(FORM_ID_SESSION_STORAGE_KEY);
+    localStorage.removeItem(FORM_ID_SESSION_STORAGE_KEY);
     enableFullscreenForm();
 
     if (queryFormId) {
-      sessionStorage.setItem(FORM_ID_SESSION_STORAGE_KEY, queryFormId);
+      localStorage.setItem(FORM_ID_SESSION_STORAGE_KEY, queryFormId);
     }
 
     return () => {
       disableFullscreenForm();
       clearCurrentFormTitle();
-      sessionStorage.removeItem(FORM_ID_SESSION_STORAGE_KEY);
+      localStorage.removeItem(FORM_ID_SESSION_STORAGE_KEY);
     };
   }, []);
 
   useEffect(() => {
     if (typeof OpenForms !== 'undefined') {
-      const sessionStorageFormId = sessionStorage.getItem(FORM_ID_SESSION_STORAGE_KEY);
+      const sessionStorageFormId = localStorage.getItem(FORM_ID_SESSION_STORAGE_KEY);
       const formId = queryFormId || sessionStorageFormId || openFormsFormId;
       const baseUrl = formatUrlTrailingSlash(openFormsBaseUrl, true);
       const targetNode = document.getElementById('openforms\u002Dcontainer');
