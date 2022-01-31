@@ -13,22 +13,24 @@ COPY ./packages/user-interface/package.json /app/packages/user-interface/
 
 RUN yarn global add lerna && yarn run bootstrap
 
+# stage 2 - run build
 FROM deps as build
 WORKDIR /app
+# COPY --from=deps /app /app
 COPY . /app
 RUN yarn run build
 
-# stage 2 - run tests
+# stage 3 - run tests
 FROM build as test
 WORKDIR /app
 # COPY --from=build /app /app
 RUN \
-    yarn run test && \
+    yarn run prettier && \
     yarn run lint && \
-    yarn run prettier
+    yarn run test
 
-# stage 3 - build the final image and copy the react build files
-FROM nginx:1.21.1-alpine as deploy
+# stage 4 - build the final image and copy the react build files
+FROM nginx:1.21.1-alpine as release
 COPY --from=build /app/packages/app/build /usr/share/nginx/html
 COPY nginx/nginx.conf /etc/nginx/conf.d
 COPY entrypoint.sh /docker-entrypoint.d/entrypoint.sh
