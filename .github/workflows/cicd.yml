@@ -18,9 +18,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: 'Check build and deploy var'
-        run: echo Check variable $PUSH_AND_DEPLOY
-
       - name: 'Checkout repo'
         uses: actions/checkout@main
 
@@ -51,10 +48,6 @@ jobs:
       - name: 'Set cache_to env'
         if: env.PUSH_AND_DEPLOY == 'true'
         run: echo "cache_to=type=gha,mode=max" >> $GITHUB_ENV
-
-      - name: Use the cache_to value
-        run: |
-          echo "${{ env.cache_to }}" # This will output 'type=gha,mode=max'
 
       - name: 'Build and push deps image'
         uses: docker/build-push-action@v2
@@ -113,7 +106,6 @@ jobs:
             type=sha
 
       - name: 'Checkout zgw kubernetes repo'
-        # if: env.PUSH_AND_DEPLOY == 'true'
         uses: actions/checkout@main
         with:
           repository: Gemeente-DenHaag/zgw-kubernetes
@@ -121,7 +113,6 @@ jobs:
           token: ${{ secrets.ZGW_REPO_PAT }}
 
       - name: 'Login to aks and set context'
-        # if: env.PUSH_AND_DEPLOY == 'true'
         uses: azure/aks-set-context@v1
         with:
           creds: '${{ secrets.AZURE_CREDENTIALS }}'
@@ -130,7 +121,6 @@ jobs:
         id: login
 
       - name: 'Deploy to aks'
-        # if: env.PUSH_AND_DEPLOY == 'true'
         uses: Azure/k8s-deploy@v1.4
         with:
           namespace: 'dhonline-test'
