@@ -49,7 +49,7 @@ jobs:
           password: ${{ secrets.ACR_PASSWORD }}
 
       - name: 'Set cache_to env'
-        if: ${{ env.PUSH_AND_DEPLOY }}
+        if: env.PUSH_AND_DEPLOY == 'true'
         run: echo "cache_to=type=gha,mode=max" >> $GITHUB_ENV
 
       - name: Use the cache_to value
