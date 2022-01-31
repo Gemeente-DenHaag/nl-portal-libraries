@@ -1,4 +1,4 @@
-# stage1 - build react app first 
+# stage 1 - get dependencies
 FROM node:14-alpine as deps
 WORKDIR /app
 ENV PATH /app/node_modules/.bin:$PATH
@@ -16,14 +16,12 @@ RUN yarn global add lerna && yarn run bootstrap
 # stage 2 - run build
 FROM deps as build
 WORKDIR /app
-# COPY --from=deps /app /app
 COPY . /app
 RUN yarn run build
 
 # stage 3 - run tests
 FROM build as test
 WORKDIR /app
-# COPY --from=build /app /app
 RUN \
     yarn run prettier && \
     yarn run lint && \
