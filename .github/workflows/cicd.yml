@@ -48,6 +48,14 @@ jobs:
           username: ${{ secrets.ACR_USERNAME }}
           password: ${{ secrets.ACR_PASSWORD }}
 
+      - name: 'Set cache_to env'
+        if: ${{ env.PUSH_AND_DEPLOY }}
+        run: echo "cache_to=type=gha,mode=max" >> $GITHUB_ENV
+
+      - name: Use the cache_to value
+        run: |
+          echo "${{ env.cache_to }}" # This will output 'type=gha,mode=max'
+
       - name: 'Build and push deps image'
         uses: docker/build-push-action@v2
         with:
@@ -56,7 +64,7 @@ jobs:
           tags: ${{ secrets.ACR_LOGIN_SERVER }}/${{ env.CR_REPO }}:deps
           labels: ${{ steps.meta.outputs.labels }}
           cache-from: type=gha
-          cache-to: type=gha,mode=max
+          cache-to: ${{ env.cache_to }}
 
       - name: 'Build and push deps image'
         uses: docker/build-push-action@v2
@@ -66,7 +74,7 @@ jobs:
           tags: ${{ secrets.ACR_LOGIN_SERVER }}/${{ env.CR_REPO }}:build
           labels: ${{ steps.meta.outputs.labels }}
           cache-from: type=gha
-          cache-to: type=gha,mode=max
+          cache-to: ${{ env.cache_to }}
       
       - name: 'Run test image'
         uses: docker/build-push-action@v2
@@ -76,7 +84,7 @@ jobs:
           tags: ${{ secrets.ACR_LOGIN_SERVER }}/${{ env.CR_REPO }}:test
           labels: ${{ steps.meta.outputs.labels }}
           cache-from: type=gha
-          cache-to: type=gha,mode=max
+          cache-to: ${{ env.cache_to }}
 
       - name: 'Build and push release image'
         uses: docker/build-push-action@v2
@@ -85,7 +93,7 @@ jobs:
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
           cache-from: type=gha
-          cache-to: type=gha,mode=max
+          cache-to: ${{ env.cache_to }}
 
   deploy-to-test:
     if: github.ref_name == 'master' && github.event_name != 'pull_request'
