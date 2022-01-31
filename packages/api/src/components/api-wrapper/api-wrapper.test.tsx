@@ -2,6 +2,6 @@ import {ApiWrapper} from './api-wrapper';
 
 describe('ApiWrapper', () => {
   it('is truthy', () => {
-    expect(ApiWrapper).toBeTruthy();
+    expect(ApiWrapper).toBeFalsy();
   });
 });
