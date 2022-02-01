@@ -5,6 +5,7 @@ import {useKeycloak} from '@react-keycloak/web';
 import {useIntl} from 'react-intl';
 import classNames from 'classnames';
 import Skeleton from 'react-loading-skeleton';
+import {useGetPersoonQuery} from '@gemeente-denhaag/nl-portal-api';
 import styles from './user-name.module.scss';
 
 interface UserNameProps {
@@ -16,6 +17,9 @@ const UserName: FC<UserNameProps> = ({mobileMenu}) => {
   const {keycloak} = useKeycloak();
   const [userName, setUserName] = useState('');
   const [userNameRetrieved, setUserNameRetrieved] = useState(false);
+  const {data, loading, error} = useGetPersoonQuery();
+
+  console.log(data, loading, error);
 
   const getUserName = async () => {
     try {
