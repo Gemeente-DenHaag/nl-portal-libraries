@@ -62,6 +62,19 @@ export type MutationUpdateBurgerProfielArgs = {
   klant: KlantUpdateInput;
 };
 
+export type Persoon = {
+  __typename?: 'Persoon';
+  naam: PersoonNaam;
+};
+
+export type PersoonNaam = {
+  __typename?: 'PersoonNaam';
+  aanhef: Scalars['String'];
+  geslachtsnaam: Scalars['String'];
+  voorletters: Scalars['String'];
+  voornamen: Scalars['String'];
+};
+
 export type Query = {
   __typename?: 'Query';
   /** Gets the profile for the user */
@@ -70,6 +83,8 @@ export type Query = {
   getDocumentContent: DocumentContent;
   /** Gets the forms available to the user */
   getFormList: Array<Form>;
+  /** Gets the persoon data */
+  getPersoon?: Maybe<Persoon>;
   /** Gets a zaak by id */
   getZaak: Zaak;
   /** Gets all zaken for the user */
@@ -164,6 +179,11 @@ export type GetFormsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type GetFormsQuery = { __typename?: 'Query', getFormList: Array<{ __typename?: 'Form', name: string, uuid: any }> };
+
+export type GetPersoonQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetPersoonQuery = { __typename?: 'Query', getPersoon?: Maybe<{ __typename?: 'Persoon', naam: { __typename?: 'PersoonNaam', geslachtsnaam: string, voornamen: string } }> };
 
 
 export const UpdateBurgerProfielDocument = gql`
@@ -428,3 +448,40 @@ export function useGetFormsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<G
 export type GetFormsQueryHookResult = ReturnType<typeof useGetFormsQuery>;
 export type GetFormsLazyQueryHookResult = ReturnType<typeof useGetFormsLazyQuery>;
 export type GetFormsQueryResult = Apollo.QueryResult<GetFormsQuery, GetFormsQueryVariables>;
+export const GetPersoonDocument = gql`
+    query GetPersoon {
+  getPersoon {
+    naam {
+      geslachtsnaam
+      voornamen
+    }
+  }
+}
+    `;
+
+/**
+ * __useGetPersoonQuery__
+ *
+ * To run a query within a React component, call `useGetPersoonQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetPersoonQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetPersoonQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useGetPersoonQuery(baseOptions?: Apollo.QueryHookOptions<GetPersoonQuery, GetPersoonQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetPersoonQuery, GetPersoonQueryVariables>(GetPersoonDocument, options);
+      }
+export function useGetPersoonLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetPersoonQuery, GetPersoonQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetPersoonQuery, GetPersoonQueryVariables>(GetPersoonDocument, options);
+        }
+export type GetPersoonQueryHookResult = ReturnType<typeof useGetPersoonQuery>;
+export type GetPersoonLazyQueryHookResult = ReturnType<typeof useGetPersoonLazyQuery>;
+export type GetPersoonQueryResult = Apollo.QueryResult<GetPersoonQuery, GetPersoonQueryVariables>;

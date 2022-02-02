@@ -44,11 +44,12 @@ const FormsPage = () => {
           ) : (
             data?.getFormList.map(form => (
               <button
+                key={form.uuid}
                 onClick={event => onClickFunction(event, form.uuid)}
                 type="button"
                 className={styles['forms__list-item-button']}
               >
-                <ListItem primaryText={form.name} leftIcon={<DocumentIcon />} key={form.uuid} />
+                <ListItem primaryText={form.name} leftIcon={<DocumentIcon />} />
               </button>
             ))
           )}
