@@ -11,6 +11,12 @@ export const QUERY_GET_PERSOON_DATA = gql`
         voornamen
         geslachtsnaam
       }
+      verblijfplaats {
+        straat
+        huisnummer
+        postcode
+        woonplaats
+      }
       geboorte {
         datum {
           datum
