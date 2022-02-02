@@ -2,13 +2,15 @@ import * as React from 'react';
 import {Heading2, Heading3} from '@gemeente-denhaag/components-react';
 import {FormattedMessage} from 'react-intl';
 import {
+  PersoonGeboorteDatum,
   PersoonNationaliteiten,
   useGetBurgerProfielQuery,
   useGetPersoonDataQuery,
 } from '@gemeente-denhaag/nl-portal-api';
-import {useEffect} from 'react';
+import {ReactElement, useEffect} from 'react';
 import styles from './account-page.module.scss';
 import {DetailList} from '../../components/detail-list';
+import {LocaleDate} from '../../components/locale-date';
 
 const AccountPage = () => {
   const {
@@ -41,6 +43,44 @@ const AccountPage = () => {
           return `${accumulatedString}, ${currentNationalityString}`;
         }, '');
     }
+    return '';
+  };
+
+  const getStreetString = (
+    street: string | null | undefined,
+    number: string | null | undefined
+  ): string => {
+    if (street && number) {
+      return `${street} ${number}`;
+    }
+    if (street) {
+      return street;
+    }
+
+    return '';
+  };
+
+  const getPostalCodeCityString = (
+    postalCode: string | null | undefined,
+    city: string | null | undefined
+  ): string => {
+    if (postalCode && city) {
+      return `${postalCode} ${city}`;
+    }
+    if (city) {
+      return city;
+    }
+
+    return '';
+  };
+
+  const getLocaleDateOfBirth = (
+    dateOfBirth: PersoonGeboorteDatum | null | undefined
+  ): string | ReactElement => {
+    if (dateOfBirth?.jaar) {
+      return <LocaleDate date={new Date(dateOfBirth.jaar, dateOfBirth.maand, dateOfBirth.dag)} />;
+    }
+
     return '';
   };
 
@@ -118,6 +158,8 @@ const AccountPage = () => {
             },
             {
               translationKey: 'dateOfBirth',
+              value: getLocaleDateOfBirth(personData?.getPersoon?.geboorte?.datum),
+              loading: personLoading,
             },
             {
               translationKey: 'countryOfBirth',
@@ -140,9 +182,19 @@ const AccountPage = () => {
           details={[
             {
               translationKey: 'street',
+              value: getStreetString(
+                personData?.getPersoon?.verblijfplaats?.straat,
+                personData?.getPersoon?.verblijfplaats?.huisnummer
+              ),
+              loading: personLoading,
             },
             {
               translationKey: 'postalCodeAndCity',
+              value: getPostalCodeCityString(
+                personData?.getPersoon?.verblijfplaats?.postcode,
+                personData?.getPersoon?.verblijfplaats?.woonplaats
+              ),
+              loading: personLoading,
             },
           ]}
         />
