@@ -64,7 +64,32 @@ export type MutationUpdateBurgerProfielArgs = {
 
 export type Persoon = {
   __typename?: 'Persoon';
+  burgerservicenummer: Scalars['String'];
+  geboorte?: Maybe<PersoonGeboorte>;
+  geslachtsaanduiding: Scalars['String'];
   naam: PersoonNaam;
+  nationaliteiten?: Maybe<Array<PersoonNationaliteiten>>;
+  verblijfplaats?: Maybe<PersoonVerblijfplaats>;
+};
+
+export type PersoonGeboorte = {
+  __typename?: 'PersoonGeboorte';
+  datum: PersoonGeboorteDatum;
+  land: PersoonGeboorteLand;
+};
+
+export type PersoonGeboorteDatum = {
+  __typename?: 'PersoonGeboorteDatum';
+  dag: Scalars['Int'];
+  datum: Scalars['String'];
+  jaar: Scalars['Int'];
+  maand: Scalars['Int'];
+};
+
+export type PersoonGeboorteLand = {
+  __typename?: 'PersoonGeboorteLand';
+  code: Scalars['String'];
+  omschrijving: Scalars['String'];
 };
 
 export type PersoonNaam = {
@@ -73,6 +98,25 @@ export type PersoonNaam = {
   geslachtsnaam: Scalars['String'];
   voorletters: Scalars['String'];
   voornamen: Scalars['String'];
+};
+
+export type PersoonNationaliteit = {
+  __typename?: 'PersoonNationaliteit';
+  code: Scalars['String'];
+  omschrijving: Scalars['String'];
+};
+
+export type PersoonNationaliteiten = {
+  __typename?: 'PersoonNationaliteiten';
+  nationaliteit: PersoonNationaliteit;
+};
+
+export type PersoonVerblijfplaats = {
+  __typename?: 'PersoonVerblijfplaats';
+  huisnummer: Scalars['String'];
+  postcode: Scalars['String'];
+  straat: Scalars['String'];
+  woonplaats: Scalars['String'];
 };
 
 export type Query = {
@@ -184,6 +228,11 @@ export type GetPersoonQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type GetPersoonQuery = { __typename?: 'Query', getPersoon?: Maybe<{ __typename?: 'Persoon', naam: { __typename?: 'PersoonNaam', geslachtsnaam: string, voornamen: string } }> };
+
+export type GetPersoonDataQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetPersoonDataQuery = { __typename?: 'Query', getPersoon?: Maybe<{ __typename?: 'Persoon', burgerservicenummer: string, geslachtsaanduiding: string, naam: { __typename?: 'PersoonNaam', aanhef: string, voorletters: string, voornamen: string, geslachtsnaam: string }, geboorte?: Maybe<{ __typename?: 'PersoonGeboorte', datum: { __typename?: 'PersoonGeboorteDatum', datum: string, jaar: number, maand: number, dag: number }, land: { __typename?: 'PersoonGeboorteLand', code: string, omschrijving: string } }>, nationaliteiten?: Maybe<Array<{ __typename?: 'PersoonNationaliteiten', nationaliteit: { __typename?: 'PersoonNationaliteit', code: string, omschrijving: string } }>> }> };
 
 
 export const UpdateBurgerProfielDocument = gql`
@@ -485,3 +534,62 @@ export function useGetPersoonLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions
 export type GetPersoonQueryHookResult = ReturnType<typeof useGetPersoonQuery>;
 export type GetPersoonLazyQueryHookResult = ReturnType<typeof useGetPersoonLazyQuery>;
 export type GetPersoonQueryResult = Apollo.QueryResult<GetPersoonQuery, GetPersoonQueryVariables>;
+export const GetPersoonDataDocument = gql`
+    query GetPersoonData {
+  getPersoon {
+    burgerservicenummer
+    geslachtsaanduiding
+    naam {
+      aanhef
+      voorletters
+      voornamen
+      geslachtsnaam
+    }
+    geboorte {
+      datum {
+        datum
+        jaar
+        maand
+        dag
+      }
+      land {
+        code
+        omschrijving
+      }
+    }
+    nationaliteiten {
+      nationaliteit {
+        code
+        omschrijving
+      }
+    }
+  }
+}
+    `;
+
+/**
+ * __useGetPersoonDataQuery__
+ *
+ * To run a query within a React component, call `useGetPersoonDataQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetPersoonDataQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetPersoonDataQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useGetPersoonDataQuery(baseOptions?: Apollo.QueryHookOptions<GetPersoonDataQuery, GetPersoonDataQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetPersoonDataQuery, GetPersoonDataQueryVariables>(GetPersoonDataDocument, options);
+      }
+export function useGetPersoonDataLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetPersoonDataQuery, GetPersoonDataQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetPersoonDataQuery, GetPersoonDataQueryVariables>(GetPersoonDataDocument, options);
+        }
+export type GetPersoonDataQueryHookResult = ReturnType<typeof useGetPersoonDataQuery>;
+export type GetPersoonDataLazyQueryHookResult = ReturnType<typeof useGetPersoonDataLazyQuery>;
+export type GetPersoonDataQueryResult = Apollo.QueryResult<GetPersoonDataQuery, GetPersoonDataQueryVariables>;
