@@ -43,6 +43,7 @@ const AccountPage = () => {
           return `${accumulatedString}, ${currentNationalityString}`;
         }, '');
     }
+
     return '';
   };
 
