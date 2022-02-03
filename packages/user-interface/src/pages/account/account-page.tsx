@@ -51,10 +51,11 @@ const AccountPage = () => {
     street: string | null | undefined,
     number: string | null | undefined
   ): string => {
-    if (street && number) {
-      return `${street} ${number}`;
-    }
     if (street) {
+      if (number) {
+        return `${street} ${number}`;
+      }
+
       return street;
     }
 
@@ -65,10 +66,11 @@ const AccountPage = () => {
     postalCode: string | null | undefined,
     city: string | null | undefined
   ): string => {
-    if (postalCode && city) {
-      return `${postalCode} ${city}`;
-    }
     if (city) {
+      if (postalCode) {
+        return `${postalCode} ${city}`;
+      }
+
       return city;
     }
 
