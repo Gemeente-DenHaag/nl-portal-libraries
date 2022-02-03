@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {FC, Fragment, useContext} from 'react';
+import {FC, Fragment, ReactElement, useContext} from 'react';
 import {FormattedMessage} from 'react-intl';
 import {Link} from '@gemeente-denhaag/components-react';
 import {EditIcon} from '@gemeente-denhaag/icons';
@@ -15,7 +15,7 @@ interface DetailListProps {
   details: Array<{
     translationKey: string;
     loading?: boolean;
-    value?: string | undefined | null | false;
+    value?: string | ReactElement | undefined | null | false;
     showEditButton?: boolean;
   }>;
 }
@@ -45,7 +45,12 @@ const DetailList: FC<DetailListProps> = ({details}) => {
             </span>
             {detail.showEditButton && (
               <Link
-                onClick={() => setUserInformation(detail.translationKey, detail.value)}
+                onClick={() =>
+                  setUserInformation(
+                    detail.translationKey,
+                    typeof detail.value === 'string' ? detail.value : ''
+                  )
+                }
                 component={RouterLink}
                 to={`/account/aanpassen?prop=${detail.translationKey}`}
                 hrefLang={hrefLang}

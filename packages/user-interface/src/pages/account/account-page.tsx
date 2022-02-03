@@ -1,22 +1,91 @@
 import * as React from 'react';
 import {Heading2, Heading3} from '@gemeente-denhaag/components-react';
 import {FormattedMessage} from 'react-intl';
-import {useGetBurgerProfielQuery} from '@gemeente-denhaag/nl-portal-api';
-import {useEffect} from 'react';
+import {
+  PersoonGeboorteDatum,
+  PersoonNationaliteiten,
+  useGetBurgerProfielQuery,
+  useGetPersoonDataQuery,
+} from '@gemeente-denhaag/nl-portal-api';
+import {ReactElement, useEffect} from 'react';
 import styles from './account-page.module.scss';
 import {DetailList} from '../../components/detail-list';
+import {LocaleDate} from '../../components/locale-date';
 
 const AccountPage = () => {
   const {
     data: contactData,
     loading: contactLoading,
-    error: contactError,
     refetch: contactRefetch,
   } = useGetBurgerProfielQuery();
 
+  const {
+    data: personData,
+    loading: personLoading,
+    refetch: personRefetch,
+  } = useGetPersoonDataQuery();
+
   useEffect(() => {
     contactRefetch();
+    personRefetch();
   }, []);
+
+  const getNationalitiesString = (
+    nationalities: Array<PersoonNationaliteiten> | undefined | null
+  ): string => {
+    if (Array.isArray(nationalities) && nationalities.length > 0) {
+      return nationalities
+        .map(nationality => nationality.nationaliteit.omschrijving)
+        .reduce((accumulatedString, currentNationalityString) => {
+          if (accumulatedString === '') {
+            return currentNationalityString;
+          }
+          return `${accumulatedString}, ${currentNationalityString}`;
+        }, '');
+    }
+
+    return '';
+  };
+
+  const getStreetString = (
+    street: string | null | undefined,
+    number: string | null | undefined
+  ): string => {
+    if (street) {
+      if (number) {
+        return `${street} ${number}`;
+      }
+
+      return street;
+    }
+
+    return '';
+  };
+
+  const getPostalCodeCityString = (
+    postalCode: string | null | undefined,
+    city: string | null | undefined
+  ): string => {
+    if (city) {
+      if (postalCode) {
+        return `${postalCode} ${city}`;
+      }
+
+      return city;
+    }
+
+    return '';
+  };
+
+  const getLocaleDateOfBirth = (
+    dateOfBirth: PersoonGeboorteDatum | null | undefined
+  ): string | ReactElement => {
+    if (dateOfBirth?.jaar) {
+      return <LocaleDate date={new Date(dateOfBirth.jaar, dateOfBirth.maand, dateOfBirth.dag)} />;
+    }
+
+    return '';
+  };
 
   return (
     <section className={styles.account}>
@@ -33,14 +102,13 @@ const AccountPage = () => {
           details={[
             {
               translationKey: 'emailadres',
-              value: !contactLoading && !contactError && contactData?.getBurgerProfiel?.emailadres,
+              value: contactData?.getBurgerProfiel?.emailadres,
               showEditButton: true,
               loading: contactLoading,
             },
             {
               translationKey: 'telefoonnummer',
-              value:
-                !contactLoading && !contactError && contactData?.getBurgerProfiel?.telefoonnummer,
+              value: contactData?.getBurgerProfiel?.telefoonnummer,
               showEditButton: true,
               loading: contactLoading,
             },
@@ -73,24 +141,38 @@ const AccountPage = () => {
           details={[
             {
               translationKey: 'firstNames',
+              value: personData?.getPersoon?.naam?.voornamen,
+              loading: personLoading,
             },
             {
               translationKey: 'lastName',
+              value: personData?.getPersoon?.naam?.geslachtsnaam,
+              loading: personLoading,
             },
             {
               translationKey: 'gender',
+              value: personData?.getPersoon?.geslachtsaanduiding,
+              loading: personLoading,
             },
             {
               translationKey: 'citizenServiceNumber',
+              value: personData?.getPersoon?.burgerservicenummer,
+              loading: personLoading,
             },
             {
               translationKey: 'dateOfBirth',
+              value: getLocaleDateOfBirth(personData?.getPersoon?.geboorte?.datum),
+              loading: personLoading,
             },
             {
               translationKey: 'countryOfBirth',
+              value: personData?.getPersoon?.geboorte?.land?.omschrijving,
+              loading: personLoading,
             },
             {
               translationKey: 'nationality',
+              value: getNationalitiesString(personData?.getPersoon?.nationaliteiten),
+              loading: personLoading,
             },
           ]}
         />
@@ -103,9 +185,19 @@ const AccountPage = () => {
           details={[
             {
               translationKey: 'street',
+              value: getStreetString(
+                personData?.getPersoon?.verblijfplaats?.straat,
+                personData?.getPersoon?.verblijfplaats?.huisnummer
+              ),
+              loading: personLoading,
             },
             {
               translationKey: 'postalCodeAndCity',
+              value: getPostalCodeCityString(
+                personData?.getPersoon?.verblijfplaats?.postcode,
+                personData?.getPersoon?.verblijfplaats?.woonplaats
+              ),
+              loading: personLoading,
             },
           ]}
         />
