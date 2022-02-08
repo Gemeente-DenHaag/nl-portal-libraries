@@ -35,13 +35,14 @@ const AccountPage = () => {
   ): string => {
     if (Array.isArray(nationalities) && nationalities.length > 0) {
       return nationalities
-        .map(nationality => nationality.nationaliteit.omschrijving)
+        .map(nationality => nationality?.nationaliteit?.omschrijving)
+        .filter(nationalityString => nationalityString)
         .reduce((accumulatedString, currentNationalityString) => {
           if (accumulatedString === '') {
             return currentNationalityString;
           }
           return `${accumulatedString}, ${currentNationalityString}`;
-        }, '');
+        }, '') as string;
     }
 
     return '';
@@ -49,13 +50,20 @@ const AccountPage = () => {
 
   const getStreetString = (
     street: string | null | undefined,
-    number: string | null | undefined
+    number: string | null | undefined,
+    letter: string | null | undefined,
+    addition: string | null | undefined
   ): string => {
+    if (street && number && letter && addition) {
+      return `${street} ${number}${letter} ${addition}`;
+    }
+    if (street && number && letter) {
+      return `${street} ${number}${letter}`;
+    }
+    if (street && number) {
+      return `${street} ${number}`;
+    }
     if (street) {
-      if (number) {
-        return `${street} ${number}`;
-      }
-
       return street;
     }
 
@@ -80,8 +88,14 @@ const AccountPage = () => {
   const getLocaleDateOfBirth = (
     dateOfBirth: PersoonGeboorteDatum | null | undefined
   ): string | ReactElement => {
-    if (dateOfBirth?.jaar) {
+    if (dateOfBirth?.jaar && dateOfBirth?.maand && dateOfBirth?.dag) {
       return <LocaleDate date={new Date(dateOfBirth.jaar, dateOfBirth.maand, dateOfBirth.dag)} />;
+    }
+    if (dateOfBirth?.jaar && dateOfBirth?.maand) {
+      return <LocaleDate date={new Date(dateOfBirth.jaar, dateOfBirth.maand)} />;
+    }
+    if (dateOfBirth?.jaar) {
+      return <LocaleDate date={new Date(dateOfBirth.jaar)} />;
     }
 
     return '';
@@ -187,7 +201,9 @@ const AccountPage = () => {
               translationKey: 'street',
               value: getStreetString(
                 personData?.getPersoon?.verblijfplaats?.straat,
-                personData?.getPersoon?.verblijfplaats?.huisnummer
+                personData?.getPersoon?.verblijfplaats?.huisnummer,
+                personData?.getPersoon?.verblijfplaats?.huisletter,
+                personData?.getPersoon?.verblijfplaats?.huisnummertoevoeging
               ),
               loading: personLoading,
             },

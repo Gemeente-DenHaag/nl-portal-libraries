@@ -26,8 +26,8 @@ const UserName: FC<UserNameProps> = ({mobileMenu}) => {
 
   useEffect(() => {
     if (data) {
-      const firstNames = data?.getPersoon?.naam.voornamen;
-      const lastName = data?.getPersoon?.naam.geslachtsnaam;
+      const firstNames = data?.getPersoon?.naam?.voornamen;
+      const lastName = data?.getPersoon?.naam?.geslachtsnaam;
 
       if (firstNames && lastName) {
         setUserName(`${firstNames} ${lastName}`);
@@ -40,8 +40,10 @@ const UserName: FC<UserNameProps> = ({mobileMenu}) => {
   }, [data]);
 
   return (
-    <div className={classNames({[styles['user-name--mobile-menu']]: mobileMenu})}>
-      <Paragraph>
+    <div
+      className={classNames(styles['user-name'], {[styles['user-name--mobile-menu']]: mobileMenu})}
+    >
+      <Paragraph className={styles['user-name__paragraph']}>
         {intl.formatMessage({id: 'header.welcome'}) +
           (userName ? ` ${userName}` : `${loading ? ' ' : ''}`)}
         {!error && loading && !userName && <Skeleton width={80} />}

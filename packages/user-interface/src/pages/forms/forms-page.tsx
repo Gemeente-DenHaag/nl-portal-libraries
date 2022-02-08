@@ -6,7 +6,7 @@ import {useGetFormsQuery} from '@gemeente-denhaag/nl-portal-api';
 import {Fragment, useEffect} from 'react';
 import {useHistory} from 'react-router-dom';
 import styles from './forms-page.module.scss';
-import {ListItemSkeleton} from '../../components';
+import {ListItemSkeleton} from '../../components/list-item-skeleton';
 
 const FormsPage = () => {
   const intl = useIntl();

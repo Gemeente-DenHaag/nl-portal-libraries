@@ -33,6 +33,8 @@
   --nlportal-header-border-width: 1px;
   --nlportal-header-border-style: solid;
   --nlportal-header-border-color: var(--denhaag-color-grey-1);
+  --nlportal-header-user-name-max-width-tablet: 275px;
+  --nlportal-header-user-name-max-width-desktop: 350px;
   --nlportal-desktop-menu-width: 230px;
   --nlportal-menu-item-height: 3rem;
   --nlportal-menu-background-color: var(--denhaag-color-white);
