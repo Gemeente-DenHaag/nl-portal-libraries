@@ -14,6 +14,8 @@ export const QUERY_GET_PERSOON_DATA = gql`
       verblijfplaats {
         straat
         huisnummer
+        huisletter
+        huisnummertoevoeging
         postcode
         woonplaats
       }
