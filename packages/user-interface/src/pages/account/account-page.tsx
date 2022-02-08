@@ -89,10 +89,12 @@ const AccountPage = () => {
     dateOfBirth: PersoonGeboorteDatum | null | undefined
   ): string | ReactElement => {
     if (dateOfBirth?.jaar && dateOfBirth?.maand && dateOfBirth?.dag) {
-      return <LocaleDate date={new Date(dateOfBirth.jaar, dateOfBirth.maand, dateOfBirth.dag)} />;
+      return (
+        <LocaleDate date={new Date(dateOfBirth.jaar, dateOfBirth.maand - 1, dateOfBirth.dag)} />
+      );
     }
     if (dateOfBirth?.jaar && dateOfBirth?.maand) {
-      return <LocaleDate date={new Date(dateOfBirth.jaar, dateOfBirth.maand)} />;
+      return <LocaleDate date={new Date(dateOfBirth.jaar, dateOfBirth.maand - 1)} />;
     }
     if (dateOfBirth?.jaar) {
       return <LocaleDate date={new Date(dateOfBirth.jaar)} />;
