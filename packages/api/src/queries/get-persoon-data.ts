@@ -9,6 +9,7 @@ export const QUERY_GET_PERSOON_DATA = gql`
         aanhef
         voorletters
         voornamen
+        voorvoegsel
         geslachtsnaam
       }
       verblijfplaats {

@@ -74,6 +74,9 @@ const getLocaleDateOfBirth = (
   return '';
 };
 
+const capitalizeFirstLetter = (text: string): string =>
+  text.charAt(0).toUpperCase() + text.slice(1);
+
 const getNameString = (
   firstNames: string | null | undefined,
   prefix: string | null | undefined,
@@ -85,7 +88,7 @@ const getNameString = (
   const returnFirstName = returnType === 'firstNames';
   const fullNameWithPrefix = `${firstNames} ${prefix} ${lastName}`;
   const fullName = `${firstNames} ${lastName}`;
-  const lastNameWithPrefix = `${prefix} ${lastName}`;
+  const lastNameWithPrefix = capitalizeFirstLetter(`${prefix} ${lastName}`);
 
   if (returnFullName || returnLastName) {
     if (returnFullName && firstNames && prefix && lastName) {
@@ -114,5 +117,6 @@ export {
   getStreetString,
   getPostalCodeCityString,
   getLocaleDateOfBirth,
+  capitalizeFirstLetter,
   getNameString,
 };
