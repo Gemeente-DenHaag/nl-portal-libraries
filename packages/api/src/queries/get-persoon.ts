@@ -4,8 +4,9 @@ export const QUERY_GET_PERSOON = gql`
   query GetPersoon {
     getPersoon {
       naam {
-        geslachtsnaam
         voornamen
+        voorvoegsel
+        geslachtsnaam
       }
     }
   }

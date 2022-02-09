@@ -98,6 +98,7 @@ export type PersoonNaam = {
   geslachtsnaam?: Maybe<Scalars['String']>;
   voorletters?: Maybe<Scalars['String']>;
   voornamen?: Maybe<Scalars['String']>;
+  voorvoegsel?: Maybe<Scalars['String']>;
 };
 
 export type PersoonNationaliteit = {
@@ -217,12 +218,12 @@ export type GetFormsQuery = { __typename?: 'Query', getFormList: Array<{ __typen
 export type GetPersoonDataQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetPersoonDataQuery = { __typename?: 'Query', getPersoon?: Maybe<{ __typename?: 'Persoon', burgerservicenummer?: Maybe<string>, geslachtsaanduiding?: Maybe<string>, naam?: Maybe<{ __typename?: 'PersoonNaam', aanhef?: Maybe<string>, voorletters?: Maybe<string>, voornamen?: Maybe<string>, geslachtsnaam?: Maybe<string> }>, verblijfplaats?: Maybe<{ __typename?: 'PersoonVerblijfplaats', straat?: Maybe<string>, huisnummer?: Maybe<string>, huisletter?: Maybe<string>, huisnummertoevoeging?: Maybe<string>, postcode?: Maybe<string>, woonplaats?: Maybe<string> }>, geboorte?: Maybe<{ __typename?: 'PersoonGeboorte', datum?: Maybe<{ __typename?: 'PersoonGeboorteDatum', datum?: Maybe<string>, jaar?: Maybe<number>, maand?: Maybe<number>, dag?: Maybe<number> }>, land?: Maybe<{ __typename?: 'PersoonGeboorteLand', code?: Maybe<string>, omschrijving?: Maybe<string> }> }>, nationaliteiten?: Maybe<Array<{ __typename?: 'PersoonNationaliteiten', nationaliteit?: Maybe<{ __typename?: 'PersoonNationaliteit', code?: Maybe<string>, omschrijving?: Maybe<string> }> }>> }> };
+export type GetPersoonDataQuery = { __typename?: 'Query', getPersoon?: Maybe<{ __typename?: 'Persoon', burgerservicenummer?: Maybe<string>, geslachtsaanduiding?: Maybe<string>, naam?: Maybe<{ __typename?: 'PersoonNaam', aanhef?: Maybe<string>, voorletters?: Maybe<string>, voornamen?: Maybe<string>, voorvoegsel?: Maybe<string>, geslachtsnaam?: Maybe<string> }>, verblijfplaats?: Maybe<{ __typename?: 'PersoonVerblijfplaats', straat?: Maybe<string>, huisnummer?: Maybe<string>, huisletter?: Maybe<string>, huisnummertoevoeging?: Maybe<string>, postcode?: Maybe<string>, woonplaats?: Maybe<string> }>, geboorte?: Maybe<{ __typename?: 'PersoonGeboorte', datum?: Maybe<{ __typename?: 'PersoonGeboorteDatum', datum?: Maybe<string>, jaar?: Maybe<number>, maand?: Maybe<number>, dag?: Maybe<number> }>, land?: Maybe<{ __typename?: 'PersoonGeboorteLand', code?: Maybe<string>, omschrijving?: Maybe<string> }> }>, nationaliteiten?: Maybe<Array<{ __typename?: 'PersoonNationaliteiten', nationaliteit?: Maybe<{ __typename?: 'PersoonNationaliteit', code?: Maybe<string>, omschrijving?: Maybe<string> }> }>> }> };
 
 export type GetPersoonQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetPersoonQuery = { __typename?: 'Query', getPersoon?: Maybe<{ __typename?: 'Persoon', naam?: Maybe<{ __typename?: 'PersoonNaam', geslachtsnaam?: Maybe<string>, voornamen?: Maybe<string> }> }> };
+export type GetPersoonQuery = { __typename?: 'Query', getPersoon?: Maybe<{ __typename?: 'Persoon', naam?: Maybe<{ __typename?: 'PersoonNaam', voornamen?: Maybe<string>, voorvoegsel?: Maybe<string>, geslachtsnaam?: Maybe<string> }> }> };
 
 export type GetZaakQueryVariables = Exact<{
   id: Scalars['UUID'];
@@ -396,6 +397,7 @@ export const GetPersoonDataDocument = gql`
       aanhef
       voorletters
       voornamen
+      voorvoegsel
       geslachtsnaam
     }
     verblijfplaats {
@@ -458,8 +460,9 @@ export const GetPersoonDocument = gql`
     query GetPersoon {
   getPersoon {
     naam {
-      geslachtsnaam
       voornamen
+      voorvoegsel
+      geslachtsnaam
     }
   }
 }
