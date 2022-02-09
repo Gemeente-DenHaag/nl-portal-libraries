@@ -7,6 +7,7 @@ import Skeleton from 'react-loading-skeleton';
 import {useGetPersoonLazyQuery} from '@gemeente-denhaag/nl-portal-api';
 import {KeycloakContext} from '@gemeente-denhaag/nl-portal-authentication';
 import styles from './user-name.module.scss';
+import {getNameString} from '../../utils/person-data';
 
 interface UserNameProps {
   mobileMenu?: boolean;
@@ -25,18 +26,7 @@ const UserName: FC<UserNameProps> = ({mobileMenu}) => {
   }, [keycloakToken]);
 
   useEffect(() => {
-    if (data) {
-      const firstNames = data?.getPersoon?.naam?.voornamen;
-      const lastName = data?.getPersoon?.naam?.geslachtsnaam;
-
-      if (firstNames && lastName) {
-        setUserName(`${firstNames} ${lastName}`);
-      } else if (lastName) {
-        setUserName(lastName);
-      } else if (firstNames) {
-        setUserName(firstNames);
-      }
-    }
+    setUserName(getNameString(data?.getPersoon?.naam));
   }, [data]);
 
   return (

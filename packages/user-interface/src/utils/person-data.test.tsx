@@ -107,32 +107,55 @@ describe('getLocaleDateOfBirth', () => {
 
 describe('getNameString', () => {
   it('should return empty string when input all is null', () => {
-    const nameString = getNameString(null, null, null);
+    const nameString = getNameString({});
     expect(nameString).toBe('');
   });
 
   it('should return correct string when all input is valid', () => {
-    const nameString = getNameString('Jan', 'de', 'Vries');
+    const nameString = getNameString({
+      voornamen: 'Jan',
+      voorvoegsel: 'de',
+      geslachtsnaam: 'Vries',
+    });
     expect(nameString).toBe('Jan de Vries');
   });
 
   it('should return correct string when first name is null and other input is valid', () => {
-    const nameString = getNameString(null, 'de', 'Vries');
+    const nameString = getNameString({
+      voorvoegsel: 'de',
+      geslachtsnaam: 'Vries',
+    });
     expect(nameString).toBe('De Vries');
   });
 
   it('should return correct string when only first name input is valid', () => {
-    const nameString = getNameString('Jan', null, null);
+    const nameString = getNameString({
+      voornamen: 'Jan',
+    });
     expect(nameString).toBe('Jan');
   });
 
   it('should return correct string when all input is valid and only last name is requested output', () => {
-    const nameString = getNameString('Jan', 'de', 'Vries', 'lastName');
+    const nameString = getNameString(
+      {
+        voornamen: 'Jan',
+        voorvoegsel: 'de',
+        geslachtsnaam: 'Vries',
+      },
+      'lastName'
+    );
     expect(nameString).toBe('De Vries');
   });
 
   it('should return correct string when all input is valid and only first name is requested output', () => {
-    const nameString = getNameString('Jan', 'de', 'Vries', 'firstNames');
+    const nameString = getNameString(
+      {
+        voornamen: 'Jan',
+        voorvoegsel: 'de',
+        geslachtsnaam: 'Vries',
+      },
+      'firstNames'
+    );
     expect(nameString).toBe('Jan');
   });
 });

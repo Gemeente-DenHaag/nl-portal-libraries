@@ -1,7 +1,11 @@
-import {PersoonGeboorteDatum, PersoonNationaliteiten} from '@gemeente-denhaag/nl-portal-api';
+import {
+  PersoonGeboorteDatum,
+  PersoonNaam,
+  PersoonNationaliteiten,
+} from '@gemeente-denhaag/nl-portal-api';
 import {ReactElement} from 'react';
 import * as React from 'react';
-import {LocaleDate} from '../components';
+import {LocaleDate} from '../components/locale-date';
 
 const getNationalitiesString = (
   nationalities: Array<PersoonNationaliteiten> | undefined | null
@@ -72,14 +76,15 @@ const capitalizeFirstLetter = (text: string): string =>
   text.charAt(0).toUpperCase() + text.slice(1);
 
 const getNameString = (
-  firstNames: string | null | undefined,
-  prefix: string | null | undefined,
-  lastName: string | null | undefined,
+  name: PersoonNaam | null | undefined,
   returnType: 'fullName' | 'firstNames' | 'lastName' = 'fullName'
 ): string => {
   const returnFullName = returnType === 'fullName';
   const returnLastName = returnType === 'lastName';
   const returnFirstName = returnType === 'firstNames';
+  const firstNames = name?.voornamen;
+  const prefix = name?.voorvoegsel;
+  const lastName = name?.geslachtsnaam;
   const fullNameWithPrefix = `${firstNames} ${prefix} ${lastName}`;
   const fullName = `${firstNames} ${lastName}`;
   const lastNameWithPrefix = capitalizeFirstLetter(`${prefix} ${lastName}`);

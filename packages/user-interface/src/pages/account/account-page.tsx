@@ -1,16 +1,17 @@
 import * as React from 'react';
 import {Heading2, Heading3} from '@gemeente-denhaag/components-react';
 import {FormattedMessage} from 'react-intl';
-import {
-  PersoonGeboorteDatum,
-  PersoonNationaliteiten,
-  useGetBurgerProfielQuery,
-  useGetPersoonDataQuery,
-} from '@gemeente-denhaag/nl-portal-api';
-import {ReactElement, useEffect} from 'react';
+import {useGetBurgerProfielQuery, useGetPersoonDataQuery} from '@gemeente-denhaag/nl-portal-api';
+import {useEffect} from 'react';
 import styles from './account-page.module.scss';
 import {DetailList} from '../../components/detail-list';
-import {LocaleDate} from '../../components/locale-date';
+import {
+  getLocaleDateOfBirth,
+  getNameString,
+  getNationalitiesString,
+  getPostalCodeCityString,
+  getStreetString,
+} from '../../utils/person-data';
 
 const AccountPage = () => {
   const {
@@ -29,79 +30,6 @@ const AccountPage = () => {
     contactRefetch();
     personRefetch();
   }, []);
-
-  const getNationalitiesString = (
-    nationalities: Array<PersoonNationaliteiten> | undefined | null
-  ): string => {
-    if (Array.isArray(nationalities) && nationalities.length > 0) {
-      return nationalities
-        .map(nationality => nationality?.nationaliteit?.omschrijving)
-        .filter(nationalityString => nationalityString)
-        .reduce((accumulatedString, currentNationalityString) => {
-          if (accumulatedString === '') {
-            return currentNationalityString;
-          }
-          return `${accumulatedString}, ${currentNationalityString}`;
-        }, '') as string;
-    }
-
-    return '';
-  };
-
-  const getStreetString = (
-    street: string | null | undefined,
-    number: string | null | undefined,
-    letter: string | null | undefined,
-    addition: string | null | undefined
-  ): string => {
-    if (street && number && letter && addition) {
-      return `${street} ${number}${letter} ${addition}`;
-    }
-    if (street && number && letter) {
-      return `${street} ${number}${letter}`;
-    }
-    if (street && number) {
-      return `${street} ${number}`;
-    }
-    if (street) {
-      return street;
-    }
-
-    return '';
-  };
-
-  const getPostalCodeCityString = (
-    postalCode: string | null | undefined,
-    city: string | null | undefined
-  ): string => {
-    if (city) {
-      if (postalCode) {
-        return `${postalCode} ${city}`;
-      }
-
-      return city;
-    }
-
-    return '';
-  };
-
-  const getLocaleDateOfBirth = (
-    dateOfBirth: PersoonGeboorteDatum | null | undefined
-  ): string | ReactElement => {
-    if (dateOfBirth?.jaar && dateOfBirth?.maand && dateOfBirth?.dag) {
-      return (
-        <LocaleDate date={new Date(dateOfBirth.jaar, dateOfBirth.maand - 1, dateOfBirth.dag)} />
-      );
-    }
-    if (dateOfBirth?.jaar && dateOfBirth?.maand) {
-      return <LocaleDate date={new Date(dateOfBirth.jaar, dateOfBirth.maand - 1)} />;
-    }
-    if (dateOfBirth?.jaar) {
-      return <LocaleDate date={new Date(dateOfBirth.jaar)} />;
-    }
-
-    return '';
-  };
 
   return (
     <section className={styles.account}>
@@ -157,12 +85,12 @@ const AccountPage = () => {
           details={[
             {
               translationKey: 'firstNames',
-              value: personData?.getPersoon?.naam?.voornamen,
+              value: getNameString(personData?.getPersoon?.naam, 'firstNames'),
               loading: personLoading,
             },
             {
               translationKey: 'lastName',
-              value: personData?.getPersoon?.naam?.geslachtsnaam,
+              value: getNameString(personData?.getPersoon?.naam, 'lastName'),
               loading: personLoading,
             },
             {
