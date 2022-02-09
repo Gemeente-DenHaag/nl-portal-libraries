@@ -64,12 +64,6 @@ const getLocaleDateOfBirth = (
   if (dateOfBirth?.jaar && dateOfBirth?.maand && dateOfBirth?.dag) {
     return <LocaleDate date={new Date(dateOfBirth.jaar, dateOfBirth.maand - 1, dateOfBirth.dag)} />;
   }
-  if (dateOfBirth?.jaar && dateOfBirth?.maand) {
-    return <LocaleDate date={new Date(dateOfBirth.jaar, dateOfBirth.maand - 1)} />;
-  }
-  if (dateOfBirth?.jaar) {
-    return <LocaleDate date={new Date(dateOfBirth.jaar)} />;
-  }
 
   return '';
 };
@@ -96,6 +90,9 @@ const getNameString = (
     }
     if (returnFullName && firstNames && lastName) {
       return fullName;
+    }
+    if (returnFullName && firstNames) {
+      return firstNames;
     }
     if (prefix && lastName) {
       return lastNameWithPrefix;
