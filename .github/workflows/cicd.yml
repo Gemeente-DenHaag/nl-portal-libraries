@@ -121,7 +121,7 @@ jobs:
         id: login
       
       - name: 'Deploy to aks'
-        uses: 'deliverybot/helm@v1'
+        uses: 'deliverybot/helm@master'
         with:
           release: 'klantportaal'
           namespace: 'dhonline-test'
