@@ -69,15 +69,15 @@ jobs:
           cache-from: type=gha
           cache-to: ${{ env.cache_to }}
       
-      - name: 'Run test image'
-        uses: docker/build-push-action@v2
-        with:
-          target: test
-          push: false
-          tags: ${{ secrets.ACR_LOGIN_SERVER }}/${{ env.CR_REPO }}:test
-          labels: ${{ steps.meta.outputs.labels }}
-          cache-from: type=gha
-          cache-to: ${{ env.cache_to }}
+      # - name: 'Run test image'
+      #   uses: docker/build-push-action@v2
+      #   with:
+      #     target: test
+      #     push: false
+      #     tags: ${{ secrets.ACR_LOGIN_SERVER }}/${{ env.CR_REPO }}:test
+      #     labels: ${{ steps.meta.outputs.labels }}
+      #     cache-from: type=gha
+      #     cache-to: ${{ env.cache_to }}
 
       - name: 'Build and push release image'
         uses: docker/build-push-action@v2
@@ -122,8 +122,9 @@ jobs:
       
       - name: 'Deploy to AKS'
         run: |
-          helm upgrade --install klantportaal denhaag/generic -f infra/values-test.yaml --set image.fullImage: ${{ steps.meta.outputs.tags }} --wait
+          helm upgrade --install --wait klantportaal denhaag/generic --values infra/values-test.yaml -n dhonline-test --set image.fullImage: ${{ steps.meta.outputs.tags }}
 
+      # # helm upgrade --install klantportaal denhaag/generic -f infra/values-test.yaml --set image.fullImage: ${{ steps.meta.outputs.tags }} --wait
       # - name: 'Deploy to aks'
       #   uses: 'glopezep/helm@v1.7.1'
       #   with:
