@@ -118,7 +118,8 @@ jobs:
       
       - name: 'Deploy to AKS'
         run: |
-          helm upgrade --debug --install --wait --repo https://gemeente-denhaag.github.io/helm-charts klantportaal generic --values infra/values-test.yaml -n dhonline-test --set image.fullImage='${{ steps.meta.outputs.tags }}'
+          echo 'this is json ${{ fromJSON(steps.meta.outputs.json).tags }}'
+          helm upgrade --debug --install --wait --repo https://gemeente-denhaag.github.io/helm-charts klantportaal generic --values infra/values-test.yaml -n dhonline-test --set image.fullImage=${{ fromJSON(steps.meta.outputs.json).tags }}
 
       # # helm upgrade --install klantportaal denhaag/generic -f infra/values-test.yaml --set image.fullImage: ${{ steps.meta.outputs.tags }} --wait
       # - name: 'Deploy to aks'
