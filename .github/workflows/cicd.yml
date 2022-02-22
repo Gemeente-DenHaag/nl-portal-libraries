@@ -105,12 +105,8 @@ jobs:
             type=ref,event=tag
             type=sha
 
-      - name: 'Checkout zgw kubernetes repo'
+      - name: 'Checkout repo'
         uses: actions/checkout@main
-        with:
-          repository: Gemeente-DenHaag/zgw-kubernetes
-          path: zgw-kubernetes
-          token: ${{ secrets.ZGW_REPO_PAT }}
 
       - name: 'Login to aks and set context'
         uses: azure/aks-set-context@v1
