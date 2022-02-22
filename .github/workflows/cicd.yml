@@ -116,29 +116,29 @@ jobs:
           cluster-name: '${{ secrets.AKS_CL_NAME_TEST_ACC }}'
         id: login
       
-      - name: 'Deploy to AKS'
-        run: |
-          echo 'this is json ${{ fromJSON(steps.meta.outputs.json).tags }}'
-          helm upgrade --debug --install --wait --repo https://gemeente-denhaag.github.io/helm-charts klantportaal generic --values infra/values-test.yaml -n dhonline-test --set image.fullImage=${{ fromJSON(steps.meta.outputs.json).tags }}
+      # - name: 'Deploy to AKS'
+      #   run: |
+      #     echo 'this is json ${{ fromJSON(steps.meta.outputs.json).tags }}'
+      #     helm upgrade --debug --install --wait --repo https://gemeente-denhaag.github.io/helm-charts klantportaal generic --values infra/values-test.yaml -n dhonline-test --set image.fullImage=${{ fromJSON(steps.meta.outputs.json).tags }}
 
       # # helm upgrade --install klantportaal denhaag/generic -f infra/values-test.yaml --set image.fullImage: ${{ steps.meta.outputs.tags }} --wait
-      # - name: 'Deploy to aks'
-      #   uses: 'glopezep/helm@v1.7.1'
-      #   with:
-      #     release: 'klantportaal'
-      #     namespace: 'dhonline-test'
-      #     chart: 'denhaag/generic'
-      #     # token: '${{ github.token }}'
-      #     repo: 'https://gemeente-denhaag.github.io/helm-charts'
-      #     repo-alias: denhaag
-      #     values: |
-      #       image.fullImage: ${{ steps.meta.outputs.tags }}
-      #     value-files: >-
-      #       [
-      #         "infra/values-test.yaml"
-      #       ]
-      #   env:
-      #     KUBECONFIG_FILE: '${{ env.KUBECONFIG }}'
+      - name: 'Deploy to aks'
+        uses: 'glopezep/helm@v1.7.1'
+        with:
+          release: 'klantportaal'
+          namespace: 'dhonline-test'
+          chart: 'denhaag/generic'
+          # token: '${{ github.token }}'
+          repo: 'https://gemeente-denhaag.github.io/helm-charts'
+          repo-alias: denhaag
+          values: |
+            image.fullImage: ${{ steps.meta.outputs.tags }}
+          value-files: >-
+            [
+              "infra/values-test.yaml"
+            ]
+        env:
+          KUBECONFIG_FILE: '${{ env.KUBECONFIG }}'
 
   deploy-to-test:
     if: github.ref_name == 'master' && github.event_name != 'pull_request'
