@@ -17,9 +17,20 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
+    outputs:
+      tagToDeploy: ${{ steps.prep.outputs.DOCKERTAG }}
+
     steps:
       - name: 'Checkout repo'
         uses: actions/checkout@main
+
+      - name: 'Generate unique docker tag to deploy with Helm'
+        id: prep
+        run: |
+            branch=${GITHUB_REF##*/}
+            sha=${GITHUB_SHA::8}
+            ts=$(date +%s)
+            echo "::set-output name=DOCKERTAG::${branch}-${sha}-${ts}"
 
       - name: 'Docker meta'
         id: meta
@@ -31,6 +42,7 @@ jobs:
             type=ref,event=pr
             type=ref,event=tag
             type=sha
+            ${{ steps.prep.outputs.DOCKERTAG }}
 
       - name: 'Set up QEMU'
         uses: docker/setup-qemu-action@v1
@@ -94,23 +106,8 @@ jobs:
     needs: build
     environment: test
     steps:
-      - name: 'Docker meta'
-        id: meta
-        uses: docker/metadata-action@v3
-        with:
-          images: ${{ secrets.ACR_LOGIN_SERVER }}/zgw/klantportaal
-          tags: |
-            type=ref,event=branch
-            type=ref,event=pr
-            type=ref,event=tag
-            type=sha
-
-      - name: 'Checkout zgw kubernetes repo'
+      - name: 'Checkout repo'
         uses: actions/checkout@main
-        with:
-          repository: Gemeente-DenHaag/zgw-kubernetes
-          path: zgw-kubernetes
-          token: ${{ secrets.ZGW_REPO_PAT }}
 
       - name: 'Login to aks and set context'
         uses: azure/aks-set-context@v1
@@ -119,16 +116,10 @@ jobs:
           resource-group: '${{ secrets.AKS_RG_TEST_ACC }}'
           cluster-name: '${{ secrets.AKS_CL_NAME_TEST_ACC }}'
         id: login
-
-      - name: 'Deploy to aks'
-        uses: Azure/k8s-deploy@v1.4
-        with:
-          namespace: 'dhonline-test'
-          manifests: |
-            zgw-kubernetes/klantportaal/test/configmap.yaml
-            zgw-kubernetes/klantportaal/test/ingress.yaml
-            zgw-kubernetes/klantportaal/klantportaal.yaml
-          images: '${{ steps.meta.outputs.tags }}'
+      
+      - name: 'Deploy to AKS'
+        run: |
+          helm upgrade --debug --install --wait --repo https://gemeente-denhaag.github.io/helm-charts klantportaal generic --values infra/values-test.yaml -n dhonline-test --set image.fullImage=${{ secrets.ACR_LOGIN_SERVER }}/${{ env.CR_REPO }}:${{ needs.build.outputs.tagToDeploy }}
 
   publish-npm:
     runs-on: ubuntu-latest
@@ -148,6 +139,7 @@ jobs:
           npm install -g yarn
           npm install -g lerna
           yarn run bootstrap
+
       - name: build library
         run: yarn run build
 
@@ -161,6 +153,7 @@ jobs:
         run: |
           git push --set-upstream origin HEAD
           yarn run release -- --yes
+      
       - name: lerna publish
         env:
           NPM_ACCESS_TOKEN: ${{ secrets.NPM_ACCESS_TOKEN }}
