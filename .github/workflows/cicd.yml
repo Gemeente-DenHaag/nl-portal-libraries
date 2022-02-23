@@ -17,9 +17,20 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
+    outputs:
+      imageToDeploy: ${{ steps.prep.outputs.DOCKERTAG }}
+
     steps:
       - name: 'Checkout repo'
         uses: actions/checkout@main
+
+      - name: Generate unique docker tag to deploy
+        id: prep
+        run: |
+            branch=${GITHUB_REF##*/}
+            sha=${GITHUB_SHA::8}
+            ts=$(date +%s)
+            echo "::set-output name=DOCKERTAG::${branch}-${sha}-${ts}"
 
       - name: 'Docker meta'
         id: meta
@@ -31,6 +42,7 @@ jobs:
             type=ref,event=pr
             type=ref,event=tag
             type=sha
+            ${{ steps.prep.outputs.DOCKERTAG }}
 
       - name: 'Set up QEMU'
         uses: docker/setup-qemu-action@v1
@@ -94,16 +106,16 @@ jobs:
     needs: build
     environment: test
     steps:
-      - name: 'Docker meta'
-        id: meta
-        uses: docker/metadata-action@v3
-        with:
-          images: ${{ secrets.ACR_LOGIN_SERVER }}/zgw/klantportaal
-          tags: |
-            type=ref,event=branch
-            type=ref,event=pr
-            type=ref,event=tag
-            type=sha
+      # - name: 'Docker meta'
+      #   id: meta
+      #   uses: docker/metadata-action@v3
+      #   with:
+      #     images: ${{ secrets.ACR_LOGIN_SERVER }}/zgw/klantportaal
+      #     tags: |
+      #       type=ref,event=branch
+      #       type=ref,event=pr
+      #       type=ref,event=tag
+      #       type=sha
 
       - name: 'Checkout repo'
         uses: actions/checkout@main
@@ -118,10 +130,10 @@ jobs:
       
       - name: 'Deploy to AKS'
         run: |
-          tagsArray=${{ join(fromJSON(steps.meta.outputs.json).tags) }}
-          echo {$tagsArray}
-          helm upgrade --debug --install --wait --repo https://gemeente-denhaag.github.io/helm-charts klantportaal generic --values infra/values-test.yaml -n dhonline-test --set "image.fullImage={$tagsArray}""
+          helm upgrade --debug --install --wait --repo https://gemeente-denhaag.github.io/helm-charts klantportaal generic --values infra/values-test.yaml -n dhonline-test --set image.fullImage='${{ needs.build.outputs.imageToDeploy }}'"
 
+      # tagsArray=${{ join(fromJSON(steps.meta.outputs.json).tags) }}
+      #    echo {$tagsArray}
       # # helm upgrade --install klantportaal denhaag/generic -f infra/values-test.yaml --set image.fullImage: ${{ steps.meta.outputs.tags }} --wait
       # - name: 'Deploy to aks'
       #   uses: 'glopezep/helm@v1.7.1'
