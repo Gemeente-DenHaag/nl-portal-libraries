@@ -118,8 +118,11 @@ jobs:
         id: login
       
       - name: 'Deploy to AKS'
-        run: |
-          helm upgrade --debug --install --wait --repo https://gemeente-denhaag.github.io/helm-charts klantportaal generic --values infra/values-test.yaml -n dhonline-test --set image.fullImage=${{ secrets.ACR_LOGIN_SERVER }}/${{ env.CR_REPO }}:${{ needs.build.outputs.tagToDeploy }}
+        run: >
+          helm upgrade --debug --install --wait --atomic --repo https://gemeente-denhaag.github.io/helm-charts klantportaal generic
+          -f infra/values-test.yaml
+          -n dhonline-test
+          --set image.fullImage=${{ secrets.ACR_LOGIN_SERVER }}/${{ env.CR_REPO }}:${{ needs.build.outputs.tagToDeploy }}
 
   publish-npm:
     runs-on: ubuntu-latest
