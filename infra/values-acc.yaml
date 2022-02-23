@@ -227,7 +227,7 @@ ingress:
 
   ## When the ingress is enabled, a host pointing to this will be created
   ##
-  hostname: klantportaal-cg.test.denhaag.nl
+  hostname: klantportaal-zgw.acc.denhaag.nl
 
   ## The Path to Nginx. You may need to set this to '/*' in order to use this
   ## with ALB ingress controllers.
