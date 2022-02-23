@@ -18,7 +18,7 @@ jobs:
     runs-on: ubuntu-latest
 
     outputs:
-      imageToDeploy: ${{ steps.prep.outputs.DOCKERTAG }}
+      imageToDeploy: ${{ steps.prep.outputs.DOCKERIMAGE }}
 
     steps:
       - name: 'Checkout repo'
@@ -31,6 +31,12 @@ jobs:
             sha=${GITHUB_SHA::8}
             ts=$(date +%s)
             echo "::set-output name=DOCKERTAG::${branch}-${sha}-${ts}"
+            echo "::set-output name=DOCKERIMAGE::${{ secrets.ACR_LOGIN_SERVER }}/${{ env.CR_REPO }}:${branch}-${sha}-${ts}"
+
+      - name: echo
+        run: |
+          echo ${{ steps.prep.outputs.DOCKERTAG }}
+          echo ${{ steps.prep.outputs.DOCKERIMAGE }}
 
       - name: 'Docker meta'
         id: meta
