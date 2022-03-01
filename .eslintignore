@@ -18,3 +18,5 @@ graphql.tsx
 .github
 
 packages/app/public/open-forms
+
+packages/app/public/config.template.js
