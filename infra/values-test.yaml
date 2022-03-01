@@ -110,6 +110,8 @@ dnsPolicy: ClusterFirst
 podSecurityContext:
   enabled: true
   fsGroup: 1000
+  runAsUser: 1000
+  runAsGroup: 1000
 
 ## Container security context
 ## ref: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/#set-the-security-context-for-a-container
@@ -125,8 +127,10 @@ podSecurityContext:
 ##
 containerSecurityContext:
   enabled: true
+  # readOnlyRootFilesystem: true
   runAsUser: 1000
   runAsNonRoot: true
+  allowPrivilegeEscalation: false
 
 ## Application container ports definitions (for use with service.ports)
 ##
@@ -147,8 +151,8 @@ service:
   ## Specify the default service port and targetPort
   ## Note: port or ports must be provided to enable service!
   ##
-  port: 3000
-  targetPort: 3000
+  port: 8080
+  targetPort: 8080
 
   ## Specify the nodePort value for the LoadBalancer and NodePort service types.
   ## ref: https://kubernetes.io/docs/concepts/services-networking/service/#type-nodeport
