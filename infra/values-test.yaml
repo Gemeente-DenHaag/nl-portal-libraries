@@ -110,6 +110,8 @@ dnsPolicy: ClusterFirst
 podSecurityContext:
   enabled: true
   fsGroup: 1000
+  runAsUser: 1000
+  runAsGroup: 1000
 
 ## Container security context
 ## ref: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/#set-the-security-context-for-a-container
@@ -125,8 +127,10 @@ podSecurityContext:
 ##
 containerSecurityContext:
   enabled: true
+  # readOnlyRootFilesystem: true
   runAsUser: 1000
   runAsNonRoot: true
+  allowPrivilegeEscalation: false
 
 ## Application container ports definitions (for use with service.ports)
 ##

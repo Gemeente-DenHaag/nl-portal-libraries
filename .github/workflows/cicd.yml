@@ -98,17 +98,18 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           file: Dockerfile-unpriv
-          push: true #${{ env.PUSH_AND_DEPLOY }}
+          push: ${{ env.PUSH_AND_DEPLOY }}
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
           cache-from: type=gha
           cache-to: ${{ env.cache_to }}
 
-  deploy-to-test-temp:
-    if: github.ref_name == 'feature/add-composite-action'
+  deploy-to-test:
+    if: github.ref_name == 'master' && github.event_name != 'pull_request'
     runs-on: ubuntu-latest
     needs: build
     environment: test
+
     steps:
       - name: 'Checkout repo'
         uses: actions/checkout@main
@@ -123,30 +124,6 @@ jobs:
           values-file: infra/values-test.yaml
           namespace: dhonline-test
           full-image-url: ${{ secrets.ACR_LOGIN_SERVER }}/${{ env.CR_REPO }}:${{ needs.build.outputs.tagToDeploy }}
-
-  deploy-to-test:
-    if: github.ref_name == 'master' && github.event_name != 'pull_request'
-    runs-on: ubuntu-latest
-    needs: build
-    environment: test
-    steps:
-      - name: 'Checkout repo'
-        uses: actions/checkout@main
-
-      - name: 'Login to aks and set context'
-        uses: azure/aks-set-context@v1
-        with:
-          creds: '${{ secrets.AZURE_CREDENTIALS }}'
-          resource-group: '${{ secrets.AKS_RG_TEST_ACC }}'
-          cluster-name: '${{ secrets.AKS_CL_NAME_TEST_ACC }}'
-        id: login
-      
-      - name: 'Deploy to AKS'
-        run: >
-          helm upgrade --debug --install --wait --atomic --repo https://gemeente-denhaag.github.io/helm-charts klantportaal generic
-          -f infra/values-test.yaml
-          -n dhonline-test
-          --set image.fullImage=${{ secrets.ACR_LOGIN_SERVER }}/${{ env.CR_REPO }}:${{ needs.build.outputs.tagToDeploy }}
 
   publish-npm:
     runs-on: ubuntu-latest
