@@ -1,0 +1,13 @@
+# This is a comment.
+# Each line is a file pattern followed by one or more owners.
+
+# These owners will be the default owners for everything in
+# the repo. Unless a later match takes precedence,
+# @global-owner1 and @global-owner2 will be requested for
+# review when someone opens a pull request.
+# disabled, not sure if needed
+# *       @bddjong @mritense @mjcarsjens @Rick-Ritense
+
+# In this example, any change inside the `/.github` directory
+# will require approval from @doctocat or @octocat.
+/.github/ @Test-Automation-Engineer
