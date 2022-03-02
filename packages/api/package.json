@@ -1,6 +1,6 @@
 {
   "name": "@gemeente-denhaag/nl-portal-api",
-  "version": "1.0.1-alpha.38",
+  "version": "1.0.1-alpha.39",
   "description": "Made with create-react-library",
   "author": "Municipality of The Hague",
   "license": "EUPL-1.2",
@@ -54,7 +54,7 @@
   ],
   "dependencies": {
     "@apollo/client": "^3.4.11",
-    "@gemeente-denhaag/nl-portal-authentication": "^1.0.1-alpha.38",
+    "@gemeente-denhaag/nl-portal-authentication": "^1.0.1-alpha.39",
     "apollo-boost": "^0.4.9",
     "graphql": "^15.5.3",
     "graphql-tag": "^2.12.5",
