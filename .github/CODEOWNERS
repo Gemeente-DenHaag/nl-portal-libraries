@@ -3,11 +3,15 @@
 
 # These owners will be the default owners for everything in
 # the repo. Unless a later match takes precedence,
-# @global-owner1 and @global-owner2 will be requested for
+# @bddjong @mritense @mjcarsjens @Rick-Ritense will be requested for
 # review when someone opens a pull request.
 # disabled, not sure if needed
 # *       @bddjong @mritense @mjcarsjens @Rick-Ritense
 
 # In this example, any change inside the `/.github` directory
-# will require approval from @doctocat or @octocat.
+# will require approval from @Test-Automation-Engineer.
 /.github/ @Test-Automation-Engineer
+
+# In this example, any change inside the `/infra` directory
+# will require approval from @Test-Automation-Engineer @bddjong.
+/infra/ @Test-Automation-Engineer @bddjong
