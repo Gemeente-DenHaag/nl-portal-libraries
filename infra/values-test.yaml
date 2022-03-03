@@ -415,25 +415,34 @@ volumeMounts: []
 ## Note: probes are disabled by default and have no checks defined
 ##
 livenessProbe:
-  enabled: false
-  initialDelaySeconds: 60
+  enabled: true
+  httpGet:
+    path: /index.html
+    port: 8080
+  initialDelaySeconds: 15
   periodSeconds: 30
   timeoutSeconds: 5
-  failureThreshold: 6
+  failureThreshold: 2
   successThreshold: 1
 readinessProbe:
-  enabled: false
-  initialDelaySeconds: 60
+  enabled: true
+  httpGet:
+    path: /index.html
+    port: 8080
+  initialDelaySeconds: 5
   periodSeconds: 30
   timeoutSeconds: 5
-  failureThreshold: 6
+  failureThreshold: 2
   successThreshold: 1
 startupProbe:
   enabled: false
-  initialDelaySeconds: 30
+  httpGet:
+    path: /index.html
+    port: 8080
+  initialDelaySeconds: 5
   periodSeconds: 30
   timeoutSeconds: 5
-  failureThreshold: 6
+  failureThreshold: 2
   successThreshold: 1
 
 ## Enable persistence using Persistent Volume Claims
