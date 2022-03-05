@@ -1,0 +1,180 @@
+## Global Docker image parameters
+## Please, note that this will override the image parameters, including dependencies, configured to use the global value
+## Current available global Docker image parameters: imageRegistry, imagePullSecrets and storageClass
+##
+# global:
+#   imageRegistry: myRegistryName
+#   imagePullSecrets:
+#     - myRegistryKeySecretName
+#   storageClass: myStorageClass
+
+image:
+  registry: ""
+  repository: "zgw/klantportaal"
+  tag: master
+  ## Specify a imagePullPolicy
+  ## Defaults to 'Always' if image tag is 'latest', else set to 'IfNotPresent'
+  ## ref: http://kubernetes.io/docs/user-guide/images/#pre-pulling-images
+  ##
+  pullPolicy: IfNotPresent
+
+## Specifies the application name (required to be set)
+##
+name: "klantportaal"
+
+## Specifies the application resource kind
+##
+appKind: Deployment
+
+## Extra labels to add to Pod
+##
+podLabels: 
+  public-access: allow
+
+## Optionally, change this to ClusterFirstWithHostNet in case you have 'hostNetwork: true'.
+## By default, while using host network, name resolution uses the host's DNS. If you wish nginx-controller
+## to keep resolving names inside the k8s network, use ClusterFirstWithHostNet.
+##
+dnsPolicy: ClusterFirst
+
+## Pod securityContext
+## ref: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/#set-the-security-context-for-a-pod
+##
+podSecurityContext:
+  enabled: true
+  fsGroup: 1000
+  runAsUser: 1000
+  runAsGroup: 1000
+
+## Container security context
+## ref: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/#set-the-security-context-for-a-container
+##
+## containerSecurityContext:
+##   capabilities:
+##     drop:
+##     - ALL
+##   readOnlyRootFilesystem: true
+##   runAsNonRoot: true
+##   runAsUser: 1001
+##   allowPrivilegeEscalation: false
+##
+containerSecurityContext:
+  enabled: true
+  # readOnlyRootFilesystem: true
+  runAsUser: 1000
+  runAsNonRoot: true
+  allowPrivilegeEscalation: false
+
+## Application service parameters
+##
+service:
+  ## Kubernetes service type and port number
+  ##
+  type: ClusterIP
+  # clusterIP: None
+
+  ## Specify the default service port and targetPort
+  ## Note: port or ports must be provided to enable service!
+  ##
+  port: 8080
+  targetPort: 8080
+
+
+## Set up update strategy for Kibana installation. Set to Recreate if you use persistent volume that cannot be mounted by more than one pods to makesure the pods are destroyed first.
+## ref: https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#strategy
+## Example:
+# updateStrategy:
+#  type: RollingUpdate
+#  rollingUpdate:
+#    maxSurge: 25%
+#    maxUnavailable: 25%
+updateStrategy:
+  type: RollingUpdate
+
+## Configure the ingress resource that allows you to access the
+## app installation. Set up the URL
+## ref: http://kubernetes.io/docs/user-guide/ingress/
+##
+ingress:
+  ## Set to true to enable ingress record generation
+  ##
+  enabled: true
+
+  ## Ingress Path type
+  ##
+  pathType: ImplementationSpecific
+
+  ## Override API Version (automatically detected if not set)
+  ##
+  apiVersion:
+
+  ## The Path to Nginx. You may need to set this to '/*' in order to use this
+  ## with ALB ingress controllers.
+  ##
+  path: /
+
+  ## Ingress annotations done as key:value pairs
+  ## For a full list of possible ingress annotations, please see
+  ## ref: https://github.com/kubernetes/ingress-nginx/blob/master/docs/user-guide/nginx-configuration/annotations.md
+  ##
+  ## If certManager is set to true, annotation kubernetes.io/tls-acme: "true" will automatically be set
+  ##
+  annotations: 
+    kubernetes.io/ingress.class: azure/application-gateway
+    appgw.ingress.kubernetes.io/ssl-redirect: "true"
+    appgw.ingress.kubernetes.io/use-private-ip: "true"
+
+  ## Enable TLS configuration for the hostname defined at ingress.hostname parameter
+  ## TLS certificates will be retrieved from a TLS secret with name: {{- printf "%s-tls" .Values.ingress.hostname }}
+  ## You can use the ingress.secrets parameter to create this TLS secret or relay on cert-manager to create it
+  ##
+  tls: true
+
+##  We usually recommend not to specify default resources and to leave this as a conscious
+##  choice for the user. This also increases chances charts run on environments with little
+##  resources, such as Minikube. If you do want to specify resources, uncomment the following
+##  lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+##
+resources:
+  limits:
+    cpu: 200m
+    memory: 512Mi
+  requests:
+    cpu: 200m
+    memory: 256Mi
+
+
+## Configure options for liveness and readiness probes
+## Ref: https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-probes/#configure-probes)
+## Note: probes are disabled by default and have no checks defined
+##
+livenessProbe:
+  enabled: true
+  httpGet:
+    path: /index.html
+    port: 8080
+  initialDelaySeconds: 10
+  periodSeconds: 30
+  timeoutSeconds: 2
+  failureThreshold: 2
+  successThreshold: 1
+readinessProbe:
+  enabled: true
+  httpGet:
+    path: /index.html
+    port: 8080
+  initialDelaySeconds: 5
+  periodSeconds: 30
+  timeoutSeconds: 2
+  failureThreshold: 2
+  successThreshold: 1
+startupProbe:
+  enabled: false
+  httpGet:
+    path: /index.html
+    port: 8080
+  initialDelaySeconds: 5
+  periodSeconds: 30
+  timeoutSeconds: 5
+  failureThreshold: 2
+  successThreshold: 1

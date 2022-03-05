@@ -105,7 +105,8 @@ jobs:
           cache-to: ${{ env.cache_to }}
 
   deploy-to-test:
-    if: github.ref_name == 'master' && github.event_name != 'pull_request'
+    # if: github.ref_name == 'master' && github.event_name != 'pull_request'
+    if: github.event_name != 'pull_request'
     runs-on: ubuntu-latest
     needs: build
     environment: test
@@ -115,13 +116,13 @@ jobs:
         uses: actions/checkout@main
 
       - name: 'Deploy to AKS'
-        uses: Gemeente-DenHaag/custom-actions/deploy-to-aks@v0.0.1-dta
+        uses: Gemeente-DenHaag/custom-actions/deploy-to-aks@main
         with:
           credentials: '${{ secrets.AZURE_CREDENTIALS }}'
           resource-group: '${{ secrets.AKS_RG_TEST_ACC }}'
           cluster-name: '${{ secrets.AKS_CL_NAME_TEST_ACC }}'
           release-name: klantportaal
-          values-file: infra/values-test.yaml
+          values-files: infra/values.yaml,infra/values-test.yaml
           namespace: dhonline-test
           full-image-url: ${{ secrets.ACR_LOGIN_SERVER }}/${{ env.CR_REPO }}:${{ needs.build.outputs.tagToDeploy }}
 
