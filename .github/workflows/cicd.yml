@@ -115,7 +115,7 @@ jobs:
         uses: actions/checkout@main
 
       - name: 'Deploy to AKS'
-        uses: Gemeente-DenHaag/custom-actions/deploy-to-aks@main
+        uses: Gemeente-DenHaag/custom-actions/deploy-to-aks@v0.0.2-dta
         with:
           credentials: '${{ secrets.AZURE_CREDENTIALS }}'
           resource-group: '${{ secrets.AKS_RG_TEST_ACC }}'
