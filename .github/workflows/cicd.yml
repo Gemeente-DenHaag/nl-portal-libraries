@@ -11,7 +11,7 @@ on:
 
 env:
   PUSH_AND_DEPLOY: ${{ github.event_name != 'pull_request' && github.ref_name == 'master' }}
-  CR_REPO: zgw/klantportaal
+  CR_REPO: zgw/nl-portal-libraries
 
 jobs:
   build:
@@ -64,7 +64,7 @@ jobs:
       - name: 'Build and push deps image'
         uses: docker/build-push-action@v2
         with:
-          file: Dockerfile-unpriv
+          file: Dockerfile
           target: deps
           push: ${{ env.PUSH_AND_DEPLOY }}
           tags: ${{ secrets.ACR_LOGIN_SERVER }}/${{ env.CR_REPO }}:deps
@@ -75,7 +75,7 @@ jobs:
       - name: 'Build and push deps image'
         uses: docker/build-push-action@v2
         with:
-          file: Dockerfile-unpriv
+          file: Dockerfile
           target: build
           push: ${{ env.PUSH_AND_DEPLOY }}
           tags: ${{ secrets.ACR_LOGIN_SERVER }}/${{ env.CR_REPO }}:build
@@ -86,7 +86,7 @@ jobs:
       - name: 'Run test image'
         uses: docker/build-push-action@v2
         with:
-          file: Dockerfile-unpriv
+          file: Dockerfile
           target: test
           push: false
           tags: ${{ secrets.ACR_LOGIN_SERVER }}/${{ env.CR_REPO }}:test
@@ -97,33 +97,12 @@ jobs:
       - name: 'Build and push release image'
         uses: docker/build-push-action@v2
         with:
-          file: Dockerfile-unpriv
+          file: Dockerfile
           push: ${{ env.PUSH_AND_DEPLOY }}
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
           cache-from: type=gha
           cache-to: ${{ env.cache_to }}
-
-  deploy-to-test:
-    if: github.ref_name == 'master' && github.event_name != 'pull_request'
-    runs-on: ubuntu-latest
-    needs: build
-    environment: test
-
-    steps:
-      - name: 'Checkout repo'
-        uses: actions/checkout@main
-
-      - name: 'Deploy to AKS'
-        uses: Gemeente-DenHaag/custom-actions/deploy-to-aks@v0.0.2-dta
-        with:
-          credentials: '${{ secrets.AZURE_CREDENTIALS }}'
-          resource-group: '${{ secrets.AKS_RG_TEST_ACC }}'
-          cluster-name: '${{ secrets.AKS_CL_NAME_TEST_ACC }}'
-          release-name: klantportaal
-          values-files: infra/values.yaml,infra/values-test.yaml
-          namespace: dhonline-test
-          full-image-url: ${{ secrets.ACR_LOGIN_SERVER }}/${{ env.CR_REPO }}:${{ needs.build.outputs.tagToDeploy }}
 
   publish-npm:
     runs-on: ubuntu-latest
