@@ -11,7 +11,3 @@
 # In this example, any change inside the `/.github` directory
 # will require approval from @Test-Automation-Engineer.
 /.github/ @Test-Automation-Engineer
-
-# In this example, any change inside the `/infra` directory
-# will require approval from @Test-Automation-Engineer @bddjong.
-/infra/ @Test-Automation-Engineer
