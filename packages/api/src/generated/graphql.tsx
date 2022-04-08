@@ -51,6 +51,11 @@ export type KlantUpdateInput = {
   telefoonnummer?: Maybe<Scalars['String']>;
 };
 
+export type MaatschappelijkeActiviteit = {
+  __typename?: 'MaatschappelijkeActiviteit';
+  naam: Scalars['String'];
+};
+
 export type Mutation = {
   __typename?: 'Mutation';
   /** Updates the profile for the user */
@@ -124,6 +129,8 @@ export type PersoonVerblijfplaats = {
 
 export type Query = {
   __typename?: 'Query';
+  /** Gets the bedrijf data */
+  getBedrijf?: Maybe<MaatschappelijkeActiviteit>;
   /** Gets the profile for the user */
   getBurgerProfiel?: Maybe<Klant>;
   /** Gets a document content by id as base64 encoded */
@@ -197,6 +204,11 @@ export type UpdateBurgerProfielMutationVariables = Exact<{
 
 
 export type UpdateBurgerProfielMutation = { __typename?: 'Mutation', updateBurgerProfiel?: Maybe<{ __typename?: 'Klant', emailadres?: Maybe<string>, telefoonnummer?: Maybe<string> }> };
+
+export type GetBedrijfQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetBedrijfQuery = { __typename?: 'Query', getBedrijf?: Maybe<{ __typename?: 'MaatschappelijkeActiviteit', naam: string }> };
 
 export type GetBurgerProfielQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -272,6 +284,40 @@ export function useUpdateBurgerProfielMutation(baseOptions?: Apollo.MutationHook
 export type UpdateBurgerProfielMutationHookResult = ReturnType<typeof useUpdateBurgerProfielMutation>;
 export type UpdateBurgerProfielMutationResult = Apollo.MutationResult<UpdateBurgerProfielMutation>;
 export type UpdateBurgerProfielMutationOptions = Apollo.BaseMutationOptions<UpdateBurgerProfielMutation, UpdateBurgerProfielMutationVariables>;
+export const GetBedrijfDocument = gql`
+    query GetBedrijf {
+  getBedrijf {
+    naam
+  }
+}
+    `;
+
+/**
+ * __useGetBedrijfQuery__
+ *
+ * To run a query within a React component, call `useGetBedrijfQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetBedrijfQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetBedrijfQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useGetBedrijfQuery(baseOptions?: Apollo.QueryHookOptions<GetBedrijfQuery, GetBedrijfQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetBedrijfQuery, GetBedrijfQueryVariables>(GetBedrijfDocument, options);
+      }
+export function useGetBedrijfLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetBedrijfQuery, GetBedrijfQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetBedrijfQuery, GetBedrijfQueryVariables>(GetBedrijfDocument, options);
+        }
+export type GetBedrijfQueryHookResult = ReturnType<typeof useGetBedrijfQuery>;
+export type GetBedrijfLazyQueryHookResult = ReturnType<typeof useGetBedrijfLazyQuery>;
+export type GetBedrijfQueryResult = Apollo.QueryResult<GetBedrijfQuery, GetBedrijfQueryVariables>;
 export const GetBurgerProfielDocument = gql`
     query GetBurgerProfiel {
   getBurgerProfiel {
