@@ -14,14 +14,10 @@ import {KeycloakContext} from '@gemeente-denhaag/nl-portal-authentication';
 import jwt_decode from 'jwt-decode';
 import styles from './user-name.module.scss';
 import {getNameString} from '../../utils';
+import {DecodedToken} from '../../interfaces';
 
 interface UserNameProps {
   mobileMenu?: boolean;
-}
-
-interface DecodedToken {
-  aanvrager?: {kvk?: string; bsn?: string};
-  gemachtigde?: {kvk?: string; bsn?: string};
 }
 
 const UserName: FC<UserNameProps> = ({mobileMenu}) => {
