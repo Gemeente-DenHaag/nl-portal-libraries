@@ -188,11 +188,9 @@ const AccountPage: FC<AccountPageProps> = ({showInhabitantAmount, addressResearc
           <div className={styles['account__label-description']}>
             <FormattedMessage id="account.inhabitantAmountDescription" />
           </div>
-          {/* <div> */}
           <Button onClick={openAddressInvestigation}>
             <FormattedMessage id="account.addressResearchRequestButton" />
           </Button>
-          {/* </div> */}
         </div>
       )}
     </section>
