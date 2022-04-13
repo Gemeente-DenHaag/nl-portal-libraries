@@ -1,8 +1,12 @@
 import * as React from 'react';
-import {Heading2, Heading3} from '@gemeente-denhaag/components-react';
+import {FC, useEffect} from 'react';
+import {Button, Heading2, Heading3} from '@gemeente-denhaag/components-react';
 import {FormattedMessage} from 'react-intl';
-import {useGetBurgerProfielQuery, useGetPersoonDataQuery} from '@gemeente-denhaag/nl-portal-api';
-import {useEffect} from 'react';
+import {
+  useGetBewonersAantalQuery,
+  useGetBurgerProfielQuery,
+  useGetPersoonDataQuery,
+} from '@gemeente-denhaag/nl-portal-api';
 import styles from './account-page.module.scss';
 import {DetailList} from '../../components/detail-list';
 import {
@@ -13,7 +17,14 @@ import {
   getStreetString,
 } from '../../utils/person-data';
 
-const AccountPage = () => {
+interface AccountPageProps {
+  showInhabitantAmount?: boolean;
+  addressResearchUrl?: string;
+}
+
+const AccountPage: FC<AccountPageProps> = ({showInhabitantAmount, addressResearchUrl}) => {
+  console.log(`showInhabitantAmount: ${showInhabitantAmount}`);
+  console.log(`addressResearchUrl: ${addressResearchUrl}`);
   const {
     data: contactData,
     loading: contactLoading,
@@ -26,9 +37,21 @@ const AccountPage = () => {
     refetch: personRefetch,
   } = useGetPersoonDataQuery();
 
+  const {
+    data: bewonerAantalData,
+    loading: bewonersAantalLoading,
+    refetch: bewonersAantalRefetch,
+  } = useGetBewonersAantalQuery();
+
+  function openAddressInvestigation() {
+    const newWindow = window.open(addressResearchUrl, '_blank', 'noopener,noreferrer');
+    if (newWindow) newWindow.opener = null;
+  }
+
   useEffect(() => {
     contactRefetch();
     personRefetch();
+    bewonersAantalRefetch();
   }, []);
 
   return (
@@ -148,6 +171,30 @@ const AccountPage = () => {
           ]}
         />
       </div>
+      {showInhabitantAmount && (
+        <div className={styles['account__sub-section']}>
+          <Heading3 className={styles['account__sub-header']}>
+            <FormattedMessage id="account.inhabitantAmountHeader" />
+          </Heading3>
+          <DetailList
+            details={[
+              {
+                translationKey: 'inhabitantAmount',
+                value: bewonerAantalData?.getBewonersAantal?.toString(),
+                loading: bewonersAantalLoading,
+              },
+            ]}
+          />
+          <div className={styles['account__label-description']}>
+            <FormattedMessage id="account.inhabitantAmountDescription" />
+          </div>
+          {/* <div> */}
+          <Button onClick={openAddressInvestigation}>
+            <FormattedMessage id="account.addressResearchRequestButton" />
+          </Button>
+          {/* </div> */}
+        </div>
+      )}
     </section>
   );
 };
