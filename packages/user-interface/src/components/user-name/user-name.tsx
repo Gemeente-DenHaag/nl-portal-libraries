@@ -10,11 +10,8 @@ import {
   useGetGemachtigdeLazyQuery,
 } from '@gemeente-denhaag/nl-portal-api';
 import {KeycloakContext} from '@gemeente-denhaag/nl-portal-authentication';
-// eslint-disable-next-line camelcase
-import jwt_decode from 'jwt-decode';
 import styles from './user-name.module.scss';
 import {getNameString} from '../../utils';
-import {DecodedToken} from '../../interfaces';
 
 interface UserNameProps {
   mobileMenu?: boolean;
@@ -22,7 +19,6 @@ interface UserNameProps {
 
 const UserName: FC<UserNameProps> = ({mobileMenu}) => {
   const intl = useIntl();
-  const [decodedToken, setDecodedToken] = useState<DecodedToken | undefined>(undefined);
   const [userName, setUserName] = useState('');
   const [volmachtgever, setVolmachtgever] = useState('');
   const [loadPersoon, {loading: persoonLoading, data: persoonData, error: persoonError}] =
@@ -33,15 +29,8 @@ const UserName: FC<UserNameProps> = ({mobileMenu}) => {
     loadGemachtigde,
     {loading: gemachtigdeLoading, data: gemachtigdeData, error: gemachtigdeError},
   ] = useGetGemachtigdeLazyQuery();
-  const {keycloakToken} = useContext(KeycloakContext);
-  const decodeToken = (jwtToken: string) => jwt_decode<DecodedToken>(jwtToken);
+  const {decodedToken} = useContext(KeycloakContext);
   const isLoading = persoonLoading || bedrijfLoading;
-
-  useEffect(() => {
-    if (keycloakToken) {
-      setDecodedToken(decodeToken(keycloakToken));
-    }
-  }, [keycloakToken]);
 
   useEffect(() => {
     if (decodedToken) {

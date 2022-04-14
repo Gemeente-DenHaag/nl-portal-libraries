@@ -2,8 +2,10 @@ import * as React from 'react';
 import {ReactKeycloakProvider} from '@react-keycloak/web';
 import Keycloak, {KeycloakConfig, KeycloakInitOptions} from 'keycloak-js';
 import {FC, Fragment, useContext, useState} from 'react';
+import jwtDecode from 'jwt-decode';
 import {formatUrlTrailingSlash} from '../../utils';
 import {KeycloakContext} from '../../contexts';
+import {DecodedToken} from '../../interfaces';
 
 interface KeycloakWrapperProps extends KeycloakConfig {
   redirectUri: string;
@@ -16,7 +18,7 @@ const KeycloakProvider: FC<KeycloakWrapperProps> = ({
   realm,
   redirectUri,
 }) => {
-  const {setKeycloakToken} = useContext(KeycloakContext);
+  const {setKeycloakToken, setDecodedToken} = useContext(KeycloakContext);
   const [authClient] = useState(
     () => new (Keycloak as any)({url: formatUrlTrailingSlash(`${url}`, false), clientId, realm})
   );
@@ -26,6 +28,7 @@ const KeycloakProvider: FC<KeycloakWrapperProps> = ({
     flow: 'standard',
     redirectUri: formatUrlTrailingSlash(redirectUri, false),
   };
+  const decodeToken = (jwtToken: string) => jwtDecode<DecodedToken>(jwtToken);
 
   return (
     <ReactKeycloakProvider
@@ -35,6 +38,7 @@ const KeycloakProvider: FC<KeycloakWrapperProps> = ({
       autoRefreshToken
       onTokens={({token}) => {
         setKeycloakToken(token || '');
+        if (token) setDecodedToken(decodeToken(token));
       }}
     >
       {children}
@@ -44,6 +48,7 @@ const KeycloakProvider: FC<KeycloakWrapperProps> = ({
 
 const KeycloakWrapper: FC<KeycloakWrapperProps> = props => {
   const [keycloakToken, setKeycloakToken] = useState('');
+  const [decodedToken, setDecodedToken] = useState(undefined);
   const ENTRY_URL_KEY = 'entryUrl';
   const entryUrl = sessionStorage.getItem(ENTRY_URL_KEY);
 
@@ -59,6 +64,8 @@ const KeycloakWrapper: FC<KeycloakWrapperProps> = props => {
       value={{
         keycloakToken,
         setKeycloakToken,
+        decodedToken,
+        setDecodedToken,
       }}
     >
       <KeycloakProvider {...props} />
