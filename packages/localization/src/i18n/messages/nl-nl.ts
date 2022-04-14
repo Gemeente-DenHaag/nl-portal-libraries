@@ -17,6 +17,7 @@ export const NL_NL_MESSAGES: Messages = {
     'pageTitles.forms': 'Formulieren',
     'header.logout': 'Uitloggen',
     'header.welcome': 'Welkom',
+    'header.proxyFor': 'Gemachtigd voor',
     'header.menuButton': 'Menu',
     'menu.close': 'Menu sluiten',
     'menu.open': 'Menu openen',
