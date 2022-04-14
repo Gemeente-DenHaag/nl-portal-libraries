@@ -91,7 +91,7 @@ const pages: Array<PortalPage> = [
     icon: <UserIcon />,
     pageComponent: (
       <AccountPage
-        showInhabitantAmount={config.SHOW_INHABITANT_AMOUNT === 'true'}
+        showInhabitantAmount={config.SHOW_INHABITANT_AMOUNT}
         addressResearchUrl={config.ADDRESS_RESEARCH_URL}
       />
     ),

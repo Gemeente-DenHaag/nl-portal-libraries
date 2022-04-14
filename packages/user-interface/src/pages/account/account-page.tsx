@@ -18,13 +18,11 @@ import {
 } from '../../utils/person-data';
 
 interface AccountPageProps {
-  showInhabitantAmount?: boolean;
+  showInhabitantAmount?: string;
   addressResearchUrl?: string;
 }
 
 const AccountPage: FC<AccountPageProps> = ({showInhabitantAmount, addressResearchUrl}) => {
-  console.log(`showInhabitantAmount: ${showInhabitantAmount}`);
-  console.log(`addressResearchUrl: ${addressResearchUrl}`);
   const {
     data: contactData,
     loading: contactLoading,
@@ -43,10 +41,10 @@ const AccountPage: FC<AccountPageProps> = ({showInhabitantAmount, addressResearc
     refetch: bewonersAantalRefetch,
   } = useGetBewonersAantalQuery();
 
-  function openAddressInvestigation() {
+  const openAddressInvestigation = (): void => {
     const newWindow = window.open(addressResearchUrl, '_blank', 'noopener,noreferrer');
     if (newWindow) newWindow.opener = null;
-  }
+  };
 
   useEffect(() => {
     contactRefetch();
@@ -171,7 +169,7 @@ const AccountPage: FC<AccountPageProps> = ({showInhabitantAmount, addressResearc
           ]}
         />
       </div>
-      {showInhabitantAmount && (
+      {showInhabitantAmount === 'true' && (
         <div className={styles['account__sub-section']}>
           <Heading3 className={styles['account__sub-header']}>
             <FormattedMessage id="account.inhabitantAmountHeader" />
