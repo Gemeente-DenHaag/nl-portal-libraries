@@ -121,6 +121,20 @@ const pages: Array<PortalPage> = [
     path: '/formulier',
     titleTranslationKey: 'form',
     showInMenu: false,
+    children: [
+      {
+        titleTranslationKey: 'form',
+        path: '/*',
+        pageComponent: (
+          <FormPage
+            openFormsBaseUrl={config.OPEN_FORMS_BASE_URL}
+            openFormsEntryEnv={config.OPEN_FORMS_ENTRY_ENV}
+            openFormsSdkUrl={config.OPEN_FORMS_SDK_URL}
+            openFormsStylesUrl={config.OPEN_FORMS_STYLES_URL}
+          />
+        ),
+      },
+    ],
   },
 ];
 
