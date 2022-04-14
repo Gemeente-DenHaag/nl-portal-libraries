@@ -11,15 +11,15 @@ import {
   CasePage,
   CasesPage,
   DocumentsPage,
+  EditAccountPage,
   FormPage,
+  FormsPage,
   Layout,
   NotificationsPage,
   OverviewPage,
   PortalFooter,
   PortalPage,
   ThemesPage,
-  EditAccountPage,
-  FormsPage,
 } from '@gemeente-denhaag/nl-portal-user-interface';
 import {ArchiveIcon, DocumentIcon, GridIcon, InboxIcon, UserIcon} from '@gemeente-denhaag/icons';
 import {CUSTOM_MESSAGES} from '../../i18n';
@@ -89,7 +89,12 @@ const pages: Array<PortalPage> = [
   },
   {
     icon: <UserIcon />,
-    pageComponent: <AccountPage />,
+    pageComponent: (
+      <AccountPage
+        showInhabitantAmount={config.SHOW_INHABITANT_AMOUNT}
+        addressResearchUrl={config.ADDRESS_RESEARCH_URL}
+      />
+    ),
     path: '/account',
     titleTranslationKey: 'account',
     showInMenu: true,

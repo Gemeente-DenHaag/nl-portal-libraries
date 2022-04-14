@@ -10,4 +10,6 @@ export interface Config {
   OPEN_FORMS_FORM_ID: string;
   OPEN_FORMS_ENTRY_ENV: string;
   OPEN_FORMS_STYLES_URL: string;
+  SHOW_INHABITANT_AMOUNT: string;
+  ADDRESS_RESEARCH_URL: string;
 }

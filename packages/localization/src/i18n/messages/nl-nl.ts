@@ -45,6 +45,9 @@ export const NL_NL_MESSAGES: Messages = {
     'account.notificationsHeader': 'Notificaties en updates',
     'account.detailsHeader': 'Persoonsgegevens',
     'account.addressHeader': 'Adres',
+    'account.inhabitantAmountHeader': 'Aantal inwoners adres',
+    'account.inhabitantAmountDescription':
+      'Staat er een ander aantal inwoners op uw address ingeschreven dan u verwacht? Dan kunt u een adresonderzoek aanvragen bij de gemeente. U kunt een adresonderzoek ook intrekken',
     'account.edit': 'Aanpassen',
     'account.cancel': 'Annuleren',
     'account.save': 'Opslaan',
@@ -64,6 +67,8 @@ export const NL_NL_MESSAGES: Messages = {
     'account.detail.nationality': 'Nationaliteit',
     'account.detail.street': 'Straat',
     'account.detail.postalCodeAndCity': 'Postcode en plaats',
+    'account.detail.inhabitantAmount': 'Aantal inwoners op uw woonadres',
+    'account.addressResearchRequestButton': 'Vraag onderzoek aaan',
     'forms.listSubHeader': 'Beschikbare formulieren',
   },
 };

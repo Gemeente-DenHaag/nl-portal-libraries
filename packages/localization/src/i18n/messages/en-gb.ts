@@ -43,6 +43,9 @@ export const EN_GB_MESSAGES: Messages = {
     'account.notificationsHeader': 'Notifications and updates',
     'account.detailsHeader': 'Personal details',
     'account.addressHeader': 'Address',
+    'account.inhabitantAmountHeader': 'Number of inhabitants address',
+    'account.inhabitantAmountDescription':
+      'Is this not the number of people you expect? You can request an address investigation with your municipility. This investigation can also be cancelled.',
     'account.edit': 'Edit',
     'account.cancel': 'Cancel',
     'account.save': 'Save',
@@ -62,6 +65,8 @@ export const EN_GB_MESSAGES: Messages = {
     'account.detail.nationality': 'Nationality',
     'account.detail.street': 'Street',
     'account.detail.postalCodeAndCity': 'Postal code and city',
+    'account.detail.inhabitantAmount': 'Number of people on your address',
+    'account.addressResearchRequestButton': 'Request research',
     'forms.listSubHeader': 'Available forms',
   },
 };

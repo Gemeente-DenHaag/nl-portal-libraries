@@ -46,4 +46,12 @@ if [ ! -z "$OPEN_FORMS_STYLES_URL" ]; then
     sed -i -r "s|(OPEN_FORMS_STYLES_URL = ').*(')|\1$OPEN_FORMS_STYLES_URL\2|g" $configfile
 fi
 
+if [ ! -z "$SHOW_INHABITANT_AMOUNT" ]; then
+    sed -i -r "s|(SHOW_INHABITANT_AMOUNT = ').*(')|\1$SHOW_INHABITANT_AMOUNT\2|g" $configfile
+fi
+
+if [ ! -z "$ADDRESS_RESEARCH_URL" ]; then
+    sed -i -r "s|(ADDRESS_RESEARCH_URL = ').*(')|\1$ADDRESS_RESEARCH_URL\2|g" $configfile
+fi
+
 echo "Done replacing env vars in $configfile"
