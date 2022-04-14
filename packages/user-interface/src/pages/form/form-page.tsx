@@ -47,10 +47,10 @@ const FormPage: FC<FormPageProps> = ({
       const localStorageFormId = localStorage.getItem(FORM_ID_LOCAL_STORAGE_KEY);
       const formId = queryFormId || localStorageFormId || '';
       const baseUrl = formatUrlTrailingSlash(openFormsBaseUrl, true);
+      const basePath = 'formulier/';
       const targetNode = document.getElementById('openforms\u002Dcontainer');
-
       const sentryEnv = openFormsEntryEnv;
-      const form = new OpenForms.OpenForm(targetNode, {baseUrl, formId, sentryEnv});
+      const form = new OpenForms.OpenForm(targetNode, {baseUrl, formId, basePath, sentryEnv});
 
       form.init();
 
