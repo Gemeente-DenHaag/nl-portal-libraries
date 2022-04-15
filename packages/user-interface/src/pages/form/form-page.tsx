@@ -3,8 +3,8 @@ import {FC, useContext, useEffect} from 'react';
 import {useScript} from 'usehooks-ts';
 import {Helmet} from 'react-helmet';
 import {formatUrlTrailingSlash} from '@gemeente-denhaag/nl-portal-authentication';
+import {useParams} from 'react-router-dom';
 import {LayoutContext} from '../../contexts';
-import {useQuery} from '../../hooks';
 
 // eslint-disable-next-line
 declare const OpenForms: any;
@@ -25,15 +25,14 @@ const FormPage: FC<FormPageProps> = ({
   const {enableFullscreenForm, disableFullscreenForm, setCurrentFormTitle, clearCurrentFormTitle} =
     useContext(LayoutContext);
   const openFormsScript = useScript(formatUrlTrailingSlash(openFormsSdkUrl, false));
-  const query = useQuery();
-  const queryFormId = query.get('id');
+  const {slug} = useParams<{slug: string}>();
   const FORM_ID_LOCAL_STORAGE_KEY = 'FORM_ID';
 
   useEffect(() => {
     enableFullscreenForm();
 
-    if (queryFormId) {
-      localStorage.setItem(FORM_ID_LOCAL_STORAGE_KEY, queryFormId);
+    if (slug) {
+      localStorage.setItem(FORM_ID_LOCAL_STORAGE_KEY, slug);
     }
 
     return () => {
@@ -45,9 +44,9 @@ const FormPage: FC<FormPageProps> = ({
   useEffect(() => {
     if (typeof OpenForms !== 'undefined') {
       const localStorageFormId = localStorage.getItem(FORM_ID_LOCAL_STORAGE_KEY);
-      const formId = queryFormId || localStorageFormId || '';
+      const formId = slug || localStorageFormId || '';
       const baseUrl = formatUrlTrailingSlash(openFormsBaseUrl, true);
-      const basePath = '/formulier';
+      const basePath = `/formulier/${slug}`;
       const targetNode = document.getElementById('openforms\u002Dcontainer');
       const sentryEnv = openFormsEntryEnv;
       const form = new OpenForms.OpenForm(targetNode, {baseUrl, formId, basePath, sentryEnv});

@@ -16,7 +16,7 @@ const FormsPage = () => {
   const onClickFunction = (event: React.MouseEvent<HTMLButtonElement>, formId: string): void => {
     event.stopPropagation();
     event.preventDefault();
-    history.push(`/formulier?id=${formId}`);
+    history.push(`/formulier/${formId}`);
   };
 
   useEffect(() => {
