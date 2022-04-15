@@ -27,7 +27,6 @@ const FormPage: FC<FormPageProps> = ({
   const openFormsScript = useScript(formatUrlTrailingSlash(openFormsSdkUrl, false));
   const {slug} = useParams<{slug: string}>();
   const FORM_ID_LOCAL_STORAGE_KEY = 'FORM_ID';
-  console.log('here');
 
   useEffect(() => {
     enableFullscreenForm();
