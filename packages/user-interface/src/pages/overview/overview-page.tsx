@@ -14,7 +14,7 @@ const OverviewPage: FC<OverviewPageProps> = ({openFormsFormId}) => {
 
   return (
     <section>
-      <Link component={RouterLink} to={`/formulier?id=${openFormsFormId}`} hrefLang={hrefLang}>
+      <Link component={RouterLink} to={`/formulier/${openFormsFormId}`} hrefLang={hrefLang}>
         <FormattedMessage id="overview.defaultFormTitle" />
       </Link>
     </section>
