@@ -72,11 +72,7 @@ const LayoutComponent: FC<LayoutComponentProps> = ({
                       </Route>,
                       ...(page.children
                         ? page.children.map(childPage => (
-                            <Route
-                              exact
-                              key={childPage.path}
-                              path={`${page.path}${childPage.path}`}
-                            >
+                            <Route key={childPage.path} path={`${page.path}${childPage.path}`}>
                               <Page page={childPage}>
                                 <Fragment>
                                   {childPage.showLinkToParent && <LinkToParent parentPage={page} />}

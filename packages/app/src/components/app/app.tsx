@@ -124,7 +124,7 @@ const pages: Array<PortalPage> = [
     children: [
       {
         titleTranslationKey: 'form',
-        path: '/:formId/*',
+        path: '/:slug',
         pageComponent: (
           <FormPage
             openFormsBaseUrl={config.OPEN_FORMS_BASE_URL}
