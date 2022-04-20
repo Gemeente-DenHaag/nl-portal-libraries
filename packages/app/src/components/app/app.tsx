@@ -17,6 +17,7 @@ import {
   Layout,
   NotificationsPage,
   OverviewPage,
+  PDSCasePage,
   PortalFooter,
   PortalPage,
   ThemesPage,
@@ -62,6 +63,13 @@ const pages: Array<PortalPage> = [
           />
         ),
         path: '/zaak',
+        titleTranslationKey: 'cases',
+        showLinkToParent: true,
+      },
+      {
+        icon: <ArchiveIcon />,
+        pageComponent: <PDSCasePage />,
+        path: '/poc-zaak',
         titleTranslationKey: 'cases',
         showLinkToParent: true,
       },
