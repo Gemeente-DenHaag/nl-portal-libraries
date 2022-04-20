@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {useGetZaakQuery} from '@gemeente-denhaag/nl-portal-api';
+import {useGetZaakSubstatusQuery} from '@gemeente-denhaag/nl-portal-api';
 import {FC, Fragment, useContext, useEffect} from 'react';
 import {Heading2, Heading3, Link, Paragraph} from '@gemeente-denhaag/components-react';
 import {FormattedMessage, useIntl} from 'react-intl';
@@ -28,7 +28,7 @@ const PDSCasePage: FC = () => {
   const query = useQuery();
   const {hrefLang} = useContext(LocaleContext);
   const id = query.get('id');
-  const {data, loading, error, refetch} = useGetZaakQuery({
+  const {data, loading, error, refetch} = useGetZaakSubstatusQuery({
     variables: {id},
   });
   const isMobile = useMediaQuery(BREAKPOINTS.MOBILE);

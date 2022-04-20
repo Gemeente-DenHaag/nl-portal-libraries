@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {FC, Fragment, ReactElement} from 'react';
-import {StatusType, ZaakStatus} from '@gemeente-denhaag/nl-portal-api';
+import {StatusType} from '@gemeente-denhaag/nl-portal-api';
 import {Paragraph} from '@gemeente-denhaag/components-react';
 import Skeleton from 'react-loading-skeleton';
 import {useIntl} from 'react-intl';
@@ -16,9 +16,9 @@ import {stringToId} from '../../utils';
 
 interface PDSStatusHistoryProps {
   caseId?: string;
-  statusHistory?: Array<ZaakStatus>;
+  statusHistory?: any;
   statuses?: Array<StatusType>;
-  status?: ZaakStatus | null;
+  status?: any;
   loading: boolean;
   facet?: ReactElement;
   background?: ReactElement;
