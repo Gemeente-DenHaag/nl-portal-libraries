@@ -73,7 +73,7 @@ const PDSStatusHistory: FC<PDSStatusHistoryProps> = ({
             const checked = index < activeStep;
             const current = index === activeStep;
             return (
-              <Step checked={checked} current={current}>
+              <Step checked={checked} current={current} expanded={current}>
                 <StepHeading checked={checked} current={current}>
                   <StepMarker checked={checked} current={current}>
                     {index + 1}
