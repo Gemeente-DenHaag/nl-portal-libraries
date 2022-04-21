@@ -22,6 +22,7 @@ import {BREAKPOINTS} from '../../constants';
 import {stringToId} from '../../utils';
 import {LocaleDate} from '../../components/locale-date';
 import {PDSStatusHistory} from '../../components/pds-status-history';
+import {ZaakStatus} from '../../components/status-history/status-history-type';
 
 const PDSCasePage: FC = () => {
   const intl = useIntl();
@@ -59,7 +60,6 @@ const PDSCasePage: FC = () => {
     <section className={styles.case}>
       {!error ? (
         <Fragment>
-          PDS ZAAK DEMO
           <header className={styles.case__header}>
             <Heading2>
               {loading ? (
@@ -108,13 +108,13 @@ const PDSCasePage: FC = () => {
           </div>
           <div className={styles.case__status}>
             <Heading3 className={styles['case__sub-header']}>
-              <FormattedMessage id="case.statusHeader" />
+              <FormattedMessage id="case.statusHeader" /> (PDS Demo Versie)
             </Heading3>
             <PDSStatusHistory
               caseId={data?.getZaak.zaaktype.identificatie}
-              statusHistory={data?.getZaak.statusGeschiedenis}
+              statusHistory={data?.getZaak.statusGeschiedenis as ZaakStatus[]}
               statuses={data?.getZaak.statussen}
-              status={data?.getZaak.status}
+              status={data?.getZaak.status as ZaakStatus}
               loading={loading}
             />
           </div>

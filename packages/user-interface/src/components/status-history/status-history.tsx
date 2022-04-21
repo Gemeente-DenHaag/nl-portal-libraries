@@ -6,12 +6,13 @@ import Skeleton from 'react-loading-skeleton';
 import {useIntl} from 'react-intl';
 import styles from './status-history.module.scss';
 import {stringToId} from '../../utils';
+import {ZaakStatus} from './status-history-type';
 
 interface StatusHistoryProps {
   caseId?: string;
-  statusHistory?: any;
+  statusHistory?: Array<ZaakStatus>;
   statuses?: Array<StatusType>;
-  status?: any;
+  status?: ZaakStatus;
   loading: boolean;
   facet?: ReactElement;
   background?: ReactElement;

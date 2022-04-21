@@ -22,6 +22,7 @@ import {StatusHistory} from '../../components/status-history';
 import {BREAKPOINTS} from '../../constants';
 import {stringToId} from '../../utils';
 import {LocaleDate} from '../../components/locale-date';
+import {ZaakStatus} from '../../components/status-history/status-history-type';
 
 interface CasePageProps {
   statusHistoryFacet?: ReactElement;
@@ -116,9 +117,9 @@ const CasePage: FC<CasePageProps> = ({statusHistoryFacet, statusHistoryBackgroun
             </Heading3>
             <StatusHistory
               caseId={data?.getZaak.zaaktype.identificatie}
-              statusHistory={data?.getZaak.statusGeschiedenis}
+              statusHistory={data?.getZaak.statusGeschiedenis as ZaakStatus[]}
               statuses={data?.getZaak.statussen}
-              status={data?.getZaak.status}
+              status={data?.getZaak.status as ZaakStatus}
               loading={loading}
               facet={statusHistoryFacet}
               background={statusHistoryBackground}
