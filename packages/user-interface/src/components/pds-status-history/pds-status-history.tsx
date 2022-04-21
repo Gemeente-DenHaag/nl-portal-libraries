@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {FC, Fragment, ReactElement} from 'react';
-import {StatusType, ZaakStatus} from '@gemeente-denhaag/nl-portal-api';
+import {StatusType} from '@gemeente-denhaag/nl-portal-api';
 import {Paragraph} from '@gemeente-denhaag/components-react';
 import Skeleton from 'react-loading-skeleton';
 import {useIntl} from 'react-intl';
@@ -17,12 +17,13 @@ import {
 } from '@gemeente-denhaag/process-steps';
 import styles from '../status-history/status-history.module.scss';
 import {stringToId} from '../../utils';
+import {ZaakStatus} from '../status-history/status-history-type';
 
 interface PDSStatusHistoryProps {
   caseId?: string;
   statusHistory?: Array<ZaakStatus>;
   statuses?: Array<StatusType>;
-  status?: any;
+  status?: ZaakStatus;
   loading: boolean;
   facet?: ReactElement;
   background?: ReactElement;
@@ -87,7 +88,7 @@ const PDSStatusHistory: FC<PDSStatusHistoryProps> = ({
                 <SubStepList>
                   {statusHistory
                     ?.find(s => s.statustype.omschrijving === statusType.omschrijving)
-                    ?.substatussen.map(value => (
+                    ?.substatussen?.map(value => (
                       <SubStep>
                         <SubStepMarker />
                         <SubStepHeading>{value.omschrijving}</SubStepHeading>
