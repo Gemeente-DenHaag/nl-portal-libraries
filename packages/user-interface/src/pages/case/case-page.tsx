@@ -79,6 +79,9 @@ const CasePage: FC<CasePageProps> = ({statusHistoryFacet, statusHistoryBackgroun
                 <FormattedMessage id={`case.${data?.getZaak.zaaktype.identificatie}.title`} />
               )}
             </Heading2>
+            <Link component={RouterLink} to={`/zaken/poc-zaak?id=${id}`}>
+              PDS POC
+            </Link>
           </header>
           <div className={styles['case__meta-icons']}>
             <MetaIcon
