@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {FC, Fragment, ReactElement} from 'react';
-import {StatusType} from '@gemeente-denhaag/nl-portal-api';
+import {StatusType, ZaakSubstatus} from '@gemeente-denhaag/nl-portal-api';
 import {Paragraph} from '@gemeente-denhaag/components-react';
 import Skeleton from 'react-loading-skeleton';
 import {useIntl} from 'react-intl';
@@ -9,11 +9,13 @@ import {
   Step,
   StepList,
   StepMarker,
-  StepHeadingLabel,
   SubStepList,
   SubStepMarker,
   SubStep,
   SubStepHeading,
+  StepHeader,
+  StepSection,
+  StepExpandedIcon,
 } from '@gemeente-denhaag/process-steps';
 import styles from '../status-history/status-history.module.scss';
 import {stringToId} from '../../utils';
@@ -66,6 +68,17 @@ const PDSStatusHistory: FC<PDSStatusHistoryProps> = ({
     </div>
   );
 
+  const getSubstatusComponent = (substatusses?: Array<ZaakSubstatus>) => (
+    <SubStepList>
+      {substatusses?.map(value => (
+        <SubStep>
+          <SubStepMarker />
+          <SubStepHeading>{value.omschrijving}</SubStepHeading>
+        </SubStep>
+      ))}
+    </SubStepList>
+  );
+
   return (
     <div style={{marginBlock: '16px'}}>
       {!loading && statuses ? (
@@ -73,28 +86,23 @@ const PDSStatusHistory: FC<PDSStatusHistoryProps> = ({
           {statuses.map((statusType, index) => {
             const checked = index < activeStep;
             const current = index === activeStep;
+            const substatusses: Array<ZaakSubstatus> | undefined = statusHistory?.find(
+              s => s.statustype.omschrijving === statusType.omschrijving
+            )?.substatussen;
             return (
               <Step checked={checked} current={current} expanded={current}>
-                <StepHeading checked={checked} current={current}>
-                  <StepMarker checked={checked} current={current}>
-                    {index + 1}
-                  </StepMarker>
-                  <StepHeadingLabel>
-                    {intl.formatMessage({
-                      id: `case.${caseId}.status.${stringToId(`${statusType.omschrijving}`)}`,
-                    })}
-                  </StepHeadingLabel>
-                </StepHeading>
-                <SubStepList>
-                  {statusHistory
-                    ?.find(s => s.statustype.omschrijving === statusType.omschrijving)
-                    ?.substatussen?.map(value => (
-                      <SubStep>
-                        <SubStepMarker />
-                        <SubStepHeading>{value.omschrijving}</SubStepHeading>
-                      </SubStep>
-                    ))}
-                </SubStepList>
+                <StepSection>
+                  <StepHeader>
+                    <StepMarker>{index + 1}</StepMarker>
+                    <StepHeading>
+                      {intl.formatMessage({
+                        id: `case.${caseId}.status.${stringToId(`${statusType.omschrijving}`)}`,
+                      })}
+                    </StepHeading>
+                    {substatusses && <StepExpandedIcon />}
+                  </StepHeader>
+                </StepSection>
+                {substatusses && getSubstatusComponent(substatusses)}
               </Step>
             );
           })}
