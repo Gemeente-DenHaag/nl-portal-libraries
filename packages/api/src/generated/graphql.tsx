@@ -194,19 +194,12 @@ export type ZaakStatus = {
   __typename?: 'ZaakStatus';
   datumStatusGezet: Scalars['String'];
   statustype: ZaakStatusType;
-  substatussen: Array<ZaakSubstatus>;
 };
 
 export type ZaakStatusType = {
   __typename?: 'ZaakStatusType';
   isEindstatus: Scalars['Boolean'];
   omschrijving: Scalars['String'];
-};
-
-export type ZaakSubstatus = {
-  __typename?: 'ZaakSubstatus';
-  omschrijving: Scalars['String'];
-  tijdstip: Scalars['String'];
 };
 
 export type ZaakType = {
@@ -226,11 +219,6 @@ export type GetBedrijfQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type GetBedrijfQuery = { __typename?: 'Query', getBedrijf?: Maybe<{ __typename?: 'MaatschappelijkeActiviteit', naam: string }> };
-
-export type GetBewonersAantalQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type GetBewonersAantalQuery = { __typename?: 'Query', getBewonersAantal?: Maybe<number> };
 
 export type GetBurgerProfielQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -264,13 +252,6 @@ export type GetPersoonQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type GetPersoonQuery = { __typename?: 'Query', getPersoon?: Maybe<{ __typename?: 'Persoon', naam?: Maybe<{ __typename?: 'PersoonNaam', voornamen?: Maybe<string>, voorvoegsel?: Maybe<string>, geslachtsnaam?: Maybe<string> }> }> };
 
-export type GetZaakSubstatusQueryVariables = Exact<{
-  id: Scalars['UUID'];
-}>;
-
-
-export type GetZaakSubstatusQuery = { __typename?: 'Query', getZaak: { __typename?: 'Zaak', uuid: any, omschrijving: string, identificatie: string, startdatum: any, zaaktype: { __typename?: 'ZaakType', identificatie: string, omschrijving: string }, status?: Maybe<{ __typename?: 'ZaakStatus', datumStatusGezet: string, statustype: { __typename?: 'ZaakStatusType', omschrijving: string, isEindstatus: boolean } }>, statusGeschiedenis: Array<{ __typename?: 'ZaakStatus', datumStatusGezet: string, statustype: { __typename?: 'ZaakStatusType', omschrijving: string, isEindstatus: boolean }, substatussen: Array<{ __typename?: 'ZaakSubstatus', omschrijving: string }> }>, statussen: Array<{ __typename?: 'StatusType', omschrijving?: Maybe<string> }>, documenten: Array<{ __typename?: 'Document', bestandsnaam?: Maybe<string>, bestandsomvang?: Maybe<number>, creatiedatum?: Maybe<string>, formaat?: Maybe<string>, identificatie?: Maybe<string>, titel?: Maybe<string>, uuid?: Maybe<any> }> } };
-
 export type GetZaakQueryVariables = Exact<{
   id: Scalars['UUID'];
 }>;
@@ -282,6 +263,11 @@ export type GetZakenQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type GetZakenQuery = { __typename?: 'Query', getZaken: Array<{ __typename?: 'Zaak', uuid: any, omschrijving: string, startdatum: any, zaaktype: { __typename?: 'ZaakType', identificatie: string }, status?: Maybe<{ __typename?: 'ZaakStatus', statustype: { __typename?: 'ZaakStatusType', isEindstatus: boolean } }> }> };
+
+export type GetBewonersAantalQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetBewonersAantalQuery = { __typename?: 'Query', getBewonersAantal?: Maybe<number> };
 
 
 export const UpdateBurgerProfielDocument = gql`
@@ -352,38 +338,6 @@ export function useGetBedrijfLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions
 export type GetBedrijfQueryHookResult = ReturnType<typeof useGetBedrijfQuery>;
 export type GetBedrijfLazyQueryHookResult = ReturnType<typeof useGetBedrijfLazyQuery>;
 export type GetBedrijfQueryResult = Apollo.QueryResult<GetBedrijfQuery, GetBedrijfQueryVariables>;
-export const GetBewonersAantalDocument = gql`
-    query GetBewonersAantal {
-  getBewonersAantal
-}
-    `;
-
-/**
- * __useGetBewonersAantalQuery__
- *
- * To run a query within a React component, call `useGetBewonersAantalQuery` and pass it any options that fit your needs.
- * When your component renders, `useGetBewonersAantalQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useGetBewonersAantalQuery({
- *   variables: {
- *   },
- * });
- */
-export function useGetBewonersAantalQuery(baseOptions?: Apollo.QueryHookOptions<GetBewonersAantalQuery, GetBewonersAantalQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<GetBewonersAantalQuery, GetBewonersAantalQueryVariables>(GetBewonersAantalDocument, options);
-      }
-export function useGetBewonersAantalLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetBewonersAantalQuery, GetBewonersAantalQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<GetBewonersAantalQuery, GetBewonersAantalQueryVariables>(GetBewonersAantalDocument, options);
-        }
-export type GetBewonersAantalQueryHookResult = ReturnType<typeof useGetBewonersAantalQuery>;
-export type GetBewonersAantalLazyQueryHookResult = ReturnType<typeof useGetBewonersAantalLazyQuery>;
-export type GetBewonersAantalQueryResult = Apollo.QueryResult<GetBewonersAantalQuery, GetBewonersAantalQueryVariables>;
 export const GetBurgerProfielDocument = gql`
     query GetBurgerProfiel {
   getBurgerProfiel {
@@ -649,77 +603,6 @@ export function useGetPersoonLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions
 export type GetPersoonQueryHookResult = ReturnType<typeof useGetPersoonQuery>;
 export type GetPersoonLazyQueryHookResult = ReturnType<typeof useGetPersoonLazyQuery>;
 export type GetPersoonQueryResult = Apollo.QueryResult<GetPersoonQuery, GetPersoonQueryVariables>;
-export const GetZaakSubstatusDocument = gql`
-    query GetZaakSubstatus($id: UUID!) {
-  getZaak(id: $id) {
-    uuid
-    omschrijving
-    identificatie
-    zaaktype {
-      identificatie
-      omschrijving
-    }
-    startdatum
-    status {
-      datumStatusGezet
-      statustype {
-        omschrijving
-        isEindstatus
-      }
-    }
-    statusGeschiedenis {
-      datumStatusGezet
-      statustype {
-        omschrijving
-        isEindstatus
-      }
-      substatussen {
-        omschrijving
-      }
-    }
-    statussen {
-      omschrijving
-    }
-    documenten {
-      bestandsnaam
-      bestandsomvang
-      creatiedatum
-      formaat
-      identificatie
-      titel
-      uuid
-    }
-  }
-}
-    `;
-
-/**
- * __useGetZaakSubstatusQuery__
- *
- * To run a query within a React component, call `useGetZaakSubstatusQuery` and pass it any options that fit your needs.
- * When your component renders, `useGetZaakSubstatusQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useGetZaakSubstatusQuery({
- *   variables: {
- *      id: // value for 'id'
- *   },
- * });
- */
-export function useGetZaakSubstatusQuery(baseOptions: Apollo.QueryHookOptions<GetZaakSubstatusQuery, GetZaakSubstatusQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<GetZaakSubstatusQuery, GetZaakSubstatusQueryVariables>(GetZaakSubstatusDocument, options);
-      }
-export function useGetZaakSubstatusLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetZaakSubstatusQuery, GetZaakSubstatusQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<GetZaakSubstatusQuery, GetZaakSubstatusQueryVariables>(GetZaakSubstatusDocument, options);
-        }
-export type GetZaakSubstatusQueryHookResult = ReturnType<typeof useGetZaakSubstatusQuery>;
-export type GetZaakSubstatusLazyQueryHookResult = ReturnType<typeof useGetZaakSubstatusLazyQuery>;
-export type GetZaakSubstatusQueryResult = Apollo.QueryResult<GetZaakSubstatusQuery, GetZaakSubstatusQueryVariables>;
 export const GetZaakDocument = gql`
     query GetZaak($id: UUID!) {
   getZaak(id: $id) {
@@ -832,3 +715,35 @@ export function useGetZakenLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<G
 export type GetZakenQueryHookResult = ReturnType<typeof useGetZakenQuery>;
 export type GetZakenLazyQueryHookResult = ReturnType<typeof useGetZakenLazyQuery>;
 export type GetZakenQueryResult = Apollo.QueryResult<GetZakenQuery, GetZakenQueryVariables>;
+export const GetBewonersAantalDocument = gql`
+    query GetBewonersAantal {
+  getBewonersAantal
+}
+    `;
+
+/**
+ * __useGetBewonersAantalQuery__
+ *
+ * To run a query within a React component, call `useGetBewonersAantalQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetBewonersAantalQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetBewonersAantalQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useGetBewonersAantalQuery(baseOptions?: Apollo.QueryHookOptions<GetBewonersAantalQuery, GetBewonersAantalQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetBewonersAantalQuery, GetBewonersAantalQueryVariables>(GetBewonersAantalDocument, options);
+      }
+export function useGetBewonersAantalLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetBewonersAantalQuery, GetBewonersAantalQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetBewonersAantalQuery, GetBewonersAantalQueryVariables>(GetBewonersAantalDocument, options);
+        }
+export type GetBewonersAantalQueryHookResult = ReturnType<typeof useGetBewonersAantalQuery>;
+export type GetBewonersAantalLazyQueryHookResult = ReturnType<typeof useGetBewonersAantalLazyQuery>;
+export type GetBewonersAantalQueryResult = Apollo.QueryResult<GetBewonersAantalQuery, GetBewonersAantalQueryVariables>;
