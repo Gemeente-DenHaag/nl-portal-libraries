@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {Button, Heading2, TextField} from '@gemeente-denhaag/components-react';
+import {Button, FormFieldLabel, Heading2, TextField} from '@gemeente-denhaag/components-react';
 import {FormattedMessage, useIntl} from 'react-intl';
 import {useContext, useEffect, useState} from 'react';
 import {LocaleContext} from '@gemeente-denhaag/nl-portal-localization';
@@ -63,13 +63,11 @@ const EditAccountPage = () => {
         </Heading2>
       </header>
       <div className={styles['edit-account__text-field-container']}>
+        <FormFieldLabel></FormFieldLabel>
         <TextField
           onChange={e => setValue(e.target.value)}
-          label={propTranslation}
           className={styles['edit-account__text-field']}
           defaultValue={defaultValue || ''}
-          error={!valid && `${value}`.length >= 1}
-          helperText={!valid && `${value}`.length >= 1 ? errorTranslation : ''}
           disabled={loading}
         />
       </div>
