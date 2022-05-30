@@ -1,18 +1,17 @@
 import * as React from 'react';
 import {FC, Fragment, ReactElement} from 'react';
-import {StatusType} from '@gemeente-denhaag/nl-portal-api';
+import {StatusType, ZaakStatus} from '@gemeente-denhaag/nl-portal-api';
 import {Paragraph, Step, Timeline} from '@gemeente-denhaag/components-react';
 import Skeleton from 'react-loading-skeleton';
 import {useIntl} from 'react-intl';
 import styles from './status-history.module.scss';
 import {stringToId} from '../../utils';
-import {ZaakStatus} from './status-history-type';
 
 interface StatusHistoryProps {
   caseId?: string;
   statusHistory?: Array<ZaakStatus>;
   statuses?: Array<StatusType>;
-  status?: ZaakStatus;
+  status?: ZaakStatus | null;
   loading: boolean;
   facet?: ReactElement;
   background?: ReactElement;
