@@ -9,11 +9,8 @@ import styles from './tasks-page.module.scss';
 
 const TasksPage = () => {
   const intl = useIntl();
-  intl.formatMessage({id: 'formTranslation.next'});
   const getTaskUrl = (id: string) => `/tasks/task?id=${id}`;
-  // const location = useLocation();
   const history = useHistory();
-  // const query = useQuery();
   const {data, loading, error, refetch} = useGetTasksQuery();
 
   const getTaskCards = () =>
@@ -70,21 +67,8 @@ const TasksPage = () => {
   };
 
   useEffect(() => {
-    console.log('Load graph page');
-    // refetch();
+    refetch();
   });
-
-  // useEffect(() => {
-  //   if (queryTab !== tabNumber) {
-  //     history.push(`${location.pathname}?${TAB_QUERY_PARAM}=${tabNumber}`);
-  //   }
-  // }, [tabNumber]);
-
-  // useEffect(() => {
-  //   if (queryTab && queryTab !== tabNumber) {
-  //     setTabNumber(queryTab);
-  //   }
-  // }, [queryTab]);
 
   return (
     <React.Fragment>
@@ -94,20 +78,7 @@ const TasksPage = () => {
             <FormattedMessage id="pageTitles.tasks" />
           </Heading2>
         </header>
-        {/* <TabContext value={tabNumber.toString()}> */}
-        {/*  <Tabs */}
-        {/*    variant={isTablet ? 'standard' : 'fullWidth'} */}
-        {/*    value={tabNumber} */}
-        {/*    onChange={(_event: React.ChangeEvent<unknown>, newValue: number) => { */}
-        {/*      setTabNumber(newValue); */}
-        {/*    }} */}
-        {/*  > */}
-        {/*    <Tab label={intl.formatMessage({id: 'titles.openTasks'})} value={0} /> */}
-        {/*  </Tabs> */}
-        {/*  <TabPanel value="0"> */}
         <div className={styles.tasks__cards}>{loading ? getSkeleton() : getContent()}</div>
-        {/*  </TabPanel> */}
-        {/* </TabContext> */}
       </section>
     </React.Fragment>
   );
