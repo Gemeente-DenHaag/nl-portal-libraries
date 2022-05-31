@@ -33,6 +33,7 @@
     "@types/node": "^12.12.38",
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.0",
+    "@formio/react": "^5.2.0",
     "babel-eslint": "^10.0.3",
     "cross-env": "^7.0.2",
     "gh-pages": "^2.2.0",

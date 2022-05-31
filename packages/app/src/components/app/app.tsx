@@ -19,6 +19,7 @@ import {
   OverviewPage,
   PortalFooter,
   PortalPage,
+  TasksPage,
   ThemesPage,
 } from '@gemeente-denhaag/nl-portal-user-interface';
 import {ArchiveIcon, DocumentIcon, GridIcon, InboxIcon, UserIcon} from '@gemeente-denhaag/icons';
@@ -40,6 +41,7 @@ const pages: Array<PortalPage> = [
   },
   {
     icon: <InboxIcon />,
+
     pageComponent: <NotificationsPage />,
     path: '/berichten',
     titleTranslationKey: 'notifications',
@@ -72,6 +74,13 @@ const pages: Array<PortalPage> = [
         titleTranslationKey: 'cases',
       },
     ],
+  },
+  {
+    icon: <DocumentIcon />,
+    pageComponent: <TasksPage />,
+    path: '/taken',
+    titleTranslationKey: 'tasks',
+    showInMenu: true,
   },
   {
     icon: <DocumentIcon />,
