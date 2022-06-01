@@ -15,6 +15,7 @@ export const EN_GB_MESSAGES: Messages = {
     'pageTitles.form': 'Form',
     'pageTitles.account': 'My account',
     'pageTitles.forms': 'Forms',
+    'pageTitles.tasks': 'Tasks',
     'header.logout': 'Log out',
     'header.welcome': 'Welcome',
     'header.proxyFor': 'Proxy for',
@@ -68,5 +69,9 @@ export const EN_GB_MESSAGES: Messages = {
     'account.detail.inhabitantAmount': 'Number of people on your address',
     'account.addressResearchRequestButton': 'Request research',
     'forms.listSubHeader': 'Available forms',
+    'tasks.noOpenTasks': 'There are no open tasks.',
+    'tasks.fetchError': 'There was an error, try again later.',
+    'task.completed': 'Taak is afgerond',
+    'task.returnMessage': 'Klik hier om terug te gaan naar je openstaande taken',
   },
 };

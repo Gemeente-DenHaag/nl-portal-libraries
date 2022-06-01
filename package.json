@@ -33,6 +33,7 @@
     "@babel/plugin-transform-runtime": "^7.15.0",
     "@babel/preset-env": "^7.15.0",
     "@babel/preset-react": "^7.16.0",
+    "@formio/react": "^5.2.3",
     "@testing-library/jest-dom": "^5.14.1",
     "@typescript-eslint/eslint-plugin": "^4.29.0",
     "@typescript-eslint/parser": "^4.29.0",
@@ -57,5 +58,8 @@
     "prettier": "^2.3.2",
     "prettier-airbnb-config": "^1.0.0",
     "ts-jest": "^27.0.4"
+  },
+  "dependencies": {
+    "formiojs": "^4.14.7"
   }
 }

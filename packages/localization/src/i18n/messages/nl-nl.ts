@@ -15,6 +15,7 @@ export const NL_NL_MESSAGES: Messages = {
     'pageTitles.form': 'Formulier',
     'pageTitles.account': 'Mijn account',
     'pageTitles.forms': 'Formulieren',
+    'pageTitles.tasks': 'Taken',
     'header.logout': 'Uitloggen',
     'header.welcome': 'Welkom',
     'header.proxyFor': 'Gemachtigd voor',
@@ -70,5 +71,7 @@ export const NL_NL_MESSAGES: Messages = {
     'account.detail.inhabitantAmount': 'Aantal inwoners op uw woonadres',
     'account.addressResearchRequestButton': 'Vraag onderzoek aaan',
     'forms.listSubHeader': 'Beschikbare formulieren',
+    'tasks.noOpenTasks': 'Er zijn geen openstaande taken.',
+    'tasks.fetchError': 'Er is een fout opgetreden, probeer het later nogmaals.',
   },
 };
