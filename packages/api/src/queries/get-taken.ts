@@ -3,7 +3,7 @@ import {gql} from '@apollo/client';
 export const QUERY_GET_TASKS = gql`
   query GetTasks {
     getTasks {
-      content  {
+      content {
         id
         objectId
         formId
