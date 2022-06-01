@@ -149,6 +149,8 @@ export type Query = {
   getGemachtigde: Gemachtigde;
   /** Gets the persoon data */
   getPersoon?: Maybe<Persoon>;
+  /** Get task by id */
+  getTaskById: Task;
   /** Get a list of tasks */
   getTasks: TaskPage;
   /** Gets a zaak by id */
@@ -163,8 +165,13 @@ export type QueryGetDocumentContentArgs = {
 };
 
 
+export type QueryGetTaskByIdArgs = {
+  id: Scalars['UUID'];
+};
+
+
 export type QueryGetTasksArgs = {
-  page?: Maybe<Scalars['Int']>;
+  pageNumber?: Maybe<Scalars['Int']>;
   pageSize?: Maybe<Scalars['Int']>;
 };
 
@@ -190,14 +197,27 @@ export type Task = {
   formId: Scalars['String'];
   id: Scalars['UUID'];
   objectId: Scalars['UUID'];
-  status: Scalars['String'];
+  status: TaskStatus;
 };
 
 export type TaskPage = {
   __typename?: 'TaskPage';
-  nextPage?: Maybe<Scalars['Int']>;
-  results: Array<Task>;
+  content: Array<Task>;
+  number: Scalars['Int'];
+  /** The number of elements on this page */
+  numberOfElements: Scalars['Int'];
+  size: Scalars['Int'];
+  totalElements: Scalars['Int'];
+  /** The total number of available pages */
+  totalPages: Scalars['Int'];
 };
+
+export enum TaskStatus {
+  Gesloten = 'GESLOTEN',
+  Ingediend = 'INGEDIEND',
+  Open = 'OPEN',
+  Verwerkt = 'VERWERKT'
+}
 
 export type Zaak = {
   __typename?: 'Zaak';
@@ -283,7 +303,7 @@ export type GetPersoonQuery = { __typename?: 'Query', getPersoon?: Maybe<{ __typ
 export type GetTasksQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetTasksQuery = { __typename?: 'Query', getTasks: { __typename?: 'TaskPage', results: Array<{ __typename?: 'Task', date: string, formId: string, id: any, objectId: any, status: string }> } };
+export type GetTasksQuery = { __typename?: 'Query', getTasks: { __typename?: 'TaskPage', content: Array<{ __typename?: 'Task', id: any, objectId: any, formId: string, status: TaskStatus, date: string }> } };
 
 export type GetZaakQueryVariables = Exact<{
   id: Scalars['UUID'];
@@ -666,12 +686,12 @@ export type GetPersoonQueryResult = Apollo.QueryResult<GetPersoonQuery, GetPerso
 export const GetTasksDocument = gql`
     query GetTasks {
   getTasks {
-    results {
-      date
-      formId
+    content {
       id
       objectId
+      formId
       status
+      date
     }
   }
 }

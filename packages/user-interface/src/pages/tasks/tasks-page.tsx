@@ -11,7 +11,7 @@ const TasksPage = () => {
   const {data, loading, error, refetch} = useGetTasksQuery();
 
   const getTaskCards = () =>
-    data?.getTasks?.results?.map(task => (
+    data?.getTasks?.content?.map(task => (
       <div className={styles.tasks__card} key={task.id}>
         <Card variant="basic" title={task.formId} date={new Date(task.date)} />
       </div>
