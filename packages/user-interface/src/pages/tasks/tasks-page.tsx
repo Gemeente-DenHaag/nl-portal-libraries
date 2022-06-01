@@ -18,7 +18,7 @@ const TasksPage = () => {
       <div className={styles.tasks__card} key={task.id}>
         <Card
           variant="basic"
-          title={intl.formatMessage({id: task.formId})}
+          title={task.formId}
           date={new Date(task.date)}
           onClick={() => history.push(getTaskUrl(task.id))}
         />
@@ -68,7 +68,7 @@ const TasksPage = () => {
 
   useEffect(() => {
     refetch();
-  });
+  }, []);
 
   return (
     <React.Fragment>
