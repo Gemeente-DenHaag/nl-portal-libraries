@@ -20,6 +20,7 @@ import {
   PortalFooter,
   PortalPage,
   TasksPage,
+  TaskPage,
   ThemesPage,
 } from '@gemeente-denhaag/nl-portal-user-interface';
 import {ArchiveIcon, DocumentIcon, GridIcon, InboxIcon, UserIcon} from '@gemeente-denhaag/icons';
@@ -81,6 +82,13 @@ const pages: Array<PortalPage> = [
     path: '/taken',
     titleTranslationKey: 'tasks',
     showInMenu: true,
+  },
+  {
+    icon: <DocumentIcon />,
+    pageComponent: <TaskPage />,
+    path: '/taken/:formulierId',
+    titleTranslationKey: 'task',
+    showInMenu: false,
   },
   {
     icon: <DocumentIcon />,

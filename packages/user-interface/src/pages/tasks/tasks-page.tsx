@@ -4,16 +4,31 @@ import {Card, Heading2, Paragraph} from '@gemeente-denhaag/components-react';
 import {FormattedMessage, useIntl} from 'react-intl';
 import Skeleton from 'react-loading-skeleton';
 import {useGetTasksQuery} from '@gemeente-denhaag/nl-portal-api';
+import {useHistory} from 'react-router-dom';
 import styles from './tasks-page.module.scss';
 
 const TasksPage = () => {
   const intl = useIntl();
   const {data, loading, error, refetch} = useGetTasksQuery();
+  const history = useHistory();
+  const getTaskUrl = (formulierId: string, verwerkerTaakId: string) =>
+    `?formulier=${formulierId}&id=${verwerkerTaakId}`;
 
   const getTaskCards = () =>
     data?.getTasks?.content?.map(task => (
       <div className={styles.tasks__card} key={task.id}>
-        <Card variant="basic" title={task.formId} date={new Date(task.date)} />
+        <Card
+          variant="basic"
+          title={task.formId}
+          date={new Date(task.date)}
+          onClick={() =>
+            history.push({
+              pathname: '/taken/taak',
+              search: getTaskUrl(task.formId, task.id),
+              state: task,
+            })
+          }
+        />
       </div>
     )) || [];
 

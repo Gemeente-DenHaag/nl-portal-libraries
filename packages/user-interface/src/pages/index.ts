@@ -10,3 +10,4 @@ export * from './account';
 export * from './edit-account';
 export * from './forms';
 export * from './tasks';
+export * from './task';
