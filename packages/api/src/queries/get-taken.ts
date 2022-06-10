@@ -9,6 +9,7 @@ export const QUERY_GET_TASKS = gql`
         formId
         status
         date
+        data
       }
     }
   }

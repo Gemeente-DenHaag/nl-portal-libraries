@@ -72,8 +72,16 @@ export type MaatschappelijkeActiviteit = {
 
 export type Mutation = {
   __typename?: 'Mutation';
+  /** Submit a task */
+  submitTask: Task;
   /** Updates the profile for the user */
   updateBurgerProfiel?: Maybe<Klant>;
+};
+
+
+export type MutationSubmitTaskArgs = {
+  id: Scalars['UUID'];
+  submission: Scalars['JSON'];
 };
 
 
@@ -210,6 +218,7 @@ export type StatusType = {
 
 export type Task = {
   __typename?: 'Task';
+  data: Scalars['JSON'];
   date: Scalars['String'];
   formId: Scalars['String'];
   id: Scalars['UUID'];
@@ -327,7 +336,7 @@ export type GetPersoonQuery = { __typename?: 'Query', getPersoon?: Maybe<{ __typ
 export type GetTasksQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetTasksQuery = { __typename?: 'Query', getTasks: { __typename?: 'TaskPage', content: Array<{ __typename?: 'Task', id: any, objectId: any, formId: string, status: TaskStatus, date: string }> } };
+export type GetTasksQuery = { __typename?: 'Query', getTasks: { __typename?: 'TaskPage', content: Array<{ __typename?: 'Task', id: any, objectId: any, formId: string, status: TaskStatus, date: string, data: any }> } };
 
 export type GetZaakQueryVariables = Exact<{
   id: Scalars['UUID'];
@@ -751,6 +760,7 @@ export const GetTasksDocument = gql`
       formId
       status
       date
+      data
     }
   }
 }

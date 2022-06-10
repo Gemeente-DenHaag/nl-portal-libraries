@@ -67,7 +67,7 @@ const TaskPage = () => {
     }
     setFormName(location.state.formId);
     setTaskId(location.state.verwerker_taak_id);
-    transformPrefilledDataToFormioSubmission({});
+    transformPrefilledDataToFormioSubmission(location.state.data);
   };
 
   useEffect(() => {
