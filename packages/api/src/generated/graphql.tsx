@@ -14,6 +14,8 @@ export type Scalars = {
   Float: number;
   /** A date */
   Date: any;
+  /** A type representing a formatted JSON */
+  JSON: any;
   /** A type representing a formatted java.util.UUID */
   UUID: any;
 };
@@ -40,6 +42,12 @@ export type Form = {
   uuid: Scalars['UUID'];
 };
 
+export type FormDefinition = {
+  __typename?: 'FormDefinition';
+  formDefinition: Scalars['JSON'];
+  name: Scalars['String'];
+};
+
 export type Gemachtigde = {
   __typename?: 'Gemachtigde';
   bedrijf?: Maybe<MaatschappelijkeActiviteit>;
@@ -64,8 +72,16 @@ export type MaatschappelijkeActiviteit = {
 
 export type Mutation = {
   __typename?: 'Mutation';
+  /** Submit a task */
+  submitTask: Task;
   /** Updates the profile for the user */
   updateBurgerProfiel?: Maybe<Klant>;
+};
+
+
+export type MutationSubmitTaskArgs = {
+  id: Scalars['UUID'];
+  submission: Scalars['JSON'];
 };
 
 
@@ -135,6 +151,8 @@ export type PersoonVerblijfplaats = {
 
 export type Query = {
   __typename?: 'Query';
+  /** find all form definitions from repository */
+  allFormDefinitions: Array<FormDefinition>;
   /** Gets the bedrijf data */
   getBedrijf?: Maybe<MaatschappelijkeActiviteit>;
   /** Gets the number of people living in the same house as the person that makes the requests */
@@ -143,6 +161,8 @@ export type Query = {
   getBurgerProfiel?: Maybe<Klant>;
   /** Gets a document content by id as base64 encoded */
   getDocumentContent: DocumentContent;
+  /** find single form definition from repository */
+  getFormDefinition?: Maybe<FormDefinition>;
   /** Gets the forms available to the user */
   getFormList: Array<Form>;
   /** Gets the data of the gemachtigde */
@@ -162,6 +182,11 @@ export type Query = {
 
 export type QueryGetDocumentContentArgs = {
   id: Scalars['UUID'];
+};
+
+
+export type QueryGetFormDefinitionArgs = {
+  name: Scalars['String'];
 };
 
 
@@ -193,6 +218,7 @@ export type StatusType = {
 
 export type Task = {
   __typename?: 'Task';
+  data: Scalars['JSON'];
   date: Scalars['String'];
   formId: Scalars['String'];
   id: Scalars['UUID'];
@@ -280,6 +306,13 @@ export type GetDocumentenQueryVariables = Exact<{
 
 export type GetDocumentenQuery = { __typename?: 'Query', getZaak: { __typename?: 'Zaak', zaaktype: { __typename?: 'ZaakType', identificatie: string }, documenten: Array<{ __typename?: 'Document', bestandsnaam?: Maybe<string>, bestandsomvang?: Maybe<number>, creatiedatum?: Maybe<string>, formaat?: Maybe<string>, identificatie?: Maybe<string>, titel?: Maybe<string>, uuid?: Maybe<any> }> } };
 
+export type GetFormDefinitionByNameQueryVariables = Exact<{
+  name: Scalars['String'];
+}>;
+
+
+export type GetFormDefinitionByNameQuery = { __typename?: 'Query', getFormDefinition?: Maybe<{ __typename?: 'FormDefinition', formDefinition: any }> };
+
 export type GetFormsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -303,7 +336,7 @@ export type GetPersoonQuery = { __typename?: 'Query', getPersoon?: Maybe<{ __typ
 export type GetTasksQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetTasksQuery = { __typename?: 'Query', getTasks: { __typename?: 'TaskPage', content: Array<{ __typename?: 'Task', id: any, objectId: any, formId: string, status: TaskStatus, date: string }> } };
+export type GetTasksQuery = { __typename?: 'Query', getTasks: { __typename?: 'TaskPage', content: Array<{ __typename?: 'Task', id: any, objectId: any, formId: string, status: TaskStatus, date: string, data: any }> } };
 
 export type GetZaakQueryVariables = Exact<{
   id: Scalars['UUID'];
@@ -499,6 +532,41 @@ export function useGetDocumentenLazyQuery(baseOptions?: Apollo.LazyQueryHookOpti
 export type GetDocumentenQueryHookResult = ReturnType<typeof useGetDocumentenQuery>;
 export type GetDocumentenLazyQueryHookResult = ReturnType<typeof useGetDocumentenLazyQuery>;
 export type GetDocumentenQueryResult = Apollo.QueryResult<GetDocumentenQuery, GetDocumentenQueryVariables>;
+export const GetFormDefinitionByNameDocument = gql`
+    query GetFormDefinitionByName($name: String!) {
+  getFormDefinition(name: $name) {
+    formDefinition
+  }
+}
+    `;
+
+/**
+ * __useGetFormDefinitionByNameQuery__
+ *
+ * To run a query within a React component, call `useGetFormDefinitionByNameQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetFormDefinitionByNameQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetFormDefinitionByNameQuery({
+ *   variables: {
+ *      name: // value for 'name'
+ *   },
+ * });
+ */
+export function useGetFormDefinitionByNameQuery(baseOptions: Apollo.QueryHookOptions<GetFormDefinitionByNameQuery, GetFormDefinitionByNameQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetFormDefinitionByNameQuery, GetFormDefinitionByNameQueryVariables>(GetFormDefinitionByNameDocument, options);
+      }
+export function useGetFormDefinitionByNameLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetFormDefinitionByNameQuery, GetFormDefinitionByNameQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetFormDefinitionByNameQuery, GetFormDefinitionByNameQueryVariables>(GetFormDefinitionByNameDocument, options);
+        }
+export type GetFormDefinitionByNameQueryHookResult = ReturnType<typeof useGetFormDefinitionByNameQuery>;
+export type GetFormDefinitionByNameLazyQueryHookResult = ReturnType<typeof useGetFormDefinitionByNameLazyQuery>;
+export type GetFormDefinitionByNameQueryResult = Apollo.QueryResult<GetFormDefinitionByNameQuery, GetFormDefinitionByNameQueryVariables>;
 export const GetFormsDocument = gql`
     query GetForms {
   getFormList {
@@ -692,6 +760,7 @@ export const GetTasksDocument = gql`
       formId
       status
       date
+      data
     }
   }
 }
