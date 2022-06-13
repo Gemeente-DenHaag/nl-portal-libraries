@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
+import {FormIoUploader} from '@gemeente-denhaag/nl-portal-user-interface';
 import {App} from './components';
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 import reportWebVitals from './reportWebVitals';
@@ -13,6 +14,7 @@ ReactDOM.render(
 );
 
 serviceWorkerRegistration.register();
+FormIoUploader.register();
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
