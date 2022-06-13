@@ -10,6 +10,8 @@ interface ApiWrapperProps {
 }
 
 const ApiWrapper: FC<ApiWrapperProps> = ({children, graphqlUri, restUri}) => {
+  const LOCAL_STORAGE_REST_URI_KEY = 'REST_URI';
+  const LOCAL_STORAGE_KEYCLOAK_TOKEN_KEY = 'KEYCLOAK_TOKEN';
   const formattedGraphqlUri = formatUrlTrailingSlash(graphqlUri, false);
   const formattedRestUri = formatUrlTrailingSlash(restUri, false);
   const {keycloakToken} = useContext(KeycloakContext);
@@ -36,8 +38,10 @@ const ApiWrapper: FC<ApiWrapperProps> = ({children, graphqlUri, restUri}) => {
 
   useEffect(() => {
     client.setLink(getLink(keycloakToken));
+    sessionStorage.setItem(LOCAL_STORAGE_KEYCLOAK_TOKEN_KEY, keycloakToken);
   }, [keycloakToken]);
 
+  sessionStorage.setItem(LOCAL_STORAGE_REST_URI_KEY, formattedRestUri);
   return keycloakToken ? (
     <ApiContext.Provider value={{restUri: formattedRestUri}}>
       <ApolloProvider client={client}>{children}</ApolloProvider>

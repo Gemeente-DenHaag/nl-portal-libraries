@@ -277,6 +277,14 @@ export type ZaakType = {
   omschrijving: Scalars['String'];
 };
 
+export type SubmitTaskMutationVariables = Exact<{
+  id: Scalars['UUID'];
+  submission: Scalars['JSON'];
+}>;
+
+
+export type SubmitTaskMutation = { __typename?: 'Mutation', submitTask: { __typename?: 'Task', id: any, objectId: any, formId: string, status: TaskStatus, date: string } };
+
 export type UpdateBurgerProfielMutationVariables = Exact<{
   klant: KlantUpdateInput;
 }>;
@@ -351,6 +359,44 @@ export type GetZakenQueryVariables = Exact<{ [key: string]: never; }>;
 export type GetZakenQuery = { __typename?: 'Query', getZaken: Array<{ __typename?: 'Zaak', uuid: any, omschrijving: string, startdatum: any, zaaktype: { __typename?: 'ZaakType', identificatie: string }, status?: Maybe<{ __typename?: 'ZaakStatus', statustype: { __typename?: 'ZaakStatusType', isEindstatus: boolean } }> }> };
 
 
+export const SubmitTaskDocument = gql`
+    mutation SubmitTask($id: UUID!, $submission: JSON!) {
+  submitTask(id: $id, submission: $submission) {
+    id
+    objectId
+    formId
+    status
+    date
+  }
+}
+    `;
+export type SubmitTaskMutationFn = Apollo.MutationFunction<SubmitTaskMutation, SubmitTaskMutationVariables>;
+
+/**
+ * __useSubmitTaskMutation__
+ *
+ * To run a mutation, you first call `useSubmitTaskMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useSubmitTaskMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [submitTaskMutation, { data, loading, error }] = useSubmitTaskMutation({
+ *   variables: {
+ *      id: // value for 'id'
+ *      submission: // value for 'submission'
+ *   },
+ * });
+ */
+export function useSubmitTaskMutation(baseOptions?: Apollo.MutationHookOptions<SubmitTaskMutation, SubmitTaskMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<SubmitTaskMutation, SubmitTaskMutationVariables>(SubmitTaskDocument, options);
+      }
+export type SubmitTaskMutationHookResult = ReturnType<typeof useSubmitTaskMutation>;
+export type SubmitTaskMutationResult = Apollo.MutationResult<SubmitTaskMutation>;
+export type SubmitTaskMutationOptions = Apollo.BaseMutationOptions<SubmitTaskMutation, SubmitTaskMutationVariables>;
 export const UpdateBurgerProfielDocument = gql`
     mutation UpdateBurgerProfiel($klant: KlantUpdateInput!) {
   updateBurgerProfiel(klant: $klant) {

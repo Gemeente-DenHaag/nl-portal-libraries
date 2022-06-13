@@ -1,13 +1,15 @@
 import * as React from 'react';
-import {Link, useLocation} from 'react-router-dom';
-import {useContext, useEffect, useState} from 'react';
+import {Link, useHistory, useLocation} from 'react-router-dom';
+import {useEffect, useState} from 'react';
 // @ts-ignore
 import {Form} from '@formio/react';
 import {Helmet} from 'react-helmet';
 import './task-page.css';
-import {KeycloakContext} from '@gemeente-denhaag/nl-portal-authentication';
 import _ from 'lodash';
-import {useGetFormDefinitionByNameQuery} from '@gemeente-denhaag/nl-portal-api';
+import {
+  useGetFormDefinitionByNameQuery,
+  useSubmitTaskMutation,
+} from '@gemeente-denhaag/nl-portal-api';
 
 const TaskPage = () => {
   const location: any = useLocation();
@@ -16,8 +18,10 @@ const TaskPage = () => {
   const [submission, setSubmission] = useState({
     data: {},
   });
-  const [submissionSuccessfully, setSubmissionSuccessfully] = useState(false);
-  const {keycloakToken} = useContext(KeycloakContext);
+  const [mutateFunction, {loading: loadingSubmitTask, error: errorSubmitTask}] =
+    useSubmitTaskMutation();
+  const [mutating, setMutationStatus] = useState(false);
+  const history = useHistory();
 
   const {data, loading} = useGetFormDefinitionByNameQuery({
     variables: {name: formName},
@@ -51,13 +55,10 @@ const TaskPage = () => {
 
   const getTaskData = () => {
     if (location.state != null && Object.keys(location.state).length > 0) {
-      localStorage.setItem(location.state.name, JSON.stringify(location.state));
+      localStorage.setItem(location.state.id, JSON.stringify(location.state));
     } else {
       const storage: any = localStorage.getItem(
-        location?.search.substring(
-          location?.search.indexOf('=') + 1,
-          location?.search.lastIndexOf('&')
-        )
+        location?.search.substring(location?.search.lastIndexOf('=') + 1)
       );
       const savedStated = storage != null ? JSON.parse(storage) : null;
 
@@ -66,40 +67,35 @@ const TaskPage = () => {
       }
     }
     setFormName(location.state.formId);
-    setTaskId(location.state.verwerker_taak_id);
+    setTaskId(location.state.id);
     transformPrefilledDataToFormioSubmission(location.state.data);
+  };
+
+  const navigateToTasksPage = (): void => {
+    history.push(`/taken/`);
   };
 
   useEffect(() => {
     getTaskData();
   }, []);
 
+  useEffect(() => {
+    if (mutating && !loadingSubmitTask) {
+      if (!errorSubmitTask) {
+        navigateToTasksPage();
+      }
+      setMutationStatus(false);
+    }
+  }, [loadingSubmitTask]);
+
   const completeTask = (submissionData: any) => {
-    fetch(`/task/submission`, {
-      method: 'POST',
-      headers: new Headers({
-        Authorization: `Bearer ${keycloakToken}`,
-        'Content-Type': 'application/json',
-      }),
-      body: JSON.stringify({verwerker_taak_id: taskId, verzonden_data: submissionData}),
-    })
-      .then(res => res.text())
-      .then(
-        result => {
-          let parsedResult;
-          if (result !== '') {
-            parsedResult = JSON.parse(result);
-          }
-          if (parsedResult == null || parsedResult?.status === 200) {
-            setSubmissionSuccessfully(true);
-          } else {
-            setSubmissionSuccessfully(false);
-          }
-        },
-        error => {
-          console.log(error);
-        }
-      );
+    setMutationStatus(true);
+    mutateFunction({
+      variables: {
+        id: `${taskId}`,
+        submission: submissionData,
+      },
+    });
   };
 
   const setFormSubmission = (formioSubmission: any) => {
@@ -144,7 +140,7 @@ const TaskPage = () => {
       <Helmet>
         <link href="https://cdn.form.io/formiojs/formio.full.min.css" rel="stylesheet" />
       </Helmet>
-      {!loading && !submissionSuccessfully ? (
+      {!loading ? (
         <Form
           form={data?.getFormDefinition?.formDefinition}
           formReady={redrawForm}
