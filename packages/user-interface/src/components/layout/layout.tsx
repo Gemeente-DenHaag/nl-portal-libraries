@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {StylesProvider} from '@gemeente-denhaag/components-react';
-import {FC, Fragment, ReactElement, useContext} from 'react';
+import {FC, Fragment, ReactElement, useContext, useEffect} from 'react';
 import {BrowserRouter as Router, Switch, Route, Redirect} from 'react-router-dom';
 import classNames from 'classnames';
 import {Header} from '../header';
@@ -13,6 +13,7 @@ import {LayoutProvider, UserInformationProvider} from '../../providers';
 import {LayoutContext} from '../../contexts';
 import {LinkToParent} from '../link-to-parent';
 import {OfflinePage} from '../../pages';
+import {FormIoUploader} from '../form-io-uploader';
 
 interface LayoutComponentProps {
   pages: Array<PortalPage>;
@@ -39,6 +40,10 @@ const LayoutComponent: FC<LayoutComponentProps> = ({
     pageComponent: <OfflinePage />,
     isHome: true,
   };
+
+  useEffect(() => {
+    FormIoUploader.register();
+  }, []);
 
   return (
     <Router>
