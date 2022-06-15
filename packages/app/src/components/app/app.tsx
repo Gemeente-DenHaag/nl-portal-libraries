@@ -82,13 +82,15 @@ const pages: Array<PortalPage> = [
     path: '/taken',
     titleTranslationKey: 'tasks',
     showInMenu: true,
-  },
-  {
-    icon: <DocumentIcon />,
-    pageComponent: <TaskPage />,
-    path: '/taken/:formulierId',
-    titleTranslationKey: 'task',
-    showInMenu: false,
+    children: [
+      {
+        icon: <DocumentIcon />,
+        pageComponent: <TaskPage />,
+        path: '/taak',
+        titleTranslationKey: 'task',
+        showLinkToParent: true,
+      },
+    ],
   },
   {
     icon: <DocumentIcon />,
