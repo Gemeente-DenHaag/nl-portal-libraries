@@ -29,17 +29,19 @@ const FileUpload: FC<FileUploadProps> = ({disabled, multiple, onChange}) => {
       method: 'POST',
       headers: {Authorization: `Bearer ${keycloakToken}`},
       body: formData,
-    })
-      .then(response => response.json())
-      .then(document => {
-        const portalFile = {url: document.url, name: file.name, size: file.size};
+    }).then(response => {
+      if (!response.ok) {
+        setFileList([]);
+      } else {
+        const uploadedFile = {url: response.url, name: file.name, size: file.size};
         if (!multiple) {
-          setFileList([portalFile]);
+          setFileList([uploadedFile]);
         } else {
-          setFileList([portalFile, ...fileList]);
+          setFileList([uploadedFile, ...fileList]);
         }
-        setLoading(false);
-      });
+      }
+      setLoading(false);
+    });
   };
 
   useEffect(() => {
@@ -56,12 +58,13 @@ const FileUpload: FC<FileUploadProps> = ({disabled, multiple, onChange}) => {
     <div>
       <input type="file" name="file" onChange={onChangeHandler} disabled={disabled || isLoading} />
       <Fragment>
-        {fileList.map(file => (
-          <div key={file.url}>
-            <p>Filename: {file.name}</p>
-            <p>Filesize: {file.size}</p>
-          </div>
-        ))}
+        {isLoading ||
+          fileList.map(file => (
+            <div key={file.url}>
+              <p>Filename: {file.name}</p>
+              <p>Filesize: {file.size}</p>
+            </div>
+          ))}
       </Fragment>
       {!isLoading || <p>Loading</p>}
     </div>

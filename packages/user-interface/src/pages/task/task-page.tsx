@@ -138,7 +138,16 @@ const TaskPage = () => {
   return (
     <React.Fragment>
       <Helmet>
-        <link href="https://cdn.form.io/formiojs/formio.full.min.css" rel="stylesheet" />
+        <link
+          rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+        />
+        <link
+          rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+        />
+        <link rel="stylesheet" href="https://cdn.form.io/formiojs/formio.full.min.css" />
+        <script src="https://cdn.form.io/formiojs/formio.full.min.js" />
       </Helmet>
       {!loading ? (
         <Form
