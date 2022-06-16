@@ -29,11 +29,12 @@ const FileUpload: FC<FileUploadProps> = ({disabled, multiple, onChange}) => {
       method: 'POST',
       headers: {Authorization: `Bearer ${keycloakToken}`},
       body: formData,
-    }).then(response => {
+    }).then(async response => {
       if (!response.ok) {
         setFileList([]);
       } else {
-        const uploadedFile = {url: response.url, name: file.name, size: file.size};
+        const jsonResponse = await response.json();
+        const uploadedFile = {url: jsonResponse?.url, name: file.name, size: file.size};
         if (!multiple) {
           setFileList([uploadedFile]);
         } else {
