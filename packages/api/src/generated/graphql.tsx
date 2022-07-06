@@ -28,7 +28,7 @@ export type Document = {
   formaat?: Maybe<Scalars['String']>;
   identificatie?: Maybe<Scalars['String']>;
   titel?: Maybe<Scalars['String']>;
-  uuid?: Maybe<Scalars['UUID']>;
+  uuid: Scalars['UUID'];
 };
 
 export type DocumentContent = {
@@ -224,6 +224,7 @@ export type Task = {
   id: Scalars['UUID'];
   objectId: Scalars['UUID'];
   status: TaskStatus;
+  title: Scalars['String'];
 };
 
 export type TaskPage = {
@@ -283,7 +284,7 @@ export type SubmitTaskMutationVariables = Exact<{
 }>;
 
 
-export type SubmitTaskMutation = { __typename?: 'Mutation', submitTask: { __typename?: 'Task', id: any, objectId: any, formId: string, status: TaskStatus, date: string } };
+export type SubmitTaskMutation = { __typename?: 'Mutation', submitTask: { __typename?: 'Task', id: any, objectId: any, formId: string, title: string, status: TaskStatus, date: string } };
 
 export type UpdateBurgerProfielMutationVariables = Exact<{
   klant: KlantUpdateInput;
@@ -312,7 +313,7 @@ export type GetDocumentenQueryVariables = Exact<{
 }>;
 
 
-export type GetDocumentenQuery = { __typename?: 'Query', getZaak: { __typename?: 'Zaak', zaaktype: { __typename?: 'ZaakType', identificatie: string }, documenten: Array<{ __typename?: 'Document', bestandsnaam?: Maybe<string>, bestandsomvang?: Maybe<number>, creatiedatum?: Maybe<string>, formaat?: Maybe<string>, identificatie?: Maybe<string>, titel?: Maybe<string>, uuid?: Maybe<any> }> } };
+export type GetDocumentenQuery = { __typename?: 'Query', getZaak: { __typename?: 'Zaak', zaaktype: { __typename?: 'ZaakType', identificatie: string }, documenten: Array<{ __typename?: 'Document', bestandsnaam?: Maybe<string>, bestandsomvang?: Maybe<number>, creatiedatum?: Maybe<string>, formaat?: Maybe<string>, identificatie?: Maybe<string>, titel?: Maybe<string>, uuid: any }> } };
 
 export type GetFormDefinitionByNameQueryVariables = Exact<{
   name: Scalars['String'];
@@ -344,14 +345,14 @@ export type GetPersoonQuery = { __typename?: 'Query', getPersoon?: Maybe<{ __typ
 export type GetTasksQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetTasksQuery = { __typename?: 'Query', getTasks: { __typename?: 'TaskPage', content: Array<{ __typename?: 'Task', id: any, objectId: any, formId: string, status: TaskStatus, date: string, data: any }> } };
+export type GetTasksQuery = { __typename?: 'Query', getTasks: { __typename?: 'TaskPage', content: Array<{ __typename?: 'Task', id: any, objectId: any, formId: string, title: string, status: TaskStatus, date: string, data: any }> } };
 
 export type GetZaakQueryVariables = Exact<{
   id: Scalars['UUID'];
 }>;
 
 
-export type GetZaakQuery = { __typename?: 'Query', getZaak: { __typename?: 'Zaak', uuid: any, omschrijving: string, identificatie: string, startdatum: any, zaaktype: { __typename?: 'ZaakType', identificatie: string, omschrijving: string }, status?: Maybe<{ __typename?: 'ZaakStatus', datumStatusGezet: string, statustype: { __typename?: 'ZaakStatusType', omschrijving: string, isEindstatus: boolean } }>, statusGeschiedenis: Array<{ __typename?: 'ZaakStatus', datumStatusGezet: string, statustype: { __typename?: 'ZaakStatusType', omschrijving: string, isEindstatus: boolean } }>, statussen: Array<{ __typename?: 'StatusType', omschrijving?: Maybe<string> }>, documenten: Array<{ __typename?: 'Document', bestandsnaam?: Maybe<string>, bestandsomvang?: Maybe<number>, creatiedatum?: Maybe<string>, formaat?: Maybe<string>, identificatie?: Maybe<string>, titel?: Maybe<string>, uuid?: Maybe<any> }> } };
+export type GetZaakQuery = { __typename?: 'Query', getZaak: { __typename?: 'Zaak', uuid: any, omschrijving: string, identificatie: string, startdatum: any, zaaktype: { __typename?: 'ZaakType', identificatie: string, omschrijving: string }, status?: Maybe<{ __typename?: 'ZaakStatus', datumStatusGezet: string, statustype: { __typename?: 'ZaakStatusType', omschrijving: string, isEindstatus: boolean } }>, statusGeschiedenis: Array<{ __typename?: 'ZaakStatus', datumStatusGezet: string, statustype: { __typename?: 'ZaakStatusType', omschrijving: string, isEindstatus: boolean } }>, statussen: Array<{ __typename?: 'StatusType', omschrijving?: Maybe<string> }>, documenten: Array<{ __typename?: 'Document', bestandsnaam?: Maybe<string>, bestandsomvang?: Maybe<number>, creatiedatum?: Maybe<string>, formaat?: Maybe<string>, identificatie?: Maybe<string>, titel?: Maybe<string>, uuid: any }> } };
 
 export type GetZakenQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -365,6 +366,7 @@ export const SubmitTaskDocument = gql`
     id
     objectId
     formId
+    title
     status
     date
   }
@@ -804,6 +806,7 @@ export const GetTasksDocument = gql`
       id
       objectId
       formId
+      title
       status
       date
       data
