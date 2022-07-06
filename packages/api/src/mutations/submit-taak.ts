@@ -6,6 +6,7 @@ export const MUTATION_SUBMIT_TAAK = gql`
       id
       objectId
       formId
+      title
       status
       date
     }

@@ -7,6 +7,7 @@ export const QUERY_GET_TASKS = gql`
         id
         objectId
         formId
+        title
         status
         date
         data

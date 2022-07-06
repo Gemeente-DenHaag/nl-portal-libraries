@@ -19,7 +19,7 @@ const TasksPage = () => {
       <div className={styles.tasks__card} key={task.id}>
         <Card
           variant="basic"
-          title={task.formId}
+          title={task.title}
           date={new Date(task.date)}
           onClick={() =>
             history.push({
