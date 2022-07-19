@@ -7,13 +7,13 @@ import {Helmet} from 'react-helmet';
 import './task-page.css';
 import _ from 'lodash';
 import {
-  useGetFormDefinitionByNameQuery,
   useSubmitTaskMutation,
+  useGetFormDefinitionByIdLazyQuery,
 } from '@gemeente-denhaag/nl-portal-api';
 
 const TaskPage = () => {
   const location: any = useLocation();
-  const [formName, setFormName] = useState('');
+  const [formId, setFormId] = useState('');
   const [taskId, setTaskId] = useState('');
   const [submission, setSubmission] = useState({
     data: {},
@@ -23,8 +23,8 @@ const TaskPage = () => {
   const [mutating, setMutationStatus] = useState(false);
   const history = useHistory();
 
-  const {data, loading} = useGetFormDefinitionByNameQuery({
-    variables: {name: formName},
+  const [loadFormById, {loading, data}] = useGetFormDefinitionByIdLazyQuery({
+    variables: {id: formId},
   });
 
   const transformPrefilledDataToFormioSubmission = (submissionData: any) => {
@@ -66,7 +66,7 @@ const TaskPage = () => {
         location.state = savedStated;
       }
     }
-    setFormName(location.state.formId);
+    setFormId(location.state.formId);
     setTaskId(location.state.id);
     transformPrefilledDataToFormioSubmission(location.state.data);
   };
@@ -77,6 +77,7 @@ const TaskPage = () => {
 
   useEffect(() => {
     getTaskData();
+    loadFormById();
   }, []);
 
   useEffect(() => {
@@ -117,7 +118,7 @@ const TaskPage = () => {
   };
 
   const removeLocalStorage = () => {
-    localStorage.removeItem(formName);
+    localStorage.removeItem(formId);
   };
 
   const getSubmittedMessage = () => (
@@ -151,7 +152,7 @@ const TaskPage = () => {
       </Helmet>
       {!loading ? (
         <Form
-          form={data?.getFormDefinition?.formDefinition}
+          form={data?.getFormDefinitionById?.formDefinition}
           formReady={redrawForm}
           submission={submission}
           onChange={setFormSubmission}

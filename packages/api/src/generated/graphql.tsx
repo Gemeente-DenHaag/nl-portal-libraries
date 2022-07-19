@@ -151,7 +151,7 @@ export type PersoonVerblijfplaats = {
 
 export type Query = {
   __typename?: 'Query';
-  /** find all form definitions from repository */
+  /** find all form definitions from repository or Objects API */
   allFormDefinitions: Array<FormDefinition>;
   /** Gets the bedrijf data */
   getBedrijf?: Maybe<MaatschappelijkeActiviteit>;
@@ -163,6 +163,8 @@ export type Query = {
   getDocumentContent: DocumentContent;
   /** find single form definition from repository */
   getFormDefinition?: Maybe<FormDefinition>;
+  /** find single form definition by ID from repository or ObjectsAPI */
+  getFormDefinitionById?: Maybe<FormDefinition>;
   /** Gets the forms available to the user */
   getFormList: Array<Form>;
   /** Gets the data of the gemachtigde */
@@ -187,6 +189,11 @@ export type QueryGetDocumentContentArgs = {
 
 export type QueryGetFormDefinitionArgs = {
   name: Scalars['String'];
+};
+
+
+export type QueryGetFormDefinitionByIdArgs = {
+  id: Scalars['String'];
 };
 
 
@@ -314,6 +321,13 @@ export type GetDocumentenQueryVariables = Exact<{
 
 
 export type GetDocumentenQuery = { __typename?: 'Query', getZaak: { __typename?: 'Zaak', zaaktype: { __typename?: 'ZaakType', identificatie: string }, documenten: Array<{ __typename?: 'Document', bestandsnaam?: Maybe<string>, bestandsomvang?: Maybe<number>, creatiedatum?: Maybe<string>, formaat?: Maybe<string>, identificatie?: Maybe<string>, titel?: Maybe<string>, uuid: any }> } };
+
+export type GetFormDefinitionByIdQueryVariables = Exact<{
+  id: Scalars['String'];
+}>;
+
+
+export type GetFormDefinitionByIdQuery = { __typename?: 'Query', getFormDefinitionById?: Maybe<{ __typename?: 'FormDefinition', formDefinition: any }> };
 
 export type GetFormDefinitionByNameQueryVariables = Exact<{
   name: Scalars['String'];
@@ -580,6 +594,41 @@ export function useGetDocumentenLazyQuery(baseOptions?: Apollo.LazyQueryHookOpti
 export type GetDocumentenQueryHookResult = ReturnType<typeof useGetDocumentenQuery>;
 export type GetDocumentenLazyQueryHookResult = ReturnType<typeof useGetDocumentenLazyQuery>;
 export type GetDocumentenQueryResult = Apollo.QueryResult<GetDocumentenQuery, GetDocumentenQueryVariables>;
+export const GetFormDefinitionByIdDocument = gql`
+    query GetFormDefinitionById($id: String!) {
+  getFormDefinitionById(id: $id) {
+    formDefinition
+  }
+}
+    `;
+
+/**
+ * __useGetFormDefinitionByIdQuery__
+ *
+ * To run a query within a React component, call `useGetFormDefinitionByIdQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetFormDefinitionByIdQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetFormDefinitionByIdQuery({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useGetFormDefinitionByIdQuery(baseOptions: Apollo.QueryHookOptions<GetFormDefinitionByIdQuery, GetFormDefinitionByIdQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetFormDefinitionByIdQuery, GetFormDefinitionByIdQueryVariables>(GetFormDefinitionByIdDocument, options);
+      }
+export function useGetFormDefinitionByIdLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetFormDefinitionByIdQuery, GetFormDefinitionByIdQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetFormDefinitionByIdQuery, GetFormDefinitionByIdQueryVariables>(GetFormDefinitionByIdDocument, options);
+        }
+export type GetFormDefinitionByIdQueryHookResult = ReturnType<typeof useGetFormDefinitionByIdQuery>;
+export type GetFormDefinitionByIdLazyQueryHookResult = ReturnType<typeof useGetFormDefinitionByIdLazyQuery>;
+export type GetFormDefinitionByIdQueryResult = Apollo.QueryResult<GetFormDefinitionByIdQuery, GetFormDefinitionByIdQueryVariables>;
 export const GetFormDefinitionByNameDocument = gql`
     query GetFormDefinitionByName($name: String!) {
   getFormDefinition(name: $name) {
