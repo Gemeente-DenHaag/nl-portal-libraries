@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {Fragment, useEffect, useState} from 'react';
+import {FC, Fragment, useEffect, useState} from 'react';
 import {
   Heading2,
   Card,
@@ -17,7 +17,11 @@ import styles from './cases-page.module.scss';
 import {useMediaQuery, useQuery} from '../../hooks';
 import {BREAKPOINTS} from '../../constants';
 
-const CasesPage = () => {
+interface CasesPageProps {
+  showCaseIdentification?: boolean;
+}
+
+const CasesPage: FC<CasesPageProps> = ({showCaseIdentification}) => {
   const [tabNumber, setTabNumber] = useState(0);
   const intl = useIntl();
   const isTablet = useMediaQuery(BREAKPOINTS.TABLET);
@@ -41,7 +45,7 @@ const CasesPage = () => {
             archived={completed}
             variant="case"
             title={intl.formatMessage({id: `case.${zaak.zaaktype.identificatie}.title`})}
-            subTitle={zaak.omschrijving}
+            subTitle={showCaseIdentification ? zaak.identificatie : zaak.omschrijving}
             date={new Date(zaak.startdatum)}
             onClick={() => history.push(getCaseUrl(zaak.uuid))}
           />
