@@ -12,7 +12,7 @@
   },
   "scripts": {
     "build": "microbundle-crl --format modern,cjs",
-    "start": "microbundle-crl watch --no-compress --no-sourcemap --format modern,cjs",
+    "start": "wait-on ../../packages/authentication/dist/index.js && microbundle-crl watch --no-compress --no-sourcemap --format modern,cjs",
     "test": "run-s test:unit test:lint test:build",
     "test:build": "run-s build",
     "test:lint": "eslint .",
@@ -47,7 +47,8 @@
     "react-dom": "^17.0.2",
     "react-scripts": "4.0.3",
     "rimraf": "^3.0.2",
-    "typescript": "^4.1.2"
+    "typescript": "^4.1.2",
+    "wait-on": "^6.0.1"
   },
   "files": [
     "dist"
