@@ -36,7 +36,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v3
         with:
-          images: ${{ secrets.ACR_LOGIN_SERVER }}/${{ env.CR_REPO }}
+          images: ${{ secrets.ZGW_PROD_ACR_URL }}/${{ env.CR_REPO }}
           tags: |
             type=ref,event=branch
             type=ref,event=pr
@@ -53,9 +53,9 @@ jobs:
       - name: 'Login to acr'
         uses: docker/login-action@v1
         with:
-          registry: ${{ secrets.ACR_LOGIN_SERVER }}
-          username: ${{ secrets.ACR_USERNAME }}
-          password: ${{ secrets.ACR_PASSWORD }}
+          registry: ${{ secrets.ZGW_PROD_ACR_URL }}
+          username: ${{ secrets.ZGW_PROD_ACR_TOKEN_USERNAME }}
+          password: ${{ secrets.ZGW_PROD_ACR_TOKEN_PASSWORD }}
 
       - name: 'Set cache_to env'
         if: env.PUSH_AND_DEPLOY == 'true'
@@ -67,7 +67,7 @@ jobs:
           file: Dockerfile
           target: deps
           push: ${{ env.PUSH_AND_DEPLOY }}
-          tags: ${{ secrets.ACR_LOGIN_SERVER }}/${{ env.CR_REPO }}:deps
+          tags: ${{ secrets.ZGW_PROD_ACR_URL }}/${{ env.CR_REPO }}:deps
           labels: ${{ steps.meta.outputs.labels }}
           cache-from: type=gha
           #cache-to: ${{ env.cache_to }}
@@ -78,7 +78,7 @@ jobs:
           file: Dockerfile
           target: build
           push: ${{ env.PUSH_AND_DEPLOY }}
-          tags: ${{ secrets.ACR_LOGIN_SERVER }}/${{ env.CR_REPO }}:build
+          tags: ${{ secrets.ZGW_PROD_ACR_URL }}/${{ env.CR_REPO }}:build
           labels: ${{ steps.meta.outputs.labels }}
           cache-from: type=gha
           #cache-to: ${{ env.cache_to }}
@@ -89,7 +89,7 @@ jobs:
           file: Dockerfile
           target: test
           push: false
-          tags: ${{ secrets.ACR_LOGIN_SERVER }}/${{ env.CR_REPO }}:test
+          tags: ${{ secrets.ZGW_PROD_ACR_URL }}/${{ env.CR_REPO }}:test
           labels: ${{ steps.meta.outputs.labels }}
           cache-from: type=gha
           #cache-to: ${{ env.cache_to }}
