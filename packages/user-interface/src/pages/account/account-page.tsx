@@ -20,9 +20,14 @@ import {
 interface AccountPageProps {
   showInhabitantAmount?: string;
   addressResearchUrl?: string;
+  showNotificationSubSection?: string;
 }
 
-const AccountPage: FC<AccountPageProps> = ({showInhabitantAmount, addressResearchUrl}) => {
+const AccountPage: FC<AccountPageProps> = ({
+  showInhabitantAmount,
+  addressResearchUrl,
+  showNotificationSubSection = 'true',
+}) => {
   const {
     data: contactData,
     loading: contactLoading,
@@ -80,24 +85,26 @@ const AccountPage: FC<AccountPageProps> = ({showInhabitantAmount, addressResearc
           ]}
         />
       </div>
-      <div className={styles['account__sub-section']}>
-        <Heading3 className={styles['account__sub-header']}>
-          <FormattedMessage id="account.notificationsHeader" />
-        </Heading3>
-        <DetailList
-          details={[
-            {
-              translationKey: 'updatesOnCases',
-            },
-            {
-              translationKey: 'newsOnNeighborhood',
-            },
-            {
-              translationKey: 'tips',
-            },
-          ]}
-        />
-      </div>
+      {showNotificationSubSection === 'true' && (
+        <div className={styles['account__sub-section']}>
+          <Heading3 className={styles['account__sub-header']}>
+            <FormattedMessage id="account.notificationsHeader" />
+          </Heading3>
+          <DetailList
+            details={[
+              {
+                translationKey: 'updatesOnCases',
+              },
+              {
+                translationKey: 'newsOnNeighborhood',
+              },
+              {
+                translationKey: 'tips',
+              },
+            ]}
+          />
+        </div>
+      )}
       <div className={styles['account__sub-section']}>
         <Heading3 className={styles['account__sub-header']}>
           <FormattedMessage id="account.detailsHeader" />
