@@ -70,7 +70,7 @@ export const NL_NL_MESSAGES: Messages = {
     'account.detail.street': 'Straat',
     'account.detail.postalCodeAndCity': 'Postcode en plaats',
     'account.detail.inhabitantAmount': 'Aantal inwoners op uw woonadres',
-    'account.addressResearchRequestButton': 'Vraag onderzoek aaan',
+    'account.addressResearchRequestButton': 'Vraag onderzoek aan',
     'forms.listSubHeader': 'Beschikbare formulieren',
     'tasks.noOpenTasks': 'Er zijn geen openstaande taken.',
     'tasks.fetchError': 'Er is een fout opgetreden, probeer het later nogmaals.',
