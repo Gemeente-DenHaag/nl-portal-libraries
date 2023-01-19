@@ -19,12 +19,14 @@ import {
 
 interface AccountPageProps {
   showInhabitantAmount?: string;
+  showAddressResearch?: string;
   addressResearchUrl?: string;
   showNotificationSubSection?: string;
 }
 
 const AccountPage: FC<AccountPageProps> = ({
   showInhabitantAmount,
+  showAddressResearch = 'true',
   addressResearchUrl,
   showNotificationSubSection = 'true',
 }) => {
@@ -193,9 +195,11 @@ const AccountPage: FC<AccountPageProps> = ({
           <div className={styles['account__label-description']}>
             <FormattedMessage id="account.inhabitantAmountDescription" />
           </div>
-          <Button onClick={openAddressInvestigation}>
-            <FormattedMessage id="account.addressResearchRequestButton" />
-          </Button>
+          {showAddressResearch === 'true' && (
+            <Button onClick={openAddressInvestigation}>
+              <FormattedMessage id="account.addressResearchRequestButton" />
+            </Button>
+          )}
         </div>
       )}
     </section>
