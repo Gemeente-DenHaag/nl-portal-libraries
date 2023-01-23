@@ -23,6 +23,7 @@ export const NL_NL_MESSAGES: Messages = {
     'header.menuButton': 'Menu',
     'menu.close': 'Menu sluiten',
     'menu.open': 'Menu openen',
+    'titles.currentCases': 'Lopende zaken',
     'titles.completedCases': 'Afgeronde zaken',
     'overview.defaultFormTitle': 'Bezwaar maken',
     'cases.noOpenCases': 'Er zijn geen lopende zaken.',

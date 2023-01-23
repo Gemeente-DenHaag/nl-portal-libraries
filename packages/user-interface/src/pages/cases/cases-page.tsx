@@ -124,7 +124,7 @@ const CasesPage: FC<CasesPageProps> = ({showCaseIdentification}) => {
             setTabNumber(newValue);
           }}
         >
-          <Tab label={intl.formatMessage({id: 'pageTitles.cases'})} value={0} />
+          <Tab label={intl.formatMessage({id: 'titles.currentCases'})} value={0} />
           <Tab label={intl.formatMessage({id: 'titles.completedCases'})} value={1} />
         </Tabs>
         <TabPanel value="0">

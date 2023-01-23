@@ -23,6 +23,7 @@ export const EN_GB_MESSAGES: Messages = {
     'header.menuButton': 'Menu',
     'menu.close': 'Close menu',
     'menu.open': 'Open menu',
+    'titles.currentCases': 'Current cases',
     'titles.completedCases': 'Closed cases',
     'overview.defaultFormTitle': 'Lodge an objection',
     'cases.noOpenCases': 'There are no current cases.',
