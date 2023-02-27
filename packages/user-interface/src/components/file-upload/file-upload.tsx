@@ -11,9 +11,10 @@ interface FileUploadProps {
   disabled: boolean;
   multiple: boolean;
   onChange: (fileList: Array<UploadedFile>) => void;
+  informatieobjecttype?: string;
 }
 
-const FileUpload: FC<FileUploadProps> = ({disabled, multiple, onChange}) => {
+const FileUpload: FC<FileUploadProps> = ({disabled, multiple, onChange, informatieobjecttype}) => {
   const [isLoading, setLoading] = useState(false);
   const [fileList, setFileList] = useState<Array<UploadedFile>>([]);
 
@@ -24,6 +25,10 @@ const FileUpload: FC<FileUploadProps> = ({disabled, multiple, onChange}) => {
     setLoading(true);
     const formData = new FormData();
     formData.append('file', file);
+
+    if (informatieobjecttype) {
+      formData.append('informatieobjecttype', informatieobjecttype);
+    }
 
     fetch(uploadLink, {
       method: 'POST',
