@@ -56,6 +56,7 @@ class FormIoUploader extends ReactComponent {
         disabled={this.component.disabled}
         multiple={this.component.multipleFiles}
         onChange={this.onChangeHandler}
+        informatieobjecttype={this.component.informatieobjecttype || ''}
       />,
       element
     );
