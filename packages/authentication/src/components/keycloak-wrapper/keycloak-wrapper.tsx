@@ -9,6 +9,7 @@ import {DecodedToken} from '../../interfaces';
 
 interface KeycloakWrapperProps extends KeycloakConfig {
   redirectUri: string;
+  autoRefreshToken?: boolean;
 }
 
 const KeycloakProvider: FC<KeycloakWrapperProps> = ({
@@ -17,6 +18,7 @@ const KeycloakProvider: FC<KeycloakWrapperProps> = ({
   clientId,
   realm,
   redirectUri,
+  autoRefreshToken = true,
 }) => {
   const {setKeycloakToken, setDecodedToken} = useContext(KeycloakContext);
   const [authClient] = useState(
@@ -35,7 +37,7 @@ const KeycloakProvider: FC<KeycloakWrapperProps> = ({
       authClient={authClient}
       initOptions={initOptions}
       LoadingComponent={<Fragment />}
-      autoRefreshToken
+      autoRefreshToken={autoRefreshToken}
       onTokens={({token}) => {
         setKeycloakToken(token || '');
         if (token) setDecodedToken(decodeToken(token));
