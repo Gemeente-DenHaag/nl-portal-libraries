@@ -30,7 +30,7 @@ const BASIC_ACTIVITY_EVENTS: string[] = [
 ];
 
 const IdleTimer: FC<IdleTimerProps> = ({idleTimeoutMinutes, onTimerReset}) => {
-  let timeout: NodeJS.Timeout | null = null;
+  let timeout: ReturnType<typeof setTimeout> | null = null;
 
   const resetTimer = () => {
     onTimerReset(); // Updates the accesstoken if necessary
