@@ -37,7 +37,7 @@ const KeycloakProvider: FC<KeycloakWrapperProps> = ({
   redirectUri,
   autoRefreshToken = false,
   idleTimeoutMinutes = 15,
-  minValiditySeconds = 30
+  minValiditySeconds = 30,
 }) => {
   const {setKeycloakToken, setDecodedToken} = useContext(KeycloakContext);
   const [authClient] = useState(
