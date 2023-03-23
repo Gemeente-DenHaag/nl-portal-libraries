@@ -29,6 +29,41 @@ const BASIC_ACTIVITY_EVENTS: string[] = [
   'audiostart',
 ];
 
+const IdleTimer: FC<IdleTimerProps> = ({idleTimeoutMinutes, onTimerReset}) => {
+  let timeout: NodeJS.Timeout | null = null;
+
+  const resetTimer = () => {
+    onTimerReset(); // Updates the accesstoken if necessary
+    if (timeout) {
+      clearTimeout(timeout);
+    }
+    timeout = setTimeout(() => {
+      window.location.reload(); // Refresh to check with Keycloak if session is still valid
+    }, 1000 * 60 * idleTimeoutMinutes); // Should be 15 minutes to comply with DigiD requirements: SSO session idle + 2 minute (internal Keycloak buffer time).
+  };
+
+  useEffect(() => {
+    // initiate timeout
+    resetTimer();
+
+    // listen for activity events
+    BASIC_ACTIVITY_EVENTS.forEach(eventType => {
+      window.addEventListener(eventType, resetTimer);
+    });
+
+    // cleanup
+    return () => {
+      if (timeout) {
+        clearTimeout(timeout);
+        BASIC_ACTIVITY_EVENTS.forEach(eventType => {
+          window.removeEventListener(eventType, resetTimer);
+        });
+      }
+    };
+  }, []);
+  return <React.Fragment />;
+};
+
 const KeycloakProvider: FC<KeycloakWrapperProps> = ({
   children,
   url,
@@ -107,41 +142,6 @@ const KeycloakWrapper: FC<KeycloakWrapperProps> = props => {
       <KeycloakProvider {...props} />
     </KeycloakContext.Provider>
   );
-};
-
-const IdleTimer: FC<IdleTimerProps> = ({idleTimeoutMinutes, onTimerReset}) => {
-  let timeout: NodeJS.Timeout | null = null;
-
-  const resetTimer = () => {
-    onTimerReset(); // Updates the accesstoken if necessary
-    if (timeout) {
-      clearTimeout(timeout);
-    }
-    timeout = setTimeout(() => {
-      window.location.reload(); // Refresh to check with Keycloak if session is still valid
-    }, 1000 * 60 * idleTimeoutMinutes); // Should be 15 minutes to comply with DigiD requirements: SSO session idle + 2 minute (internal Keycloak buffer time).
-  };
-
-  useEffect(() => {
-    // initiate timeout
-    resetTimer();
-
-    // listen for activity events
-    BASIC_ACTIVITY_EVENTS.forEach(eventType => {
-      window.addEventListener(eventType, resetTimer);
-    });
-
-    // cleanup
-    return () => {
-      if (timeout) {
-        clearTimeout(timeout);
-        BASIC_ACTIVITY_EVENTS.forEach(eventType => {
-          window.removeEventListener(eventType, resetTimer);
-        });
-      }
-    };
-  }, []);
-  return <React.Fragment />;
 };
 
 export {KeycloakWrapper};
