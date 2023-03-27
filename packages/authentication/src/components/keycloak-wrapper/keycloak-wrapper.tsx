@@ -10,6 +10,7 @@ import {DecodedToken} from '../../interfaces';
 interface KeycloakWrapperProps extends KeycloakConfig {
   redirectUri: string;
   autoRefreshToken?: boolean;
+  autoIdleSessionLogout?: boolean;
   idleTimeoutMinutes?: number;
   minValiditySeconds?: number;
 }
@@ -71,6 +72,7 @@ const KeycloakProvider: FC<KeycloakWrapperProps> = ({
   realm,
   redirectUri,
   autoRefreshToken = false,
+  autoIdleSessionLogout = true,
   idleTimeoutMinutes = 15,
   minValiditySeconds = 30,
 }) => {
@@ -111,7 +113,9 @@ const KeycloakProvider: FC<KeycloakWrapperProps> = ({
         }
       }}
     >
-      <IdleTimer onTimerReset={updateToken} idleTimeoutMinutes={idleTimeoutMinutes} />
+      {autoIdleSessionLogout && (
+        <IdleTimer onTimerReset={updateToken} idleTimeoutMinutes={idleTimeoutMinutes} />
+      )}
       {children}
     </ReactKeycloakProvider>
   );
