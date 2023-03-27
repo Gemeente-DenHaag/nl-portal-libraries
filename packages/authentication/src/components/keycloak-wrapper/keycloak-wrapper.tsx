@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {ReactKeycloakProvider} from '@react-keycloak/web';
-import Keycloak, {KeycloakConfig, KeycloakInitOptions} from 'keycloak-js';
-import {FC, Fragment, useContext, useState} from 'react';
+import Keycloak, {KeycloakConfig, KeycloakInitOptions, KeycloakInstance} from 'keycloak-js';
+import {FC, Fragment, useContext, useState, useEffect} from 'react';
 import jwtDecode from 'jwt-decode';
 import {formatUrlTrailingSlash} from '../../utils';
 import {KeycloakContext} from '../../contexts';
@@ -10,7 +10,60 @@ import {DecodedToken} from '../../interfaces';
 interface KeycloakWrapperProps extends KeycloakConfig {
   redirectUri: string;
   autoRefreshToken?: boolean;
+  autoIdleSessionLogout?: boolean;
+  idleTimeoutMinutes?: number;
+  minValiditySeconds?: number;
 }
+
+interface IdleTimerProps {
+  idleTimeoutMinutes: number;
+  onTimerReset: () => void;
+}
+
+const BASIC_ACTIVITY_EVENTS: string[] = [
+  'mousedown',
+  'keydown',
+  'pointerdown',
+  'touchstart',
+  'scroll',
+  'wheel',
+  'audiostart',
+];
+
+const IdleTimer: FC<IdleTimerProps> = ({idleTimeoutMinutes, onTimerReset}) => {
+  let timeout: ReturnType<typeof setTimeout> | null = null;
+
+  const resetTimer = () => {
+    onTimerReset(); // Updates the accesstoken if necessary
+    if (timeout) {
+      clearTimeout(timeout);
+    }
+    timeout = setTimeout(() => {
+      window.location.reload(); // Refresh to check with Keycloak if session is still valid
+    }, 1000 * 60 * idleTimeoutMinutes); // Should be 15 minutes to comply with DigiD requirements: SSO session idle + 2 minute (internal Keycloak buffer time).
+  };
+
+  useEffect(() => {
+    // initiate timeout
+    resetTimer();
+
+    // listen for activity events
+    BASIC_ACTIVITY_EVENTS.forEach(eventType => {
+      window.addEventListener(eventType, resetTimer);
+    });
+
+    // cleanup
+    return () => {
+      if (timeout) {
+        clearTimeout(timeout);
+        BASIC_ACTIVITY_EVENTS.forEach(eventType => {
+          window.removeEventListener(eventType, resetTimer);
+        });
+      }
+    };
+  }, []);
+  return <React.Fragment />;
+};
 
 const KeycloakProvider: FC<KeycloakWrapperProps> = ({
   children,
@@ -18,11 +71,19 @@ const KeycloakProvider: FC<KeycloakWrapperProps> = ({
   clientId,
   realm,
   redirectUri,
-  autoRefreshToken = true,
+  autoRefreshToken = false,
+  autoIdleSessionLogout = true,
+  idleTimeoutMinutes = 15,
+  minValiditySeconds = 30,
 }) => {
   const {setKeycloakToken, setDecodedToken} = useContext(KeycloakContext);
   const [authClient] = useState(
-    () => new (Keycloak as any)({url: formatUrlTrailingSlash(`${url}`, false), clientId, realm})
+    () =>
+      new (Keycloak as any)({
+        url: formatUrlTrailingSlash(`${url}`, false),
+        clientId,
+        realm,
+      }) as KeycloakInstance
   );
   const initOptions: KeycloakInitOptions = {
     checkLoginIframe: false,
@@ -31,6 +92,10 @@ const KeycloakProvider: FC<KeycloakWrapperProps> = ({
     redirectUri: formatUrlTrailingSlash(redirectUri, false),
   };
   const decodeToken = (jwtToken: string) => jwtDecode<DecodedToken>(jwtToken);
+
+  const updateToken = () => {
+    authClient.updateToken(minValiditySeconds);
+  };
 
   return (
     <ReactKeycloakProvider
@@ -42,7 +107,15 @@ const KeycloakProvider: FC<KeycloakWrapperProps> = ({
         setKeycloakToken(token || '');
         if (token) setDecodedToken(decodeToken(token));
       }}
+      onEvent={eventType => {
+        if (eventType === 'onAuthRefreshError') {
+          authClient.logout();
+        }
+      }}
     >
+      {autoIdleSessionLogout && (
+        <IdleTimer onTimerReset={updateToken} idleTimeoutMinutes={idleTimeoutMinutes} />
+      )}
       {children}
     </ReactKeycloakProvider>
   );
