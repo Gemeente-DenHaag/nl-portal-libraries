@@ -1,5 +1,6 @@
 import * as React from 'react';
-import {Fragment, FC, useState, useEffect} from 'react';
+import {Fragment, FC, useState, useEffect, useContext} from 'react';
+import {KeycloakContext} from '@gemeente-denhaag/nl-portal-authentication';
 
 interface UploadedFile {
   url: string;
@@ -20,7 +21,7 @@ const FileUpload: FC<FileUploadProps> = ({disabled, multiple, onChange, informat
 
   const uploadFile = (file: File) => {
     const restUri = sessionStorage.getItem('REST_URI');
-    const keycloakToken = sessionStorage.getItem('KEYCLOAK_TOKEN');
+    const {keycloakToken} = useContext(KeycloakContext);
     const uploadLink = `${restUri}/document/content`;
     setLoading(true);
     const formData = new FormData();
