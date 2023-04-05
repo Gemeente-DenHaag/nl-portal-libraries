@@ -1,0 +1,7 @@
+const TOKEN_KEY = 'KEYCLOAK_TOKEN';
+
+const TOKEN_OBJECT = {
+  [TOKEN_KEY]: '',
+};
+
+export {TOKEN_KEY, TOKEN_OBJECT};

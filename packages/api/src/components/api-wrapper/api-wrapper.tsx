@@ -3,6 +3,7 @@ import {FC, useContext, useEffect, useState} from 'react';
 import {ApolloClient, ApolloLink, ApolloProvider, HttpLink, InMemoryCache} from '@apollo/client';
 import {KeycloakContext, formatUrlTrailingSlash} from '@gemeente-denhaag/nl-portal-authentication';
 import {ApiContext} from '../../contexts';
+import {TOKEN_KEY, TOKEN_OBJECT} from '../../constants';
 
 interface ApiWrapperProps {
   graphqlUri: string;
@@ -37,6 +38,7 @@ const ApiWrapper: FC<ApiWrapperProps> = ({children, graphqlUri, restUri}) => {
 
   useEffect(() => {
     client.setLink(getLink(keycloakToken));
+    TOKEN_OBJECT[TOKEN_KEY] = keycloakToken;
   }, [keycloakToken]);
 
   sessionStorage.setItem(LOCAL_STORAGE_REST_URI_KEY, formattedRestUri);
