@@ -1,9 +1,8 @@
 import * as React from 'react';
 import {Link as RouterLink} from 'react-router-dom';
-import {useIntl} from 'react-intl';
 import {Link, Paragraph} from '@gemeente-denhaag/components-react';
 import {Alert} from '@gemeente-denhaag/alert';
-import {FormattedMessage} from 'react-intl';
+import {FormattedMessage, useIntl} from 'react-intl';
 import {FC, useContext} from 'react';
 import {LocaleContext} from '@gemeente-denhaag/nl-portal-localization';
 
@@ -30,9 +29,7 @@ const OverviewPage: FC<OverviewPageProps> = ({
 
   return (
     <section>
-      {showAlert === 'true' && (
-        <Alert variant={alertType} title={alertTitle} text={alertText} />
-      )}
+      {showAlert === 'true' && <Alert variant={alertType} title={alertTitle} text={alertText} />}
       {showIntro === 'true' && (
         <React.Fragment>
           <h2 className="utrecht-heading-2">
