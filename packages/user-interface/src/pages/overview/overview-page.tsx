@@ -24,12 +24,15 @@ const OverviewPage: FC<OverviewPageProps> = ({
   const {hrefLang} = useContext(LocaleContext);
   const intl = useIntl();
 
-  const alertTitle = intl.formatMessage({id: 'overview.alertTitle'});
-  const alertText = intl.formatMessage({id: 'overview.alertText'});
-
   return (
     <section>
-      {showAlert === 'true' && <Alert variant={alertType} title={alertTitle} text={alertText} />}
+      {showAlert === 'true' && (
+        <Alert
+          variant={alertType}
+          title={intl.formatMessage({id: 'overview.alertTitle'})}
+          text={intl.formatMessage({id: 'overview.alertText'})}
+        />
+      )}
       {showIntro === 'true' && (
         <React.Fragment>
           <h2 className="utrecht-heading-2">
